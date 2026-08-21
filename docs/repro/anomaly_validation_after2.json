@@ -1,0 +1,889 @@
+{
+ "method": "scratchpad/anom.py used unmodified; BEFORE from anomaly_validation.json, AFTER-1 from anomaly_validation_after.json, both read programmatically",
+ "binary_after2": "./target/release/saga",
+ "elliptic_selfcheck": {
+  "measured": {
+   "mean_degree_ratio": 0.6499,
+   "clustering_ratio": 0.0563,
+   "in_out": 1.7123,
+   "homophily_lift": 13.2732,
+   "edge_share": 0.0348,
+   "ks": 0.2097
+  },
+  "expected": {
+   "mean_degree_ratio": 0.65,
+   "clustering_ratio": 0.056,
+   "in_out": 1.712,
+   "homophily_lift": 13.273,
+   "edge_share": 0.0348,
+   "ks": 0.21
+  },
+  "drifted": {},
+  "ok": true
+ },
+ "real_elliptic": {
+  "dataset": "elliptic",
+  "n_nodes_total": 203769,
+  "n_edges_total": 234355,
+  "anomalous": {
+   "population": "anomalous/illicit",
+   "n_nodes": 4545,
+   "frac_of_nodes": 0.022304668521708405,
+   "n_incident_edges": 8145,
+   "n_internal_edges": 998,
+   "mean_total_degree": 2.0116611661166117,
+   "median_total_degree": 1.0,
+   "max_total_degree": 177,
+   "mean_in_degree": 1.26996699669967,
+   "mean_out_degree": 0.7416941694169417,
+   "in_out_ratio_mean": 1.7122515574013648,
+   "fanin_fanout_median": 1.0,
+   "clustering": 0.0007805421195644158,
+   "clustering_n_sampled": 2075,
+   "reciprocity_incident": 0.0,
+   "homophily_out": 0.29605458320973005,
+   "homophily_baseline_random": 0.022304668521708405,
+   "homophily_lift": 13.273211521686134,
+   "powerlaw_alpha": 2.5585125146513508,
+   "powerlaw_xmin": 43.0,
+   "time_buckets_occupied": 49,
+   "activity_gini_over_time": 0.4682176369627041
+  },
+  "normal": {
+   "population": "normal/licit",
+   "n_nodes": 42019,
+   "frac_of_nodes": 0.2062089915541618,
+   "n_incident_edges": 96128,
+   "n_internal_edges": 33930,
+   "mean_total_degree": 3.095218829577096,
+   "median_total_degree": 2.0,
+   "max_total_degree": 473,
+   "mean_in_degree": 1.9093981294176443,
+   "mean_out_degree": 1.1858207001594516,
+   "in_out_ratio_mean": 1.6101912617657093,
+   "fanin_fanout_median": 1.0,
+   "clustering": 0.01385343926297591,
+   "clustering_n_sampled": 3000,
+   "reciprocity_incident": 0.0,
+   "homophily_out": 0.6809561081341441,
+   "homophily_baseline_random": 0.2062089915541618,
+   "homophily_lift": 3.3022619576474077,
+   "powerlaw_alpha": 2.6077389664636197,
+   "powerlaw_xmin": 20.0,
+   "time_buckets_occupied": 49,
+   "activity_gini_over_time": 0.29188632843283785
+  },
+  "contrast": {
+   "degree_KS_anom_vs_norm": 0.20974470373570586,
+   "mean_degree_ratio": 0.6499253451464263,
+   "clustering_ratio": 0.05634284055732342,
+   "homophily_lift_ratio": 4.019430224470204
+  },
+  "basics": {
+   "n_nodes": 203769,
+   "n_edges": 234355,
+   "n_illicit": 4545,
+   "n_licit": 42019,
+   "illicit_rate_all_nodes": 0.022304668521708405,
+   "n_time_steps": 49
+  }
+ },
+ "configs": {
+  "A_matched": {
+   "cmd": "./target/release/saga generate --domain crypto --nodes 203769 --edges 234355 --time-span 49 --seed 42 --anomaly-rate 0.0223 --format parquet --out ./scratch/after2_A_matched --quiet",
+   "edges_requested": 234355,
+   "edges_actual": 230801,
+   "anomalous_edges": 107,
+   "anomalous_edge_rate": 0.00046360284400847484,
+   "anomalous_nodes": 4107,
+   "status": "OK"
+  },
+  "B_1e7": {
+   "cmd": "./target/release/saga generate --domain crypto --nodes 203769 --edges 10000000 --time-span 49 --seed 42 --anomaly-rate 0.0223 --format parquet --out ./scratch/after2_B_1e7 --quiet",
+   "edges_requested": 10000000,
+   "edges_actual": 9820224,
+   "anomalous_edges": 4443,
+   "anomalous_edge_rate": 0.00045243367157409036,
+   "anomalous_nodes": 4107,
+   "status": "OK"
+  }
+ },
+ "after2_cfgA_matched": {
+  "dataset": "saga",
+  "n_nodes_total": 203768,
+  "n_edges_total": 230801,
+  "anomalous": {
+   "population": "anomalous/illicit",
+   "n_nodes": 4107,
+   "frac_of_nodes": 0.020155274626045307,
+   "n_incident_edges": 6760,
+   "n_internal_edges": 55,
+   "mean_total_degree": 1.6593620647674703,
+   "median_total_degree": 0.0,
+   "max_total_degree": 206,
+   "mean_in_degree": 0.4010226442658875,
+   "mean_out_degree": 1.2583394205015828,
+   "in_out_ratio_mean": 0.31869195046439625,
+   "fanin_fanout_median": 1.0,
+   "clustering": 0.0,
+   "clustering_n_sampled": 354,
+   "reciprocity_incident": 0.0030425963488843813,
+   "homophily_out": 0.010642414860681114,
+   "homophily_baseline_random": 0.020155274626045307,
+   "homophily_lift": 0.5280213273268247,
+   "powerlaw_alpha": 2.7383815201964716,
+   "powerlaw_xmin": 37.0,
+   "time_buckets_occupied": 6747,
+   "activity_gini_over_time": 0.0019193715725507364
+  },
+  "normal": {
+   "population": "normal/licit",
+   "n_nodes": 199661,
+   "frac_of_nodes": 0.9798447253739547,
+   "n_incident_edges": 230746,
+   "n_internal_edges": 224041,
+   "mean_total_degree": 2.277795863989462,
+   "median_total_degree": 0.0,
+   "max_total_degree": 30147,
+   "mean_in_degree": 1.1477153775649727,
+   "mean_out_degree": 1.1300804864244895,
+   "in_out_ratio_mean": 1.0156049868591916,
+   "fanin_fanout_median": 0.25,
+   "clustering": 0.0011745309129200232,
+   "clustering_n_sampled": 3000,
+   "reciprocity_incident": 0.0019261505675996886,
+   "homophily_out": 0.9929442944959292,
+   "homophily_baseline_random": 0.9798447253739547,
+   "homophily_lift": 1.0133690255024592,
+   "powerlaw_alpha": 2.6570678730400044,
+   "powerlaw_xmin": 51.0,
+   "time_buckets_occupied": 224170,
+   "activity_gini_over_time": 0.02770061822065263
+  },
+  "contrast": {
+   "degree_KS_anom_vs_norm": 0.04574447991756547,
+   "mean_degree_ratio": 0.7284946342211582,
+   "clustering_ratio": 0.0,
+   "homophily_lift_ratio": 0.5210553253934476
+  },
+  "basics": {
+   "n_nodes": 203768,
+   "n_edges": 230801,
+   "n_anomalous_nodes": 4107,
+   "anomalous_node_rate": 0.020155274626045307,
+   "n_anomalous_edges": 107,
+   "anomalous_edge_rate": 0.00046360284400847484
+  },
+  "cmd": "./target/release/saga generate --domain crypto --nodes 203769 --edges 234355 --time-span 49 --seed 42 --anomaly-rate 0.0223 --format parquet --out ./scratch/after2_A_matched --quiet",
+  "wall_s": 4.4
+ },
+ "after2_cfgB_1e7": {
+  "dataset": "saga",
+  "n_nodes_total": 203768,
+  "n_edges_total": 9820224,
+  "anomalous": {
+   "population": "anomalous/illicit",
+   "n_nodes": 4107,
+   "frac_of_nodes": 0.020155274626045307,
+   "n_incident_edges": 289949,
+   "n_internal_edges": 2105,
+   "mean_total_degree": 71.11127343559777,
+   "median_total_degree": 8.0,
+   "max_total_degree": 10909,
+   "mean_in_degree": 16.814706598490382,
+   "mean_out_degree": 54.29656683710738,
+   "in_out_ratio_mean": 0.3096826848912088,
+   "fanin_fanout_median": 3.0,
+   "clustering": 0.003914406636528668,
+   "clustering_n_sampled": 3000,
+   "reciprocity_incident": 0.001960226374529704,
+   "homophily_out": 0.00943963120414716,
+   "homophily_baseline_random": 0.020155274626045307,
+   "homophily_lift": 0.4683454519616894,
+   "powerlaw_alpha": 2.676655161309218,
+   "powerlaw_xmin": 1177.0,
+   "time_buckets_occupied": 280093,
+   "activity_gini_over_time": 0.03284736188143805
+  },
+  "normal": {
+   "population": "normal/licit",
+   "n_nodes": 199661,
+   "frac_of_nodes": 0.9798447253739547,
+   "n_incident_edges": 9818119,
+   "n_internal_edges": 9530275,
+   "mean_total_degree": 96.90622605316011,
+   "median_total_degree": 6.0,
+   "max_total_degree": 1273693,
+   "mean_in_degree": 48.83861144640165,
+   "mean_out_degree": 48.067614606758454,
+   "in_out_ratio_mean": 1.0160398398370862,
+   "fanin_fanout_median": 0.5,
+   "clustering": 0.004089044837622898,
+   "clustering_n_sampled": 3000,
+   "reciprocity_incident": 0.0018296501886876434,
+   "homophily_out": 0.9930237147643048,
+   "homophily_baseline_random": 0.9798447253739547,
+   "homophily_lift": 1.013450079435107,
+   "powerlaw_alpha": 2.5571702155718476,
+   "powerlaw_xmin": 1682.0,
+   "time_buckets_occupied": 3803916,
+   "activity_gini_over_time": 0.2916383607463243
+  },
+  "contrast": {
+   "degree_KS_anom_vs_norm": 0.2000218602818117,
+   "mean_degree_ratio": 0.7338153215933522,
+   "clustering_ratio": 0.9572911992826781,
+   "homophily_lift_ratio": 0.4621297698479074
+  },
+  "basics": {
+   "n_nodes": 203768,
+   "n_edges": 9820224,
+   "n_anomalous_nodes": 4107,
+   "anomalous_node_rate": 0.020155274626045307,
+   "n_anomalous_edges": 4443,
+   "anomalous_edge_rate": 0.00045243367157409036
+  },
+  "cmd": "./target/release/saga generate --domain crypto --nodes 203769 --edges 10000000 --time-span 49 --seed 42 --anomaly-rate 0.0223 --format parquet --out ./scratch/after2_B_1e7 --quiet",
+  "wall_s": 45.5
+ },
+ "subgraph_fidelity_after2": {
+  "A_matched_incident": {
+   "real_n_edges": 8145,
+   "synth_n_edges": 6760,
+   "fidelity_score": 0.6624794725740357,
+   "ks_distances": {
+    "out_degree": 0.36076029943812027,
+    "in_degree": 0.18918910411619522,
+    "total_degree": 0.18353215488219957,
+    "inter_event_time": 0.99893219434063
+   }
+  },
+  "A_matched_internal": {
+   "real_n_edges": 998,
+   "synth_n_edges": 55,
+   "fidelity_score": 0.7594722023009,
+   "ks_distances": {
+    "out_degree": 0.2318027473375521,
+    "in_degree": 0.16042599166538046,
+    "total_degree": 0.34273807686371355,
+    "inter_event_time": 1.0
+   }
+  },
+  "A_matched_whole": {
+   "real_n_edges": 234355,
+   "synth_n_edges": 230801,
+   "fidelity_score": 0.6037325116144814,
+   "ks_distances": {
+    "out_degree": 0.5187829442601656,
+    "in_degree": 0.148666713367818,
+    "total_degree": 0.2573263009440745,
+    "inter_event_time": 0.99873
+   }
+  },
+  "B_1e7_incident": {
+   "real_n_edges": 8145,
+   "synth_n_edges": 289949,
+   "fidelity_score": 0.5648566973099156,
+   "ks_distances": {
+    "out_degree": 0.5359256725649059,
+    "in_degree": 0.43241872703274936,
+    "total_degree": 0.18578499514013624,
+    "inter_event_time": 0.9989
+   }
+  },
+  "B_1e7_internal": {
+   "real_n_edges": 998,
+   "synth_n_edges": 2105,
+   "fidelity_score": 0.7432698506185289,
+   "ks_distances": {
+    "out_degree": 0.23486803519061583,
+    "in_degree": 0.14388278548605943,
+    "total_degree": 0.23037597934083248,
+    "inter_event_time": 1.0
+   }
+  },
+  "B_1e7_whole": {
+   "real_n_edges": 234355,
+   "synth_n_edges": 9820224,
+   "fidelity_score": 0.4118210495661119,
+   "ks_distances": {
+    "out_degree": 0.6368647375538838,
+    "in_degree": 0.8604010041416618,
+    "total_degree": 0.7346223784971684,
+    "inter_event_time": 0.99861
+   }
+  }
+ },
+ "before_prefix": {
+  "dataset": "saga",
+  "n_nodes_total": 203769,
+  "n_edges_total": 232689,
+  "anomalous": {
+   "population": "anomalous/illicit",
+   "n_nodes": 4144,
+   "frac_of_nodes": 0.020336753873258444,
+   "n_incident_edges": 75374,
+   "n_internal_edges": 22793,
+   "mean_total_degree": 23.688947876447877,
+   "median_total_degree": 13.0,
+   "max_total_degree": 561,
+   "mean_in_degree": 5.7676158301158305,
+   "mean_out_degree": 17.921332046332047,
+   "in_out_ratio_mean": 0.3218296394043035,
+   "fanin_fanout_median": 0.3076923076923077,
+   "clustering": 0.013526899851159596,
+   "clustering_n_sampled": 3000,
+   "reciprocity_incident": 0.01682085786375105,
+   "homophily_out": 0.306910295424555,
+   "homophily_baseline_random": 0.020336753873258444,
+   "homophily_lift": 15.091410228852835,
+   "powerlaw_alpha": 4.330616010514846,
+   "powerlaw_xmin": 61.0,
+   "time_buckets_occupied": 74578,
+   "activity_gini_over_time": 0.010448799073729037
+  },
+  "normal": {
+   "population": "normal/licit",
+   "n_nodes": 199625,
+   "frac_of_nodes": 0.9796632461267416,
+   "n_incident_edges": 209896,
+   "n_internal_edges": 157315,
+   "mean_total_degree": 1.8395040701314966,
+   "median_total_degree": 0.0,
+   "max_total_degree": 22304,
+   "mean_in_degree": 1.04590106449593,
+   "mean_out_degree": 0.7936030056355667,
+   "in_out_ratio_mean": 1.3179146967296416,
+   "fanin_fanout_median": 0.25,
+   "clustering": 0.0037778566113059564,
+   "clustering_n_sampled": 3000,
+   "reciprocity_incident": 0.0007532271889041843,
+   "homophily_out": 0.9930060660383909,
+   "homophily_baseline_random": 0.9796632461267416,
+   "homophily_lift": 1.0136198024825391,
+   "powerlaw_alpha": 2.6792727431896908,
+   "powerlaw_xmin": 45.0,
+   "time_buckets_occupied": 204524,
+   "activity_gini_over_time": 0.024941601596575835
+  },
+  "contrast": {
+   "degree_KS_anom_vs_norm": 0.8215046044344729,
+   "mean_degree_ratio": 12.87789913656156,
+   "clustering_ratio": 3.5805752422359727,
+   "homophily_lift_ratio": 14.88863002862733
+  },
+  "basics": {
+   "n_nodes": 203769,
+   "n_edges": 232689,
+   "n_anomalous_nodes": 4144,
+   "anomalous_node_rate": 0.020336753873258444,
+   "n_anomalous_edges": 70315,
+   "anomalous_edge_rate": 0.30218446080390565,
+   "t_min": 1735689719.0,
+   "t_max": 1739923195.0
+  }
+ },
+ "after1_cfgA_matched": {
+  "mean_degree_ratio": 0.7398953051627604,
+  "clustering_ratio": 0.0,
+  "in_out_ratio_anom": 0.30743306496910694,
+  "homophily_lift_anom": 0.27619442803865196,
+  "anom_edge_share": 0.030124344699103158,
+  "degree_KS": 0.026257114340210497,
+  "anom_mean_deg": 1.6850868725868726,
+  "norm_mean_deg": 2.2774666372780827,
+  "anom_clustering": 0.0,
+  "norm_clustering": 0.0009150778091794461,
+  "anom_nodes": 4144,
+  "anom_inc_edges": 6953,
+  "powerlaw_alpha_anom": 2.267365638476121
+ },
+ "after1_cfgB_1e7": {
+  "mean_degree_ratio": 0.7394168699800723,
+  "clustering_ratio": 0.9497865419234821,
+  "in_out_ratio_anom": 0.29928713027267595,
+  "homophily_lift_anom": 0.22077641908023551,
+  "anom_edge_share": 0.03013057212628286,
+  "degree_KS": 0.13174843029219255,
+  "anom_mean_deg": 71.64671814671814,
+  "norm_mean_deg": 96.89624494048812,
+  "anom_clustering": 0.004052252463162901,
+  "norm_clustering": 0.0042664875572530105,
+  "anom_nodes": 4144,
+  "anom_inc_edges": 295878,
+  "powerlaw_alpha_anom": 2.5569429628848157
+ },
+ "after1_configs": {
+  "A": {
+   "nodes": 203769,
+   "edges_requested": 234355,
+   "edges_actual": 230810,
+   "anomalous_edges": 11,
+   "anomalous_edge_rate": 4.76582470430224e-05,
+   "anomalous_nodes": 4144
+  },
+  "B": {
+   "nodes": 203769,
+   "edges_requested": 10000000,
+   "edges_actual": 9819860,
+   "anomalous_edges": 471,
+   "anomalous_edge_rate": 4.7964023927021365e-05,
+   "anomalous_nodes": 4144
+  },
+  "C": {
+   "nodes": 203769,
+   "edges_requested": 100000000,
+   "edges_actual": 98197330,
+   "anomalous_edges": 4885,
+   "anomalous_edge_rate": 4.975e-05,
+   "anomalous_nodes": 4144
+  }
+ },
+ "after1_subgraph_fidelity": {
+  "cfgA_matched_incident": {
+   "real_n_edges": 8145,
+   "synth_n_edges": 6953,
+   "fidelity_score": 0.6638619085324536,
+   "ks_distances": {
+    "out_degree": 0.37455065647432084,
+    "in_degree": 0.1962403456447871,
+    "total_degree": 0.1963560247979923,
+    "inter_event_time": 0.998639455782313
+   },
+   "scalar_metrics": {
+    "powerlaw_alpha": {
+     "real": 2.8538952115440672,
+     "synth": 2.7025439910755615,
+     "distance": 0.02723888716305038
+    },
+    "burstiness_b": {
+     "real": null,
+     "synth": 0.48865856461981566,
+     "distance": NaN
+    },
+    "memory_m": {
+     "real": null,
+     "synth": 0.13262666327619013,
+     "distance": NaN
+    },
+    "clustering": {
+     "real": 8.61103935244984e-05,
+     "synth": 0.0,
+     "distance": 8.61103935244984e-05
+    },
+    "reciprocity": {
+     "real": 0.0,
+     "synth": 0.0030911901081916537,
+     "distance": 0.0030911901081916537
+    },
+    "repeat_edge_ratio": {
+     "real": 0.0,
+     "synth": 0.7208399252121387,
+     "distance": 0.7208399252121387
+    },
+    "mean_degree": {
+     "real": 1.6970517762266903,
+     "synth": 5.2043413173652695,
+     "distance": 0.508200227631599
+    }
+   }
+  },
+  "cfgA_matched_internal": {
+   "real_n_edges": 998,
+   "synth_n_edges": 30,
+   "fidelity_score": 0.7646897151895686,
+   "ks_distances": {
+    "out_degree": 0.25845448305983654,
+    "in_degree": 0.13377425594309603,
+    "total_degree": 0.2887627129219442,
+    "inter_event_time": 1.0
+   },
+   "scalar_metrics": {
+    "powerlaw_alpha": {
+     "real": 4.280718238660578,
+     "synth": null,
+     "distance": NaN
+    },
+    "burstiness_b": {
+     "real": null,
+     "synth": 0.4030023762063317,
+     "distance": NaN
+    },
+    "memory_m": {
+     "real": null,
+     "synth": -0.3633341189681295,
+     "distance": NaN
+    },
+    "clustering": {
+     "real": 0.0,
+     "synth": 0.0,
+     "distance": 0.0
+    },
+    "reciprocity": {
+     "real": 0.0,
+     "synth": 0.0,
+     "distance": 0.0
+    },
+    "repeat_edge_ratio": {
+     "real": 0.0,
+     "synth": 0.1333333333333333,
+     "distance": 0.1333333333333333
+    },
+    "mean_degree": {
+     "real": 1.4633431085043989,
+     "synth": 1.2765957446808511,
+     "distance": 0.0681574932252408
+    }
+   }
+  },
+  "cfgA_matched_wholegraph": {
+   "fidelity_score": 0.6034066490524215,
+   "ks_distances": {
+    "out_degree": 0.5199870769373895,
+    "in_degree": 0.14922840450274444,
+    "total_degree": 0.2582414587403479,
+    "inter_event_time": 0.99878
+   },
+   "scalar_metrics": {
+    "powerlaw_alpha": {
+     "real": 3.9743705855125206,
+     "synth": 2.699397340772062,
+     "distance": 0.19104249036275092
+    },
+    "burstiness_b": {
+     "real": null,
+     "synth": 0.5233262277139255,
+     "distance": NaN
+    },
+    "memory_m": {
+     "real": null,
+     "synth": 0.15131211167716554,
+     "distance": NaN
+    },
+    "clustering": {
+     "real": 0.015082910044471532,
+     "synth": 0.0007301041973579122,
+     "distance": 0.01435280584711362
+    },
+    "reciprocity": {
+     "real": 0.0,
+     "synth": 0.0019270982820123825,
+     "distance": 0.0019270982820123825
+    },
+    "repeat_edge_ratio": {
+     "real": 0.0,
+     "synth": 0.7886660023395866,
+     "distance": 0.7886660023395866
+    },
+    "mean_degree": {
+     "real": 2.3002026804862368,
+     "synth": 10.736347567215555,
+     "distance": 0.6471148215162614
+    }
+   },
+   "real_n_edges": 234355,
+   "synth_n_edges": 230810
+  },
+  "cfgB_1e7_incident": {
+   "real_n_edges": 8145,
+   "synth_n_edges": 295878,
+   "fidelity_score": 0.5605931456852957,
+   "ks_distances": {
+    "out_degree": 0.5713822878019175,
+    "in_degree": 0.43140483188387835,
+    "total_degree": 0.1898062828250554,
+    "inter_event_time": 0.998845
+   },
+   "scalar_metrics": {
+    "powerlaw_alpha": {
+     "real": 2.8538952115440672,
+     "synth": 2.0602991086360465,
+     "distance": 0.16149058242347528
+    },
+    "burstiness_b": {
+     "real": null,
+     "synth": 0.6359019610454085,
+     "distance": NaN
+    },
+    "memory_m": {
+     "real": null,
+     "synth": 0.38718674370180406,
+     "distance": NaN
+    },
+    "clustering": {
+     "real": 8.61103935244984e-05,
+     "synth": 7.763055465150874e-05,
+     "distance": 8.479838872989666e-06
+    },
+    "reciprocity": {
+     "real": 0.0,
+     "synth": 0.0015395198008450982,
+     "distance": 0.0015395198008450982
+    },
+    "repeat_edge_ratio": {
+     "real": 0.0,
+     "synth": 0.7936379183312041,
+     "distance": 0.7936379183312041
+    },
+    "mean_degree": {
+     "real": 1.6970517762266903,
+     "synth": 15.847777182645956,
+     "distance": 0.8065467859270901
+    }
+   }
+  },
+  "cfgB_1e7_internal": {
+   "real_n_edges": 998,
+   "synth_n_edges": 1026,
+   "fidelity_score": 0.7684864915966364,
+   "ks_distances": {
+    "out_degree": 0.42284328574651153,
+    "in_degree": 0.08655860268763495,
+    "total_degree": 0.1396990106667526,
+    "inter_event_time": 1.0
+   },
+   "scalar_metrics": {
+    "powerlaw_alpha": {
+     "real": 4.280718238660578,
+     "synth": 3.2744618294465386,
+     "distance": 0.13318761434446497
+    },
+    "burstiness_b": {
+     "real": null,
+     "synth": 0.12979015387687395,
+     "distance": NaN
+    },
+    "memory_m": {
+     "real": null,
+     "synth": 0.1137969236835493,
+     "distance": NaN
+    },
+    "clustering": {
+     "real": 0.0,
+     "synth": 0.0015187893339153843,
+     "distance": 0.0015187893339153843
+    },
+    "reciprocity": {
+     "real": 0.0,
+     "synth": 0.002242152466367713,
+     "distance": 0.002242152466367713
+    },
+    "repeat_edge_ratio": {
+     "real": 0.0,
+     "synth": 0.1306042884990254,
+     "distance": 0.1306042884990254
+    },
+    "mean_degree": {
+     "real": 1.4633431085043989,
+     "synth": 2.04995004995005,
+     "distance": 0.16696783188559997
+    }
+   }
+  },
+  "cfgB_1e7_wholegraph": {
+   "fidelity_score": 0.4107861076667655,
+   "ks_distances": {
+    "out_degree": 0.6456167185505641,
+    "in_degree": 0.861826933842383,
+    "total_degree": 0.7337652275474127,
+    "inter_event_time": 0.9984
+   },
+   "scalar_metrics": {
+    "powerlaw_alpha": {
+     "real": 3.9743705855125206,
+     "synth": 2.5604883114703645,
+     "distance": 0.21636003107809096
+    },
+    "burstiness_b": {
+     "real": null,
+     "synth": 0.6787540166353463,
+     "distance": NaN
+    },
+    "memory_m": {
+     "real": null,
+     "synth": 0.29454378573675133,
+     "distance": NaN
+    },
+    "clustering": {
+     "real": 0.015082910044471532,
+     "synth": 0.0013539377260282299,
+     "distance": 0.013728972318443302
+    },
+    "reciprocity": {
+     "real": 0.0,
+     "synth": 0.001834963129654548,
+     "distance": 0.001834963129654548
+    },
+    "repeat_edge_ratio": {
+     "real": 0.0,
+     "synth": 0.8720245502481705,
+     "distance": 0.8720245502481705
+    },
+    "mean_degree": {
+     "real": 2.3002026804862368,
+     "synth": 110.92001671730806,
+     "distance": 0.9593676342843926
+    }
+   },
+   "real_n_edges": 234355,
+   "synth_n_edges": 9819860
+  }
+ },
+ "before_subgraph_fidelity": {
+  "incident": {
+   "fidelity_score": 0.6354226594788563,
+   "ks_distances": {
+    "out_degree": 0.6445312855102294,
+    "in_degree": 0.5135520009156733,
+    "total_degree": 0.11343635317530198,
+    "inter_event_time": 0.9998871045129971
+   },
+   "scalar_metrics": {
+    "powerlaw_alpha": {
+     "real": 2.8538952115440672,
+     "synth": 3.939640706301292,
+     "distance": 0.1598203804156202
+    },
+    "burstiness_b": {
+     "real": null,
+     "synth": 0.44107592114891336,
+     "distance": NaN
+    },
+    "memory_m": {
+     "real": null,
+     "synth": 0.2091839910989549,
+     "distance": NaN
+    },
+    "clustering": {
+     "real": 8.61103935244984e-05,
+     "synth": 0.005443395210005268,
+     "distance": 0.00535728481648077
+    },
+    "reciprocity": {
+     "real": 0.0,
+     "synth": 0.01682085786375105,
+     "distance": 0.01682085786375105
+    },
+    "repeat_edge_ratio": {
+     "real": 0.0,
+     "synth": 0.3847878578820283,
+     "distance": 0.3847878578820283
+    },
+    "mean_degree": {
+     "real": 1.6970517762266903,
+     "synth": 4.39652356509566,
+     "distance": 0.4430029395982105
+    }
+   },
+   "real_summary": {
+    "n_edges": 8145.0,
+    "n_nodes": 9599.0,
+    "density": 8.84065313725094e-05,
+    "reciprocity": 0.0,
+    "mean_degree": 1.6970517762266903,
+    "repeat_edge_ratio": 0.0,
+    "powerlaw_alpha": 2.8538952115440672,
+    "burstiness_b": NaN,
+    "memory_m": NaN,
+    "clustering": 8.61103935244984e-05
+   },
+   "synth_summary": {
+    "n_edges": 75374.0,
+    "n_nodes": 34288.0,
+    "density": 6.411356439898008e-05,
+    "reciprocity": 0.01682085786375105,
+    "mean_degree": 4.39652356509566,
+    "repeat_edge_ratio": 0.3847878578820283,
+    "powerlaw_alpha": 3.939640706301292,
+    "burstiness_b": 0.44107592114891336,
+    "memory_m": 0.2091839910989549,
+    "clustering": 0.005443395210005268
+   },
+   "sizes": {
+    "real_edges": 8145,
+    "real_nodes": 9599,
+    "synth_edges": 75374,
+    "synth_nodes": 34288
+   },
+   "fidelity_score_ex_temporal": 0.7148363799778381
+  },
+  "internal": {
+   "fidelity_score": 0.45311779787203266,
+   "ks_distances": {
+    "out_degree": 0.6950829349040829,
+    "in_degree": 0.5459618600273929,
+    "total_degree": 0.6956028535656967,
+    "inter_event_time": 1.0
+   },
+   "scalar_metrics": {
+    "powerlaw_alpha": {
+     "real": 4.280718238660578,
+     "synth": 3.8363971816753013,
+     "distance": 0.05473878760823274
+    },
+    "burstiness_b": {
+     "real": null,
+     "synth": 0.2747549757948112,
+     "distance": NaN
+    },
+    "memory_m": {
+     "real": null,
+     "synth": 0.29578932649193407,
+     "distance": NaN
+    },
+    "clustering": {
+     "real": 0.0,
+     "synth": 0.1533438457063327,
+     "distance": 0.1533438457063327
+    },
+    "reciprocity": {
+     "real": 0.0,
+     "synth": 0.15765948801300284,
+     "distance": 0.15765948801300284
+    },
+    "repeat_edge_ratio": {
+     "real": 0.0,
+     "synth": 0.7840565085771948,
+     "distance": 0.7840565085771948
+    },
+    "mean_degree": {
+     "real": 1.4633431085043989,
+     "synth": 16.327363896848137,
+     "distance": 0.8354935407497706
+    }
+   },
+   "real_summary": {
+    "n_edges": 998.0,
+    "n_nodes": 1364.0,
+    "density": 0.0005368096509553921,
+    "reciprocity": 0.0,
+    "mean_degree": 1.4633431085043989,
+    "repeat_edge_ratio": 0.0,
+    "powerlaw_alpha": 4.280718238660578,
+    "burstiness_b": NaN,
+    "memory_m": NaN,
+    "clustering": 0.0
+   },
+   "synth_summary": {
+    "n_edges": 22793.0,
+    "n_nodes": 2792.0,
+    "density": 0.002925002489582253,
+    "reciprocity": 0.15765948801300284,
+    "mean_degree": 16.327363896848137,
+    "repeat_edge_ratio": 0.7840565085771948,
+    "powerlaw_alpha": 3.8363971816753013,
+    "burstiness_b": 0.2747549757948112,
+    "memory_m": 0.29578932649193407,
+    "clustering": 0.1533438457063327
+   },
+   "sizes": {
+    "real_edges": 998,
+    "real_nodes": 1364,
+    "synth_edges": 22793,
+    "synth_nodes": 2792
+   },
+   "fidelity_score_ex_temporal": 0.5097575226060367
+  }
+ },
+ "before_wholegraph_fidelity": 0.6337427844927825
+}

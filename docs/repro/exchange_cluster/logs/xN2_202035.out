@@ -1,0 +1,12 @@
+job 202035 nodes itiger[01-02] N=2 EDGES=1000000 TAG=x2_1m
+itiger01
+itiger02
+/var/spool/slurmd/job202035/slurm_script: line 20: bc: command not found
+rep1 srun_wall 
+cat: '$PROJECT/saga/xrun/x2_1m/rep1/shard*.time': No such file or directory
+xchg leftover: 0 files; dir exists: no
+/var/spool/slurmd/job202035/slurm_script: line 20: bc: command not found
+rep2 srun_wall 
+0 itiger01 1787292228.483588786 1787293579.669587898 0 1351.19
+1 itiger02 1787292228.413676699 1787293579.321980483 0 1350.91
+xchg leftover: 0 files; dir exists: no

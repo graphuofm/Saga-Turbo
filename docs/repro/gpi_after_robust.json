@@ -1,0 +1,242 @@
+[
+ {
+  "domain": "finance",
+  "pi": 0.005,
+  "status": "ok",
+  "total_edges": 998367,
+  "anom_edges": 358,
+  "frac": 0.0003585855702361957
+ },
+ {
+  "domain": "finance",
+  "pi": 0.01,
+  "status": "ok",
+  "total_edges": 998438,
+  "anom_edges": 772,
+  "frac": 0.0007732077505062908
+ },
+ {
+  "domain": "finance",
+  "pi": 0.02,
+  "status": "ok",
+  "total_edges": 998532,
+  "anom_edges": 1571,
+  "frac": 0.0015733096185199873
+ },
+ {
+  "domain": "finance",
+  "pi": 0.05,
+  "status": "ok",
+  "total_edges": 998415,
+  "anom_edges": 4069,
+  "frac": 0.004075459603471502
+ },
+ {
+  "domain": "finance",
+  "pi": 0.1,
+  "status": "ok",
+  "total_edges": 998794,
+  "anom_edges": 8179,
+  "frac": 0.00818887578419574
+ },
+ {
+  "domain": "crypto",
+  "pi": 0.005,
+  "status": "ok",
+  "total_edges": 981619,
+  "anom_edges": 58,
+  "frac": 5.908606088512957e-05
+ },
+ {
+  "domain": "crypto",
+  "pi": 0.01,
+  "status": "ok",
+  "total_edges": 981581,
+  "anom_edges": 95,
+  "frac": 9.678263943576739e-05
+ },
+ {
+  "domain": "crypto",
+  "pi": 0.02,
+  "status": "ok",
+  "total_edges": 981598,
+  "anom_edges": 232,
+  "frac": 0.0002363492998151993
+ },
+ {
+  "domain": "crypto",
+  "pi": 0.05,
+  "status": "ok",
+  "total_edges": 981635,
+  "anom_edges": 610,
+  "frac": 0.000621412235708792
+ },
+ {
+  "domain": "crypto",
+  "pi": 0.1,
+  "status": "ok",
+  "total_edges": 981670,
+  "anom_edges": 1235,
+  "frac": 0.0012580602442776086
+ },
+ {
+  "domain": "cyber",
+  "pi": 0.005,
+  "status": "ok",
+  "total_edges": 993362,
+  "anom_edges": 63,
+  "frac": 6.342098852180776e-05
+ },
+ {
+  "domain": "cyber",
+  "pi": 0.01,
+  "status": "ok",
+  "total_edges": 993413,
+  "anom_edges": 169,
+  "frac": 0.00017012058428870973
+ },
+ {
+  "domain": "cyber",
+  "pi": 0.02,
+  "status": "ok",
+  "total_edges": 993397,
+  "anom_edges": 275,
+  "frac": 0.0002768278945879643
+ },
+ {
+  "domain": "cyber",
+  "pi": 0.05,
+  "status": "ok",
+  "total_edges": 993425,
+  "anom_edges": 662,
+  "frac": 0.0006663814580869215
+ },
+ {
+  "domain": "cyber",
+  "pi": 0.1,
+  "status": "ok",
+  "total_edges": 993457,
+  "anom_edges": 1320,
+  "frac": 0.0013286936425028965
+ },
+ {
+  "domain": "transport",
+  "pi": 0.005,
+  "status": "ok",
+  "total_edges": 997932,
+  "anom_edges": 96,
+  "frac": 9.619893940669304e-05
+ },
+ {
+  "domain": "transport",
+  "pi": 0.01,
+  "status": "ok",
+  "total_edges": 997922,
+  "anom_edges": 219,
+  "frac": 0.00021945602962957024
+ },
+ {
+  "domain": "transport",
+  "pi": 0.02,
+  "status": "ok",
+  "total_edges": 997928,
+  "anom_edges": 334,
+  "frac": 0.00033469348490071426
+ },
+ {
+  "domain": "transport",
+  "pi": 0.05,
+  "status": "ok",
+  "total_edges": 997938,
+  "anom_edges": 896,
+  "frac": 0.0008978513695239584
+ },
+ {
+  "domain": "transport",
+  "pi": 0.1,
+  "status": "ok",
+  "total_edges": 997915,
+  "anom_edges": 1909,
+  "frac": 0.0019129885811917848
+ },
+ {
+  "domain": "ecommerce",
+  "pi": 0.005,
+  "status": "ok",
+  "total_edges": 996980,
+  "anom_edges": 2003,
+  "frac": 0.0020090673834981644
+ },
+ {
+  "domain": "ecommerce",
+  "pi": 0.01,
+  "status": "ok",
+  "total_edges": 997102,
+  "anom_edges": 4131,
+  "frac": 0.004143006432641796
+ },
+ {
+  "domain": "ecommerce",
+  "pi": 0.02,
+  "status": "ok",
+  "total_edges": 997103,
+  "anom_edges": 8581,
+  "frac": 0.008605931383217181
+ },
+ {
+  "domain": "ecommerce",
+  "pi": 0.05,
+  "status": "ok",
+  "total_edges": 996915,
+  "anom_edges": 21307,
+  "frac": 0.021372935506036122
+ },
+ {
+  "domain": "ecommerce",
+  "pi": 0.1,
+  "status": "ok",
+  "total_edges": 996800,
+  "anom_edges": 43239,
+  "frac": 0.04337780898876405
+ },
+ {
+  "domain": "healthcare",
+  "pi": 0.005,
+  "status": "ok",
+  "total_edges": 996698,
+  "anom_edges": 2205,
+  "frac": 0.0022123050312130655
+ },
+ {
+  "domain": "healthcare",
+  "pi": 0.01,
+  "status": "ok",
+  "total_edges": 996585,
+  "anom_edges": 3912,
+  "frac": 0.003925405258959346
+ },
+ {
+  "domain": "healthcare",
+  "pi": 0.02,
+  "status": "ok",
+  "total_edges": 996777,
+  "anom_edges": 8170,
+  "frac": 0.00819641705215911
+ },
+ {
+  "domain": "healthcare",
+  "pi": 0.05,
+  "status": "ok",
+  "total_edges": 996317,
+  "anom_edges": 20611,
+  "frac": 0.02068719092417373
+ },
+ {
+  "domain": "healthcare",
+  "pi": 0.1,
+  "status": "ok",
+  "total_edges": 996572,
+  "anom_edges": 43993,
+  "frac": 0.04414432675210622
+ }
+]

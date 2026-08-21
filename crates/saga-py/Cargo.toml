@@ -1,0 +1,22 @@
+[package]
+name = "saga-py"
+version.workspace = true
+edition.workspace = true
+repository.workspace = true
+authors.workspace = true
+description = "PyO3 bindings for SAGA: install and run the graph-benchmark generator from Python."
+
+[lib]
+name = "saga_py"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+pyo3 = { version = "0.23", features = ["extension-module", "abi3-py39"] }
+numpy = "0.23"
+anyhow = { workspace = true }
+serde_json = { workspace = true }
+
+saga-core = { workspace = true }
+saga-rules = { workspace = true }
+saga-io = { workspace = true }
+saga-host = { workspace = true }

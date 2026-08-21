@@ -1,0 +1,59 @@
+{
+ "dirs": {
+  "$PROJECT/saga/xrun/x16c_n4_3n/rep1/out0": {
+   "edges": 215178,
+   "edge_digest": "8943896f7efd3c029f1df9a3aadbcb548369eb3b9d201e738c459f0cff479e20",
+   "nodes": 25000,
+   "node_digest": "ce89366c961255444ee3cd4aa4e51170a4b5b65851141eb60b2ba7fe6e049467",
+   "node_ids_unique": true,
+   "node_rows_not_in_ref": 0,
+   "node_slice_equals_ref": true
+  },
+  "$PROJECT/saga/xrun/x16c_n4_3n/rep1/out1": {
+   "edges": 227885,
+   "edge_digest": "bf59ee8121ca23288bf077b80aec3b67204c60d064a4e1fcad8b0c289c763f56",
+   "nodes": 25000,
+   "node_digest": "b7a6bd18dcef66bcc75d9427c00d9913c1903fe4f23c8f64b95795ce7223a8c0",
+   "node_ids_unique": true,
+   "node_rows_not_in_ref": 0,
+   "node_slice_equals_ref": true
+  },
+  "$PROJECT/saga/xrun/x16c_n4_3n/rep1/out2": {
+   "edges": 223228,
+   "edge_digest": "13132c8779c5fa7efa760e234ee7ee0b4c52f7f3168e83032236448b16889f9d",
+   "nodes": 25000,
+   "node_digest": "aecf56f58fa3616dc7e1f8ea3ab2af7325cf2e0d74b9109e2c92c0b07e7fb43b",
+   "node_ids_unique": true,
+   "node_rows_not_in_ref": 0,
+   "node_slice_equals_ref": true
+  },
+  "$PROJECT/saga/xrun/x16c_n4_3n/rep1/out3": {
+   "edges": 220865,
+   "edge_digest": "133741dbda1a1c47e710712e9c82790c2c08cf369718abd5764043876680a1b8",
+   "nodes": 25000,
+   "node_digest": "f24c57d2bbacff45c2ba36cf7db26b3196dc36ff60fe8cc0a525ccc791b80e25",
+   "node_ids_unique": true,
+   "node_rows_not_in_ref": 0,
+   "node_slice_equals_ref": true
+  }
+ },
+ "union": {
+  "edges": 887156,
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "nodes": 100000,
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9",
+  "shard_node_ids_disjoint": true
+ },
+ "ref": {
+  "dir": "$PROJECT/saga/xrun/ref16/out1",
+  "edges": 887156,
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "nodes": 100000,
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9"
+ },
+ "edge_union_equals_ref": true,
+ "edge_union_minus_ref": 0,
+ "ref_minus_edge_union": 0,
+ "node_union_equals_ref": true,
+ "digest_seconds": 16.7
+}

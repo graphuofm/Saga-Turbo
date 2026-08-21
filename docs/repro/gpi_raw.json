@@ -1,0 +1,567 @@
+[
+  {
+    "domain": "finance",
+    "pi": 0.005,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99804761,
+    "anomalous_edges": 25332,
+    "fraction": 0.00025381554693568176,
+    "wall_s": 22.9,
+    "by_intent": {
+      "normal": 99779429,
+      "structuring": 8419,
+      "layering": 7391,
+      "fan_in_out": 6830,
+      "round_tripping": 1856,
+      "mule_network": 836
+    }
+  },
+  {
+    "domain": "finance",
+    "pi": 0.01,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99805335,
+    "anomalous_edges": 50414,
+    "fraction": 0.0005051232982685746,
+    "wall_s": 22.8,
+    "by_intent": {
+      "normal": 99754921,
+      "structuring": 14505,
+      "layering": 14643,
+      "fan_in_out": 15509,
+      "round_tripping": 4284,
+      "mule_network": 1473
+    }
+  },
+  {
+    "domain": "finance",
+    "pi": 0.02,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99808585,
+    "anomalous_edges": 106351,
+    "fraction": 0.001065549621808585,
+    "wall_s": 24.9,
+    "by_intent": {
+      "normal": 99702234,
+      "structuring": 30378,
+      "layering": 30426,
+      "fan_in_out": 34924,
+      "round_tripping": 7915,
+      "mule_network": 2708
+    }
+  },
+  {
+    "domain": "finance",
+    "pi": 0.05,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99803433,
+    "anomalous_edges": 258677,
+    "fraction": 0.002591864750784675,
+    "wall_s": 26.9,
+    "by_intent": {
+      "normal": 99544756,
+      "structuring": 77481,
+      "layering": 72236,
+      "fan_in_out": 82741,
+      "round_tripping": 18745,
+      "mule_network": 7474
+    }
+  },
+  {
+    "domain": "finance",
+    "pi": 0.1,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99805880,
+    "anomalous_edges": 548148,
+    "fraction": 0.005492141344778484,
+    "wall_s": 25.3,
+    "by_intent": {
+      "normal": 99257732,
+      "structuring": 160865,
+      "layering": 152450,
+      "fan_in_out": 181730,
+      "round_tripping": 38528,
+      "mule_network": 14575
+    }
+  },
+  {
+    "domain": "crypto",
+    "pi": 0.005,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 98209425,
+    "anomalous_edges": 590,
+    "fraction": 6.007570047375799e-06,
+    "wall_s": 35.3,
+    "by_intent": {
+      "normal": 98208835,
+      "wash_trading": 362,
+      "phishing_drain": 46,
+      "mixing": 36,
+      "pump_and_dump": 82,
+      "rug_pull": 10,
+      "ponzi": 54
+    }
+  },
+  {
+    "domain": "crypto",
+    "pi": 0.01,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 98209692,
+    "anomalous_edges": 1046,
+    "fraction": 1.0650679975658614e-05,
+    "wall_s": 32.1,
+    "by_intent": {
+      "normal": 98208646,
+      "wash_trading": 681,
+      "phishing_drain": 76,
+      "mixing": 57,
+      "pump_and_dump": 125,
+      "rug_pull": 15,
+      "ponzi": 92
+    }
+  },
+  {
+    "domain": "crypto",
+    "pi": 0.02,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 98209637,
+    "anomalous_edges": 2427,
+    "fraction": 2.4712442425583958e-05,
+    "wall_s": 35.4,
+    "by_intent": {
+      "normal": 98207210,
+      "wash_trading": 1360,
+      "phishing_drain": 137,
+      "mixing": 141,
+      "pump_and_dump": 350,
+      "rug_pull": 53,
+      "ponzi": 386
+    }
+  },
+  {
+    "domain": "crypto",
+    "pi": 0.05,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 98209695,
+    "anomalous_edges": 6607,
+    "fraction": 6.72744172558524e-05,
+    "wall_s": 33.3,
+    "by_intent": {
+      "normal": 98203088,
+      "wash_trading": 3480,
+      "phishing_drain": 369,
+      "mixing": 393,
+      "pump_and_dump": 885,
+      "rug_pull": 115,
+      "ponzi": 1365
+    }
+  },
+  {
+    "domain": "crypto",
+    "pi": 0.1,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 98208823,
+    "anomalous_edges": 12822,
+    "fraction": 0.00013055853444043415,
+    "wall_s": 21.7,
+    "by_intent": {
+      "normal": 98196001,
+      "wash_trading": 6366,
+      "phishing_drain": 806,
+      "mixing": 771,
+      "pump_and_dump": 1873,
+      "rug_pull": 207,
+      "ponzi": 2799
+    }
+  },
+  {
+    "domain": "cyber",
+    "pi": 0.005,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99428890,
+    "anomalous_edges": 3998,
+    "fraction": 4.02096412823275e-05,
+    "wall_s": 28.7,
+    "by_intent": {
+      "normal": 99424892,
+      "recon_scan": 1327,
+      "brute_force": 1069,
+      "lateral_movement": 16,
+      "c2_beacon": 1519,
+      "exfiltration": 67,
+      "priv_esc": 0
+    }
+  },
+  {
+    "domain": "cyber",
+    "pi": 0.01,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99429024,
+    "anomalous_edges": 7197,
+    "fraction": 7.238329122088134e-05,
+    "wall_s": 27.0,
+    "by_intent": {
+      "normal": 99421827,
+      "recon_scan": 2432,
+      "brute_force": 1881,
+      "lateral_movement": 51,
+      "c2_beacon": 2733,
+      "exfiltration": 97,
+      "priv_esc": 3
+    }
+  },
+  {
+    "domain": "cyber",
+    "pi": 0.02,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99428993,
+    "anomalous_edges": 13966,
+    "fraction": 0.0001404620481271494,
+    "wall_s": 35.8,
+    "by_intent": {
+      "normal": 99415027,
+      "recon_scan": 4624,
+      "brute_force": 3415,
+      "lateral_movement": 89,
+      "c2_beacon": 5638,
+      "exfiltration": 190,
+      "priv_esc": 10
+    }
+  },
+  {
+    "domain": "cyber",
+    "pi": 0.05,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99429925,
+    "anomalous_edges": 32869,
+    "fraction": 0.000330574522710341,
+    "wall_s": 26.8,
+    "by_intent": {
+      "normal": 99397056,
+      "recon_scan": 11399,
+      "brute_force": 7736,
+      "lateral_movement": 254,
+      "c2_beacon": 12942,
+      "exfiltration": 521,
+      "priv_esc": 17
+    }
+  },
+  {
+    "domain": "cyber",
+    "pi": 0.1,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99431398,
+    "anomalous_edges": 66001,
+    "fraction": 0.0006637842907529068,
+    "wall_s": 31.0,
+    "by_intent": {
+      "normal": 99365397,
+      "recon_scan": 23475,
+      "brute_force": 15154,
+      "lateral_movement": 474,
+      "c2_beacon": 25748,
+      "exfiltration": 1104,
+      "priv_esc": 46
+    }
+  },
+  {
+    "domain": "transport",
+    "pi": 0.005,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99918441,
+    "anomalous_edges": 8824,
+    "fraction": 8.831202640561616e-05,
+    "wall_s": 17.7,
+    "by_intent": {
+      "normal": 99909617,
+      "gps_spoofing": 282,
+      "fake_trip_injection": 269,
+      "sensor_stuck": 3950,
+      "sensor_drift": 3863,
+      "sensor_dropout": 0,
+      "sensor_impossible": 56,
+      "congestion_cascade": 347,
+      "incident": 57
+    }
+  },
+  {
+    "domain": "transport",
+    "pi": 0.01,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99918241,
+    "anomalous_edges": 21307,
+    "fraction": 0.00021324434644521013,
+    "wall_s": 17.7,
+    "by_intent": {
+      "normal": 99896934,
+      "gps_spoofing": 432,
+      "fake_trip_injection": 281,
+      "sensor_stuck": 6590,
+      "sensor_drift": 13086,
+      "sensor_dropout": 0,
+      "sensor_impossible": 242,
+      "congestion_cascade": 606,
+      "incident": 70
+    }
+  },
+  {
+    "domain": "transport",
+    "pi": 0.02,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99917449,
+    "anomalous_edges": 31600,
+    "fraction": 0.00031626107668141125,
+    "wall_s": 21.6,
+    "by_intent": {
+      "normal": 99885849,
+      "gps_spoofing": 849,
+      "fake_trip_injection": 775,
+      "sensor_stuck": 10336,
+      "sensor_drift": 17917,
+      "sensor_dropout": 0,
+      "sensor_impossible": 401,
+      "congestion_cascade": 1165,
+      "incident": 157
+    }
+  },
+  {
+    "domain": "transport",
+    "pi": 0.05,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99916911,
+    "anomalous_edges": 89977,
+    "fraction": 0.0009005182315934486,
+    "wall_s": 17.7,
+    "by_intent": {
+      "normal": 99826934,
+      "gps_spoofing": 1656,
+      "fake_trip_injection": 2130,
+      "sensor_stuck": 23982,
+      "sensor_drift": 57869,
+      "sensor_dropout": 0,
+      "sensor_impossible": 879,
+      "congestion_cascade": 3023,
+      "incident": 438
+    }
+  },
+  {
+    "domain": "transport",
+    "pi": 0.1,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99913799,
+    "anomalous_edges": 189490,
+    "fraction": 0.001896534831990524,
+    "wall_s": 17.7,
+    "by_intent": {
+      "normal": 99724309,
+      "gps_spoofing": 3246,
+      "fake_trip_injection": 3945,
+      "sensor_stuck": 46104,
+      "sensor_drift": 127379,
+      "sensor_dropout": 0,
+      "sensor_impossible": 1946,
+      "congestion_cascade": 6011,
+      "incident": 859
+    }
+  },
+  {
+    "domain": "ecommerce",
+    "pi": 0.005,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99756580,
+    "anomalous_edges": 384836,
+    "fraction": 0.0038577505363555967,
+    "wall_s": 21.4,
+    "by_intent": {
+      "normal": 99371744,
+      "fake_reviews": 168494,
+      "collusion_ring": 130495,
+      "sockpuppet": 45549,
+      "singleton_burst": 7780,
+      "return_fraud": 32518
+    }
+  },
+  {
+    "domain": "ecommerce",
+    "pi": 0.01,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99761312,
+    "anomalous_edges": 804431,
+    "fraction": 0.008063556742317101,
+    "wall_s": 21.8,
+    "by_intent": {
+      "normal": 98956881,
+      "fake_reviews": 343341,
+      "collusion_ring": 234642,
+      "sockpuppet": 145056,
+      "singleton_burst": 13153,
+      "return_fraud": 68239
+    }
+  },
+  {
+    "domain": "ecommerce",
+    "pi": 0.02,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99761317,
+    "anomalous_edges": 1622342,
+    "fraction": 0.016262235190820505,
+    "wall_s": 22.8,
+    "by_intent": {
+      "normal": 98138975,
+      "fake_reviews": 701713,
+      "collusion_ring": 467420,
+      "sockpuppet": 294611,
+      "singleton_burst": 23820,
+      "return_fraud": 134778
+    }
+  },
+  {
+    "domain": "ecommerce",
+    "pi": 0.05,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99762319,
+    "anomalous_edges": 4006399,
+    "fraction": 0.040159441361823194,
+    "wall_s": 22.6,
+    "by_intent": {
+      "normal": 95755920,
+      "fake_reviews": 1760187,
+      "collusion_ring": 1122401,
+      "sockpuppet": 730272,
+      "singleton_burst": 74774,
+      "return_fraud": 318765
+    }
+  },
+  {
+    "domain": "ecommerce",
+    "pi": 0.1,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99767675,
+    "anomalous_edges": 8082266,
+    "fraction": 0.0810108685002432,
+    "wall_s": 23.4,
+    "by_intent": {
+      "normal": 91685409,
+      "fake_reviews": 3569209,
+      "collusion_ring": 2214320,
+      "sockpuppet": 1516530,
+      "singleton_burst": 135215,
+      "return_fraud": 646992
+    }
+  },
+  {
+    "domain": "healthcare",
+    "pi": 0.005,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99655295,
+    "anomalous_edges": 474554,
+    "fraction": 0.004761954695934621,
+    "wall_s": 21.8,
+    "by_intent": {
+      "normal": 99180741,
+      "upcoding": 34873,
+      "phantom_billing": 420749,
+      "unbundling": 15201,
+      "kickback_ring": 3522,
+      "doctor_shopping": 209
+    }
+  },
+  {
+    "domain": "healthcare",
+    "pi": 0.01,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99639028,
+    "anomalous_edges": 899682,
+    "fraction": 0.00902941365505894,
+    "wall_s": 20.8,
+    "by_intent": {
+      "normal": 98739346,
+      "upcoding": 53684,
+      "phantom_billing": 802771,
+      "unbundling": 30938,
+      "kickback_ring": 12070,
+      "doctor_shopping": 219
+    }
+  },
+  {
+    "domain": "healthcare",
+    "pi": 0.02,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99617401,
+    "anomalous_edges": 1764917,
+    "fraction": 0.017716954892248192,
+    "wall_s": 20.5,
+    "by_intent": {
+      "normal": 97852484,
+      "upcoding": 98434,
+      "phantom_billing": 1572441,
+      "unbundling": 70877,
+      "kickback_ring": 21897,
+      "doctor_shopping": 1268
+    }
+  },
+  {
+    "domain": "healthcare",
+    "pi": 0.05,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99536992,
+    "anomalous_edges": 4373093,
+    "fraction": 0.04393434955317918,
+    "wall_s": 20.9,
+    "by_intent": {
+      "normal": 95163899,
+      "upcoding": 274680,
+      "phantom_billing": 3863454,
+      "unbundling": 183774,
+      "kickback_ring": 47828,
+      "doctor_shopping": 3357
+    }
+  },
+  {
+    "domain": "healthcare",
+    "pi": 0.1,
+    "edges_requested": 100000000,
+    "status": "ok",
+    "total_edges": 99420865,
+    "anomalous_edges": 9578234,
+    "fraction": 0.09634028028221239,
+    "wall_s": 21.6,
+    "by_intent": {
+      "normal": 89842631,
+      "upcoding": 574545,
+      "phantom_billing": 8527714,
+      "unbundling": 380250,
+      "kickback_ring": 87668,
+      "doctor_shopping": 8057
+    }
+  }
+]

@@ -1,0 +1,26 @@
+{
+ "dirs": {
+  "$PROJECT/saga/xrun/ref16_1e7/out1": {
+   "edges": 8858299,
+   "edge_digest": "562786dc96f90f68d939bb8a2ddbf41d38835970a4f893520f6942583ff0e34f",
+   "nodes": 1000000,
+   "node_digest": "6f128c73d43112e649064ae77036ed078644641f6744384f1b2fda5a14163d70",
+   "node_ids_unique": true
+  },
+  "$PROJECT/saga/xrun/ref16_1e7/out2": {
+   "edges": 8858299,
+   "edge_digest": "562786dc96f90f68d939bb8a2ddbf41d38835970a4f893520f6942583ff0e34f",
+   "nodes": 1000000,
+   "node_digest": "6f128c73d43112e649064ae77036ed078644641f6744384f1b2fda5a14163d70",
+   "node_ids_unique": true
+  }
+ },
+ "union": {
+  "edges": 17716598,
+  "edge_digest": "d09ece7d92e0b2243fb064bfa3a66a5158f2ab3a961ab1dacc4ed865921759da",
+  "nodes": 2000000,
+  "node_digest": "948ed41ad62833b04b3495bf0dade6fee79dc9376f461b0837bc8b020e87dacf",
+  "shard_node_ids_disjoint": false
+ },
+ "digest_seconds": 203.4
+}

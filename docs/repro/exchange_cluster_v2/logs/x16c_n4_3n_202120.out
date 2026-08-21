@@ -1,0 +1,110 @@
+job 202120 nodes itiger[01-02,08] N=4 EDGES=1000000 TAG=x16c_n4_3n NN=3
+itiger01
+itiger02
+itiger08
+itiger02: load 5.53 5.96 6.14 | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo
+itiger08: load 6.42 6.26 6.17 | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo
+itiger01: load 16.77 14.83 11.22 | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo
+rep1 srun_wall 2.57538
+0 itiger01 1787298419.234513876 1787298421.282533434 0 2.04802
+1 itiger01 1787298419.234786297 1787298421.284846452 0 2.05006
+2 itiger02 1787298419.141924477 1787298421.283310641 0 2.14139
+3 itiger08 1787298419.131074196 1787298421.301880432 0 2.17081
+        1 "exchange_bytes_received": 10067435
+        1 "exchange_bytes_received": 7818475
+        1 "exchange_bytes_received": 7865165
+        1 "exchange_bytes_received": 8223565
+        1 "exchange_bytes_sent": 7758800
+        1 "exchange_bytes_sent": 8682905
+        1 "exchange_bytes_sent": 8752555
+        1 "exchange_bytes_sent": 8780380
+        1 "exchange_deltas_received": 223385
+        1 "exchange_deltas_received": 224719
+        1 "exchange_deltas_received": 234959
+        1 "exchange_deltas_received": 287641
+        1 "exchange_deltas_sent": 221680
+        1 "exchange_deltas_sent": 248083
+        1 "exchange_deltas_sent": 250073
+        1 "exchange_deltas_sent": 250868
+        1 "exchange_idle_polls": 15
+        1 "exchange_idle_polls": 19
+        1 "exchange_idle_polls": 349
+        1 "exchange_idle_polls": 38
+        1 "exchange_nudges": 131
+        1 "exchange_nudges": 14
+        1 "exchange_nudges": 18
+        1 "exchange_nudges": 9
+        4 "exchange_rounds": 90
+        4 "exchange_skewed_opens": 0
+xchg leftover: 0 entries (0 = dir removed)
+rep2 srun_wall 1.96364
+0 itiger01 1787298421.813068938 1787298423.267053489 0 1.45398
+1 itiger01 1787298421.813329349 1787298423.266662837 0 1.45333
+2 itiger02 1787298421.734974092 1787298423.266088776 0 1.53111
+3 itiger08 1787298421.746376276 1787298423.272576945 0 1.5262
+        1 "exchange_bytes_received": 10067435
+        1 "exchange_bytes_received": 7818475
+        1 "exchange_bytes_received": 7865165
+        1 "exchange_bytes_received": 8223565
+        1 "exchange_bytes_sent": 7758800
+        1 "exchange_bytes_sent": 8682905
+        1 "exchange_bytes_sent": 8752555
+        1 "exchange_bytes_sent": 8780380
+        1 "exchange_deltas_received": 223385
+        1 "exchange_deltas_received": 224719
+        1 "exchange_deltas_received": 234959
+        1 "exchange_deltas_received": 287641
+        1 "exchange_deltas_sent": 221680
+        1 "exchange_deltas_sent": 248083
+        1 "exchange_deltas_sent": 250073
+        1 "exchange_deltas_sent": 250868
+        1 "exchange_idle_polls": 254
+        2 "exchange_idle_polls": 3
+        1 "exchange_idle_polls": 75
+        1 "exchange_nudges": 1
+        1 "exchange_nudges": 13
+        1 "exchange_nudges": 2
+        1 "exchange_nudges": 26
+        4 "exchange_rounds": 90
+        4 "exchange_skewed_opens": 0
+xchg leftover: 0 entries (0 = dir removed)
+rep1 digest:
+   "edge_digest": "8943896f7efd3c029f1df9a3aadbcb548369eb3b9d201e738c459f0cff479e20",
+   "node_digest": "ce89366c961255444ee3cd4aa4e51170a4b5b65851141eb60b2ba7fe6e049467",
+   "node_slice_equals_ref": true
+   "edge_digest": "bf59ee8121ca23288bf077b80aec3b67204c60d064a4e1fcad8b0c289c763f56",
+   "node_digest": "b7a6bd18dcef66bcc75d9427c00d9913c1903fe4f23c8f64b95795ce7223a8c0",
+   "node_slice_equals_ref": true
+   "edge_digest": "13132c8779c5fa7efa760e234ee7ee0b4c52f7f3168e83032236448b16889f9d",
+   "node_digest": "aecf56f58fa3616dc7e1f8ea3ab2af7325cf2e0d74b9109e2c92c0b07e7fb43b",
+   "node_slice_equals_ref": true
+   "edge_digest": "133741dbda1a1c47e710712e9c82790c2c08cf369718abd5764043876680a1b8",
+   "node_digest": "f24c57d2bbacff45c2ba36cf7db26b3196dc36ff60fe8cc0a525ccc791b80e25",
+   "node_slice_equals_ref": true
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9",
+  "shard_node_ids_disjoint": true
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9"
+ "edge_union_equals_ref": true,
+ "node_union_equals_ref": true,
+rep2 digest:
+   "edge_digest": "8943896f7efd3c029f1df9a3aadbcb548369eb3b9d201e738c459f0cff479e20",
+   "node_digest": "ce89366c961255444ee3cd4aa4e51170a4b5b65851141eb60b2ba7fe6e049467",
+   "node_slice_equals_ref": true
+   "edge_digest": "bf59ee8121ca23288bf077b80aec3b67204c60d064a4e1fcad8b0c289c763f56",
+   "node_digest": "b7a6bd18dcef66bcc75d9427c00d9913c1903fe4f23c8f64b95795ce7223a8c0",
+   "node_slice_equals_ref": true
+   "edge_digest": "13132c8779c5fa7efa760e234ee7ee0b4c52f7f3168e83032236448b16889f9d",
+   "node_digest": "aecf56f58fa3616dc7e1f8ea3ab2af7325cf2e0d74b9109e2c92c0b07e7fb43b",
+   "node_slice_equals_ref": true
+   "edge_digest": "133741dbda1a1c47e710712e9c82790c2c08cf369718abd5764043876680a1b8",
+   "node_digest": "f24c57d2bbacff45c2ba36cf7db26b3196dc36ff60fe8cc0a525ccc791b80e25",
+   "node_slice_equals_ref": true
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9",
+  "shard_node_ids_disjoint": true
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9"
+ "edge_union_equals_ref": true,
+ "node_union_equals_ref": true,

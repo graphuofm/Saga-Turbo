@@ -1,0 +1,101 @@
+[
+ {
+  "domain": "finance",
+  "edges_req": 200000,
+  "wall_s": 0.3,
+  "status": "OK",
+  "total_edges": 199345,
+  "anom_edges": 807,
+  "frac": 0.004048258045097695,
+  "intents": {
+   "structuring": 351,
+   "layering": 196,
+   "fan_in_out": 166,
+   "round_tripping": 65,
+   "mule_network": 29
+  }
+ },
+ {
+  "domain": "finance",
+  "edges_req": 1000000,
+  "wall_s": 0.5,
+  "status": "OK",
+  "total_edges": 998413,
+  "anom_edges": 3876,
+  "frac": 0.0038821609894903212,
+  "intents": {
+   "structuring": 1744,
+   "layering": 963,
+   "fan_in_out": 711,
+   "round_tripping": 313,
+   "mule_network": 145
+  }
+ },
+ {
+  "domain": "finance",
+  "edges_req": 2000000,
+  "wall_s": 0.7,
+  "status": "OK",
+  "total_edges": 1997562,
+  "anom_edges": 7890,
+  "frac": 0.0039498148242707865,
+  "intents": {
+   "structuring": 3497,
+   "layering": 1997,
+   "fan_in_out": 1470,
+   "round_tripping": 650,
+   "mule_network": 276
+  }
+ },
+ {
+  "domain": "cyber",
+  "edges_req": 200000,
+  "wall_s": 0.3,
+  "status": "OK",
+  "total_edges": 199076,
+  "anom_edges": 126,
+  "frac": 0.0006329241093853603,
+  "intents": {
+   "recon_scan": 27,
+   "brute_force": 5,
+   "lateral_movement": 2,
+   "c2_beacon": 87,
+   "exfiltration": 5,
+   "priv_esc": 0
+  }
+ },
+ {
+  "domain": "cyber",
+  "edges_req": 1000000,
+  "wall_s": 0.5,
+  "status": "OK",
+  "total_edges": 993425,
+  "anom_edges": 662,
+  "frac": 0.0006663814580869215,
+  "intents": {
+   "recon_scan": 120,
+   "brute_force": 20,
+   "lateral_movement": 10,
+   "c2_beacon": 480,
+   "exfiltration": 32,
+   "priv_esc": 0
+  }
+ },
+ {
+  "domain": "cyber",
+  "edges_req": 2000000,
+  "wall_s": 0.8,
+  "status": "OK",
+  "total_edges": 1986586,
+  "anom_edges": 1288,
+  "frac": 0.0006483484732098182,
+  "intents": {
+   "recon_scan": 229,
+   "brute_force": 41,
+   "lateral_movement": 25,
+   "c2_beacon": 935,
+   "exfiltration": 58,
+   "priv_esc": 0
+  }
+ }
+]

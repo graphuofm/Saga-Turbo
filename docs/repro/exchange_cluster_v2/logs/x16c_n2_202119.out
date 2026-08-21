@@ -1,0 +1,69 @@
+job 202119 nodes itiger[01,08] N=2 EDGES=1000000 TAG=x16c_n2 NN=2
+itiger01
+itiger08
+itiger08: load 6.37 6.24 6.16 | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo
+itiger01: load 16.77 14.83 11.22 | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo
+rep1 srun_wall 1.51165
+0 itiger01 1787298418.198356628 1787298419.292676103 0 1.09432
+1 itiger08 1787298418.159938519 1787298419.309182353 0 1.14924
+        1 "exchange_bytes_received": 10568880
+        1 "exchange_bytes_received": 11962300
+        1 "exchange_bytes_sent": 10568880
+        1 "exchange_bytes_sent": 11962300
+        1 "exchange_deltas_received": 301968
+        1 "exchange_deltas_received": 341780
+        1 "exchange_deltas_sent": 301968
+        1 "exchange_deltas_sent": 341780
+        1 "exchange_idle_polls": 30
+        1 "exchange_idle_polls": 65
+        1 "exchange_nudges": 1
+        1 "exchange_nudges": 2
+        2 "exchange_rounds": 90
+        2 "exchange_skewed_opens": 0
+xchg leftover: 0 entries (0 = dir removed)
+rep2 srun_wall 1.66776
+0 itiger01 1787298419.738518135 1787298420.979043560 0 1.24053
+1 itiger08 1787298419.692615269 1787298420.997484631 0 1.30487
+        1 "exchange_bytes_received": 10568880
+        1 "exchange_bytes_received": 11962300
+        1 "exchange_bytes_sent": 10568880
+        1 "exchange_bytes_sent": 11962300
+        1 "exchange_deltas_received": 301968
+        1 "exchange_deltas_received": 341780
+        1 "exchange_deltas_sent": 301968
+        1 "exchange_deltas_sent": 341780
+        1 "exchange_idle_polls": 47
+        1 "exchange_idle_polls": 51
+        1 "exchange_nudges": 4
+        1 "exchange_nudges": 6
+        2 "exchange_rounds": 90
+        2 "exchange_skewed_opens": 0
+xchg leftover: 0 entries (0 = dir removed)
+rep1 digest:
+   "edge_digest": "1e67846f92c43088c85fc3eb834708abd933fee65acc592d2954f48c27041cef",
+   "node_digest": "0aafd961f89ffdb71c6c6441a6dd340d4a5d1fc267e4f75cbeb7295f8be2260d",
+   "node_slice_equals_ref": true
+   "edge_digest": "d9e02a12dc9ad7ea5a6d9e4794ae065be353028cf0fd65ee37bb23a47bc55cad",
+   "node_digest": "64c14b3905a1e7909b7c72c6a9c87299cb5f98508b300d25ebca4ffa7aa5dd50",
+   "node_slice_equals_ref": true
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9",
+  "shard_node_ids_disjoint": true
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9"
+ "edge_union_equals_ref": true,
+ "node_union_equals_ref": true,
+rep2 digest:
+   "edge_digest": "1e67846f92c43088c85fc3eb834708abd933fee65acc592d2954f48c27041cef",
+   "node_digest": "0aafd961f89ffdb71c6c6441a6dd340d4a5d1fc267e4f75cbeb7295f8be2260d",
+   "node_slice_equals_ref": true
+   "edge_digest": "d9e02a12dc9ad7ea5a6d9e4794ae065be353028cf0fd65ee37bb23a47bc55cad",
+   "node_digest": "64c14b3905a1e7909b7c72c6a9c87299cb5f98508b300d25ebca4ffa7aa5dd50",
+   "node_slice_equals_ref": true
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9",
+  "shard_node_ids_disjoint": true
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9"
+ "edge_union_equals_ref": true,
+ "node_union_equals_ref": true,

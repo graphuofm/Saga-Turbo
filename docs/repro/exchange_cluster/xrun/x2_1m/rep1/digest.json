@@ -1,0 +1,41 @@
+{
+ "dirs": {
+  "xrun/x2_1m/rep1/out0": {
+   "edges": 0,
+   "edge_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "nodes": 0,
+   "node_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "node_ids_unique": true,
+   "node_rows_not_in_ref": 0,
+   "node_slice_equals_ref": true
+  },
+  "xrun/x2_1m/rep1/out1": {
+   "edges": 0,
+   "edge_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "nodes": 0,
+   "node_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "node_ids_unique": true,
+   "node_rows_not_in_ref": 0,
+   "node_slice_equals_ref": true
+  }
+ },
+ "union": {
+  "edges": 0,
+  "edge_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "nodes": 0,
+  "node_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "shard_node_ids_disjoint": true
+ },
+ "ref": {
+  "dir": "xrun/ref1m/out1",
+  "edges": 887156,
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "nodes": 100000,
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9"
+ },
+ "edge_union_equals_ref": false,
+ "edge_union_minus_ref": 0,
+ "ref_minus_edge_union": 887156,
+ "node_union_equals_ref": false,
+ "digest_seconds": 7.4
+}

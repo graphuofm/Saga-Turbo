@@ -1,0 +1,298 @@
+{
+  "snap-email-eu": {
+    "domain": "finance",
+    "domain_precedent": "docs/VALIDATION.md 'SAGA finance vs email-Eu'",
+    "cmd": [
+      "./target/release/saga",
+      "generate",
+      "--domain",
+      "finance",
+      "--nodes",
+      "986",
+      "--edges",
+      "332334",
+      "--time-span",
+      "803.926551",
+      "--no-anomalies",
+      "--seed",
+      "42",
+      "--out",
+      "/tmp/j4_snap-email-eu"
+    ],
+    "real": {
+      "edges": 332334,
+      "nodes": 986,
+      "span_days": 803.9265509259259,
+      "time_prefix_capped_to": null
+    },
+    "synth": {
+      "edges": 332597,
+      "nodes": 986
+    },
+    "advanced": {
+      "layer2_distribution_distances": {
+        "total_degree": {
+          "energy": 5.077652828775425,
+          "wasserstein": 150.08722109533494,
+          "anderson_darling": 84.27478687630182
+        },
+        "inter_event": {
+          "energy": 121.20688798632177,
+          "wasserstein": 116739.11942500013,
+          "anderson_darling": 44599.03362695794
+        }
+      },
+      "layer3_temporal_motifs": {
+        "delta_s": 3600.0,
+        "real_fingerprint": [
+          0.28384533898305087,
+          0.05847457627118644,
+          0.13935381355932203,
+          0.059957627118644066,
+          0.05540254237288136,
+          0.13765889830508474,
+          0.05632944915254237,
+          0.20897775423728815
+        ],
+        "synth_fingerprint": [
+          0.45753514458445627,
+          0.0006555466530701434,
+          0.00014567703401558745,
+          0.0006919659115740403,
+          0.0007648044285818341,
+          0.0001820962925194843,
+          0.0009104814625974215,
+          0.5391142836331853
+        ],
+        "l1_distance": 1.007652669994605
+      },
+      "layer4_discriminative": {
+        "auc": 0.9998529444444444,
+        "accuracy": 0.9945416666666667,
+        "discriminative_score": 0.9997058888888888
+      }
+    }
+  },
+  "snap-collegemsg": {
+    "domain": "finance",
+    "domain_precedent": "docs/VALIDATION.md 'SAGA finance vs CollegeMsg'",
+    "cmd": [
+      "./target/release/saga",
+      "generate",
+      "--domain",
+      "finance",
+      "--nodes",
+      "1899",
+      "--edges",
+      "59835",
+      "--time-span",
+      "193.705799",
+      "--no-anomalies",
+      "--seed",
+      "42",
+      "--out",
+      "/tmp/j4_snap-collegemsg"
+    ],
+    "real": {
+      "edges": 59835,
+      "nodes": 1899,
+      "span_days": 193.7057986111111,
+      "time_prefix_capped_to": null
+    },
+    "synth": {
+      "edges": 59072,
+      "nodes": 1894
+    },
+    "advanced": {
+      "layer2_distribution_distances": {
+        "total_degree": {
+          "energy": 1.848534441664371,
+          "wasserstein": 20.099543304345694,
+          "anderson_darling": 247.77948494422384
+        },
+        "inter_event": {
+          "energy": 265.0731854353471,
+          "wasserstein": 287828.5682450027,
+          "anderson_darling": 7194.303733172824
+        }
+      },
+      "layer3_temporal_motifs": {
+        "delta_s": 3600.0,
+        "real_fingerprint": [
+          0.1727565369627831,
+          0.035296775286609815,
+          0.28485909527305586,
+          0.03546619980798554,
+          0.037386344383577116,
+          0.2798328344722426,
+          0.035240300446151236,
+          0.11916191336759474
+        ],
+        "synth_fingerprint": [
+          0.4514983351831299,
+          0.0006659267480577136,
+          0.00022197558268590456,
+          0.0008879023307436182,
+          0.00022197558268590456,
+          0.0,
+          0.0006659267480577136,
+          0.5458379578246393
+        ],
+        "l1_distance": 1.4108356853547828
+      },
+      "layer4_discriminative": {
+        "auc": 0.9997350694444446,
+        "accuracy": 0.9925833333333334,
+        "discriminative_score": 0.9994701388888891
+      }
+    }
+  },
+  "tgbl-review": {
+    "domain": "ecommerce",
+    "domain_precedent": "docs/VALIDATION.md 'SAGA ecommerce vs tgbl-review'",
+    "cmd": [
+      "./target/release/saga",
+      "generate",
+      "--domain",
+      "ecommerce",
+      "--nodes",
+      "326525",
+      "--edges",
+      "2500000",
+      "--time-span",
+      "5886.000000",
+      "--no-anomalies",
+      "--seed",
+      "42",
+      "--out",
+      "/tmp/j4_tgbl-review"
+    ],
+    "real": {
+      "edges": 2500000,
+      "nodes": 326525,
+      "span_days": 5886.0,
+      "time_prefix_capped_to": 2500000
+    },
+    "synth": {
+      "edges": 2492042,
+      "nodes": 285555
+    },
+    "advanced": {
+      "layer2_distribution_distances": {
+        "total_degree": {
+          "energy": 0.6397115583214049,
+          "wasserstein": 6.371715000009029,
+          "anderson_darling": 7755.809356977079
+        },
+        "inter_event": {
+          "energy": 1485.3991874073838,
+          "wasserstein": 15090927.17554,
+          "anderson_darling": 51879.53012032159
+        }
+      },
+      "layer3_temporal_motifs": {
+        "delta_s": 3600.0,
+        "real_fingerprint": [
+          0.38635112823335166,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.6136488717666483
+        ],
+        "synth_fingerprint": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "l1_distance": 1.2272977435332968
+      },
+      "layer4_discriminative": {
+        "auc": 0.9999196458333334,
+        "accuracy": 0.9996666666666667,
+        "discriminative_score": 0.9998392916666667
+      }
+    }
+  },
+  "tgbl-wiki": {
+    "domain": "ecommerce",
+    "domain_precedent": "NO doc precedent; realdata/INDEX.txt calls it 'ECOMMERCE-like: bipartite user->item'",
+    "cmd": [
+      "./target/release/saga",
+      "generate",
+      "--domain",
+      "ecommerce",
+      "--nodes",
+      "8227",
+      "--edges",
+      "157474",
+      "--time-span",
+      "30.999688",
+      "--no-anomalies",
+      "--seed",
+      "42",
+      "--out",
+      "/tmp/j4_tgbl-wiki"
+    ],
+    "real": {
+      "edges": 157474,
+      "nodes": 8227,
+      "span_days": 30.9996875,
+      "time_prefix_capped_to": null
+    },
+    "synth": {
+      "edges": 156982,
+      "nodes": 7532
+    },
+    "advanced": {
+      "layer2_distribution_distances": {
+        "total_degree": {
+          "energy": 2.8730782468114433,
+          "wasserstein": 28.787075940837582,
+          "anderson_darling": 3241.868631524303
+        },
+        "inter_event": {
+          "energy": 108.2707911006543,
+          "wasserstein": 48885.06963905483,
+          "anderson_darling": 20441.013014467364
+        }
+      },
+      "layer3_temporal_motifs": {
+        "delta_s": 3600.0,
+        "real_fingerprint": [
+          0.1456438383362081,
+          0.0,
+          0.0,
+          1.2408949334259868e-05,
+          0.0,
+          1.2408949334259868e-05,
+          1.2408949334259868e-05,
+          0.8543189348157891
+        ],
+        "synth_fingerprint": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "l1_distance": 1.708712323327584
+      },
+      "layer4_discriminative": {
+        "auc": 0.9998690069444445,
+        "accuracy": 0.994125,
+        "discriminative_score": 0.9997380138888889
+      }
+    }
+  }
+}

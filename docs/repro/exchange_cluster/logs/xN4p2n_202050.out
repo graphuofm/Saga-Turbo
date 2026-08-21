@@ -1,0 +1,83 @@
+job 202050 nodes itiger[01-02] N=4 EDGES=1000000 TAG=x4p2n_1m POKE=1 NN=2 TPN=2
+itiger01
+itiger02
+itiger02:  AMD EPYC 7513 32-Core Processor | 8 cpus | load 8.42 7.37 7.46 | ib: 200 Gb/sec (4X HDR) mlx5_0  | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,
+itiger01:  AMD EPYC 9334 32-Core Processor | 8 cpus | load 24.66 24.26 24.24 | ib: 200 Gb/sec (4X HDR) mlx5_0  | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,
+rep1 srun_wall 2.95919
+0 itiger01 1787293731.938252868 1787293734.374607674 0 2.43635
+1 itiger01 1787293731.937741207 1787293734.382003331 0 2.44426
+2 itiger01 1787293731.938024638 1787293734.377600571 0 2.43958
+3 itiger02 1787293731.864218520 1787293734.384725968 0 2.52051
+xchg leftover: 0 files; dir exists: yes
+cp: cannot stat '/tmp/jding2_x_202050/shard2/shard_02/metrics.prom': No such file or directory
+cp: cannot stat '/tmp/jding2_x_202050/shard0/shard_00/metrics.prom': No such file or directory
+rep2 srun_wall 2.81193
+0 itiger01 1787293734.930438453 1787293737.195022080 0 2.26458
+1 itiger01 1787293734.931051264 1787293737.197666106 0 2.26661
+2 itiger01 1787293734.930054112 1787293737.199154529 0 2.2691
+3 itiger02 1787293734.917512737 1787293737.202778874 0 2.28527
+xchg leftover: 0 files; dir exists: yes
+rep1 digest:
+   "edges": 215178,
+   "edge_digest": "8943896f7efd3c029f1df9a3aadbcb548369eb3b9d201e738c459f0cff479e20",
+   "nodes": 25000,
+   "node_digest": "ce89366c961255444ee3cd4aa4e51170a4b5b65851141eb60b2ba7fe6e049467",
+   "node_slice_equals_ref": true
+   "edges": 227885,
+   "edge_digest": "bf59ee8121ca23288bf077b80aec3b67204c60d064a4e1fcad8b0c289c763f56",
+   "nodes": 25000,
+   "node_digest": "b7a6bd18dcef66bcc75d9427c00d9913c1903fe4f23c8f64b95795ce7223a8c0",
+   "node_slice_equals_ref": true
+   "edges": 223228,
+   "edge_digest": "13132c8779c5fa7efa760e234ee7ee0b4c52f7f3168e83032236448b16889f9d",
+   "nodes": 25000,
+   "node_digest": "aecf56f58fa3616dc7e1f8ea3ab2af7325cf2e0d74b9109e2c92c0b07e7fb43b",
+   "node_slice_equals_ref": true
+   "edges": 220865,
+   "edge_digest": "133741dbda1a1c47e710712e9c82790c2c08cf369718abd5764043876680a1b8",
+   "nodes": 25000,
+   "node_digest": "f24c57d2bbacff45c2ba36cf7db26b3196dc36ff60fe8cc0a525ccc791b80e25",
+   "node_slice_equals_ref": true
+  "edges": 887156,
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "nodes": 100000,
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9",
+  "shard_node_ids_disjoint": true
+  "edges": 887156,
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "nodes": 100000,
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9"
+ "edge_union_equals_ref": true,
+ "node_union_equals_ref": true,
+rep2 digest:
+   "edges": 215178,
+   "edge_digest": "8943896f7efd3c029f1df9a3aadbcb548369eb3b9d201e738c459f0cff479e20",
+   "nodes": 25000,
+   "node_digest": "ce89366c961255444ee3cd4aa4e51170a4b5b65851141eb60b2ba7fe6e049467",
+   "node_slice_equals_ref": true
+   "edges": 227885,
+   "edge_digest": "bf59ee8121ca23288bf077b80aec3b67204c60d064a4e1fcad8b0c289c763f56",
+   "nodes": 25000,
+   "node_digest": "b7a6bd18dcef66bcc75d9427c00d9913c1903fe4f23c8f64b95795ce7223a8c0",
+   "node_slice_equals_ref": true
+   "edges": 223228,
+   "edge_digest": "13132c8779c5fa7efa760e234ee7ee0b4c52f7f3168e83032236448b16889f9d",
+   "nodes": 25000,
+   "node_digest": "aecf56f58fa3616dc7e1f8ea3ab2af7325cf2e0d74b9109e2c92c0b07e7fb43b",
+   "node_slice_equals_ref": true
+   "edges": 220865,
+   "edge_digest": "133741dbda1a1c47e710712e9c82790c2c08cf369718abd5764043876680a1b8",
+   "nodes": 25000,
+   "node_digest": "f24c57d2bbacff45c2ba36cf7db26b3196dc36ff60fe8cc0a525ccc791b80e25",
+   "node_slice_equals_ref": true
+  "edges": 887156,
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "nodes": 100000,
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9",
+  "shard_node_ids_disjoint": true
+  "edges": 887156,
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "nodes": 100000,
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9"
+ "edge_union_equals_ref": true,
+ "node_union_equals_ref": true,

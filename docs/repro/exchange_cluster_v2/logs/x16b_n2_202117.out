@@ -1,0 +1,8 @@
+job 202117 nodes itiger[07-08] N=2 EDGES=1000000 TAG=x16b_n2 NN=2
+itiger07
+itiger08
+itiger08: load 6.32 6.23 6.15 | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo
+itiger07: load 5.57 3.25 2.73 | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 202117.1 ON itiger07 CANCELLED AT 2026-08-21T07:46:52 ***
+slurmstepd: error: *** JOB 202117 ON itiger07 CANCELLED AT 2026-08-21T07:46:52 ***

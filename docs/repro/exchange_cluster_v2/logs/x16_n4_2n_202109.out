@@ -1,0 +1,54 @@
+job 202109 nodes itiger[01-02] N=4 EDGES=1000000 TAG=x16_n4_2n NN=2
+itiger01
+itiger02
+itiger02: load 7.19 6.39 6.21 | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo
+itiger01: load 6.34 3.52 6.63 | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo
+rep1 srun_wall 2.30977
+0 itiger01 1787297863.479580992 1787297865.276376530 0 1.7968
+1 itiger01 1787297863.478823180 1787297865.280674805 0 1.80185
+2 itiger01 1787297863.479202411 1787297865.280024563 0 1.80082
+3 itiger02 1787297863.373923295 1787297865.278905471 0 1.90498
+        1 "exchange_bytes_received": 10067435
+        1 "exchange_bytes_received": 7818475
+        1 "exchange_bytes_received": 7865165
+        1 "exchange_bytes_received": 8223565
+        1 "exchange_bytes_sent": 7758800
+        1 "exchange_bytes_sent": 8682905
+        1 "exchange_bytes_sent": 8752555
+        1 "exchange_bytes_sent": 8780380
+        1 "exchange_deltas_received": 223385
+        1 "exchange_deltas_received": 224719
+        1 "exchange_deltas_received": 234959
+        1 "exchange_deltas_received": 287641
+        1 "exchange_deltas_sent": 221680
+        1 "exchange_deltas_sent": 248083
+        1 "exchange_deltas_sent": 250073
+        1 "exchange_deltas_sent": 250868
+        2 "exchange_idle_polls": 0
+        1 "exchange_idle_polls": 1
+        1 "exchange_idle_polls": 278
+        3 "exchange_nudges": 0
+        1 "exchange_nudges": 81
+        4 "exchange_rounds": 90
+        4 "exchange_skewed_opens": 0
+xchg leftover: 0 entries (0 = dir removed)
+rep1 digest:
+   "edge_digest": "8943896f7efd3c029f1df9a3aadbcb548369eb3b9d201e738c459f0cff479e20",
+   "node_digest": "ce89366c961255444ee3cd4aa4e51170a4b5b65851141eb60b2ba7fe6e049467",
+   "node_slice_equals_ref": true
+   "edge_digest": "bf59ee8121ca23288bf077b80aec3b67204c60d064a4e1fcad8b0c289c763f56",
+   "node_digest": "b7a6bd18dcef66bcc75d9427c00d9913c1903fe4f23c8f64b95795ce7223a8c0",
+   "node_slice_equals_ref": true
+   "edge_digest": "13132c8779c5fa7efa760e234ee7ee0b4c52f7f3168e83032236448b16889f9d",
+   "node_digest": "aecf56f58fa3616dc7e1f8ea3ab2af7325cf2e0d74b9109e2c92c0b07e7fb43b",
+   "node_slice_equals_ref": true
+   "edge_digest": "133741dbda1a1c47e710712e9c82790c2c08cf369718abd5764043876680a1b8",
+   "node_digest": "f24c57d2bbacff45c2ba36cf7db26b3196dc36ff60fe8cc0a525ccc791b80e25",
+   "node_slice_equals_ref": true
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9",
+  "shard_node_ids_disjoint": true
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9"
+ "edge_union_equals_ref": true,
+ "node_union_equals_ref": true,

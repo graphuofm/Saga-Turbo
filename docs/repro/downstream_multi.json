@@ -1,0 +1,62 @@
+[
+  {
+    "domain": "finance",
+    "n_nodes": 63716,
+    "n_edges": 200000,
+    "tgn_saga": 0.956,
+    "tgn_ba": 0.725,
+    "eb_saga": 0.825,
+    "eb_ba": 0.5,
+    "ebtw_saga": 0.699
+  },
+  {
+    "domain": "crypto",
+    "n_nodes": 28889,
+    "n_edges": 200000,
+    "tgn_saga": 0.985,
+    "tgn_ba": 0.659,
+    "eb_saga": 0.925,
+    "eb_ba": 0.5,
+    "ebtw_saga": 0.867
+  },
+  {
+    "domain": "cyber",
+    "n_nodes": 60627,
+    "n_edges": 200000,
+    "tgn_saga": 0.941,
+    "tgn_ba": 0.702,
+    "eb_saga": 0.793,
+    "eb_ba": 0.5,
+    "ebtw_saga": 0.683
+  },
+  {
+    "domain": "transport",
+    "n_nodes": 48248,
+    "n_edges": 200000,
+    "tgn_saga": 0.986,
+    "tgn_ba": 0.727,
+    "eb_saga": 0.931,
+    "eb_ba": 0.5,
+    "ebtw_saga": 0.764
+  },
+  {
+    "domain": "ecommerce",
+    "n_nodes": 64957,
+    "n_edges": 200000,
+    "tgn_saga": 0.943,
+    "tgn_ba": 0.703,
+    "eb_saga": 0.697,
+    "eb_ba": 0.5,
+    "ebtw_saga": 0.597
+  },
+  {
+    "domain": "healthcare",
+    "n_nodes": 26162,
+    "n_edges": 200000,
+    "tgn_saga": 0.972,
+    "tgn_ba": 0.664,
+    "eb_saga": 0.883,
+    "eb_ba": 0.5,
+    "ebtw_saga": 0.777
+  }
+]

@@ -1,0 +1,51 @@
+# Local-only cluster notes (never commit)
+ITIGER*
+*.secret
+*.pem
+.env
+.env.*
+**/credentials*
+
+# Licensed corpus text and third-party datasets (not redistributed)
+corpus/
+realdata/
+
+# Generated graphs / outputs
+out/
+/output/
+/runs/
+/results/
+*.parquet
+*.graphml
+scratch/
+
+# Rust
+target/
+**/*.rs.bk
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+*.whl
+/wheels/
+
+# Paper sources
+paper/
+paper.frozen/
+paper-vldb/
+paper*.pdf
+
+# Logs / editor
+*.log
+slurm_logs/
+.DS_Store
+*.swp
+.idea/
+.vscode/
+.claude/

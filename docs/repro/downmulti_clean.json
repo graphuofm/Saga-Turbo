@@ -1,0 +1,134 @@
+[
+ {
+  "domain": "finance",
+  "cmd": "./target/release/saga generate --domain finance --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down_after/finance --quiet",
+  "n_nodes": 63716,
+  "n_edges": 200000,
+  "tgn_saga": 0.959,
+  "tgn_ba": 0.741,
+  "eb_saga": 0.825,
+  "eb_ba": 0.5,
+  "ebtw_saga": 0.699,
+  "status": "OK",
+  "steps_s": {
+   "gen": 0.6,
+   "load": 0.1,
+   "tgn_saga": 153.4,
+   "eb_saga": 0.7,
+   "ba_gen": 0.2,
+   "tgn_ba": 132.4,
+   "eb_ba": 0.6
+  },
+  "wall_s": 288.0
+ },
+ {
+  "domain": "crypto",
+  "cmd": "./target/release/saga generate --domain crypto --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down_after/crypto --quiet",
+  "n_nodes": 28889,
+  "n_edges": 200000,
+  "tgn_saga": 0.984,
+  "tgn_ba": 0.648,
+  "eb_saga": 0.925,
+  "eb_ba": 0.5,
+  "ebtw_saga": 0.867,
+  "status": "OK",
+  "steps_s": {
+   "gen": 0.8,
+   "load": 0.0,
+   "tgn_saga": 114.6,
+   "eb_saga": 0.6,
+   "ba_gen": 0.3,
+   "tgn_ba": 174.4,
+   "eb_ba": 0.6
+  },
+  "wall_s": 291.3
+ },
+ {
+  "domain": "cyber",
+  "cmd": "./target/release/saga generate --domain cyber --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down_after/cyber --quiet",
+  "n_nodes": 60627,
+  "n_edges": 200000,
+  "tgn_saga": 0.944,
+  "tgn_ba": 0.756,
+  "eb_saga": 0.793,
+  "eb_ba": 0.5,
+  "ebtw_saga": 0.683,
+  "status": "OK",
+  "steps_s": {
+   "gen": 0.7,
+   "load": 0.0,
+   "tgn_saga": 147.4,
+   "eb_saga": 0.6,
+   "ba_gen": 0.2,
+   "tgn_ba": 116.9,
+   "eb_ba": 0.5
+  },
+  "wall_s": 266.4
+ },
+ {
+  "domain": "transport",
+  "cmd": "./target/release/saga generate --domain transport --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down_after/transport --quiet",
+  "n_nodes": 48248,
+  "n_edges": 200000,
+  "tgn_saga": 0.987,
+  "tgn_ba": 0.675,
+  "eb_saga": 0.931,
+  "eb_ba": 0.5,
+  "ebtw_saga": 0.764,
+  "status": "OK",
+  "steps_s": {
+   "gen": 0.5,
+   "load": 0.0,
+   "tgn_saga": 168.0,
+   "eb_saga": 0.6,
+   "ba_gen": 0.2,
+   "tgn_ba": 138.8,
+   "eb_ba": 0.7
+  },
+  "wall_s": 308.9
+ },
+ {
+  "domain": "ecommerce",
+  "cmd": "./target/release/saga generate --domain ecommerce --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down_after/ecommerce --quiet",
+  "n_nodes": 64957,
+  "n_edges": 200000,
+  "tgn_saga": 0.943,
+  "tgn_ba": 0.673,
+  "eb_saga": 0.697,
+  "eb_ba": 0.5,
+  "ebtw_saga": 0.597,
+  "status": "OK",
+  "steps_s": {
+   "gen": 0.6,
+   "load": 0.0,
+   "tgn_saga": 141.5,
+   "eb_saga": 0.6,
+   "ba_gen": 0.3,
+   "tgn_ba": 132.4,
+   "eb_ba": 0.6
+  },
+  "wall_s": 276.0
+ },
+ {
+  "domain": "healthcare",
+  "cmd": "./target/release/saga generate --domain healthcare --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down_after/healthcare --quiet",
+  "n_nodes": 26162,
+  "n_edges": 200000,
+  "tgn_saga": 0.972,
+  "tgn_ba": 0.594,
+  "eb_saga": 0.883,
+  "eb_ba": 0.5,
+  "ebtw_saga": 0.777,
+  "status": "OK",
+  "steps_s": {
+   "gen": 0.6,
+   "load": 0.0,
+   "tgn_saga": 153.4,
+   "eb_saga": 0.7,
+   "ba_gen": 0.2,
+   "tgn_ba": 167.8,
+   "eb_ba": 0.7
+  },
+  "wall_s": 323.4
+ }
+]

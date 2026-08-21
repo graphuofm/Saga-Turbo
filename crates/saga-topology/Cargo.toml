@@ -1,0 +1,14 @@
+[package]
+name = "saga-topology"
+description = "Pluggable structure/evolution models for the skeleton graph (BA, WS, SBM, R-MAT, forest fire, spatial, affiliation)"
+version.workspace = true
+edition.workspace = true
+repository.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+rayon.workspace = true
+saga-rules.workspace = true
+saga-sample.workspace = true
+rand.workspace = true
+rand_distr = "0.4"

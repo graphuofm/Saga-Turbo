@@ -1,0 +1,1264 @@
+{
+  "stages": [
+    {
+      "domain": "finance",
+      "intent": "structuring",
+      "stage": "smurf_deposits",
+      "actor": "account",
+      "current_k": [
+        0.1449,
+        0.5794
+      ],
+      "current_implied_rate_per_day": [
+        1.0,
+        4.0
+      ],
+      "normal_actor_rate_per_day_scale1": 6.903531,
+      "scope": "normal",
+      "duration_days": "7-21",
+      "ring_size": "3-12",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "31 CFR 1010.100(xx) (definition of \"structure (structuring)\")",
+      "source_quote": "\"...to conduct one or more transactions in currency, in any amount, at one or more financial institutions, on one or more days, in any manner, for the purpose of evading the reporting requirements... The transaction or transactions need not exceed the $10,000 reporting threshold at any single financial institution on any single day in order to constitute structuring within the meaning of this definition.\"",
+      "source_locator": "corpus/text/finance/fincen_31cfr_chx.txt @ ~8,023,700",
+      "note": "AMOUNT is grounded (override $8,200-$9,900 sits under the $10,000 CTR threshold of 31 CFR 1010.311 \u2014 cite Q['ctr']). RATE is not. IMPORTANT: the finance.yaml `ctr_structuring_window` constraint (k:4, floor:$7,000, window 7d) is presented as '31 CFR 1010.311' but NEITHER the count-of-4, the 7-day window, NOR the $7,000 floor appears in the CFR. The premise that this yields a grounded 0.57 deposits/day is FALSE. Recommend k=1 (neutral default) and re-label the constraint's k/floor/window as a modelling choice.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "finance",
+      "intent": "structuring",
+      "stage": "aggregate_to_collector",
+      "actor": "account",
+      "current_k": [
+        0.1449,
+        0.4346
+      ],
+      "current_implied_rate_per_day": [
+        1.0,
+        3.0
+      ],
+      "normal_actor_rate_per_day_scale1": 6.903531,
+      "scope": "collector",
+      "duration_days": "2-6",
+      "ring_size": "3-12",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "31 CFR 1010.100(xx) (definition of \"structure (structuring)\")",
+      "source_quote": "\"...to conduct one or more transactions in currency, in any amount, at one or more financial institutions, on one or more days, in any manner, for the purpose of evading the reporting requirements... The transaction or transactions need not exceed the $10,000 reporting threshold at any single financial institution on any single day in order to constitute structuring within the meaning of this definition.\"",
+      "source_locator": "corpus/text/finance/fincen_31cfr_chx.txt @ ~8,023,700",
+      "note": "Modelling choice, not grounded. 31 CFR 1010.100(xx) is affirmatively rate-free \u2014 it says structuring may be 'one or more transactions ... on one or more days'. FATF text is NOT in the corpus (fetch produced provenance only). Recommend the neutral default k=1.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "finance",
+      "intent": "layering",
+      "stage": "chain_hops",
+      "actor": "account",
+      "current_k": [
+        0.5794,
+        1.7382
+      ],
+      "current_implied_rate_per_day": [
+        4.0,
+        12.0
+      ],
+      "normal_actor_rate_per_day_scale1": 6.903531,
+      "scope": "chain",
+      "duration_days": "3-10",
+      "ring_size": "4-10",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. 31 CFR 1010.100(xx) is affirmatively rate-free \u2014 it says structuring may be 'one or more transactions ... on one or more days'. FATF text is NOT in the corpus (fetch produced provenance only). Recommend the neutral default k=1. (Cited as 'FATF placement/layering typology' \u2014 the FATF 40 Recommendations fetch left only provenance.json; there is no retrievable text.)",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "finance",
+      "intent": "fan_in_out",
+      "stage": "gather",
+      "actor": "account",
+      "current_k": [
+        0.8691,
+        2.8971
+      ],
+      "current_implied_rate_per_day": [
+        6.0,
+        20.0
+      ],
+      "normal_actor_rate_per_day_scale1": 6.903531,
+      "scope": "collector",
+      "duration_days": "1-5",
+      "ring_size": "5-25",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. 31 CFR 1010.100(xx) is affirmatively rate-free \u2014 it says structuring may be 'one or more transactions ... on one or more days'. FATF text is NOT in the corpus (fetch produced provenance only). Recommend the neutral default k=1.",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "finance",
+      "intent": "fan_in_out",
+      "stage": "scatter",
+      "actor": "account",
+      "current_k": [
+        0.8691,
+        2.8971
+      ],
+      "current_implied_rate_per_day": [
+        6.0,
+        20.0
+      ],
+      "normal_actor_rate_per_day_scale1": 6.903531,
+      "scope": "victims 10-40",
+      "duration_days": "1-4",
+      "ring_size": "5-25",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. 31 CFR 1010.100(xx) is affirmatively rate-free \u2014 it says structuring may be 'one or more transactions ... on one or more days'. FATF text is NOT in the corpus (fetch produced provenance only). Recommend the neutral default k=1.",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "finance",
+      "intent": "round_tripping",
+      "stage": "cycle",
+      "actor": "account",
+      "current_k": [
+        0.2897,
+        0.8691
+      ],
+      "current_implied_rate_per_day": [
+        2.0,
+        6.0
+      ],
+      "normal_actor_rate_per_day_scale1": 6.903531,
+      "scope": "chain",
+      "duration_days": "2-8",
+      "ring_size": "3-8",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. 31 CFR 1010.100(xx) is affirmatively rate-free \u2014 it says structuring may be 'one or more transactions ... on one or more days'. FATF text is NOT in the corpus (fetch produced provenance only). Recommend the neutral default k=1.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "finance",
+      "intent": "mule_network",
+      "stage": "receive",
+      "actor": "account",
+      "current_k": [
+        0.1449,
+        0.5794
+      ],
+      "current_implied_rate_per_day": [
+        1.0,
+        4.0
+      ],
+      "normal_actor_rate_per_day_scale1": 6.903531,
+      "scope": "collector",
+      "duration_days": "1-3",
+      "ring_size": "4-15",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. 31 CFR 1010.100(xx) is affirmatively rate-free \u2014 it says structuring may be 'one or more transactions ... on one or more days'. FATF text is NOT in the corpus (fetch produced provenance only). Recommend the neutral default k=1.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "finance",
+      "intent": "mule_network",
+      "stage": "forward",
+      "actor": "account",
+      "current_k": [
+        0.2897,
+        0.8691
+      ],
+      "current_implied_rate_per_day": [
+        2.0,
+        6.0
+      ],
+      "normal_actor_rate_per_day_scale1": 6.903531,
+      "scope": "victims 3-10",
+      "duration_days": "1-2",
+      "ring_size": "4-15",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. 31 CFR 1010.100(xx) is affirmatively rate-free \u2014 it says structuring may be 'one or more transactions ... on one or more days'. FATF text is NOT in the corpus (fetch produced provenance only). Recommend the neutral default k=1.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "crypto",
+      "intent": "wash_trading",
+      "stage": "cycle_volume",
+      "actor": "eoa",
+      "current_k": [
+        0.018,
+        0.0674
+      ],
+      "current_implied_rate_per_day": [
+        8.017,
+        30.019
+      ],
+      "normal_actor_rate_per_day_scale1": 445.384897,
+      "scope": "chain",
+      "duration_days": "2-10",
+      "ring_size": "3-10",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. The crypto corpus contains NO typology text: FATF VASP guidance fetch FAILED (HTTP 403, provenance.json only); grep of sok_defi_attacks.txt for 'rug pull'/'wash trad'/'ponzi'/'pump' returns 0 hits; OFAC SDN/crypto-address lists are address enumerations (they ground PREVALENCE and the existence of mixers, not rates); ERC-20/721/1155 ground the event schema, not rates. Recommend the neutral default k=1. SEE DENOMINATOR BUG below \u2014 the eoa yardstick is 445/day, a MEV-bot-dominated mean.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "crypto",
+      "intent": "wash_trading",
+      "stage": "pool_wash",
+      "actor": "eoa",
+      "current_k": [
+        0.0135,
+        0.0449
+      ],
+      "current_implied_rate_per_day": [
+        6.013,
+        19.998
+      ],
+      "normal_actor_rate_per_day_scale1": 445.384897,
+      "scope": "normal",
+      "duration_days": "1-5",
+      "ring_size": "3-10",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. The crypto corpus contains NO typology text: FATF VASP guidance fetch FAILED (HTTP 403, provenance.json only); grep of sok_defi_attacks.txt for 'rug pull'/'wash trad'/'ponzi'/'pump' returns 0 hits; OFAC SDN/crypto-address lists are address enumerations (they ground PREVALENCE and the existence of mixers, not rates); ERC-20/721/1155 ground the event schema, not rates. Recommend the neutral default k=1.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "crypto",
+      "intent": "phishing_drain",
+      "stage": "bait_approve",
+      "actor": "eoa",
+      "current_k": [
+        0.0011,
+        0.0045
+      ],
+      "current_implied_rate_per_day": [
+        0.49,
+        2.004
+      ],
+      "normal_actor_rate_per_day_scale1": 445.384897,
+      "scope": "victims 8-40",
+      "duration_days": "1-7",
+      "ring_size": "2-6",
+      "classification": "B",
+      "derived_events_per_day": [
+        1.1428571428571428,
+        40.0
+      ],
+      "derived_implied_k": [
+        0.0026,
+        0.0898
+      ],
+      "assumption": "One approve per victim (ERC-20 allowance is multi-use); victims = 8-40; stage window = 1-7 days => 8/7=1.14/day to 40/1=40/day. This bounds the COUNT the mechanism requires; it is not a rate the standard states.",
+      "source_citation": "ERC-20 Token Standard, `approve` (EIP-20)",
+      "source_quote": "\"Allows `_spender` to withdraw from your account multiple times, up to the `_value` amount. If this function is called again it overwrites the current allowance with `_value`.\"",
+      "source_locator": "corpus/text/crypto/ethereum_ercs.txt (erc-20.md)",
+      "note": "DERIVABLE from mechanism, not from a stated rate. ERC-20 `approve` grants multi-use spend rights in ONE call, so the campaign needs exactly 1 approve per victim (2 if the spec's set-to-0-first note is honoured). ASSUMPTION: each victim approves once over the stage window.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "crypto",
+      "intent": "phishing_drain",
+      "stage": "drain_to_collector",
+      "actor": "eoa",
+      "current_k": [
+        0.009,
+        0.0337
+      ],
+      "current_implied_rate_per_day": [
+        4.008,
+        15.009
+      ],
+      "normal_actor_rate_per_day_scale1": 445.384897,
+      "scope": "collector",
+      "duration_days": "0.5-3",
+      "ring_size": "2-6",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "ERC-20 Token Standard, `approve` (EIP-20)",
+      "source_quote": "\"Allows `_spender` to withdraw from your account multiple times, up to the `_value` amount. If this function is called again it overwrites the current allowance with `_value`.\"",
+      "source_locator": "corpus/text/crypto/ethereum_ercs.txt (erc-20.md)",
+      "note": "ERC-20 grounds that ONE approve permits unbounded transferFrom draws ('withdraw from your account multiple times'), so the standard sets NO upper bound on drain count. Rate is a modelling choice; recommend k=1.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "crypto",
+      "intent": "mixing",
+      "stage": "deposit_fixed",
+      "actor": "eoa",
+      "current_k": [
+        0.0022,
+        0.0112
+      ],
+      "current_implied_rate_per_day": [
+        0.98,
+        4.988
+      ],
+      "normal_actor_rate_per_day_scale1": 445.384897,
+      "scope": "collector",
+      "duration_days": "1-6",
+      "ring_size": "4-14",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. The crypto corpus contains NO typology text: FATF VASP guidance fetch FAILED (HTTP 403, provenance.json only); grep of sok_defi_attacks.txt for 'rug pull'/'wash trad'/'ponzi'/'pump' returns 0 hits; OFAC SDN/crypto-address lists are address enumerations (they ground PREVALENCE and the existence of mixers, not rates); ERC-20/721/1155 ground the event schema, not rates. Recommend the neutral default k=1. The fixed 10-unit denomination is a structural choice; OFAC listings name mixers but state no cadence.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "crypto",
+      "intent": "mixing",
+      "stage": "withdraw_fixed",
+      "actor": "eoa",
+      "current_k": [
+        0.0022,
+        0.009
+      ],
+      "current_implied_rate_per_day": [
+        0.98,
+        4.008
+      ],
+      "normal_actor_rate_per_day_scale1": 445.384897,
+      "scope": "victims 5-20",
+      "duration_days": "2-12",
+      "ring_size": "4-14",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. The crypto corpus contains NO typology text: FATF VASP guidance fetch FAILED (HTTP 403, provenance.json only); grep of sok_defi_attacks.txt for 'rug pull'/'wash trad'/'ponzi'/'pump' returns 0 hits; OFAC SDN/crypto-address lists are address enumerations (they ground PREVALENCE and the existence of mixers, not rates); ERC-20/721/1155 ground the event schema, not rates. Recommend the neutral default k=1.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "crypto",
+      "intent": "pump_and_dump",
+      "stage": "accumulate",
+      "actor": "eoa",
+      "current_k": [
+        0.0112,
+        0.0449
+      ],
+      "current_implied_rate_per_day": [
+        4.988,
+        19.998
+      ],
+      "normal_actor_rate_per_day_scale1": 445.384897,
+      "scope": "collector",
+      "duration_days": "1-4",
+      "ring_size": "5-25",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. The crypto corpus contains NO typology text: FATF VASP guidance fetch FAILED (HTTP 403, provenance.json only); grep of sok_defi_attacks.txt for 'rug pull'/'wash trad'/'ponzi'/'pump' returns 0 hits; OFAC SDN/crypto-address lists are address enumerations (they ground PREVALENCE and the existence of mixers, not rates); ERC-20/721/1155 ground the event schema, not rates. Recommend the neutral default k=1.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "crypto",
+      "intent": "pump_and_dump",
+      "stage": "dump",
+      "actor": "eoa",
+      "current_k": [
+        0.0225,
+        0.0898
+      ],
+      "current_implied_rate_per_day": [
+        10.021,
+        39.996
+      ],
+      "normal_actor_rate_per_day_scale1": 445.384897,
+      "scope": "collector",
+      "duration_days": "0.25-1.5",
+      "ring_size": "5-25",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. The crypto corpus contains NO typology text: FATF VASP guidance fetch FAILED (HTTP 403, provenance.json only); grep of sok_defi_attacks.txt for 'rug pull'/'wash trad'/'ponzi'/'pump' returns 0 hits; OFAC SDN/crypto-address lists are address enumerations (they ground PREVALENCE and the existence of mixers, not rates); ERC-20/721/1155 ground the event schema, not rates. Recommend the neutral default k=1.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "crypto",
+      "intent": "rug_pull",
+      "stage": "seed_liquidity",
+      "actor": "eoa",
+      "current_k": [
+        0.0011,
+        0.0045
+      ],
+      "current_implied_rate_per_day": [
+        0.49,
+        2.004
+      ],
+      "normal_actor_rate_per_day_scale1": 445.384897,
+      "scope": "normal",
+      "duration_days": "1-5",
+      "ring_size": "1-4",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. The crypto corpus contains NO typology text: FATF VASP guidance fetch FAILED (HTTP 403, provenance.json only); grep of sok_defi_attacks.txt for 'rug pull'/'wash trad'/'ponzi'/'pump' returns 0 hits; OFAC SDN/crypto-address lists are address enumerations (they ground PREVALENCE and the existence of mixers, not rates); ERC-20/721/1155 ground the event schema, not rates. Recommend the neutral default k=1.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "crypto",
+      "intent": "rug_pull",
+      "stage": "pull",
+      "actor": "eoa",
+      "current_k": [
+        0.0045,
+        0.018
+      ],
+      "current_implied_rate_per_day": [
+        2.004,
+        8.017
+      ],
+      "normal_actor_rate_per_day_scale1": 445.384897,
+      "scope": "normal",
+      "duration_days": "0.1-1",
+      "ring_size": "1-4",
+      "classification": "B",
+      "derived_events_per_day": [
+        1.0,
+        10.0
+      ],
+      "derived_implied_k": [
+        0.0022,
+        0.0225
+      ],
+      "assumption": "Exactly 1 remove_liquidity per operator over a 0.1-1 day stage => 1/day to 10/day.",
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "DERIVABLE from mechanism. A rug pull is by definition a near-total single removeLiquidity: the stage requires ~1 event per operator, not a sustained rate. ASSUMPTION: one pull per operator per campaign. No corpus text states this (SoK DeFi paper has zero 'rug pull' hits) \u2014 the derivation is from the event's own semantics.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "crypto",
+      "intent": "ponzi",
+      "stage": "collect_deposits",
+      "actor": "eoa",
+      "current_k": [
+        0.0022,
+        0.0135
+      ],
+      "current_implied_rate_per_day": [
+        0.98,
+        6.013
+      ],
+      "normal_actor_rate_per_day_scale1": 445.384897,
+      "scope": "collector",
+      "duration_days": "10-40",
+      "ring_size": "6-30",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. The crypto corpus contains NO typology text: FATF VASP guidance fetch FAILED (HTTP 403, provenance.json only); grep of sok_defi_attacks.txt for 'rug pull'/'wash trad'/'ponzi'/'pump' returns 0 hits; OFAC SDN/crypto-address lists are address enumerations (they ground PREVALENCE and the existence of mixers, not rates); ERC-20/721/1155 ground the event schema, not rates. Recommend the neutral default k=1. FLAGGED ABSURD: current k=0.0022-0.0135 makes a Ponzi operator ~100x LESS active than the average eoa.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "crypto",
+      "intent": "ponzi",
+      "stage": "payout_earlier",
+      "actor": "eoa",
+      "current_k": [
+        0.0011,
+        0.0067
+      ],
+      "current_implied_rate_per_day": [
+        0.49,
+        2.984
+      ],
+      "normal_actor_rate_per_day_scale1": 445.384897,
+      "scope": "ring",
+      "duration_days": "10-40",
+      "ring_size": "6-30",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. The crypto corpus contains NO typology text: FATF VASP guidance fetch FAILED (HTTP 403, provenance.json only); grep of sok_defi_attacks.txt for 'rug pull'/'wash trad'/'ponzi'/'pump' returns 0 hits; OFAC SDN/crypto-address lists are address enumerations (they ground PREVALENCE and the existence of mixers, not rates); ERC-20/721/1155 ground the event schema, not rates. Recommend the neutral default k=1. FLAGGED ABSURD (same as above). Note this is the ONLY crypto stage with scope:!ring \u2014 the sole source of ring-internal crypto traffic (see homophily section).",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "cyber",
+      "intent": "recon_scan",
+      "stage": "sweep",
+      "actor": "host",
+      "current_k": [
+        0.3043,
+        2.4345
+      ],
+      "current_implied_rate_per_day": [
+        99.996,
+        800.0
+      ],
+      "normal_actor_rate_per_day_scale1": 328.609694,
+      "scope": "victims 30-200",
+      "duration_days": "0.1-2",
+      "ring_size": "1-3",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "CAPEC \u2014 TCP SYN / port scanning",
+      "source_quote": "\"Unlike TCP Connect scanning, it is possible to scan thousands of ports per second using this method\"",
+      "source_locator": "corpus/text/cyber/mitre_capec.txt",
+      "note": "Modelling choice, not grounded. CAPEC states a CAPABILITY CEILING ('thousands of ports per second'), not a campaign rate; using it as the rate would give ~10^8/day. MITRE T1046 states no rate. The current 100-800/day encodes a 'low-and-slow' choice. Recommend k=1 unless a scan-rate source is added.",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "cyber",
+      "intent": "brute_force",
+      "stage": "hammer",
+      "actor": "user",
+      "current_k": [
+        2.2305,
+        22.3049
+      ],
+      "current_implied_rate_per_day": [
+        200.001,
+        2000.004
+      ],
+      "normal_actor_rate_per_day_scale1": 89.666579,
+      "scope": "collector",
+      "duration_days": "0.05-1",
+      "ring_size": "1-4",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "CAPEC-49 Password Brute Forcing",
+      "source_quote": "\"an adversary can brute force this password in maximum 1+26+26^2+26^3+26^4+26^5 = ... = 12,356,631 attempts, and half these tries (6,178,316) on average\"",
+      "source_locator": "corpus/text/cyber/mitre_capec.txt",
+      "note": "Modelling choice, not grounded. CAPEC-49 gives an exhaustive-search COUNT (6.18M attempts on average), which is a search-space size, not a rate \u2014 using it would give ~10^7/day. ATT&CK T1110.003 says spraying stays 'under lockout' but names no threshold. The natural grounding source (NIST SP 800-63B throttling guidance, <=100 failed attempts) is NOT in the corpus \u2014 CORPUS GAP. Recommend k=1 pending that source.",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "cyber",
+      "intent": "lateral_movement",
+      "stage": "pivot",
+      "actor": "user",
+      "current_k": [
+        0.0223,
+        0.1115
+      ],
+      "current_implied_rate_per_day": [
+        2.0,
+        9.998
+      ],
+      "normal_actor_rate_per_day_scale1": 89.666579,
+      "scope": "victims 3-12",
+      "duration_days": "1-7",
+      "ring_size": "1-5",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. MITRE T1021 is a prose technique description; ATT&CK states no rates anywhere (grep for 'interval'/'frequenc'/'sleep' returns only qualitative prose). Recommend k=1.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "cyber",
+      "intent": "c2_beacon",
+      "stage": "beacon",
+      "actor": "host",
+      "current_k": [
+        0.073,
+        0.2921
+      ],
+      "current_implied_rate_per_day": [
+        23.989,
+        95.987
+      ],
+      "normal_actor_rate_per_day_scale1": 328.609694,
+      "scope": "collector",
+      "duration_days": "3-21",
+      "ring_size": "1-3",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "MITRE ATT&CK T1071 / T1568 (DNS beaconing)",
+      "source_quote": "\"DNS beacons may be difficult to detect because the beacons infrequently communicate with infected devices.\" (qualitative only; no interval stated)",
+      "source_locator": "corpus/text/cyber/mitre_attack_enterprise.txt",
+      "note": "Modelling choice, not grounded. ATT&CK T1071/T1568 say beaconing is 'periodic'/'infrequent' but state no interval. NIST SP 800-94's 'every 15 minutes, every 30 minutes' span is about NBA FLOW-BATCH COLLECTION LATENCY, not beacon cadence \u2014 do NOT cite it here. The YAML's '~hourly to ~15-min beacons' comment is an unsourced choice. Recommend k=1.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "cyber",
+      "intent": "exfiltration",
+      "stage": "stage_chunks",
+      "actor": "host",
+      "current_k": [
+        0.0152,
+        0.0913
+      ],
+      "current_implied_rate_per_day": [
+        4.995,
+        30.002
+      ],
+      "normal_actor_rate_per_day_scale1": 328.609694,
+      "scope": "collector",
+      "duration_days": "0.5-5",
+      "ring_size": "1-2",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. MITRE T1041/T1029 describe scheduling ('at certain times of day or at certain intervals') without numbers. Recommend k=1.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "cyber",
+      "intent": "priv_esc",
+      "stage": "escalate",
+      "actor": "process",
+      "current_k": [
+        0.0895,
+        0.5367
+      ],
+      "current_implied_rate_per_day": [
+        2.001,
+        12.0
+      ],
+      "normal_actor_rate_per_day_scale1": 22.358517,
+      "scope": "chain",
+      "duration_days": "0.05-1",
+      "ring_size": "1-4",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. MITRE T1068 states no rate. Mechanistically priv-esc is a small burst of execs, not a sustained rate \u2014 but no standard says how many. Recommend k=1.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "transport",
+      "intent": "gps_spoofing",
+      "stage": "spoofed_traversals",
+      "actor": "vehicle",
+      "current_k": [
+        1.1796,
+        4.7183
+      ],
+      "current_implied_rate_per_day": [
+        20.0,
+        79.999
+      ],
+      "normal_actor_rate_per_day_scale1": 16.955094,
+      "scope": "victims 5-20",
+      "duration_days": "0.5-3",
+      "ring_size": "2-8",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "FHWA Traffic Analysis Toolbox Vol. III",
+      "source_quote": "\"...signalized intersections was 1800 vehicles per hour of green per lane (vphgpl)\" (network capacity; nothing on spoofing or probe-report rates)",
+      "source_locator": "corpus/text/transport/fhwa_tat_vol3.txt",
+      "note": "Modelling choice, not grounded. FHWA TAT Vol.III / MUTCD Part 4 / NGSIM / SUMO ground vehicle DYNAMICS and traffic VOLUMES (the normal side and the physical-range constraints), never adversary probe rates. Recommend k=1. NOTE the corpus DOES ground the normal denominator (MUTCD Table 4C-1 veh/h warrants; FHWA 1800 vphgpl saturation flow) \u2014 a grounding opportunity for normal rates, not for k.",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "transport",
+      "intent": "fake_trip_injection",
+      "stage": "phantom_trips",
+      "actor": "vehicle",
+      "current_k": [
+        0.5898,
+        2.3592
+      ],
+      "current_implied_rate_per_day": [
+        10.0,
+        40.0
+      ],
+      "normal_actor_rate_per_day_scale1": 16.955094,
+      "scope": "collector",
+      "duration_days": "1-7",
+      "ring_size": "3-12",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "FHWA Traffic Analysis Toolbox Vol. III",
+      "source_quote": "\"...signalized intersections was 1800 vehicles per hour of green per lane (vphgpl)\" (network capacity; nothing on spoofing or probe-report rates)",
+      "source_locator": "corpus/text/transport/fhwa_tat_vol3.txt",
+      "note": "Modelling choice, not grounded. Same corpus finding as gps_spoofing. Recommend k=1.",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "ecommerce",
+      "intent": "fake_reviews",
+      "stage": "blitz",
+      "actor": "user",
+      "current_k": [
+        3.7719,
+        15.0875
+      ],
+      "current_implied_rate_per_day": [
+        1.0,
+        4.0
+      ],
+      "normal_actor_rate_per_day_scale1": 0.265121,
+      "scope": "victims 3-12",
+      "duration_days": "2-10",
+      "ring_size": "1",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "FTC 16 CFR Part 465 \u2014 Rule on the Use of Consumer Reviews and Testimonials",
+      "source_quote": "\"It is an unfair or deceptive act or practice and a violation of this part for a business to write, create, or sell a consumer review...\" (conduct prohibition; the Part states no count, frequency, or rate anywhere in its 14 chunks)",
+      "source_locator": "corpus/text/ecommerce/ftc_16cfr_465.txt",
+      "note": "Modelling choice, not grounded. FTC 16 CFR 465 and 16 CFR 255 are conduct rules \u2014 a full read of 465 shows no count, frequency, or rate anywhere; 16 CFR 255 and the FTC endorsement FAQ likewise return 0 rate-language hits. Ott et al. 2011 is a text-classification study of 400 reviews (linguistic features), not posting cadence. Recommend the neutral default k=1.",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "ecommerce",
+      "intent": "fake_reviews",
+      "stage": "camo_votes",
+      "actor": "user",
+      "current_k": [
+        1.8859,
+        7.5437
+      ],
+      "current_implied_rate_per_day": [
+        0.5,
+        2.0
+      ],
+      "normal_actor_rate_per_day_scale1": 0.265121,
+      "scope": "normal",
+      "duration_days": "1-6",
+      "ring_size": "1",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "FTC 16 CFR Part 465 \u2014 Rule on the Use of Consumer Reviews and Testimonials",
+      "source_quote": "\"It is an unfair or deceptive act or practice and a violation of this part for a business to write, create, or sell a consumer review...\" (conduct prohibition; the Part states no count, frequency, or rate anywhere in its 14 chunks)",
+      "source_locator": "corpus/text/ecommerce/ftc_16cfr_465.txt",
+      "note": "Modelling choice, not grounded. FTC 16 CFR 465 and 16 CFR 255 are conduct rules \u2014 a full read of 465 shows no count, frequency, or rate anywhere; 16 CFR 255 and the FTC endorsement FAQ likewise return 0 rate-language hits. Ott et al. 2011 is a text-classification study of 400 reviews (linguistic features), not posting cadence. Recommend the neutral default k=1.",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "ecommerce",
+      "intent": "collusion_ring",
+      "stage": "coordinated_flood",
+      "actor": "user",
+      "current_k": [
+        3.7719,
+        11.3156
+      ],
+      "current_implied_rate_per_day": [
+        1.0,
+        3.0
+      ],
+      "normal_actor_rate_per_day_scale1": 0.265121,
+      "scope": "collector",
+      "duration_days": "3-9",
+      "ring_size": "5-20",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "FTC 16 CFR Part 465 \u2014 Rule on the Use of Consumer Reviews and Testimonials",
+      "source_quote": "\"It is an unfair or deceptive act or practice and a violation of this part for a business to write, create, or sell a consumer review...\" (conduct prohibition; the Part states no count, frequency, or rate anywhere in its 14 chunks)",
+      "source_locator": "corpus/text/ecommerce/ftc_16cfr_465.txt",
+      "note": "Modelling choice, not grounded. FTC 16 CFR 465 and 16 CFR 255 are conduct rules \u2014 a full read of 465 shows no count, frequency, or rate anywhere; 16 CFR 255 and the FTC endorsement FAQ likewise return 0 rate-language hits. Ott et al. 2011 is a text-classification study of 400 reviews (linguistic features), not posting cadence. Recommend the neutral default k=1.",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "ecommerce",
+      "intent": "collusion_ring",
+      "stage": "mutual_helpful",
+      "actor": "user",
+      "current_k": [
+        1.8859,
+        7.5437
+      ],
+      "current_implied_rate_per_day": [
+        0.5,
+        2.0
+      ],
+      "normal_actor_rate_per_day_scale1": 0.265121,
+      "scope": "ring",
+      "duration_days": "2-7",
+      "ring_size": "5-20",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "FTC 16 CFR Part 465 \u2014 Rule on the Use of Consumer Reviews and Testimonials",
+      "source_quote": "\"It is an unfair or deceptive act or practice and a violation of this part for a business to write, create, or sell a consumer review...\" (conduct prohibition; the Part states no count, frequency, or rate anywhere in its 14 chunks)",
+      "source_locator": "corpus/text/ecommerce/ftc_16cfr_465.txt",
+      "note": "Modelling choice, not grounded. FTC 16 CFR 465 and 16 CFR 255 are conduct rules \u2014 a full read of 465 shows no count, frequency, or rate anywhere; 16 CFR 255 and the FTC endorsement FAQ likewise return 0 rate-language hits. Ott et al. 2011 is a text-classification study of 400 reviews (linguistic features), not posting cadence. Recommend the neutral default k=1. This is one of only 3 ring-scoped stages in the whole rule base (see homophily section).",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "ecommerce",
+      "intent": "collusion_ring",
+      "stage": "benign_spread",
+      "actor": "user",
+      "current_k": [
+        1.1316,
+        3.7719
+      ],
+      "current_implied_rate_per_day": [
+        0.3,
+        1.0
+      ],
+      "normal_actor_rate_per_day_scale1": 0.265121,
+      "scope": "normal",
+      "duration_days": "5-20",
+      "ring_size": "5-20",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "FTC 16 CFR Part 465 \u2014 Rule on the Use of Consumer Reviews and Testimonials",
+      "source_quote": "\"It is an unfair or deceptive act or practice and a violation of this part for a business to write, create, or sell a consumer review...\" (conduct prohibition; the Part states no count, frequency, or rate anywhere in its 14 chunks)",
+      "source_locator": "corpus/text/ecommerce/ftc_16cfr_465.txt",
+      "note": "Modelling choice, not grounded. FTC 16 CFR 465 and 16 CFR 255 are conduct rules \u2014 a full read of 465 shows no count, frequency, or rate anywhere; 16 CFR 255 and the FTC endorsement FAQ likewise return 0 rate-language hits. Ott et al. 2011 is a text-classification study of 400 reviews (linguistic features), not posting cadence. Recommend the neutral default k=1.",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "ecommerce",
+      "intent": "sockpuppet",
+      "stage": "puppet_reviews",
+      "actor": "user",
+      "current_k": [
+        1.8859,
+        9.4297
+      ],
+      "current_implied_rate_per_day": [
+        0.5,
+        2.5
+      ],
+      "normal_actor_rate_per_day_scale1": 0.265121,
+      "scope": "collector",
+      "duration_days": "4-18",
+      "ring_size": "3-10",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "FTC 16 CFR Part 465 \u2014 Rule on the Use of Consumer Reviews and Testimonials",
+      "source_quote": "\"It is an unfair or deceptive act or practice and a violation of this part for a business to write, create, or sell a consumer review...\" (conduct prohibition; the Part states no count, frequency, or rate anywhere in its 14 chunks)",
+      "source_locator": "corpus/text/ecommerce/ftc_16cfr_465.txt",
+      "note": "Modelling choice, not grounded. FTC 16 CFR 465 and 16 CFR 255 are conduct rules \u2014 a full read of 465 shows no count, frequency, or rate anywhere; 16 CFR 255 and the FTC endorsement FAQ likewise return 0 rate-language hits. Ott et al. 2011 is a text-classification study of 400 reviews (linguistic features), not posting cadence. Recommend the neutral default k=1.",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "ecommerce",
+      "intent": "sockpuppet",
+      "stage": "puppet_helpful",
+      "actor": "user",
+      "current_k": [
+        1.8859,
+        5.6578
+      ],
+      "current_implied_rate_per_day": [
+        0.5,
+        1.5
+      ],
+      "normal_actor_rate_per_day_scale1": 0.265121,
+      "scope": "ring",
+      "duration_days": "3-12",
+      "ring_size": "3-10",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "FTC 16 CFR Part 465 \u2014 Rule on the Use of Consumer Reviews and Testimonials",
+      "source_quote": "\"It is an unfair or deceptive act or practice and a violation of this part for a business to write, create, or sell a consumer review...\" (conduct prohibition; the Part states no count, frequency, or rate anywhere in its 14 chunks)",
+      "source_locator": "corpus/text/ecommerce/ftc_16cfr_465.txt",
+      "note": "Modelling choice, not grounded. FTC 16 CFR 465 and 16 CFR 255 are conduct rules \u2014 a full read of 465 shows no count, frequency, or rate anywhere; 16 CFR 255 and the FTC endorsement FAQ likewise return 0 rate-language hits. Ott et al. 2011 is a text-classification study of 400 reviews (linguistic features), not posting cadence. Recommend the neutral default k=1. Ring-scoped (see homophily section).",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "ecommerce",
+      "intent": "singleton_burst",
+      "stage": "one_shot_flood",
+      "actor": "user",
+      "current_k": [
+        3.0175,
+        7.5437
+      ],
+      "current_implied_rate_per_day": [
+        0.8,
+        2.0
+      ],
+      "normal_actor_rate_per_day_scale1": 0.265121,
+      "scope": "collector",
+      "duration_days": "0.5-3",
+      "ring_size": "8-30",
+      "classification": "B",
+      "derived_events_per_day": [
+        0.3333333333333333,
+        2.0
+      ],
+      "derived_implied_k": [
+        1.2573,
+        7.5437
+      ],
+      "assumption": "Exactly 1 review per account over a 0.5-3 day stage => 0.33/day to 2/day.",
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "DERIVABLE from the intent's own definition, not from a standard. 'Singleton' means each account fires EXACTLY ONCE (Xie et al., KDD 2012 \u2014 a research paper, not a standard, and NOT in the corpus). ASSUMPTION: 1 review per account over the stage window.",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "ecommerce",
+      "intent": "return_fraud",
+      "stage": "buy",
+      "actor": "user",
+      "current_k": [
+        3.7719,
+        11.3156
+      ],
+      "current_implied_rate_per_day": [
+        1.0,
+        3.0
+      ],
+      "normal_actor_rate_per_day_scale1": 0.265121,
+      "scope": "normal",
+      "duration_days": "1-4",
+      "ring_size": "1-4",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "FTC 16 CFR Part 465 \u2014 Rule on the Use of Consumer Reviews and Testimonials",
+      "source_quote": "\"It is an unfair or deceptive act or practice and a violation of this part for a business to write, create, or sell a consumer review...\" (conduct prohibition; the Part states no count, frequency, or rate anywhere in its 14 chunks)",
+      "source_locator": "corpus/text/ecommerce/ftc_16cfr_465.txt",
+      "note": "Modelling choice, not grounded. FTC 16 CFR 465 and 16 CFR 255 are conduct rules \u2014 a full read of 465 shows no count, frequency, or rate anywhere; 16 CFR 255 and the FTC endorsement FAQ likewise return 0 rate-language hits. Ott et al. 2011 is a text-classification study of 400 reviews (linguistic features), not posting cadence. Recommend the neutral default k=1.",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "ecommerce",
+      "intent": "return_fraud",
+      "stage": "positive_review",
+      "actor": "user",
+      "current_k": [
+        1.8859,
+        5.6578
+      ],
+      "current_implied_rate_per_day": [
+        0.5,
+        1.5
+      ],
+      "normal_actor_rate_per_day_scale1": 0.265121,
+      "scope": "normal",
+      "duration_days": "1-3",
+      "ring_size": "1-4",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "FTC 16 CFR Part 465 \u2014 Rule on the Use of Consumer Reviews and Testimonials",
+      "source_quote": "\"It is an unfair or deceptive act or practice and a violation of this part for a business to write, create, or sell a consumer review...\" (conduct prohibition; the Part states no count, frequency, or rate anywhere in its 14 chunks)",
+      "source_locator": "corpus/text/ecommerce/ftc_16cfr_465.txt",
+      "note": "Modelling choice, not grounded. FTC 16 CFR 465 and 16 CFR 255 are conduct rules \u2014 a full read of 465 shows no count, frequency, or rate anywhere; 16 CFR 255 and the FTC endorsement FAQ likewise return 0 rate-language hits. Ott et al. 2011 is a text-classification study of 400 reviews (linguistic features), not posting cadence. Recommend the neutral default k=1.",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "ecommerce",
+      "intent": "return_fraud",
+      "stage": "refund",
+      "actor": "user",
+      "current_k": [
+        3.7719,
+        11.3156
+      ],
+      "current_implied_rate_per_day": [
+        1.0,
+        3.0
+      ],
+      "normal_actor_rate_per_day_scale1": 0.265121,
+      "scope": "normal",
+      "duration_days": "1-7",
+      "ring_size": "1-4",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "FTC 16 CFR Part 465 \u2014 Rule on the Use of Consumer Reviews and Testimonials",
+      "source_quote": "\"It is an unfair or deceptive act or practice and a violation of this part for a business to write, create, or sell a consumer review...\" (conduct prohibition; the Part states no count, frequency, or rate anywhere in its 14 chunks)",
+      "source_locator": "corpus/text/ecommerce/ftc_16cfr_465.txt",
+      "note": "Modelling choice, not grounded. FTC 16 CFR 465 and 16 CFR 255 are conduct rules \u2014 a full read of 465 shows no count, frequency, or rate anywhere; 16 CFR 255 and the FTC endorsement FAQ likewise return 0 rate-language hits. Ott et al. 2011 is a text-classification study of 400 reviews (linguistic features), not posting cadence. Recommend the neutral default k=1.",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "healthcare",
+      "intent": "upcoding",
+      "stage": "inflate_intensity",
+      "actor": "provider",
+      "current_k": [
+        0.5803,
+        1.3927
+      ],
+      "current_implied_rate_per_day": [
+        10.0,
+        24.0
+      ],
+      "normal_actor_rate_per_day_scale1": 17.232717,
+      "scope": "normal",
+      "duration_days": "30-120",
+      "ring_size": "1-3",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "CMS NCCI Medically Unlikely Edits \u2014 Practitioner Services (MUE table, eff. 07-01-2026)",
+      "source_quote": "\"HCPCS/CPT Code | Practitioner Services MUE Values | MUE Adjudication Indicator | MUE Rationale | 0001U | 1 | 2 Date of Service Edit: Policy | ...\" (per-code max units of service per beneficiary per date of service)",
+      "source_locator": "corpus/text/healthcare/cms_ncci_mue_practitioner.txt",
+      "note": "Modelling choice for RATE, not grounded. Upcoding does not change claim VOLUME at all \u2014 it changes the code on claims the provider already files. The corpus grounds the ATTRIBUTE (HCPCS/CPT code set), never the rate. NCCI MUE caps units per code per beneficiary per date of service; it says nothing about claims/day. Recommend k=1 \u2014 which here is not merely a default but SEMANTICALLY CORRECT: an upcoder bills at a normal cadence by construction.",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "healthcare",
+      "intent": "phantom_billing",
+      "stage": "ghost_claims",
+      "actor": "provider",
+      "current_k": [
+        8.7044,
+        23.2117
+      ],
+      "current_implied_rate_per_day": [
+        150.0,
+        400.001
+      ],
+      "normal_actor_rate_per_day_scale1": 17.232717,
+      "scope": "victims 40-150",
+      "duration_days": "14-90",
+      "ring_size": "1-2",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "CMS NCCI Medically Unlikely Edits \u2014 Practitioner Services (MUE table, eff. 07-01-2026)",
+      "source_quote": "\"HCPCS/CPT Code | Practitioner Services MUE Values | MUE Adjudication Indicator | MUE Rationale | 0001U | 1 | 2 Date of Service Edit: Policy | ...\" (per-code max units of service per beneficiary per date of service)",
+      "source_locator": "corpus/text/healthcare/cms_ncci_mue_practitioner.txt",
+      "note": "Modelling choice, not grounded. NCCI MUE is a per-code/per-beneficiary/per-date-of-service UNITS cap \u2014 it is a genuine count-in-a-window, but it constrains the `units` field, NOT a provider's claims/day. No corpus source states an implausible-daily-claim-volume threshold. The 150-400/day is unsourced. Recommend k=1 unless a per-provider volume source (e.g. CMS Provider Utilization & Payment PUF) is added \u2014 CORPUS GAP.",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "healthcare",
+      "intent": "unbundling",
+      "stage": "split_components",
+      "actor": "provider",
+      "current_k": [
+        0.6963,
+        1.7409
+      ],
+      "current_implied_rate_per_day": [
+        11.999,
+        30.0
+      ],
+      "normal_actor_rate_per_day_scale1": 17.232717,
+      "scope": "normal",
+      "duration_days": "20-90",
+      "ring_size": "1-3",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": "CMS NCCI Medically Unlikely Edits \u2014 Practitioner Services (MUE table, eff. 07-01-2026)",
+      "source_quote": "\"HCPCS/CPT Code | Practitioner Services MUE Values | MUE Adjudication Indicator | MUE Rationale | 0001U | 1 | 2 Date of Service Edit: Policy | ...\" (per-code max units of service per beneficiary per date of service)",
+      "source_locator": "corpus/text/healthcare/cms_ncci_mue_practitioner.txt",
+      "note": "RATE is a modelling choice; the ATTRIBUTE is grounded. NCCI PTP edits (4,041 chunks) ground WHICH Column1/Column2 code pairs may not be billed together, and NCCI MUE grounds the max units per code per beneficiary per DOS \u2014 so the `units` override IS citable (A-grade for the attribute). Neither states claims/day. Like upcoding, unbundling does not change cadence by construction: recommend k=1.",
+      "current_k_absurd_flag": false
+    },
+    {
+      "domain": "healthcare",
+      "intent": "kickback_ring",
+      "stage": "reciprocal_referrals",
+      "actor": "provider",
+      "current_k": [
+        0.058,
+        0.2321
+      ],
+      "current_implied_rate_per_day": [
+        0.999,
+        4.0
+      ],
+      "normal_actor_rate_per_day_scale1": 17.232717,
+      "scope": "chain",
+      "duration_days": "30-120",
+      "ring_size": "4-12",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. 42 CFR 1001 (exclusion authorities / AKS safe harbors) prohibits remuneration for referrals; it states no referral frequency. Recommend k=1.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "healthcare",
+      "intent": "kickback_ring",
+      "stage": "steered_prescriptions",
+      "actor": "provider",
+      "current_k": [
+        0.1161,
+        0.3482
+      ],
+      "current_implied_rate_per_day": [
+        2.001,
+        6.0
+      ],
+      "normal_actor_rate_per_day_scale1": 17.232717,
+      "scope": "collector",
+      "duration_days": "30-120",
+      "ring_size": "4-12",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. 42 CFR 1001 / CMS Pub 100-04 Ch.1 state no prescribing rate.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "healthcare",
+      "intent": "kickback_ring",
+      "stage": "cover_claims",
+      "actor": "provider",
+      "current_k": [
+        0.1741,
+        0.4642
+      ],
+      "current_implied_rate_per_day": [
+        3.0,
+        7.999
+      ],
+      "normal_actor_rate_per_day_scale1": 17.232717,
+      "scope": "normal",
+      "duration_days": "30-120",
+      "ring_size": "4-12",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded. Same as above.",
+      "current_k_absurd_flag": true
+    },
+    {
+      "domain": "healthcare",
+      "intent": "doctor_shopping",
+      "stage": "prescriber_fanin",
+      "actor": "provider",
+      "current_k": [
+        0.0174,
+        0.058
+      ],
+      "current_implied_rate_per_day": [
+        0.3,
+        0.999
+      ],
+      "normal_actor_rate_per_day_scale1": 17.232717,
+      "scope": "collector",
+      "duration_days": "20-90",
+      "ring_size": "5-15",
+      "classification": "C",
+      "derived_events_per_day": null,
+      "derived_implied_k": null,
+      "assumption": null,
+      "source_citation": null,
+      "source_quote": null,
+      "source_locator": null,
+      "note": "Modelling choice, not grounded \u2014 BUT THIS IS THE BEST CORPUS-GAP CANDIDATE IN THE WHOLE RULE BASE. CMS's Part D Overutilization Monitoring System (OMS) publishes an explicit count-in-a-window criterion for opioid doctor/pharmacy shopping (beneficiaries meeting an MME threshold with >=N prescribers and >=M pharmacies over a lookback). That source is NOT in the corpus. Fetching the CMS OMS / Part D Opioid Overutilization guidance would make this stage a genuine (A) and would also ground `ring_size` (distinct prescribers). Until then: recommend k=1, labelled a modelling choice.",
+      "current_k_absurd_flag": true
+    }
+  ]
+}

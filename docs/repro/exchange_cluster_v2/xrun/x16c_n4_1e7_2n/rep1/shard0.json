@@ -1,0 +1,70 @@
+{
+ "nodes": 1000000,
+ "edges_written": 2213289,
+ "anomalous_edges": 2672,
+ "intent_names": [
+  "normal",
+  "structuring",
+  "layering",
+  "fan_in_out",
+  "round_tripping",
+  "mule_network"
+ ],
+ "event_type_names": [
+  "transfer",
+  "purchase",
+  "cash_deposit",
+  "cash_withdrawal"
+ ],
+ "edges_per_intent": [
+  2210617,
+  1074,
+  664,
+  702,
+  145,
+  87
+ ],
+ "attr_dictionaries": [
+  [
+   "channel",
+   [
+    "wire",
+    "ach",
+    "card",
+    "cash",
+    "crypto_onramp",
+    "online",
+    "cash/domestic/small_bills",
+    "cash/domestic/large_bills",
+    "cash/foreign_currency",
+    "instrument/money_order",
+    "instrument/cashiers_check",
+    "wire/inbound_domestic",
+    "wire/inbound_cross_border"
+   ]
+  ],
+  [
+   "source_of_funds_grade",
+   [
+    "payroll_documented",
+    "business_receipts",
+    "third_party_declared",
+    "unverified",
+    "high_risk_corridor"
+   ]
+  ]
+ ],
+ "ground_truth": "<stripped in this copy; full file on the cluster>",
+ "wall_time_s": 7.937277979,
+ "events_per_sec": 278847.35873630666,
+ "overdraft_guarded": 1058833,
+ "overdraft_violations": 51920,
+ "exchange_rounds": 90,
+ "exchange_deltas_sent": 2308510,
+ "exchange_bytes_sent": 80797850,
+ "exchange_deltas_received": 2779920,
+ "exchange_bytes_received": 97297200,
+ "exchange_idle_polls": 6,
+ "exchange_nudges": 6,
+ "exchange_skewed_opens": 0
+}

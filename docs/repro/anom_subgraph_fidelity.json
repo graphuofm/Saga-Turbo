@@ -1,0 +1,156 @@
+{
+  "incident": {
+    "fidelity_score": 0.6354226594788563,
+    "ks_distances": {
+      "out_degree": 0.6445312855102294,
+      "in_degree": 0.5135520009156733,
+      "total_degree": 0.11343635317530198,
+      "inter_event_time": 0.9998871045129971
+    },
+    "scalar_metrics": {
+      "powerlaw_alpha": {
+        "real": 2.8538952115440672,
+        "synth": 3.939640706301292,
+        "distance": 0.1598203804156202
+      },
+      "burstiness_b": {
+        "real": null,
+        "synth": 0.44107592114891336,
+        "distance": NaN
+      },
+      "memory_m": {
+        "real": null,
+        "synth": 0.2091839910989549,
+        "distance": NaN
+      },
+      "clustering": {
+        "real": 8.61103935244984e-05,
+        "synth": 0.005443395210005268,
+        "distance": 0.00535728481648077
+      },
+      "reciprocity": {
+        "real": 0.0,
+        "synth": 0.01682085786375105,
+        "distance": 0.01682085786375105
+      },
+      "repeat_edge_ratio": {
+        "real": 0.0,
+        "synth": 0.3847878578820283,
+        "distance": 0.3847878578820283
+      },
+      "mean_degree": {
+        "real": 1.6970517762266903,
+        "synth": 4.39652356509566,
+        "distance": 0.4430029395982105
+      }
+    },
+    "real_summary": {
+      "n_edges": 8145.0,
+      "n_nodes": 9599.0,
+      "density": 8.84065313725094e-05,
+      "reciprocity": 0.0,
+      "mean_degree": 1.6970517762266903,
+      "repeat_edge_ratio": 0.0,
+      "powerlaw_alpha": 2.8538952115440672,
+      "burstiness_b": NaN,
+      "memory_m": NaN,
+      "clustering": 8.61103935244984e-05
+    },
+    "synth_summary": {
+      "n_edges": 75374.0,
+      "n_nodes": 34288.0,
+      "density": 6.411356439898008e-05,
+      "reciprocity": 0.01682085786375105,
+      "mean_degree": 4.39652356509566,
+      "repeat_edge_ratio": 0.3847878578820283,
+      "powerlaw_alpha": 3.939640706301292,
+      "burstiness_b": 0.44107592114891336,
+      "memory_m": 0.2091839910989549,
+      "clustering": 0.005443395210005268
+    },
+    "sizes": {
+      "real_edges": 8145,
+      "real_nodes": 9599,
+      "synth_edges": 75374,
+      "synth_nodes": 34288
+    },
+    "fidelity_score_ex_temporal": 0.7148363799778381
+  },
+  "internal": {
+    "fidelity_score": 0.45311779787203266,
+    "ks_distances": {
+      "out_degree": 0.6950829349040829,
+      "in_degree": 0.5459618600273929,
+      "total_degree": 0.6956028535656967,
+      "inter_event_time": 1.0
+    },
+    "scalar_metrics": {
+      "powerlaw_alpha": {
+        "real": 4.280718238660578,
+        "synth": 3.8363971816753013,
+        "distance": 0.05473878760823274
+      },
+      "burstiness_b": {
+        "real": null,
+        "synth": 0.2747549757948112,
+        "distance": NaN
+      },
+      "memory_m": {
+        "real": null,
+        "synth": 0.29578932649193407,
+        "distance": NaN
+      },
+      "clustering": {
+        "real": 0.0,
+        "synth": 0.1533438457063327,
+        "distance": 0.1533438457063327
+      },
+      "reciprocity": {
+        "real": 0.0,
+        "synth": 0.15765948801300284,
+        "distance": 0.15765948801300284
+      },
+      "repeat_edge_ratio": {
+        "real": 0.0,
+        "synth": 0.7840565085771948,
+        "distance": 0.7840565085771948
+      },
+      "mean_degree": {
+        "real": 1.4633431085043989,
+        "synth": 16.327363896848137,
+        "distance": 0.8354935407497706
+      }
+    },
+    "real_summary": {
+      "n_edges": 998.0,
+      "n_nodes": 1364.0,
+      "density": 0.0005368096509553921,
+      "reciprocity": 0.0,
+      "mean_degree": 1.4633431085043989,
+      "repeat_edge_ratio": 0.0,
+      "powerlaw_alpha": 4.280718238660578,
+      "burstiness_b": NaN,
+      "memory_m": NaN,
+      "clustering": 0.0
+    },
+    "synth_summary": {
+      "n_edges": 22793.0,
+      "n_nodes": 2792.0,
+      "density": 0.002925002489582253,
+      "reciprocity": 0.15765948801300284,
+      "mean_degree": 16.327363896848137,
+      "repeat_edge_ratio": 0.7840565085771948,
+      "powerlaw_alpha": 3.8363971816753013,
+      "burstiness_b": 0.2747549757948112,
+      "memory_m": 0.29578932649193407,
+      "clustering": 0.1533438457063327
+    },
+    "sizes": {
+      "real_edges": 998,
+      "real_nodes": 1364,
+      "synth_edges": 22793,
+      "synth_nodes": 2792
+    },
+    "fidelity_score_ex_temporal": 0.5097575226060367
+  }
+}

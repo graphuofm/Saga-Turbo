@@ -1,0 +1,162 @@
+[
+  {
+    "delta": 0.0,
+    "edges_requested": 10000000,
+    "pi": 0.05,
+    "status": "ok",
+    "total_edges": 9971247,
+    "anomalous_edges": 37540,
+    "fraction": 0.0037648250013263135,
+    "n_csv_shards": 1,
+    "gen_wall_s": 3.5,
+    "all": {
+      "roc_auc": 0.923277427093624,
+      "ap": 0.6400318205826763,
+      "n_anom": 37540,
+      "n_total": 9971247,
+      "train_s": 16.0
+    },
+    "attr": {
+      "roc_auc": 0.9008437462335024,
+      "ap": 0.46954175684215643,
+      "n_anom": 37540,
+      "n_total": 9971247,
+      "train_s": 15.1
+    },
+    "struct": {
+      "roc_auc": 0.930242429533858,
+      "ap": 0.16881248807240837,
+      "n_anom": 37540,
+      "n_total": 9971247,
+      "train_s": 16.1
+    }
+  },
+  {
+    "delta": 0.25,
+    "edges_requested": 10000000,
+    "pi": 0.05,
+    "status": "ok",
+    "total_edges": 9971346,
+    "anomalous_edges": 32739,
+    "fraction": 0.0032833079907165995,
+    "n_csv_shards": 1,
+    "gen_wall_s": 3.5,
+    "all": {
+      "roc_auc": 0.8917896038700981,
+      "ap": 0.4508600835875707,
+      "n_anom": 32739,
+      "n_total": 9971346,
+      "train_s": 16.6
+    },
+    "attr": {
+      "roc_auc": 0.8205853726691819,
+      "ap": 0.27013734494956654,
+      "n_anom": 32739,
+      "n_total": 9971346,
+      "train_s": 14.9
+    },
+    "struct": {
+      "roc_auc": 0.9114739234358901,
+      "ap": 0.11428245421853739,
+      "n_anom": 32739,
+      "n_total": 9971346,
+      "train_s": 14.5
+    }
+  },
+  {
+    "delta": 0.5,
+    "edges_requested": 10000000,
+    "pi": 0.05,
+    "status": "ok",
+    "total_edges": 9972175,
+    "anomalous_edges": 28158,
+    "fraction": 0.002823656825115885,
+    "n_csv_shards": 1,
+    "gen_wall_s": 3.5,
+    "all": {
+      "roc_auc": 0.9141101397679773,
+      "ap": 0.3330150608407588,
+      "n_anom": 28158,
+      "n_total": 9972175,
+      "train_s": 15.8
+    },
+    "attr": {
+      "roc_auc": 0.8884593039757323,
+      "ap": 0.18041800322357246,
+      "n_anom": 28158,
+      "n_total": 9972175,
+      "train_s": 15.1
+    },
+    "struct": {
+      "roc_auc": 0.9263654277555743,
+      "ap": 0.10032450032729479,
+      "n_anom": 28158,
+      "n_total": 9972175,
+      "train_s": 14.4
+    }
+  },
+  {
+    "delta": 0.75,
+    "edges_requested": 10000000,
+    "pi": 0.05,
+    "status": "ok",
+    "total_edges": 9972139,
+    "anomalous_edges": 23418,
+    "fraction": 0.0023483427176456324,
+    "n_csv_shards": 1,
+    "gen_wall_s": 3.5,
+    "all": {
+      "roc_auc": 0.8717627507198158,
+      "ap": 0.193691981451663,
+      "n_anom": 23418,
+      "n_total": 9972139,
+      "train_s": 16.7
+    },
+    "attr": {
+      "roc_auc": 0.8866587291289246,
+      "ap": 0.06580919984971154,
+      "n_anom": 23418,
+      "n_total": 9972139,
+      "train_s": 15.0
+    },
+    "struct": {
+      "roc_auc": 0.9227534508540821,
+      "ap": 0.09763144003346969,
+      "n_anom": 23418,
+      "n_total": 9972139,
+      "train_s": 14.2
+    }
+  },
+  {
+    "delta": 1.0,
+    "edges_requested": 10000000,
+    "pi": 0.05,
+    "status": "ok",
+    "total_edges": 9971719,
+    "anomalous_edges": 19891,
+    "fraction": 0.001994741327949574,
+    "n_csv_shards": 1,
+    "gen_wall_s": 3.5,
+    "all": {
+      "roc_auc": 0.8110343041676491,
+      "ap": 0.14702664064591658,
+      "n_anom": 19891,
+      "n_total": 9971719,
+      "train_s": 15.3
+    },
+    "attr": {
+      "roc_auc": 0.9058550587310409,
+      "ap": 0.03332124605718512,
+      "n_anom": 19891,
+      "n_total": 9971719,
+      "train_s": 15.2
+    },
+    "struct": {
+      "roc_auc": 0.9461623553960361,
+      "ap": 0.10349482101505027,
+      "n_anom": 19891,
+      "n_total": 9971719,
+      "train_s": 15.0
+    }
+  }
+]

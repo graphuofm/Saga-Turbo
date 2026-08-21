@@ -1,0 +1,560 @@
+{
+  "setup": {
+    "domain": "finance",
+    "edges_requested": 10000000,
+    "anomaly_rate_pi": 0.05,
+    "gen_seeds": [
+      42,
+      43
+    ],
+    "detector_seed": 0,
+    "format": "csv",
+    "shard_size_mb": 8192,
+    "why_this_scale": "JOB 1 measured finance frac = 0.05424*pi, so pi=0.05 gives ~0.26% of edges anomalous. At 1e7 edges that is ~26k anomalous edges: above the ~20k target for training while keeping the base rate at its honest intrinsic value (~0.26%, NOT the ~30% the elasticity bug used to produce). 1e8 edges would give ~260k positives but a 6GB+ CSV that detector.py must read into pandas; 1e7 is the largest scale that trains comfortably and it already clears the positives bar.",
+    "shard_note": "--shard-size 8192 forces a single edges_00000.csv because detector.py reads only the first edges*.csv shard; no data is changed by this.",
+    "edge_invariance_check": "finance pi=0.05 delta=0.5 (the default) at 1e7 -> 25,780/9,983,506 = 0.2582%; JOB 1's same config at 1e8 -> 258,677/99,803,433 = 0.2592%. The anomaly fraction is edge-count-invariant to within 0.4% relative, confirming the elasticity fix."
+  },
+  "runs": {
+    "seed42": [
+      {
+        "delta": 0.0,
+        "edges_requested": 10000000,
+        "pi": 0.05,
+        "status": "ok",
+        "total_edges": 9983470,
+        "anomalous_edges": 34652,
+        "fraction": 0.0034709374596207532,
+        "n_csv_shards": 1,
+        "gen_wall_s": 3.5,
+        "all": {
+          "roc_auc": 0.8619206208838541,
+          "ap": 0.5468086321584043,
+          "n_anom": 34652,
+          "n_total": 9983470,
+          "train_s": 15.6
+        },
+        "attr": {
+          "roc_auc": 0.8541190937805975,
+          "ap": 0.41097965529156766,
+          "n_anom": 34652,
+          "n_total": 9983470,
+          "train_s": 14.8
+        },
+        "struct": {
+          "roc_auc": 0.9076688830721032,
+          "ap": 0.11784297223678841,
+          "n_anom": 34652,
+          "n_total": 9983470,
+          "train_s": 14.4
+        }
+      },
+      {
+        "delta": 0.25,
+        "edges_requested": 10000000,
+        "pi": 0.05,
+        "status": "ok",
+        "total_edges": 9983438,
+        "anomalous_edges": 30156,
+        "fraction": 0.003020602722228555,
+        "n_csv_shards": 1,
+        "gen_wall_s": 3.5,
+        "all": {
+          "roc_auc": 0.9049987073292246,
+          "ap": 0.4318037164482961,
+          "n_anom": 30156,
+          "n_total": 9983438,
+          "train_s": 15.2
+        },
+        "attr": {
+          "roc_auc": 0.8271650738313872,
+          "ap": 0.2688163604255662,
+          "n_anom": 30156,
+          "n_total": 9983438,
+          "train_s": 14.9
+        },
+        "struct": {
+          "roc_auc": 0.9221848482037734,
+          "ap": 0.11281675670487953,
+          "n_anom": 30156,
+          "n_total": 9983438,
+          "train_s": 15.2
+        }
+      },
+      {
+        "delta": 0.5,
+        "edges_requested": 10000000,
+        "pi": 0.05,
+        "status": "ok",
+        "total_edges": 9983506,
+        "anomalous_edges": 25780,
+        "fraction": 0.0025822591782886694,
+        "n_csv_shards": 1,
+        "gen_wall_s": 3.5,
+        "all": {
+          "roc_auc": 0.8486920565391086,
+          "ap": 0.26428367880285697,
+          "n_anom": 25780,
+          "n_total": 9983506,
+          "train_s": 15.0
+        },
+        "attr": {
+          "roc_auc": 0.8925990814133024,
+          "ap": 0.17297438901020945,
+          "n_anom": 25780,
+          "n_total": 9983506,
+          "train_s": 14.7
+        },
+        "struct": {
+          "roc_auc": 0.9264187924417949,
+          "ap": 0.09807523694354724,
+          "n_anom": 25780,
+          "n_total": 9983506,
+          "train_s": 14.1
+        }
+      },
+      {
+        "delta": 0.75,
+        "edges_requested": 10000000,
+        "pi": 0.05,
+        "status": "ok",
+        "total_edges": 9983371,
+        "anomalous_edges": 21609,
+        "fraction": 0.002164499345962401,
+        "n_csv_shards": 1,
+        "gen_wall_s": 3.5,
+        "all": {
+          "roc_auc": 0.8418883394675198,
+          "ap": 0.1805383163959085,
+          "n_anom": 21609,
+          "n_total": 9983371,
+          "train_s": 20.6
+        },
+        "attr": {
+          "roc_auc": 0.8782740876544622,
+          "ap": 0.048442537862850465,
+          "n_anom": 21609,
+          "n_total": 9983371,
+          "train_s": 15.6
+        },
+        "struct": {
+          "roc_auc": 0.9249188827249593,
+          "ap": 0.07265282147543428,
+          "n_anom": 21609,
+          "n_total": 9983371,
+          "train_s": 17.4
+        }
+      },
+      {
+        "delta": 1.0,
+        "edges_requested": 10000000,
+        "pi": 0.05,
+        "status": "ok",
+        "total_edges": 9983368,
+        "anomalous_edges": 18316,
+        "fraction": 0.0018346513921954995,
+        "n_csv_shards": 1,
+        "gen_wall_s": 3.5,
+        "all": {
+          "roc_auc": 0.817309184248389,
+          "ap": 0.132100511081755,
+          "n_anom": 18316,
+          "n_total": 9983368,
+          "train_s": 16.1
+        },
+        "attr": {
+          "roc_auc": 0.9035589927252728,
+          "ap": 0.029600138499110636,
+          "n_anom": 18316,
+          "n_total": 9983368,
+          "train_s": 14.9
+        },
+        "struct": {
+          "roc_auc": 0.9447224488014573,
+          "ap": 0.07649901230618641,
+          "n_anom": 18316,
+          "n_total": 9983368,
+          "train_s": 14.1
+        }
+      }
+    ],
+    "seed43": [
+      {
+        "delta": 0.0,
+        "edges_requested": 10000000,
+        "pi": 0.05,
+        "status": "ok",
+        "total_edges": 9971247,
+        "anomalous_edges": 37540,
+        "fraction": 0.0037648250013263135,
+        "n_csv_shards": 1,
+        "gen_wall_s": 3.5,
+        "all": {
+          "roc_auc": 0.923277427093624,
+          "ap": 0.6400318205826763,
+          "n_anom": 37540,
+          "n_total": 9971247,
+          "train_s": 16.0
+        },
+        "attr": {
+          "roc_auc": 0.9008437462335024,
+          "ap": 0.46954175684215643,
+          "n_anom": 37540,
+          "n_total": 9971247,
+          "train_s": 15.1
+        },
+        "struct": {
+          "roc_auc": 0.930242429533858,
+          "ap": 0.16881248807240837,
+          "n_anom": 37540,
+          "n_total": 9971247,
+          "train_s": 16.1
+        }
+      },
+      {
+        "delta": 0.25,
+        "edges_requested": 10000000,
+        "pi": 0.05,
+        "status": "ok",
+        "total_edges": 9971346,
+        "anomalous_edges": 32739,
+        "fraction": 0.0032833079907165995,
+        "n_csv_shards": 1,
+        "gen_wall_s": 3.5,
+        "all": {
+          "roc_auc": 0.8917896038700981,
+          "ap": 0.4508600835875707,
+          "n_anom": 32739,
+          "n_total": 9971346,
+          "train_s": 16.6
+        },
+        "attr": {
+          "roc_auc": 0.8205853726691819,
+          "ap": 0.27013734494956654,
+          "n_anom": 32739,
+          "n_total": 9971346,
+          "train_s": 14.9
+        },
+        "struct": {
+          "roc_auc": 0.9114739234358901,
+          "ap": 0.11428245421853739,
+          "n_anom": 32739,
+          "n_total": 9971346,
+          "train_s": 14.5
+        }
+      },
+      {
+        "delta": 0.5,
+        "edges_requested": 10000000,
+        "pi": 0.05,
+        "status": "ok",
+        "total_edges": 9972175,
+        "anomalous_edges": 28158,
+        "fraction": 0.002823656825115885,
+        "n_csv_shards": 1,
+        "gen_wall_s": 3.5,
+        "all": {
+          "roc_auc": 0.9141101397679773,
+          "ap": 0.3330150608407588,
+          "n_anom": 28158,
+          "n_total": 9972175,
+          "train_s": 15.8
+        },
+        "attr": {
+          "roc_auc": 0.8884593039757323,
+          "ap": 0.18041800322357246,
+          "n_anom": 28158,
+          "n_total": 9972175,
+          "train_s": 15.1
+        },
+        "struct": {
+          "roc_auc": 0.9263654277555743,
+          "ap": 0.10032450032729479,
+          "n_anom": 28158,
+          "n_total": 9972175,
+          "train_s": 14.4
+        }
+      },
+      {
+        "delta": 0.75,
+        "edges_requested": 10000000,
+        "pi": 0.05,
+        "status": "ok",
+        "total_edges": 9972139,
+        "anomalous_edges": 23418,
+        "fraction": 0.0023483427176456324,
+        "n_csv_shards": 1,
+        "gen_wall_s": 3.5,
+        "all": {
+          "roc_auc": 0.8717627507198158,
+          "ap": 0.193691981451663,
+          "n_anom": 23418,
+          "n_total": 9972139,
+          "train_s": 16.7
+        },
+        "attr": {
+          "roc_auc": 0.8866587291289246,
+          "ap": 0.06580919984971154,
+          "n_anom": 23418,
+          "n_total": 9972139,
+          "train_s": 15.0
+        },
+        "struct": {
+          "roc_auc": 0.9227534508540821,
+          "ap": 0.09763144003346969,
+          "n_anom": 23418,
+          "n_total": 9972139,
+          "train_s": 14.2
+        }
+      },
+      {
+        "delta": 1.0,
+        "edges_requested": 10000000,
+        "pi": 0.05,
+        "status": "ok",
+        "total_edges": 9971719,
+        "anomalous_edges": 19891,
+        "fraction": 0.001994741327949574,
+        "n_csv_shards": 1,
+        "gen_wall_s": 3.5,
+        "all": {
+          "roc_auc": 0.8110343041676491,
+          "ap": 0.14702664064591658,
+          "n_anom": 19891,
+          "n_total": 9971719,
+          "train_s": 15.3
+        },
+        "attr": {
+          "roc_auc": 0.9058550587310409,
+          "ap": 0.03332124605718512,
+          "n_anom": 19891,
+          "n_total": 9971719,
+          "train_s": 15.2
+        },
+        "struct": {
+          "roc_auc": 0.9461623553960361,
+          "ap": 0.10349482101505027,
+          "n_anom": 19891,
+          "n_total": 9971719,
+          "train_s": 15.0
+        }
+      }
+    ]
+  },
+  "analysis": {
+    "all": {
+      "roc_auc": {
+        "seed42": [
+          0.8619206208838541,
+          0.9049987073292246,
+          0.8486920565391086,
+          0.8418883394675198,
+          0.817309184248389
+        ],
+        "seed43": [
+          0.923277427093624,
+          0.8917896038700981,
+          0.9141101397679773,
+          0.8717627507198158,
+          0.8110343041676491
+        ],
+        "monotone_decreasing_seed42": false,
+        "monotone_decreasing_seed43": false,
+        "monotone_in_both_seeds": false,
+        "range_seed42": 0.08768952308083555,
+        "range_seed43": 0.11224312292597494,
+        "delta0_to_delta1_seed42": [
+          0.8619206208838541,
+          0.817309184248389
+        ],
+        "delta0_to_delta1_seed43": [
+          0.923277427093624,
+          0.8110343041676491
+        ],
+        "ratio_delta0_over_delta1_seed42": 1.0545833051863849,
+        "ratio_delta0_over_delta1_seed43": 1.138395037483856,
+        "max_abs_seed_disagreement_per_cell": 0.06541808322886866
+      },
+      "ap": {
+        "seed42": [
+          0.5468086321584043,
+          0.4318037164482961,
+          0.26428367880285697,
+          0.1805383163959085,
+          0.132100511081755
+        ],
+        "seed43": [
+          0.6400318205826763,
+          0.4508600835875707,
+          0.3330150608407588,
+          0.193691981451663,
+          0.14702664064591658
+        ],
+        "monotone_decreasing_seed42": true,
+        "monotone_decreasing_seed43": true,
+        "monotone_in_both_seeds": true,
+        "range_seed42": 0.4147081210766492,
+        "range_seed43": 0.4930051799367597,
+        "delta0_to_delta1_seed42": [
+          0.5468086321584043,
+          0.132100511081755
+        ],
+        "delta0_to_delta1_seed43": [
+          0.6400318205826763,
+          0.14702664064591658
+        ],
+        "ratio_delta0_over_delta1_seed42": 4.139337748814557,
+        "ratio_delta0_over_delta1_seed43": 4.353169043180829,
+        "max_abs_seed_disagreement_per_cell": 0.09322318842427202
+      }
+    },
+    "attr": {
+      "roc_auc": {
+        "seed42": [
+          0.8541190937805975,
+          0.8271650738313872,
+          0.8925990814133024,
+          0.8782740876544622,
+          0.9035589927252728
+        ],
+        "seed43": [
+          0.9008437462335024,
+          0.8205853726691819,
+          0.8884593039757323,
+          0.8866587291289246,
+          0.9058550587310409
+        ],
+        "monotone_decreasing_seed42": false,
+        "monotone_decreasing_seed43": false,
+        "monotone_in_both_seeds": false,
+        "range_seed42": 0.07639391889388569,
+        "range_seed43": 0.08526968606185903,
+        "delta0_to_delta1_seed42": [
+          0.8541190937805975,
+          0.9035589927252728
+        ],
+        "delta0_to_delta1_seed43": [
+          0.9008437462335024,
+          0.9058550587310409
+        ],
+        "ratio_delta0_over_delta1_seed42": 0.9452831532387752,
+        "ratio_delta0_over_delta1_seed43": 0.9944678649754868,
+        "max_abs_seed_disagreement_per_cell": 0.04672465245290491
+      },
+      "ap": {
+        "seed42": [
+          0.41097965529156766,
+          0.2688163604255662,
+          0.17297438901020945,
+          0.048442537862850465,
+          0.029600138499110636
+        ],
+        "seed43": [
+          0.46954175684215643,
+          0.27013734494956654,
+          0.18041800322357246,
+          0.06580919984971154,
+          0.03332124605718512
+        ],
+        "monotone_decreasing_seed42": true,
+        "monotone_decreasing_seed43": true,
+        "monotone_in_both_seeds": true,
+        "range_seed42": 0.381379516792457,
+        "range_seed43": 0.4362205107849713,
+        "delta0_to_delta1_seed42": [
+          0.41097965529156766,
+          0.029600138499110636
+        ],
+        "delta0_to_delta1_seed43": [
+          0.46954175684215643,
+          0.03332124605718512
+        ],
+        "ratio_delta0_over_delta1_seed42": 13.884382848543629,
+        "ratio_delta0_over_delta1_seed43": 14.091362490956678,
+        "max_abs_seed_disagreement_per_cell": 0.058562101550588774
+      }
+    },
+    "struct": {
+      "roc_auc": {
+        "seed42": [
+          0.9076688830721032,
+          0.9221848482037734,
+          0.9264187924417949,
+          0.9249188827249593,
+          0.9447224488014573
+        ],
+        "seed43": [
+          0.930242429533858,
+          0.9114739234358901,
+          0.9263654277555743,
+          0.9227534508540821,
+          0.9461623553960361
+        ],
+        "monotone_decreasing_seed42": false,
+        "monotone_decreasing_seed43": false,
+        "monotone_in_both_seeds": false,
+        "range_seed42": 0.03705356572935403,
+        "range_seed43": 0.03468843196014604,
+        "delta0_to_delta1_seed42": [
+          0.9076688830721032,
+          0.9447224488014573
+        ],
+        "delta0_to_delta1_seed43": [
+          0.930242429533858,
+          0.9461623553960361
+        ],
+        "ratio_delta0_over_delta1_seed42": 0.9607783579437931,
+        "ratio_delta0_over_delta1_seed43": 0.9831742134197313,
+        "max_abs_seed_disagreement_per_cell": 0.0225735464617548
+      },
+      "ap": {
+        "seed42": [
+          0.11784297223678841,
+          0.11281675670487953,
+          0.09807523694354724,
+          0.07265282147543428,
+          0.07649901230618641
+        ],
+        "seed43": [
+          0.16881248807240837,
+          0.11428245421853739,
+          0.10032450032729479,
+          0.09763144003346969,
+          0.10349482101505027
+        ],
+        "monotone_decreasing_seed42": false,
+        "monotone_decreasing_seed43": false,
+        "monotone_in_both_seeds": false,
+        "range_seed42": 0.04519015076135413,
+        "range_seed43": 0.07118104803893868,
+        "delta0_to_delta1_seed42": [
+          0.11784297223678841,
+          0.07649901230618641
+        ],
+        "delta0_to_delta1_seed43": [
+          0.16881248807240837,
+          0.10349482101505027
+        ],
+        "ratio_delta0_over_delta1_seed42": 1.5404508984393586,
+        "ratio_delta0_over_delta1_seed43": 1.631120150909383,
+        "max_abs_seed_disagreement_per_cell": 0.050969515835619955
+      }
+    }
+  },
+  "anomaly_volume_vs_delta": {
+    "seed42": {
+      "0.0": 34652,
+      "0.25": 30156,
+      "0.5": 25780,
+      "0.75": 21609,
+      "1.0": 18316
+    },
+    "seed43": {
+      "0.0": 37540,
+      "0.25": 32739,
+      "0.5": 28158,
+      "0.75": 23418,
+      "1.0": 19891
+    },
+    "note": "CONFOUND: raising delta also REDUCES the number of anomalous edges (34,652 -> 18,316 at seed 42; 37,540 -> 19,891 at seed 43, a ~1.9x drop). So the delta knob changes both camouflage and anomaly volume; the AP decline is partly a rarer-positives effect, not camouflage alone. This confound should be stated in the paper."
+  }
+}

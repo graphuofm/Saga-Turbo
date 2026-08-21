@@ -1,0 +1,16 @@
+job 202107 nodes itiger[02-03] N=2 EDGES=1000000 TAG=x16_n2 NN=2
+itiger02
+itiger03
+itiger02: load 7.15 6.45 6.23 | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo
+itiger03: load 4.44 3.99 4.03 | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo
+rep1 srun_wall 339.074
+0 itiger02 1787297885.230481541 1787298005.415282644 1 120.185
+1 itiger03 1787297931.442056772 1787298203.308778281 1 271.867
+xchg leftover: 5 entries (0 = dir removed)
+$PROJECT/saga/xrun/x16_n2/rep1/xchg
+$PROJECT/saga/xrun/x16_n2/rep1/xchg/r1
+$PROJECT/saga/xrun/x16_n2/rep1/xchg/r1/b1_from1_to0.bin
+$PROJECT/saga/xrun/x16_n2/rep1/xchg/r0
+$PROJECT/saga/xrun/x16_n2/rep1/xchg/r0/b0_from1_to0.bin
+slurmstepd: error: *** JOB 202107 ON itiger02 CANCELLED AT 2026-08-21T07:45:47 ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.

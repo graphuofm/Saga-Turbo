@@ -1,0 +1,38 @@
+job 202104 node itiger02
+Rocky Linux release 9.4 (Blue Onyx)
+ldd (GNU libc) 2.34
+6.31 6.15 6.13 5/1009 3313323
+4488f123ff852f3caf4163ad9011feaaf684260d2dfc09e6ab39987b5618a235  $PROJECT/saga/bin/agora
+saga 0.1.0
+--- generate --help exchange flags:
+      --shard-size <SHARD_SIZE_MB>
+          Shard size in MiB
+      --shard-index <SHARD_INDEX>
+          Distributed sharding: this shard's index in [0, shard-count) [default: 0]
+      --shard-count <SHARD_COUNT>
+          Distributed sharding: total number of shards (1 = whole-graph run). Run the SAME command
+          on each machine with the same seed/config and a different --shard-index; the disjoint
+      --exchange-dir <EXCHANGE_DIR>
+          Shared directory for the per-block cross-shard state exchange (real multi-process sharded
+          runs). Give the SAME fresh, empty directory (e.g. on a shared filesystem) to all N shard
+          --shard-count > 1; with guards off it additionally makes each shard's exported node state
+          complete (otherwise cross-shard in-edge effects are missing)
+      --exchange-timeout-s <EXCHANGE_TIMEOUT_S>
+          Seconds to wait for a peer shard's per-block delta file before failing with an error
+--- tiny single run json telemetry keys:
+"edges_written": 17530
+"wall_time_s": 0.039066011
+"exchange_rounds": 0
+"exchange_deltas_sent": 0
+"exchange_bytes_sent": 0
+"exchange_deltas_received": 0
+"exchange_bytes_received": 0
+"exchange_idle_polls": 0
+"exchange_nudges": 0
+"exchange_skewed_opens": 0
+--- tiny N=2 on this node (two processes, local /tmp exchange dir):
+shard 0:
+"edges_written": 8632 "wall_time_s": 0.078755199 "exchange_rounds": 90 "exchange_deltas_sent": 5381 "exchange_bytes_sent": 188335 "exchange_deltas_received": 6881 "exchange_bytes_received": 240835 "exchange_idle_polls": 45 "exchange_nudges": 0 "exchange_skewed_opens": 0 
+shard 1:
+"edges_written": 8898 "wall_time_s": 0.075252925 "exchange_rounds": 90 "exchange_deltas_sent": 6881 "exchange_bytes_sent": 240835 "exchange_deltas_received": 5381 "exchange_bytes_received": 188335 "exchange_idle_polls": 46 "exchange_nudges": 0 "exchange_skewed_opens": 0 
+xchg leftover entries: 0

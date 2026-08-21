@@ -1,0 +1,24 @@
+[package]
+name = "saga-cli"
+description = "The saga command-line interface"
+version.workspace = true
+edition.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "saga"
+path = "src/main.rs"
+
+[dependencies]
+libc.workspace = true
+anyhow.workspace = true
+clap.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+serde_yaml.workspace = true
+owo-colors.workspace = true
+saga-rules.workspace = true
+saga-host.workspace = true
+saga-core.workspace = true
+saga-io.workspace = true
+saga-introspect.workspace = true

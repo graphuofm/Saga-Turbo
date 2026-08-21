@@ -1,0 +1,58 @@
+job 202045 nodes itiger[01-02] N=2 EDGES=1000000 TAG=x2p_1m POKE=1 NN=2 TPN=1
+itiger01
+itiger02
+itiger02:  AMD EPYC 7513 32-Core Processor | 8 cpus | load 6.34 6.83 7.33 | ib: 200 Gb/sec (4X HDR) mlx5_0  | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,
+itiger01:  AMD EPYC 9334 32-Core Processor | 8 cpus | load 24.00 24.00 24.16 | ib: 200 Gb/sec (4X HDR) mlx5_0  | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,
+rep1 srun_wall 1.60641
+0 itiger01 1787293612.643847817 1787293613.897736639 0 1.25389
+1 itiger02 1787293612.604626527 1787293613.904178169 0 1.29955
+xchg leftover: 0 files; dir exists: no
+srun: Step created for StepId=202045.2
+rep2 srun_wall 1.75293
+0 itiger01 1787293614.422913631 1787293615.681247639 0 1.25833
+1 itiger02 1787293614.356650374 1787293615.695203245 0 1.33855
+xchg leftover: 0 files; dir exists: no
+rep1 digest:
+   "edges": 438406,
+   "edge_digest": "1e67846f92c43088c85fc3eb834708abd933fee65acc592d2954f48c27041cef",
+   "nodes": 50000,
+   "node_digest": "0aafd961f89ffdb71c6c6441a6dd340d4a5d1fc267e4f75cbeb7295f8be2260d",
+   "node_slice_equals_ref": true
+   "edges": 448750,
+   "edge_digest": "d9e02a12dc9ad7ea5a6d9e4794ae065be353028cf0fd65ee37bb23a47bc55cad",
+   "nodes": 50000,
+   "node_digest": "64c14b3905a1e7909b7c72c6a9c87299cb5f98508b300d25ebca4ffa7aa5dd50",
+   "node_slice_equals_ref": true
+  "edges": 887156,
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "nodes": 100000,
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9",
+  "shard_node_ids_disjoint": true
+  "edges": 887156,
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "nodes": 100000,
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9"
+ "edge_union_equals_ref": true,
+ "node_union_equals_ref": true,
+rep2 digest:
+   "edges": 438406,
+   "edge_digest": "1e67846f92c43088c85fc3eb834708abd933fee65acc592d2954f48c27041cef",
+   "nodes": 50000,
+   "node_digest": "0aafd961f89ffdb71c6c6441a6dd340d4a5d1fc267e4f75cbeb7295f8be2260d",
+   "node_slice_equals_ref": true
+   "edges": 448750,
+   "edge_digest": "d9e02a12dc9ad7ea5a6d9e4794ae065be353028cf0fd65ee37bb23a47bc55cad",
+   "nodes": 50000,
+   "node_digest": "64c14b3905a1e7909b7c72c6a9c87299cb5f98508b300d25ebca4ffa7aa5dd50",
+   "node_slice_equals_ref": true
+  "edges": 887156,
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "nodes": 100000,
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9",
+  "shard_node_ids_disjoint": true
+  "edges": 887156,
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "nodes": 100000,
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9"
+ "edge_union_equals_ref": true,
+ "node_union_equals_ref": true,

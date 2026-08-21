@@ -1,0 +1,15 @@
+[
+  {
+    "label": "crypto/sx-mathoverflow",
+    "domain": "crypto",
+    "real_edges": 506550,
+    "real_nodes": 24818,
+    "span_days": 2350.34,
+    "synth_edges": 497028,
+    "fid": 0.7166321203867589,
+    "B_real": 0.6870087528796346,
+    "B_synth": 0.6277474277078269,
+    "recip_real": 0.38335597429764395,
+    "recip_synth": 0.002407318247472316
+  }
+]

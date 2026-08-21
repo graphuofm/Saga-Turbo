@@ -1,0 +1,183 @@
+[
+  {
+    "domain": "finance",
+    "real": "email-Eu",
+    "real_edges": 332334,
+    "real_nodes": 986,
+    "span_days": 803.9,
+    "fidelity": 0.801,
+    "ks": {
+      "out_degree": 0.2718052738336714,
+      "in_degree": 0.11764705882352941,
+      "total_degree": 0.29817444219066935,
+      "inter_event_time": 0.371465
+    },
+    "real_B": 0.7832867760505704,
+    "saga_B": 0.4779720295421745,
+    "real_recip": 0.7112198644149385,
+    "saga_recip": 0.2825503936326672,
+    "real_alpha": 2.4543247918481454,
+    "saga_alpha": 2.539528993232098,
+    "real_rep": 0.9249881143668719,
+    "saga_rep": 0.9652469603492442,
+    "baselines": {
+      "real (reference)": 1.0,
+      "SAGA (ours)": 0.801,
+      "Erdos-Renyi": 0.52,
+      "Barabasi-Albert": 0.617,
+      "R-MAT": 0.747,
+      "config model": 0.844,
+      "Watts-Strogatz": 0.481
+    }
+  },
+  {
+    "domain": "finance",
+    "real": "CollegeMsg",
+    "real_edges": 59835,
+    "real_nodes": 1899,
+    "span_days": 193.7,
+    "fidelity": 0.8,
+    "ks": {
+      "out_degree": 0.2824796195199339,
+      "in_degree": 0.1229211243759207,
+      "total_degree": 0.32053512508248844,
+      "inter_event_time": 0.28614734638205375
+    },
+    "real_B": 0.6759514580186051,
+    "saga_B": 0.4179560222935579,
+    "real_recip": 0.6363815530153725,
+    "saga_recip": 0.11540626759241884,
+    "real_alpha": 4.102382391989304,
+    "saga_alpha": 2.576829867265125,
+    "real_rep": 0.6608005348040444,
+    "saga_rep": 0.8195700016929067
+  },
+  {
+    "domain": "crypto",
+    "real": "wiki-talk",
+    "real_edges": 2500000,
+    "real_nodes": 330984,
+    "span_days": 1809.4,
+    "fidelity": 0.848,
+    "ks": {
+      "out_degree": 0.11872000000000005,
+      "in_degree": 0.06184999999999996,
+      "total_degree": 0.09441499999999992,
+      "inter_event_time": 0.15272999999999998
+    },
+    "real_B": 0.7619608734567783,
+    "saga_B": 0.6068775807191509,
+    "real_recip": 0.322241894000044,
+    "saga_recip": 0.009440164939081308,
+    "real_alpha": 1.7805983598826813,
+    "saga_alpha": 2.6551257950989364,
+    "real_rep": 0.5818036,
+    "saga_rep": 0.8001574285214899,
+    "baselines": {
+      "real (reference)": 1.0,
+      "SAGA (ours)": 0.848,
+      "Erdos-Renyi": 0.527,
+      "Barabasi-Albert": 0.585,
+      "R-MAT": 0.665,
+      "config model": 0.831,
+      "Watts-Strogatz": 0.541
+    }
+  },
+  {
+    "domain": "crypto",
+    "real": "sx-mathoverflow",
+    "real_edges": 506550,
+    "real_nodes": 24818,
+    "span_days": 2350.3,
+    "fidelity": 0.73,
+    "ks": {
+      "out_degree": 0.6500249543555277,
+      "in_degree": 0.1836177828832497,
+      "total_degree": 0.19631009806944755,
+      "inter_event_time": 0.512545
+    },
+    "real_B": 0.6870087528796346,
+    "saga_B": 0.6374863031540638,
+    "real_recip": 0.38335597429764395,
+    "saga_recip": 0.007519383878857261,
+    "real_alpha": 1.814586921585768,
+    "saga_alpha": 2.498923627984869,
+    "real_rep": 0.5262501233836738,
+    "saga_rep": 0.8454184388605673
+  },
+  {
+    "domain": "cyber",
+    "real": "sx-superuser",
+    "real_edges": 1443339,
+    "real_nodes": 194085,
+    "span_days": 2773.3,
+    "fidelity": 0.803,
+    "ks": {
+      "out_degree": 0.2616291871773237,
+      "in_degree": 0.13698813290935563,
+      "total_degree": 0.30851648623995687,
+      "inter_event_time": 0.289905
+    },
+    "real_B": 0.6332946228073768,
+    "saga_B": 0.42344130305935307,
+    "real_recip": 0.37855800606777484,
+    "saga_recip": 0.06850471397426307,
+    "real_alpha": 2.1909801982555726,
+    "saga_alpha": 3.2100211085350625,
+    "real_rep": 0.35920390150893167,
+    "saga_rep": 0.5607646246970734
+  },
+  {
+    "domain": "cyber",
+    "real": "sx-askubuntu",
+    "real_edges": 964437,
+    "real_nodes": 159316,
+    "span_days": 2613.8,
+    "fidelity": 0.8,
+    "ks": {
+      "out_degree": 0.23102877454372672,
+      "in_degree": 0.14570393990496866,
+      "total_degree": 0.30224315113678785,
+      "inter_event_time": 0.30440500000000004
+    },
+    "real_B": 0.6574650483739359,
+    "saga_B": 0.4442814696113003,
+    "real_recip": 0.3855910127267214,
+    "saga_recip": 0.05605759900327848,
+    "real_alpha": 2.122181569676475,
+    "saga_alpha": 3.5355191263186896,
+    "real_rep": 0.381055475889042,
+    "saga_rep": 0.5265893090749605
+  },
+  {
+    "domain": "ecommerce",
+    "real": "tgbl-review",
+    "real_edges": 2500000,
+    "real_nodes": 326525,
+    "span_days": 5886.0,
+    "fidelity": 0.838,
+    "ks": {
+      "out_degree": 0.257465,
+      "in_degree": 0.21982000000000002,
+      "total_degree": 0.18017499999999997,
+      "inter_event_time": 0.46201
+    },
+    "real_B": 0.4052152295075322,
+    "saga_B": 0.3622401014948239,
+    "real_recip": 0.0002905206255013571,
+    "saga_recip": 0.0006563852906897203,
+    "real_alpha": 2.4911373977913467,
+    "saga_alpha": 2.5342797602720166,
+    "real_rep": 0.04309719999999995,
+    "saga_rep": 0.4637968501153076,
+    "baselines": {
+      "real (reference)": 1.0,
+      "SAGA (ours)": 0.838,
+      "Erdos-Renyi": 0.753,
+      "Barabasi-Albert": 0.817,
+      "R-MAT": 0.847,
+      "config model": 0.923,
+      "Watts-Strogatz": 0.663
+    }
+  }
+]

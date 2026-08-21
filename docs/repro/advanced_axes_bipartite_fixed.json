@@ -1,0 +1,146 @@
+{
+  "tgbl-review": {
+    "nodes_buggy_merged": 326525,
+    "nodes_namespace_fixed": 497475,
+    "real": {
+      "edges": 2500000,
+      "span_days": 5886.0
+    },
+    "synth": {
+      "edges": 2494914,
+      "nodes": 412917
+    },
+    "advanced": {
+      "layer2_distribution_distances": {
+        "total_degree": {
+          "energy": 0.5171256877684575,
+          "wasserstein": 6.289745000004176,
+          "anderson_darling": 5196.192166926029
+        },
+        "inter_event": {
+          "energy": 1849.2488760815427,
+          "wasserstein": 19363802.82174,
+          "anderson_darling": 53542.24253803969
+        }
+      },
+      "layer3_temporal_motifs": {
+        "delta_s": 3600.0,
+        "real_fingerprint": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "synth_fingerprint": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "l1_distance": 0.0
+      },
+      "layer4_discriminative": {
+        "auc": 0.9998554791666667,
+        "accuracy": 0.9995,
+        "discriminative_score": 0.9997109583333335
+      }
+    },
+    "cmd": [
+      "./target/release/saga",
+      "generate",
+      "--domain",
+      "ecommerce",
+      "--nodes",
+      "497475",
+      "--edges",
+      "2500000",
+      "--time-span",
+      "5886.000000",
+      "--no-anomalies",
+      "--seed",
+      "42",
+      "--out",
+      "/tmp/j4fix_tgbl-review"
+    ]
+  },
+  "tgbl-wiki": {
+    "nodes_buggy_merged": 8227,
+    "nodes_namespace_fixed": 9227,
+    "real": {
+      "edges": 157474,
+      "span_days": 30.9996875
+    },
+    "synth": {
+      "edges": 157371,
+      "nodes": 8422
+    },
+    "advanced": {
+      "layer2_distribution_distances": {
+        "total_degree": {
+          "energy": 2.512892798045159,
+          "wasserstein": 24.339939570551877,
+          "anderson_darling": 2985.251732022447
+        },
+        "inter_event": {
+          "energy": 116.84815713889438,
+          "wasserstein": 55502.408451638184,
+          "anderson_darling": 20752.845076228165
+        }
+      },
+      "layer3_temporal_motifs": {
+        "delta_s": 3600.0,
+        "real_fingerprint": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "synth_fingerprint": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "l1_distance": 0.0
+      },
+      "layer4_discriminative": {
+        "auc": 0.9970814236111112,
+        "accuracy": 0.9773333333333334,
+        "discriminative_score": 0.9941628472222224
+      }
+    },
+    "cmd": [
+      "./target/release/saga",
+      "generate",
+      "--domain",
+      "ecommerce",
+      "--nodes",
+      "9227",
+      "--edges",
+      "157474",
+      "--time-span",
+      "30.999688",
+      "--no-anomalies",
+      "--seed",
+      "42",
+      "--out",
+      "/tmp/j4fix_tgbl-wiki"
+    ]
+  }
+}

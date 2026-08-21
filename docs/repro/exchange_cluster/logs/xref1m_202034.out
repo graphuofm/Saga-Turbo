@@ -1,0 +1,35 @@
+job 202034 node itiger05 EDGES=1000000
+model name	: AMD EPYC 7513 32-Core Processor
+8
+48.22 45.64 45.06 53/1116 1137401
+Rocky Linux release 9.4 (Blue Onyx)
+/var/spool/slurmd/job202034/slurm_script: line 20: bc: command not found
+ref1 wall  rc 0
+/var/spool/slurmd/job202034/slurm_script: line 20: bc: command not found
+ref2 wall  rc 0
+{
+ "dirs": {
+  "$PROJECT/saga/xrun/ref1m/out1": {
+   "edges": 887156,
+   "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+   "nodes": 100000,
+   "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9",
+   "node_ids_unique": true
+  },
+  "$PROJECT/saga/xrun/ref1m/out2": {
+   "edges": 887156,
+   "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+   "nodes": 100000,
+   "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9",
+   "node_ids_unique": true
+  }
+ },
+ "union": {
+  "edges": 1774312,
+  "edge_digest": "7802b428a6cf3b2bfaf14a910941de0cf331d55bb8739cb293ac15daf594ca31",
+  "nodes": 200000,
+  "node_digest": "2cf7bf2abdf37061029749bed9ae7d20e98cd2b579820d1a77e661b98743f71c",
+  "shard_node_ids_disjoint": false
+ },
+ "digest_seconds": 25.4
+}

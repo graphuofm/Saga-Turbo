@@ -1,0 +1,59 @@
+{
+ "dirs": {
+  "$PROJECT/saga/xrun/x16c_n4_1e7_3n/rep1/out0": {
+   "edges": 2213289,
+   "edge_digest": "b633b0984741b52303688144852f50ad41426eaefbaa2f0a63412341b4a8535b",
+   "nodes": 250000,
+   "node_digest": "301064f3cdbf2ad371fd93d5e7410c5c79a5c707d5c03952dcea0fc88179ca52",
+   "node_ids_unique": true,
+   "node_rows_not_in_ref": 0,
+   "node_slice_equals_ref": true
+  },
+  "$PROJECT/saga/xrun/x16c_n4_1e7_3n/rep1/out1": {
+   "edges": 2231847,
+   "edge_digest": "a542cbb1c38de91b56e364d4480f24b24661c9df010ecd7ab4497d0d049d1c51",
+   "nodes": 250000,
+   "node_digest": "3ddd4c8009239a93585ada678e59af49d01ae6fc0ae2e4195071359ddf8c48ce",
+   "node_ids_unique": true,
+   "node_rows_not_in_ref": 0,
+   "node_slice_equals_ref": true
+  },
+  "$PROJECT/saga/xrun/x16c_n4_1e7_3n/rep1/out2": {
+   "edges": 2209316,
+   "edge_digest": "711d0bd1e5ad382f0a40ca4c71f0ee729625cf3689bf1c20bb6a74680904ac50",
+   "nodes": 250000,
+   "node_digest": "f832a0658950312cdc08766d37a2f5251070aa859745d5c7fb95ee0bd90f1634",
+   "node_ids_unique": true,
+   "node_rows_not_in_ref": 0,
+   "node_slice_equals_ref": true
+  },
+  "$PROJECT/saga/xrun/x16c_n4_1e7_3n/rep1/out3": {
+   "edges": 2203847,
+   "edge_digest": "7926c7567145571b58b379d9c465291a73c8635632656ba990397c75bb6cb478",
+   "nodes": 250000,
+   "node_digest": "10dcb91facaf73173433735f5232387af64cd0d4282b013509cc7b71184a5caf",
+   "node_ids_unique": true,
+   "node_rows_not_in_ref": 0,
+   "node_slice_equals_ref": true
+  }
+ },
+ "union": {
+  "edges": 8858299,
+  "edge_digest": "562786dc96f90f68d939bb8a2ddbf41d38835970a4f893520f6942583ff0e34f",
+  "nodes": 1000000,
+  "node_digest": "6f128c73d43112e649064ae77036ed078644641f6744384f1b2fda5a14163d70",
+  "shard_node_ids_disjoint": true
+ },
+ "ref": {
+  "dir": "$PROJECT/saga/xrun/ref16_1e7/out1",
+  "edges": 8858299,
+  "edge_digest": "562786dc96f90f68d939bb8a2ddbf41d38835970a4f893520f6942583ff0e34f",
+  "nodes": 1000000,
+  "node_digest": "6f128c73d43112e649064ae77036ed078644641f6744384f1b2fda5a14163d70"
+ },
+ "edge_union_equals_ref": true,
+ "edge_union_minus_ref": 0,
+ "ref_minus_edge_union": 0,
+ "node_union_equals_ref": true,
+ "digest_seconds": 190.5
+}

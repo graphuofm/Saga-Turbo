@@ -1,0 +1,125 @@
+[
+ {
+  "domain": "finance",
+  "n_nodes": 98465,
+  "mean_degree": 40.57772812674554,
+  "clustering": 0.0345629418370306,
+  "reciprocity": 0.08969425956738769,
+  "burstiness": 0.4040227579068369,
+  "alpha": 2.893259620571091,
+  "memory": 0.32573859397135013,
+  "repeat": 0.7882089938495592,
+  "nt": 3,
+  "et": 4,
+  "attr": 4,
+  "ev": {
+   "cash_deposit": 275252,
+   "purchase": 627604,
+   "transfer": 1067258,
+   "cash_withdrawal": 27629
+  }
+ },
+ {
+  "domain": "crypto",
+  "n_nodes": 78722,
+  "mean_degree": 50.13897004649272,
+  "clustering": 0.0021302611789104768,
+  "reciprocity": 0.0023389414771022945,
+  "burstiness": 0.6303615697000413,
+  "alpha": 2.4957332973361916,
+  "memory": 0.2840597658019966,
+  "repeat": 0.8665496169281284,
+  "nt": 4,
+  "et": 6,
+  "attr": 10,
+  "ev": {
+   "swap": 1384032,
+   "tx": 496916,
+   "token_transfer": 91978,
+   "add_liquidity": 197,
+   "remove_liquidity": 104,
+   "approve": 293
+  }
+ },
+ {
+  "domain": "cyber",
+  "n_nodes": 92957,
+  "mean_degree": 42.74468840431597,
+  "clustering": 0.06316674190187903,
+  "reciprocity": 0.16783772715227532,
+  "burstiness": 0.3877703667410274,
+  "alpha": 3.4064234906554387,
+  "memory": 0.2496560956880579,
+  "repeat": 0.7492717856515474,
+  "nt": 4,
+  "et": 4,
+  "attr": 11,
+  "ev": {
+   "flow": 1373137,
+   "auth": 240131,
+   "dns": 343467,
+   "process_exec": 29974
+  }
+ },
+ {
+  "domain": "transport",
+  "n_nodes": 96351,
+  "mean_degree": 41.415470519247336,
+  "clustering": 0.0,
+  "reciprocity": 0.0,
+  "burstiness": 0.337968955120034,
+  "alpha": 2.2240167136133877,
+  "memory": 0.2198388949134303,
+  "repeat": 0.7717133676588591,
+  "nt": 4,
+  "et": 3,
+  "attr": 8,
+  "ev": {
+   "traversal": 810794,
+   "sensor_reading": 820762,
+   "trip": 363655
+  }
+ },
+ {
+  "domain": "ecommerce",
+  "n_nodes": 91177,
+  "mean_degree": 43.74000021935357,
+  "clustering": 0.09674721837787402,
+  "reciprocity": 2.4862726670371212e-05,
+  "burstiness": 0.38296537523532376,
+  "alpha": 2.4802652279152824,
+  "memory": 0.30640996970879036,
+  "repeat": 0.5965895385300504,
+  "nt": 4,
+  "et": 5,
+  "attr": 8,
+  "ev": {
+   "WROTE_REVIEW": 728265,
+   "VOTED_HELPFUL": 296816,
+   "PURCHASED": 776343,
+   "RATED": 154307,
+   "RETURNED": 38310
+  }
+ },
+ {
+  "domain": "healthcare",
+  "n_nodes": 60615,
+  "mean_degree": 65.48913635238802,
+  "clustering": 0.008373943259480432,
+  "reciprocity": 0.04744381862661433,
+  "burstiness": 0.3844295715694782,
+  "alpha": 2.6593659961619656,
+  "memory": 0.3112788230521584,
+  "repeat": 0.7786062357543183,
+  "nt": 4,
+  "et": 5,
+  "attr": 11,
+  "ev": {
+   "SUBMITTED_CLAIM": 1141221,
+   "PRESCRIBED": 259316,
+   "PRESCRIBED_NDC": 111745,
+   "DISPENSED": 320848,
+   "REFERRED": 151682
+  }
+ }
+]

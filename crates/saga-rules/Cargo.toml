@@ -1,0 +1,14 @@
+[package]
+name = "saga-rules"
+description = "Rule-base schema (the 7 primitives), generation config, presets, validation and run metadata"
+version.workspace = true
+edition.workspace = true
+repository.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+thiserror.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+serde_yaml.workspace = true
+chrono.workspace = true

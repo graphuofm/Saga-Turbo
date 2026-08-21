@@ -1,0 +1,15 @@
+[
+ {
+  "domain": "finance",
+  "cmd": "./target/release/saga generate --domain finance --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down_after/finance --quiet",
+  "n_nodes": 63716,
+  "n_edges": 200000,
+  "tgn_saga": 0.958,
+  "tgn_ba": 0.727,
+  "eb_saga": 0.825,
+  "eb_ba": 0.5,
+  "ebtw_saga": 0.699,
+  "status": "OK",
+  "wall_s": 40068.3
+ }
+]

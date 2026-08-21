@@ -1,0 +1,13 @@
+[package]
+name = "saga-sample"
+description = "Seeded, splittable RNG and O(1) samplers (alias tables, standard distributions) for bit-reproducible parallel runs"
+version.workspace = true
+edition.workspace = true
+repository.workspace = true
+
+[dependencies]
+saga-rules.workspace = true
+anyhow.workspace = true
+rand.workspace = true
+rand_pcg.workspace = true
+rand_distr = "0.4"

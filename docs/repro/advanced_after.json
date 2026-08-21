@@ -1,0 +1,602 @@
+{
+  "snap-email-eu": {
+    "domain": "finance",
+    "domain_precedent": "job4_axes.py / docs/VALIDATION.md 'SAGA finance vs email-Eu'",
+    "cmd": [
+      "./target/release/saga",
+      "generate",
+      "--domain",
+      "finance",
+      "--nodes",
+      "986",
+      "--edges",
+      "332334",
+      "--time-span",
+      "803.926551",
+      "--no-anomalies",
+      "--seed",
+      "42",
+      "--out",
+      "/tmp/j3after_snap-email-eu"
+    ],
+    "real": {
+      "edges": 332334,
+      "nodes": 986,
+      "span_days": 803.9265509259259,
+      "time_prefix_capped_to": null
+    },
+    "synth": {
+      "edges": 332597,
+      "nodes": 986
+    },
+    "advanced": {
+      "layer2_distribution_distances": {
+        "total_degree": {
+          "energy": 5.077652828775425,
+          "wasserstein": 150.08722109533494,
+          "anderson_darling": 84.27478687630182
+        },
+        "inter_event": {
+          "energy": 121.20688798632177,
+          "wasserstein": 116739.11942500013,
+          "anderson_darling": 44599.03362695794
+        }
+      },
+      "layer3_temporal_motifs": {
+        "delta_s": 3600.0,
+        "real_fingerprint": [
+          0.28384533898305087,
+          0.05847457627118644,
+          0.13935381355932203,
+          0.059957627118644066,
+          0.05540254237288136,
+          0.13765889830508474,
+          0.05632944915254237,
+          0.20897775423728815
+        ],
+        "synth_fingerprint": [
+          0.45753514458445627,
+          0.0006555466530701434,
+          0.00014567703401558745,
+          0.0006919659115740403,
+          0.0007648044285818341,
+          0.0001820962925194843,
+          0.0009104814625974215,
+          0.5391142836331853
+        ],
+        "l1_distance": 1.007652669994605
+      },
+      "layer4_discriminative": {
+        "auc": 0.9998529444444444,
+        "accuracy": 0.9945416666666667,
+        "discriminative_score": 0.9997058888888888
+      }
+    },
+    "status": "OK"
+  },
+  "snap-collegemsg": {
+    "domain": "finance",
+    "domain_precedent": "job4_axes.py / docs/VALIDATION.md 'SAGA finance vs CollegeMsg'",
+    "cmd": [
+      "./target/release/saga",
+      "generate",
+      "--domain",
+      "finance",
+      "--nodes",
+      "1899",
+      "--edges",
+      "59835",
+      "--time-span",
+      "193.705799",
+      "--no-anomalies",
+      "--seed",
+      "42",
+      "--out",
+      "/tmp/j3after_snap-collegemsg"
+    ],
+    "real": {
+      "edges": 59835,
+      "nodes": 1899,
+      "span_days": 193.7057986111111,
+      "time_prefix_capped_to": null
+    },
+    "synth": {
+      "edges": 59072,
+      "nodes": 1894
+    },
+    "advanced": {
+      "layer2_distribution_distances": {
+        "total_degree": {
+          "energy": 1.848534441664371,
+          "wasserstein": 20.099543304345694,
+          "anderson_darling": 247.77948494422384
+        },
+        "inter_event": {
+          "energy": 265.0731854353471,
+          "wasserstein": 287828.5682450027,
+          "anderson_darling": 7194.303733172824
+        }
+      },
+      "layer3_temporal_motifs": {
+        "delta_s": 3600.0,
+        "real_fingerprint": [
+          0.1727565369627831,
+          0.035296775286609815,
+          0.28485909527305586,
+          0.03546619980798554,
+          0.037386344383577116,
+          0.2798328344722426,
+          0.035240300446151236,
+          0.11916191336759474
+        ],
+        "synth_fingerprint": [
+          0.4514983351831299,
+          0.0006659267480577136,
+          0.00022197558268590456,
+          0.0008879023307436182,
+          0.00022197558268590456,
+          0.0,
+          0.0006659267480577136,
+          0.5458379578246393
+        ],
+        "l1_distance": 1.4108356853547828
+      },
+      "layer4_discriminative": {
+        "auc": 0.9997350694444446,
+        "accuracy": 0.9925833333333334,
+        "discriminative_score": 0.9994701388888891
+      }
+    },
+    "status": "OK"
+  },
+  "tgbl-review": {
+    "domain": "ecommerce",
+    "domain_precedent": "job4_axes.py / docs/VALIDATION.md 'SAGA ecommerce vs tgbl-review'",
+    "cmd": [
+      "./target/release/saga",
+      "generate",
+      "--domain",
+      "ecommerce",
+      "--nodes",
+      "326525",
+      "--edges",
+      "2500000",
+      "--time-span",
+      "5886.000000",
+      "--no-anomalies",
+      "--seed",
+      "42",
+      "--out",
+      "/tmp/j3after_tgbl-review"
+    ],
+    "real": {
+      "edges": 2500000,
+      "nodes": 326525,
+      "span_days": 5886.0,
+      "time_prefix_capped_to": 2500000
+    },
+    "synth": {
+      "edges": 2492042,
+      "nodes": 285555
+    },
+    "advanced": {
+      "layer2_distribution_distances": {
+        "total_degree": {
+          "energy": 0.6397115583214049,
+          "wasserstein": 6.371715000009029,
+          "anderson_darling": 7755.809356977079
+        },
+        "inter_event": {
+          "energy": 1485.3991874073838,
+          "wasserstein": 15090927.17554,
+          "anderson_darling": 51879.53012032159
+        }
+      },
+      "layer3_temporal_motifs": {
+        "delta_s": 3600.0,
+        "real_fingerprint": [
+          0.38635112823335166,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.6136488717666483
+        ],
+        "synth_fingerprint": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "l1_distance": 1.2272977435332968
+      },
+      "layer4_discriminative": {
+        "auc": 0.9999196458333334,
+        "accuracy": 0.9996666666666667,
+        "discriminative_score": 0.9998392916666667
+      }
+    },
+    "status": "OK"
+  },
+  "tgbl-wiki": {
+    "domain": "ecommerce",
+    "domain_precedent": "job4_axes.py; NO doc precedent; INDEX.txt calls it 'ECOMMERCE-like bipartite'",
+    "cmd": [
+      "./target/release/saga",
+      "generate",
+      "--domain",
+      "ecommerce",
+      "--nodes",
+      "8227",
+      "--edges",
+      "157474",
+      "--time-span",
+      "30.999688",
+      "--no-anomalies",
+      "--seed",
+      "42",
+      "--out",
+      "/tmp/j3after_tgbl-wiki"
+    ],
+    "real": {
+      "edges": 157474,
+      "nodes": 8227,
+      "span_days": 30.9996875,
+      "time_prefix_capped_to": null
+    },
+    "synth": {
+      "edges": 156982,
+      "nodes": 7532
+    },
+    "advanced": {
+      "layer2_distribution_distances": {
+        "total_degree": {
+          "energy": 2.8730782468114433,
+          "wasserstein": 28.787075940837582,
+          "anderson_darling": 3241.868631524303
+        },
+        "inter_event": {
+          "energy": 108.2707911006543,
+          "wasserstein": 48885.06963905483,
+          "anderson_darling": 20441.013014467364
+        }
+      },
+      "layer3_temporal_motifs": {
+        "delta_s": 3600.0,
+        "real_fingerprint": [
+          0.1456438383362081,
+          0.0,
+          0.0,
+          1.2408949334259868e-05,
+          0.0,
+          1.2408949334259868e-05,
+          1.2408949334259868e-05,
+          0.8543189348157891
+        ],
+        "synth_fingerprint": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "l1_distance": 1.708712323327584
+      },
+      "layer4_discriminative": {
+        "auc": 0.9998690069444445,
+        "accuracy": 0.994125,
+        "discriminative_score": 0.9997380138888889
+      }
+    },
+    "status": "OK"
+  },
+  "wiki-talk": {
+    "domain": "crypto",
+    "domain_precedent": "domain mapping from j4_fid.py (tab:fidelity driver)",
+    "cmd": [
+      "./target/release/saga",
+      "generate",
+      "--domain",
+      "crypto",
+      "--nodes",
+      "330984",
+      "--edges",
+      "2500000",
+      "--time-span",
+      "1809.434271",
+      "--no-anomalies",
+      "--seed",
+      "42",
+      "--out",
+      "/tmp/j3after_wiki-talk"
+    ],
+    "real": {
+      "edges": 2500000,
+      "nodes": 330984,
+      "span_days": 1809.4342708333334,
+      "time_prefix_capped_to": 2500000
+    },
+    "synth": {
+      "edges": 2459531,
+      "nodes": 187728
+    },
+    "advanced": {
+      "layer2_distribution_distances": {
+        "total_degree": {
+          "energy": 0.9257376892179889,
+          "wasserstein": 14.203242058299159,
+          "anderson_darling": 2933.1421172308687
+        },
+        "inter_event": {
+          "energy": 354.93071459825023,
+          "wasserstein": 1042074.0785249997,
+          "anderson_darling": 9325.179852502633
+        }
+      },
+      "layer3_temporal_motifs": {
+        "delta_s": 3600.0,
+        "real_fingerprint": [
+          0.5483017120712127,
+          0.03647351334569814,
+          0.07922042816500331,
+          0.04241504545807339,
+          0.039867145200874636,
+          0.0776601068940507,
+          0.043549824564220734,
+          0.13251222430086634
+        ],
+        "synth_fingerprint": [
+          0.9526534085530334,
+          0.0,
+          0.0,
+          1.0402872024908636e-06,
+          0.0,
+          0.0,
+          0.0,
+          0.04734555115976419
+        ],
+        "l1_distance": 0.8087033929636412
+      },
+      "layer4_discriminative": {
+        "auc": 0.9993205347222223,
+        "accuracy": 0.988875,
+        "discriminative_score": 0.9986410694444445
+      }
+    },
+    "status": "OK"
+  },
+  "sx-mathoverflow": {
+    "domain": "crypto",
+    "domain_precedent": "domain mapping from j4_fid.py (tab:fidelity driver)",
+    "cmd": [
+      "./target/release/saga",
+      "generate",
+      "--domain",
+      "crypto",
+      "--nodes",
+      "24818",
+      "--edges",
+      "506550",
+      "--time-span",
+      "2350.339896",
+      "--no-anomalies",
+      "--seed",
+      "42",
+      "--out",
+      "/tmp/j3after_sx-mathoverflow"
+    ],
+    "real": {
+      "edges": 506550,
+      "nodes": 24818,
+      "span_days": 2350.3398958333332,
+      "time_prefix_capped_to": null
+    },
+    "synth": {
+      "edges": 497028,
+      "nodes": 19694
+    },
+    "advanced": {
+      "layer2_distribution_distances": {
+        "total_degree": {
+          "energy": 0.8667949821143163,
+          "wasserstein": 15.7974821031434,
+          "anderson_darling": 1156.9866575818312
+        },
+        "inter_event": {
+          "energy": 133.0935602017451,
+          "wasserstein": 332330.9776149987,
+          "anderson_darling": 53847.328771813714
+        }
+      },
+      "layer3_temporal_motifs": {
+        "delta_s": 3600.0,
+        "real_fingerprint": [
+          0.6059777868232832,
+          0.0322149212071873,
+          0.012211432226551142,
+          0.07856021399081235,
+          0.04221666569750538,
+          0.010350642553933826,
+          0.018666046403442462,
+          0.19980229109728442
+        ],
+        "synth_fingerprint": [
+          0.9531608928994509,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.046839107100549046
+        ],
+        "l1_distance": 0.6943662121523355
+      },
+      "layer4_discriminative": {
+        "auc": 0.9999028680555556,
+        "accuracy": 0.9957083333333333,
+        "discriminative_score": 0.9998057361111112
+      }
+    },
+    "status": "OK"
+  },
+  "sx-superuser": {
+    "domain": "cyber",
+    "domain_precedent": "domain mapping from j4_fid.py (tab:fidelity driver)",
+    "cmd": [
+      "./target/release/saga",
+      "generate",
+      "--domain",
+      "cyber",
+      "--nodes",
+      "194085",
+      "--edges",
+      "1443339",
+      "--time-span",
+      "2773.320926",
+      "--no-anomalies",
+      "--seed",
+      "42",
+      "--out",
+      "/tmp/j3after_sx-superuser"
+    ],
+    "real": {
+      "edges": 1443339,
+      "nodes": 194085,
+      "span_days": 2773.320925925926,
+      "time_prefix_capped_to": null
+    },
+    "synth": {
+      "edges": 1441075,
+      "nodes": 160821
+    },
+    "advanced": {
+      "layer2_distribution_distances": {
+        "total_degree": {
+          "energy": 1.614552819474527,
+          "wasserstein": 11.055456521783821,
+          "anderson_darling": 23136.817156980385
+        },
+        "inter_event": {
+          "energy": 1860.851120445726,
+          "wasserstein": 10659827.960655,
+          "anderson_darling": 25844.270831851627
+        }
+      },
+      "layer3_temporal_motifs": {
+        "delta_s": 3600.0,
+        "real_fingerprint": [
+          0.5496255193527225,
+          0.03914279466433414,
+          0.013229827246883884,
+          0.12534167942269844,
+          0.07283238574240104,
+          0.010086376558058167,
+          0.02097911655368467,
+          0.16876230045921714
+        ],
+        "synth_fingerprint": [
+          0.2234705179456846,
+          7.939690113894854e-06,
+          3.969845056947427e-06,
+          7.939690113894854e-06,
+          0.0,
+          0.0,
+          7.939690113894854e-06,
+          0.7765016931389168
+        ],
+        "l1_distance": 1.2154787853593993
+      },
+      "layer4_discriminative": {
+        "auc": 0.9943436874999999,
+        "accuracy": 0.9589583333333334,
+        "discriminative_score": 0.9886873749999998
+      }
+    },
+    "status": "OK"
+  },
+  "sx-askubuntu": {
+    "domain": "cyber",
+    "domain_precedent": "domain mapping from j4_fid.py (tab:fidelity driver)",
+    "cmd": [
+      "./target/release/saga",
+      "generate",
+      "--domain",
+      "cyber",
+      "--nodes",
+      "159316",
+      "--edges",
+      "964437",
+      "--time-span",
+      "2613.824792",
+      "--no-anomalies",
+      "--seed",
+      "42",
+      "--out",
+      "/tmp/j3after_sx-askubuntu"
+    ],
+    "real": {
+      "edges": 964437,
+      "nodes": 159316,
+      "span_days": 2613.8247916666664,
+      "time_prefix_capped_to": null
+    },
+    "synth": {
+      "edges": 962371,
+      "nodes": 127394
+    },
+    "advanced": {
+      "layer2_distribution_distances": {
+        "total_degree": {
+          "energy": 1.49214788254363,
+          "wasserstein": 9.38034489190548,
+          "anderson_darling": 18313.006847740187
+        },
+        "inter_event": {
+          "energy": 2019.2312418312938,
+          "wasserstein": 11729522.369634999,
+          "anderson_darling": 28162.575214718312
+        }
+      },
+      "layer3_temporal_motifs": {
+        "delta_s": 3600.0,
+        "real_fingerprint": [
+          0.5659355974473703,
+          0.03914032127924888,
+          0.010929362576102105,
+          0.11808112667791389,
+          0.04628475023839214,
+          0.008802171202229883,
+          0.01647473043350693,
+          0.19435194014523582
+        ],
+        "synth_fingerprint": [
+          0.22657005971065114,
+          5.9002619716315404e-06,
+          0.0,
+          5.9002619716315404e-06,
+          0.0,
+          0.0,
+          5.9002619716315404e-06,
+          0.773412239503434
+        ],
+        "l1_distance": 1.1581205987163963
+      },
+      "layer4_discriminative": {
+        "auc": 0.9947707083333334,
+        "accuracy": 0.9625833333333333,
+        "discriminative_score": 0.9895414166666667
+      }
+    },
+    "status": "OK"
+  }
+}

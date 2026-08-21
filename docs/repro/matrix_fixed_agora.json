@@ -1,0 +1,44 @@
+{
+  "finance": {
+    "_real": "email-Eu",
+    "_proxy": false,
+    "_edges": 332334,
+    "_nodes": 986,
+    "SAGA": 0.804
+  },
+  "crypto": {
+    "_real": "wiki-talk",
+    "_proxy": false,
+    "_edges": 1500000,
+    "_nodes": 192666,
+    "SAGA": 0.827
+  },
+  "cyber": {
+    "_real": "sx-superuser",
+    "_proxy": false,
+    "_edges": 1443339,
+    "_nodes": 194085,
+    "SAGA": 0.808
+  },
+  "ecommerce": {
+    "_real": "tgbl-review",
+    "_proxy": false,
+    "_edges": 1500000,
+    "_nodes": 281674,
+    "SAGA": 0.86
+  },
+  "transport": {
+    "_real": "sx-askubuntu",
+    "_proxy": true,
+    "_edges": 964437,
+    "_nodes": 159316,
+    "SAGA": 0.743
+  },
+  "healthcare": {
+    "_real": "sx-mathoverflow",
+    "_proxy": true,
+    "_edges": 506550,
+    "_nodes": 24818,
+    "SAGA": 0.754
+  }
+}

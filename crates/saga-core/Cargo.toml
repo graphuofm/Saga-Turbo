@@ -1,0 +1,16 @@
+[package]
+name = "saga-core"
+description = "Discrete-event simulation engine: world state, behavior/adversary/failure processes, intent labeling"
+version.workspace = true
+edition.workspace = true
+repository.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+serde.workspace = true
+rayon.workspace = true
+saga-rules.workspace = true
+saga-sample.workspace = true
+saga-topology.workspace = true
+rand.workspace = true
+rand_distr = "0.4"

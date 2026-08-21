@@ -1,0 +1,67 @@
+[
+  {
+    "model": "qwen2.5:0.5b",
+    "size_B": 0.5,
+    "valid": true,
+    "mode": "template",
+    "fidelity": 0.802,
+    "params": {
+      "ctr_threshold": 10000.0,
+      "sar_threshold": 5000.0,
+      "structuring_upper": 10000.0
+    },
+    "secs": 125
+  },
+  {
+    "model": "qwen2.5:1.5b",
+    "size_B": 1.5,
+    "valid": true,
+    "mode": "template",
+    "fidelity": 0.802,
+    "params": {
+      "ctr_threshold": 10000.0,
+      "sar_threshold": 5000.0,
+      "structuring_upper": 10000.0
+    },
+    "secs": 123
+  },
+  {
+    "model": "qwen2.5:3b",
+    "size_B": 3.0,
+    "valid": true,
+    "mode": "template",
+    "fidelity": 0.802,
+    "params": {
+      "ctr_threshold": 10000.0,
+      "sar_threshold": 5000.0,
+      "structuring_upper": 10000.0
+    },
+    "secs": 123
+  },
+  {
+    "model": "qwen2.5:7b",
+    "size_B": 7.0,
+    "valid": true,
+    "mode": "template",
+    "fidelity": 0.802,
+    "params": {
+      "ctr_threshold": 10000.0,
+      "sar_threshold": 5000.0,
+      "structuring_upper": 10000.0
+    },
+    "secs": 28
+  },
+  {
+    "model": "qwen2.5:14b",
+    "size_B": 14.0,
+    "valid": true,
+    "mode": "template",
+    "fidelity": 0.802,
+    "params": {
+      "ctr_threshold": 10000.0,
+      "sar_threshold": 5000.0,
+      "structuring_upper": 10000.0
+    },
+    "secs": 33
+  }
+]

@@ -1,0 +1,41 @@
+{
+ "dirs": {
+  "$PROJECT/saga/xrun/x2p_1m/rep1/out0": {
+   "edges": 438406,
+   "edge_digest": "1e67846f92c43088c85fc3eb834708abd933fee65acc592d2954f48c27041cef",
+   "nodes": 50000,
+   "node_digest": "0aafd961f89ffdb71c6c6441a6dd340d4a5d1fc267e4f75cbeb7295f8be2260d",
+   "node_ids_unique": true,
+   "node_rows_not_in_ref": 0,
+   "node_slice_equals_ref": true
+  },
+  "$PROJECT/saga/xrun/x2p_1m/rep1/out1": {
+   "edges": 448750,
+   "edge_digest": "d9e02a12dc9ad7ea5a6d9e4794ae065be353028cf0fd65ee37bb23a47bc55cad",
+   "nodes": 50000,
+   "node_digest": "64c14b3905a1e7909b7c72c6a9c87299cb5f98508b300d25ebca4ffa7aa5dd50",
+   "node_ids_unique": true,
+   "node_rows_not_in_ref": 0,
+   "node_slice_equals_ref": true
+  }
+ },
+ "union": {
+  "edges": 887156,
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "nodes": 100000,
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9",
+  "shard_node_ids_disjoint": true
+ },
+ "ref": {
+  "dir": "$PROJECT/saga/xrun/ref1m/out1",
+  "edges": 887156,
+  "edge_digest": "36ca881b9b98755ebccb017d269b6fc6f96c92f97c7cf16e5d294ca48ac10865",
+  "nodes": 100000,
+  "node_digest": "bf8c5d0e4892d38cd476992e2af7df9fed07c7fd07bd30bbd878583ad61454c9"
+ },
+ "edge_union_equals_ref": true,
+ "edge_union_minus_ref": 0,
+ "ref_minus_edge_union": 0,
+ "node_union_equals_ref": true,
+ "digest_seconds": 17.0
+}

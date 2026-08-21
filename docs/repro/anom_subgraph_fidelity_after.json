@@ -1,0 +1,290 @@
+{
+  "cfgA_matched_incident": {
+    "real_n_edges": 8145,
+    "synth_n_edges": 6953,
+    "fidelity_score": 0.6638619085324536,
+    "ks_distances": {
+      "out_degree": 0.37455065647432084,
+      "in_degree": 0.1962403456447871,
+      "total_degree": 0.1963560247979923,
+      "inter_event_time": 0.998639455782313
+    },
+    "scalar_metrics": {
+      "powerlaw_alpha": {
+        "real": 2.8538952115440672,
+        "synth": 2.7025439910755615,
+        "distance": 0.02723888716305038
+      },
+      "burstiness_b": {
+        "real": null,
+        "synth": 0.48865856461981566,
+        "distance": NaN
+      },
+      "memory_m": {
+        "real": null,
+        "synth": 0.13262666327619013,
+        "distance": NaN
+      },
+      "clustering": {
+        "real": 8.61103935244984e-05,
+        "synth": 0.0,
+        "distance": 8.61103935244984e-05
+      },
+      "reciprocity": {
+        "real": 0.0,
+        "synth": 0.0030911901081916537,
+        "distance": 0.0030911901081916537
+      },
+      "repeat_edge_ratio": {
+        "real": 0.0,
+        "synth": 0.7208399252121387,
+        "distance": 0.7208399252121387
+      },
+      "mean_degree": {
+        "real": 1.6970517762266903,
+        "synth": 5.2043413173652695,
+        "distance": 0.508200227631599
+      }
+    }
+  },
+  "cfgA_matched_internal": {
+    "real_n_edges": 998,
+    "synth_n_edges": 30,
+    "fidelity_score": 0.7646897151895686,
+    "ks_distances": {
+      "out_degree": 0.25845448305983654,
+      "in_degree": 0.13377425594309603,
+      "total_degree": 0.2887627129219442,
+      "inter_event_time": 1.0
+    },
+    "scalar_metrics": {
+      "powerlaw_alpha": {
+        "real": 4.280718238660578,
+        "synth": null,
+        "distance": NaN
+      },
+      "burstiness_b": {
+        "real": null,
+        "synth": 0.4030023762063317,
+        "distance": NaN
+      },
+      "memory_m": {
+        "real": null,
+        "synth": -0.3633341189681295,
+        "distance": NaN
+      },
+      "clustering": {
+        "real": 0.0,
+        "synth": 0.0,
+        "distance": 0.0
+      },
+      "reciprocity": {
+        "real": 0.0,
+        "synth": 0.0,
+        "distance": 0.0
+      },
+      "repeat_edge_ratio": {
+        "real": 0.0,
+        "synth": 0.1333333333333333,
+        "distance": 0.1333333333333333
+      },
+      "mean_degree": {
+        "real": 1.4633431085043989,
+        "synth": 1.2765957446808511,
+        "distance": 0.0681574932252408
+      }
+    }
+  },
+  "cfgA_matched_wholegraph": {
+    "fidelity_score": 0.6034066490524215,
+    "ks_distances": {
+      "out_degree": 0.5199870769373895,
+      "in_degree": 0.14922840450274444,
+      "total_degree": 0.2582414587403479,
+      "inter_event_time": 0.99878
+    },
+    "scalar_metrics": {
+      "powerlaw_alpha": {
+        "real": 3.9743705855125206,
+        "synth": 2.699397340772062,
+        "distance": 0.19104249036275092
+      },
+      "burstiness_b": {
+        "real": null,
+        "synth": 0.5233262277139255,
+        "distance": NaN
+      },
+      "memory_m": {
+        "real": null,
+        "synth": 0.15131211167716554,
+        "distance": NaN
+      },
+      "clustering": {
+        "real": 0.015082910044471532,
+        "synth": 0.0007301041973579122,
+        "distance": 0.01435280584711362
+      },
+      "reciprocity": {
+        "real": 0.0,
+        "synth": 0.0019270982820123825,
+        "distance": 0.0019270982820123825
+      },
+      "repeat_edge_ratio": {
+        "real": 0.0,
+        "synth": 0.7886660023395866,
+        "distance": 0.7886660023395866
+      },
+      "mean_degree": {
+        "real": 2.3002026804862368,
+        "synth": 10.736347567215555,
+        "distance": 0.6471148215162614
+      }
+    },
+    "real_n_edges": 234355,
+    "synth_n_edges": 230810
+  },
+  "cfgB_1e7_incident": {
+    "real_n_edges": 8145,
+    "synth_n_edges": 295878,
+    "fidelity_score": 0.5605931456852957,
+    "ks_distances": {
+      "out_degree": 0.5713822878019175,
+      "in_degree": 0.43140483188387835,
+      "total_degree": 0.1898062828250554,
+      "inter_event_time": 0.998845
+    },
+    "scalar_metrics": {
+      "powerlaw_alpha": {
+        "real": 2.8538952115440672,
+        "synth": 2.0602991086360465,
+        "distance": 0.16149058242347528
+      },
+      "burstiness_b": {
+        "real": null,
+        "synth": 0.6359019610454085,
+        "distance": NaN
+      },
+      "memory_m": {
+        "real": null,
+        "synth": 0.38718674370180406,
+        "distance": NaN
+      },
+      "clustering": {
+        "real": 8.61103935244984e-05,
+        "synth": 7.763055465150874e-05,
+        "distance": 8.479838872989666e-06
+      },
+      "reciprocity": {
+        "real": 0.0,
+        "synth": 0.0015395198008450982,
+        "distance": 0.0015395198008450982
+      },
+      "repeat_edge_ratio": {
+        "real": 0.0,
+        "synth": 0.7936379183312041,
+        "distance": 0.7936379183312041
+      },
+      "mean_degree": {
+        "real": 1.6970517762266903,
+        "synth": 15.847777182645956,
+        "distance": 0.8065467859270901
+      }
+    }
+  },
+  "cfgB_1e7_internal": {
+    "real_n_edges": 998,
+    "synth_n_edges": 1026,
+    "fidelity_score": 0.7684864915966364,
+    "ks_distances": {
+      "out_degree": 0.42284328574651153,
+      "in_degree": 0.08655860268763495,
+      "total_degree": 0.1396990106667526,
+      "inter_event_time": 1.0
+    },
+    "scalar_metrics": {
+      "powerlaw_alpha": {
+        "real": 4.280718238660578,
+        "synth": 3.2744618294465386,
+        "distance": 0.13318761434446497
+      },
+      "burstiness_b": {
+        "real": null,
+        "synth": 0.12979015387687395,
+        "distance": NaN
+      },
+      "memory_m": {
+        "real": null,
+        "synth": 0.1137969236835493,
+        "distance": NaN
+      },
+      "clustering": {
+        "real": 0.0,
+        "synth": 0.0015187893339153843,
+        "distance": 0.0015187893339153843
+      },
+      "reciprocity": {
+        "real": 0.0,
+        "synth": 0.002242152466367713,
+        "distance": 0.002242152466367713
+      },
+      "repeat_edge_ratio": {
+        "real": 0.0,
+        "synth": 0.1306042884990254,
+        "distance": 0.1306042884990254
+      },
+      "mean_degree": {
+        "real": 1.4633431085043989,
+        "synth": 2.04995004995005,
+        "distance": 0.16696783188559997
+      }
+    }
+  },
+  "cfgB_1e7_wholegraph": {
+    "fidelity_score": 0.4107861076667655,
+    "ks_distances": {
+      "out_degree": 0.6456167185505641,
+      "in_degree": 0.861826933842383,
+      "total_degree": 0.7337652275474127,
+      "inter_event_time": 0.9984
+    },
+    "scalar_metrics": {
+      "powerlaw_alpha": {
+        "real": 3.9743705855125206,
+        "synth": 2.5604883114703645,
+        "distance": 0.21636003107809096
+      },
+      "burstiness_b": {
+        "real": null,
+        "synth": 0.6787540166353463,
+        "distance": NaN
+      },
+      "memory_m": {
+        "real": null,
+        "synth": 0.29454378573675133,
+        "distance": NaN
+      },
+      "clustering": {
+        "real": 0.015082910044471532,
+        "synth": 0.0013539377260282299,
+        "distance": 0.013728972318443302
+      },
+      "reciprocity": {
+        "real": 0.0,
+        "synth": 0.001834963129654548,
+        "distance": 0.001834963129654548
+      },
+      "repeat_edge_ratio": {
+        "real": 0.0,
+        "synth": 0.8720245502481705,
+        "distance": 0.8720245502481705
+      },
+      "mean_degree": {
+        "real": 2.3002026804862368,
+        "synth": 110.92001671730806,
+        "distance": 0.9593676342843926
+      }
+    },
+    "real_n_edges": 234355,
+    "synth_n_edges": 9819860
+  }
+}

@@ -1,0 +1,72 @@
+[
+ {
+  "delta": 0.0,
+  "cmd": "/tmp/saga_base/target/release/saga generate --domain finance --edges 200000 --anomaly-rate 0.05 --difficulty 0.0 --seed 11 --format csv --out ./scratch/work_diff/d0.0 --quiet",
+  "auc_all": 0.998,
+  "ap_all": 0.9959,
+  "n_anom": 60250,
+  "n_total": 200962,
+  "auc_attr": 0.9947,
+  "ap_attr": 0.9891,
+  "auc_struct": 0.9409,
+  "ap_struct": 0.9037,
+  "status": "OK",
+  "wall_s": 2.6
+ },
+ {
+  "delta": 0.25,
+  "cmd": "/tmp/saga_base/target/release/saga generate --domain finance --edges 200000 --anomaly-rate 0.05 --difficulty 0.25 --seed 11 --format csv --out ./scratch/work_diff/d0.25 --quiet",
+  "auc_all": 0.9946,
+  "ap_all": 0.9895,
+  "n_anom": 59759,
+  "n_total": 200471,
+  "auc_attr": 0.9855,
+  "ap_attr": 0.9725,
+  "auc_struct": 0.9401,
+  "ap_struct": 0.9005,
+  "status": "OK",
+  "wall_s": 2.3
+ },
+ {
+  "delta": 0.5,
+  "cmd": "/tmp/saga_base/target/release/saga generate --domain finance --edges 200000 --anomaly-rate 0.05 --difficulty 0.5 --seed 11 --format csv --out ./scratch/work_diff/d0.5 --quiet",
+  "auc_all": 0.993,
+  "ap_all": 0.9861,
+  "n_anom": 59976,
+  "n_total": 200688,
+  "auc_attr": 0.978,
+  "ap_attr": 0.9573,
+  "auc_struct": 0.9415,
+  "ap_struct": 0.9025,
+  "status": "OK",
+  "wall_s": 2.3
+ },
+ {
+  "delta": 0.75,
+  "cmd": "/tmp/saga_base/target/release/saga generate --domain finance --edges 200000 --anomaly-rate 0.05 --difficulty 0.75 --seed 11 --format csv --out ./scratch/work_diff/d0.75 --quiet",
+  "auc_all": 0.9916,
+  "ap_all": 0.9828,
+  "n_anom": 60155,
+  "n_total": 200867,
+  "auc_attr": 0.9717,
+  "ap_attr": 0.9437,
+  "auc_struct": 0.9398,
+  "ap_struct": 0.8997,
+  "status": "OK",
+  "wall_s": 2.5
+ },
+ {
+  "delta": 1.0,
+  "cmd": "/tmp/saga_base/target/release/saga generate --domain finance --edges 200000 --anomaly-rate 0.05 --difficulty 1.0 --seed 11 --format csv --out ./scratch/work_diff/d1.0 --quiet",
+  "auc_all": 0.9909,
+  "ap_all": 0.9816,
+  "n_anom": 60343,
+  "n_total": 201055,
+  "auc_attr": 0.9684,
+  "ap_attr": 0.9361,
+  "auc_struct": 0.9416,
+  "ap_struct": 0.9046,
+  "status": "OK",
+  "wall_s": 2.7
+ }
+]

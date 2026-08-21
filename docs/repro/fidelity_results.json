@@ -1,0 +1,100 @@
+{
+  "finance_vs_CollegeMsg": {
+    "synth_edges": 60277,
+    "real_edges": 59835,
+    "t_load": 0.2,
+    "t_stats": 0.2,
+    "fidelity_score": 0.8046385453871754,
+    "ks": {
+      "out_degree": 0.29308141527910403,
+      "in_degree": 0.14973869461201572,
+      "total_degree": 0.327231148682724,
+      "inter_event_time": 0.20502163652197275
+    },
+    "scalars": {
+      "powerlaw_alpha": {
+        "real": 4.102382391989304,
+        "synth": 2.6679629572710386
+      },
+      "burstiness_b": {
+        "real": 0.6759514580186051,
+        "synth": 0.4166475188584501
+      },
+      "memory_m": {
+        "real": 0.1559955291782991,
+        "synth": 0.33969746685072755
+      },
+      "clustering": {
+        "real": 0.13803890790569384,
+        "synth": 0.08394673339668776
+      },
+      "reciprocity": {
+        "real": 0.6363815530153725,
+        "synth": 0.12344006965270388
+      },
+      "repeat_edge_ratio": {
+        "real": 0.6608005348040444,
+        "synth": 0.8285083862833253
+      },
+      "mean_degree": {
+        "real": 63.0173775671406,
+        "synth": 63.75145425700688
+      }
+    },
+    "C2ST": {
+      "auc": 0.9997235624999999,
+      "accuracy": 0.992125,
+      "discriminative_score": 0.9994471249999999
+    },
+    "t_c2st": 0.8
+  },
+  "finance_vs_email-Eu": {
+    "synth_edges": 332210,
+    "real_edges": 332334,
+    "t_load": 1.5,
+    "t_stats": 0.9,
+    "fidelity_score": 0.8033109457101564,
+    "ks": {
+      "out_degree": 0.2738336713995943,
+      "in_degree": 0.11460446247464504,
+      "total_degree": 0.295131845841785,
+      "inter_event_time": 0.370425
+    },
+    "scalars": {
+      "powerlaw_alpha": {
+        "real": 2.4543247918481454,
+        "synth": 2.5445811339633044
+      },
+      "burstiness_b": {
+        "real": 0.7832867760505704,
+        "synth": 0.4812348195294588
+      },
+      "memory_m": {
+        "real": 0.06345527215429418,
+        "synth": 0.36865312550511686
+      },
+      "clustering": {
+        "real": 0.4504508880519253,
+        "synth": 0.12993476313679275
+      },
+      "reciprocity": {
+        "real": 0.7112198644149385,
+        "synth": 0.28437418570311823
+      },
+      "repeat_edge_ratio": {
+        "real": 0.9249881143668719,
+        "synth": 0.9653442099876584
+      },
+      "mean_degree": {
+        "real": 674.105476673428,
+        "synth": 673.8539553752536
+      }
+    },
+    "C2ST": {
+      "auc": 0.9998582777777778,
+      "accuracy": 0.9949583333333333,
+      "discriminative_score": 0.9997165555555556
+    },
+    "t_c2st": 1.0
+  }
+}

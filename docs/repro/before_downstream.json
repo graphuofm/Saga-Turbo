@@ -1,0 +1,80 @@
+[
+ {
+  "domain": "finance",
+  "cmd": "/tmp/saga_base/target/release/saga generate --domain finance --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down/finance --quiet",
+  "n_nodes": 63694,
+  "n_edges": 200000,
+  "tgn_saga": 0.958,
+  "tgn_ba": 0.718,
+  "eb_saga": 0.826,
+  "eb_ba": 0.5,
+  "ebtw_saga": 0.701,
+  "status": "OK",
+  "wall_s": 327.5
+ },
+ {
+  "domain": "crypto",
+  "cmd": "/tmp/saga_base/target/release/saga generate --domain crypto --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down/crypto --quiet",
+  "n_nodes": 28889,
+  "n_edges": 200000,
+  "tgn_saga": 0.984,
+  "tgn_ba": 0.6,
+  "eb_saga": 0.925,
+  "eb_ba": 0.5,
+  "ebtw_saga": 0.867,
+  "status": "OK",
+  "wall_s": 338.7
+ },
+ {
+  "domain": "cyber",
+  "cmd": "/tmp/saga_base/target/release/saga generate --domain cyber --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down/cyber --quiet",
+  "n_nodes": 60627,
+  "n_edges": 200000,
+  "tgn_saga": 0.94,
+  "tgn_ba": 0.747,
+  "eb_saga": 0.793,
+  "eb_ba": 0.5,
+  "ebtw_saga": 0.683,
+  "status": "OK",
+  "wall_s": 268.8
+ },
+ {
+  "domain": "transport",
+  "cmd": "/tmp/saga_base/target/release/saga generate --domain transport --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down/transport --quiet",
+  "n_nodes": 48248,
+  "n_edges": 200000,
+  "tgn_saga": 0.986,
+  "tgn_ba": 0.686,
+  "eb_saga": 0.931,
+  "eb_ba": 0.5,
+  "ebtw_saga": 0.764,
+  "status": "OK",
+  "wall_s": 404.2
+ },
+ {
+  "domain": "ecommerce",
+  "cmd": "/tmp/saga_base/target/release/saga generate --domain ecommerce --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down/ecommerce --quiet",
+  "n_nodes": 64957,
+  "n_edges": 200000,
+  "tgn_saga": 0.943,
+  "tgn_ba": 0.688,
+  "eb_saga": 0.697,
+  "eb_ba": 0.5,
+  "ebtw_saga": 0.597,
+  "status": "OK",
+  "wall_s": 348.7
+ },
+ {
+  "domain": "healthcare",
+  "cmd": "/tmp/saga_base/target/release/saga generate --domain healthcare --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down/healthcare --quiet",
+  "n_nodes": 26162,
+  "n_edges": 200000,
+  "tgn_saga": 0.972,
+  "tgn_ba": 0.667,
+  "eb_saga": 0.883,
+  "eb_ba": 0.5,
+  "ebtw_saga": 0.777,
+  "status": "OK",
+  "wall_s": 403.3
+ }
+]

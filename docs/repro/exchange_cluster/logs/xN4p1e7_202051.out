@@ -1,0 +1,10 @@
+job 202051 nodes itiger[01-03] N=4 EDGES=10000000 TAG=x4p3n_1e7 POKE=1 NN=3 TPN=2
+itiger01
+itiger02
+itiger03
+itiger02:  AMD EPYC 7513 32-Core Processor | 8 cpus | load 8.45 7.66 7.55 | ib: 200 Gb/sec (4X HDR) mlx5_0  | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,
+itiger01:  AMD EPYC 9334 32-Core Processor | 8 cpus | load 24.96 24.56 24.35 | ib: 200 Gb/sec (4X HDR) mlx5_0  | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,
+itiger03:  AMD EPYC 7513 32-Core Processor | 8 cpus | load 5.32 3.62 2.67 | ib: 200 Gb/sec (4X HDR) mlx5_0  | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 202051.1 ON itiger01 CANCELLED AT 2026-08-21T07:00:19 ***
+slurmstepd: error: *** JOB 202051 ON itiger01 CANCELLED AT 2026-08-21T07:00:19 ***

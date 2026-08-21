@@ -1,0 +1,9 @@
+job 202108 nodes itiger[01-03] N=4 EDGES=1000000 TAG=x16_n4_3n NN=3
+itiger01
+itiger02
+itiger03
+itiger02: load 7.19 6.39 6.21 | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo
+itiger01: load 6.34 3.52 6.63 | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo
+itiger03: load 4.10 3.90 4.01 | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo
+slurmstepd: error: *** JOB 202108 ON itiger01 CANCELLED AT 2026-08-21T07:45:47 ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.

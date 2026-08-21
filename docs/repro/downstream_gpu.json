@@ -1,0 +1,284 @@
+{
+  "config": {
+    "tab:downmulti": "saga generate --domain <D> --edges 200000 --seed <S> (default anomaly rate); BA size-matched to that SAGA graph (n, m, span) via saga_eval.baselines.gen_ba, uniform-random timestamps",
+    "tab:downstream": "saga generate --domain finance --nodes 1899 --edges 59835 --time-span 193.7057986 --seed <S>; real = SNAP CollegeMsg; BA matched to real (n=1899, m=59835, span)",
+    "tgn": "saga_eval.tgn_eval.run_tgn UNMODIFIED (6 epochs, mem_dim=64, batch=200). NOTE: run_tgn hardcodes device=cpu, so the GPU was allocated but unused; cells were parallelised across CPU cores instead.",
+    "edgebank": "saga_eval.downstream_extra.run_edgebank UNMODIFIED; EdgeBank_inf reported",
+    "seeds": "5 seeds (0-4); seed drives BOTH graph generation and model/negative sampling",
+    "metric": "test AP, mean +/- sample std (ddof=1) over seeds"
+  },
+  "downmulti": {
+    "finance": {
+      "ts": {
+        "mean": 0.9485785327814898,
+        "std": 0.0012417939994167665,
+        "n_seeds": 5
+      },
+      "tb": {
+        "mean": 0.7415322162853787,
+        "std": 0.00849012080903695,
+        "n_seeds": 5
+      },
+      "es": {
+        "mean": 0.7939620213887572,
+        "std": 0.002436657015062855,
+        "n_seeds": 5
+      },
+      "eb": {
+        "mean": 0.5,
+        "std": 0.0,
+        "n_seeds": 5
+      },
+      "repeat_edge_fraction_saga": 0.5251849980388371,
+      "repeat_edge_fraction_ba": 0.0,
+      "pre_fix_published": {
+        "tgn_saga": 0.956,
+        "tgn_ba": 0.725,
+        "eb_saga": 0.825,
+        "eb_ba": 0.5
+      }
+    },
+    "crypto": {
+      "ts": {
+        "mean": 0.982072077807538,
+        "std": 0.000532182270225996,
+        "n_seeds": 5
+      },
+      "tb": {
+        "mean": 0.697599936784161,
+        "std": 0.01796772465319715,
+        "n_seeds": 5
+      },
+      "es": {
+        "mean": 0.9165318746783025,
+        "std": 0.0022278300857699824,
+        "n_seeds": 5
+      },
+      "eb": {
+        "mean": 0.5,
+        "std": 0.0,
+        "n_seeds": 5
+      },
+      "repeat_edge_fraction_saga": 0.8142990027960437,
+      "repeat_edge_fraction_ba": 0.0,
+      "pre_fix_published": {
+        "tgn_saga": 0.985,
+        "tgn_ba": 0.659,
+        "eb_saga": 0.925,
+        "eb_ba": 0.5
+      }
+    },
+    "cyber": {
+      "ts": {
+        "mean": 0.923509203011838,
+        "std": 0.0024669455886069617,
+        "n_seeds": 5
+      },
+      "tb": {
+        "mean": 0.7419719341050298,
+        "std": 0.015114035974107804,
+        "n_seeds": 5
+      },
+      "es": {
+        "mean": 0.7564732035264636,
+        "std": 0.003253379426086236,
+        "n_seeds": 5
+      },
+      "eb": {
+        "mean": 0.5,
+        "std": 0.0,
+        "n_seeds": 5
+      },
+      "repeat_edge_fraction_saga": 0.524781343233105,
+      "repeat_edge_fraction_ba": 0.0,
+      "pre_fix_published": {
+        "tgn_saga": 0.941,
+        "tgn_ba": 0.702,
+        "eb_saga": 0.793,
+        "eb_ba": 0.5
+      }
+    },
+    "transport": {
+      "ts": {
+        "mean": 0.9864777385272478,
+        "std": 0.0006315018144865407,
+        "n_seeds": 5
+      },
+      "tb": {
+        "mean": 0.7134621056291512,
+        "std": 0.03832024855316655,
+        "n_seeds": 5
+      },
+      "es": {
+        "mean": 0.9247632819201496,
+        "std": 0.0019773282727634537,
+        "n_seeds": 5
+      },
+      "eb": {
+        "mean": 0.5,
+        "std": 0.0,
+        "n_seeds": 5
+      },
+      "repeat_edge_fraction_saga": 0.7143931590559338,
+      "repeat_edge_fraction_ba": 0.0,
+      "pre_fix_published": {
+        "tgn_saga": 0.986,
+        "tgn_ba": 0.727,
+        "eb_saga": 0.931,
+        "eb_ba": 0.5
+      }
+    },
+    "ecommerce": {
+      "ts": {
+        "mean": 0.9411967970920136,
+        "std": 0.0018538417295563567,
+        "n_seeds": 5
+      },
+      "tb": {
+        "mean": 0.726716051460363,
+        "std": 0.009355335310304308,
+        "n_seeds": 5
+      },
+      "es": {
+        "mean": 0.69163651474023,
+        "std": 0.003422586976568213,
+        "n_seeds": 5
+      },
+      "eb": {
+        "mean": 0.5,
+        "std": 0.0,
+        "n_seeds": 5
+      },
+      "repeat_edge_fraction_saga": 0.32546899085900166,
+      "repeat_edge_fraction_ba": 0.0,
+      "pre_fix_published": {
+        "tgn_saga": 0.943,
+        "tgn_ba": 0.703,
+        "eb_saga": 0.697,
+        "eb_ba": 0.5
+      }
+    },
+    "healthcare": {
+      "ts": {
+        "mean": 0.9736583167270325,
+        "std": 0.0013318289939151346,
+        "n_seeds": 5
+      },
+      "tb": {
+        "mean": 0.6691925654597453,
+        "std": 0.024769784047414586,
+        "n_seeds": 5
+      },
+      "es": {
+        "mean": 0.8770194859344465,
+        "std": 0.0011984281572135962,
+        "n_seeds": 5
+      },
+      "eb": {
+        "mean": 0.5,
+        "std": 0.0,
+        "n_seeds": 5
+      },
+      "repeat_edge_fraction_saga": 0.687802819380477,
+      "repeat_edge_fraction_ba": 0.0,
+      "pre_fix_published": {
+        "tgn_saga": 0.972,
+        "tgn_ba": 0.664,
+        "eb_saga": 0.883,
+        "eb_ba": 0.5
+      }
+    },
+    "_mean_over_domains": {
+      "ts": 0.95924877765786,
+      "tb": 0.7150791349539715,
+      "es": 0.8267310636980582,
+      "eb": 0.5
+    }
+  },
+  "downstream": {
+    "real": {
+      "TGN (learned)": {
+        "mean": 0.8340792816471321,
+        "std": 0.01128528266879839,
+        "n_seeds": 5
+      },
+      "EdgeBank_inf": {
+        "mean": 0.7651580454598041,
+        "std": 0.0010738235767835025,
+        "n_seeds": 5
+      },
+      "EdgeBank_tw": {
+        "mean": 0.7414363461130971,
+        "std": 0.00040148595449190954,
+        "n_seeds": 5
+      },
+      "repeat_edge_fraction": {
+        "mean": 0.6608005348040444,
+        "std": 0.0,
+        "n_seeds": 5
+      }
+    },
+    "saga": {
+      "TGN (learned)": {
+        "mean": 0.9390340364215255,
+        "std": 0.010419473997832822,
+        "n_seeds": 5
+      },
+      "EdgeBank_inf": {
+        "mean": 0.9452201356899319,
+        "std": 0.0031595847569915493,
+        "n_seeds": 5
+      },
+      "EdgeBank_tw": {
+        "mean": 0.8485102983857156,
+        "std": 0.0057041487557088185,
+        "n_seeds": 5
+      },
+      "repeat_edge_fraction": {
+        "mean": 0.8306057228343254,
+        "std": 0.0025460089655483615,
+        "n_seeds": 5
+      }
+    },
+    "ba": {
+      "TGN (learned)": {
+        "mean": 0.5707977804456175,
+        "std": 0.04744314055252002,
+        "n_seeds": 5
+      },
+      "EdgeBank_inf": {
+        "mean": 0.5,
+        "std": 0.0,
+        "n_seeds": 5
+      },
+      "EdgeBank_tw": {
+        "mean": 0.5,
+        "std": 0.0,
+        "n_seeds": 5
+      },
+      "repeat_edge_fraction": {
+        "mean": 0.0,
+        "std": 0.0,
+        "n_seeds": 5
+      }
+    }
+  },
+  "verdict": {
+    "TGN": {
+      "saga_mean": 0.9390340364215255,
+      "real_mean": 0.8340792816471321,
+      "gap_post_fix": 0.10495475477439342,
+      "gap_pre_fix": 0.09999999999999998,
+      "direction": "WIDENED",
+      "interpretation": "SAGA easier than real"
+    },
+    "EdgeBank_inf": {
+      "saga_mean": 0.9452201356899319,
+      "real_mean": 0.7651580454598041,
+      "gap_post_fix": 0.18006209023012776,
+      "gap_pre_fix": 0.17799999999999994,
+      "direction": "WIDENED",
+      "interpretation": "SAGA easier than real"
+    }
+  }
+}

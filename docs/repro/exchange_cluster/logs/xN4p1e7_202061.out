@@ -1,0 +1,81 @@
+job 202061 nodes itiger[01-02] N=4 EDGES=10000000 TAG=x4p2n_1e7 POKE=1 NN=2 TPN=1
+itiger01
+itiger02
+itiger02:  AMD EPYC 7513 32-Core Processor | 8 cpus | load 6.39 6.18 6.82 | ib: 200 Gb/sec (4X HDR) mlx5_0  | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,
+itiger01:  AMD EPYC 9334 32-Core Processor | 8 cpus | load 1.74 12.71 20.03 | ib: 200 Gb/sec (4X HDR) mlx5_0  | nfs /project: rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,
+rep1 srun_wall 10.8905
+0 itiger01 1787296281.718609006 1787296290.902385321 0 9.18378
+1 itiger01 1787296281.719254017 1787296290.900950407 0 9.1817
+2 itiger01 1787296281.718317045 1787296290.900924817 0 9.18261
+3 itiger02 1787296281.624271003 1787296290.874285225 0 9.25001
+xchg leftover: 0 files; dir exists: no
+rep2 srun_wall 10.8732
+0 itiger01 1787296292.652423626 1787296301.878194797 0 9.22577
+1 itiger01 1787296292.652837997 1787296301.875349624 0 9.22251
+2 itiger01 1787296292.651995575 1787296301.875192544 0 9.2232
+3 itiger02 1787296292.554111165 1787296301.876337306 0 9.32223
+xchg leftover: 0 files; dir exists: no
+rep1 digest:
+   "edges": 2213289,
+   "edge_digest": "b633b0984741b52303688144852f50ad41426eaefbaa2f0a63412341b4a8535b",
+   "nodes": 250000,
+   "node_digest": "301064f3cdbf2ad371fd93d5e7410c5c79a5c707d5c03952dcea0fc88179ca52",
+   "node_slice_equals_ref": true
+   "edges": 2231847,
+   "edge_digest": "a542cbb1c38de91b56e364d4480f24b24661c9df010ecd7ab4497d0d049d1c51",
+   "nodes": 250000,
+   "node_digest": "3ddd4c8009239a93585ada678e59af49d01ae6fc0ae2e4195071359ddf8c48ce",
+   "node_slice_equals_ref": true
+   "edges": 2209316,
+   "edge_digest": "711d0bd1e5ad382f0a40ca4c71f0ee729625cf3689bf1c20bb6a74680904ac50",
+   "nodes": 250000,
+   "node_digest": "f832a0658950312cdc08766d37a2f5251070aa859745d5c7fb95ee0bd90f1634",
+   "node_slice_equals_ref": true
+   "edges": 2203847,
+   "edge_digest": "7926c7567145571b58b379d9c465291a73c8635632656ba990397c75bb6cb478",
+   "nodes": 250000,
+   "node_digest": "10dcb91facaf73173433735f5232387af64cd0d4282b013509cc7b71184a5caf",
+   "node_slice_equals_ref": true
+  "edges": 8858299,
+  "edge_digest": "562786dc96f90f68d939bb8a2ddbf41d38835970a4f893520f6942583ff0e34f",
+  "nodes": 1000000,
+  "node_digest": "6f128c73d43112e649064ae77036ed078644641f6744384f1b2fda5a14163d70",
+  "shard_node_ids_disjoint": true
+  "edges": 8858299,
+  "edge_digest": "562786dc96f90f68d939bb8a2ddbf41d38835970a4f893520f6942583ff0e34f",
+  "nodes": 1000000,
+  "node_digest": "6f128c73d43112e649064ae77036ed078644641f6744384f1b2fda5a14163d70"
+ "edge_union_equals_ref": true,
+ "node_union_equals_ref": true,
+rep2 digest:
+   "edges": 2213289,
+   "edge_digest": "b633b0984741b52303688144852f50ad41426eaefbaa2f0a63412341b4a8535b",
+   "nodes": 250000,
+   "node_digest": "301064f3cdbf2ad371fd93d5e7410c5c79a5c707d5c03952dcea0fc88179ca52",
+   "node_slice_equals_ref": true
+   "edges": 2231847,
+   "edge_digest": "a542cbb1c38de91b56e364d4480f24b24661c9df010ecd7ab4497d0d049d1c51",
+   "nodes": 250000,
+   "node_digest": "3ddd4c8009239a93585ada678e59af49d01ae6fc0ae2e4195071359ddf8c48ce",
+   "node_slice_equals_ref": true
+   "edges": 2209316,
+   "edge_digest": "711d0bd1e5ad382f0a40ca4c71f0ee729625cf3689bf1c20bb6a74680904ac50",
+   "nodes": 250000,
+   "node_digest": "f832a0658950312cdc08766d37a2f5251070aa859745d5c7fb95ee0bd90f1634",
+   "node_slice_equals_ref": true
+   "edges": 2203847,
+   "edge_digest": "7926c7567145571b58b379d9c465291a73c8635632656ba990397c75bb6cb478",
+   "nodes": 250000,
+   "node_digest": "10dcb91facaf73173433735f5232387af64cd0d4282b013509cc7b71184a5caf",
+   "node_slice_equals_ref": true
+  "edges": 8858299,
+  "edge_digest": "562786dc96f90f68d939bb8a2ddbf41d38835970a4f893520f6942583ff0e34f",
+  "nodes": 1000000,
+  "node_digest": "6f128c73d43112e649064ae77036ed078644641f6744384f1b2fda5a14163d70",
+  "shard_node_ids_disjoint": true
+  "edges": 8858299,
+  "edge_digest": "562786dc96f90f68d939bb8a2ddbf41d38835970a4f893520f6942583ff0e34f",
+  "nodes": 1000000,
+  "node_digest": "6f128c73d43112e649064ae77036ed078644641f6744384f1b2fda5a14163d70"
+ "edge_union_equals_ref": true,
+ "node_union_equals_ref": true,

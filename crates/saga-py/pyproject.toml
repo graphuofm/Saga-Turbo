@@ -1,0 +1,24 @@
+[build-system]
+requires = ["maturin>=1.5"]
+build-backend = "maturin"
+
+[project]
+name = "saga"
+description = "SAGA: agent-based-simulation graph benchmark generator (PyO3 bindings)."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "Jiacheng Ding", email = "jding2@memphis.edu" }, { name = "Xiaofei Zhang", email = "xiaofei.zhang@memphis.edu" }]
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+]
+dynamic = ["version"]
+dependencies = ["numpy>=1.21"]
+
+[project.urls]
+Repository = "https://github.com/graphuofm/SAGA2.0"
+
+[tool.maturin]
+# The wheel's import name is `saga`, matching the `#[pymodule] fn saga`.
+module-name = "saga"
+features = ["pyo3/extension-module"]
