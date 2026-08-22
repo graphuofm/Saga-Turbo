@@ -1,4 +1,4 @@
-# SAGA: deterministic parallel generation of labeled temporal graph benchmarks
+# SAGA 2.0
 
 SAGA (Synthetic Agentic Graph Architecture) generates large, attributed,
 time-stamped graphs with exact ground-truth anomaly labels by running an
@@ -137,15 +137,18 @@ workspace tests and `scripts/regress.sh` are self-contained.
 
 ## Citation
 
-Demo paper:
+This repository is SAGA 2.0, the full system. The earlier demonstration (SAGA, VLDB 2026 demo track):
 
 ```bibtex
 @article{ding2026saga,
-  author  = {Jiacheng Ding and Xiaofei Zhang},
-  title   = {{SAGA}: Synthetic Agentic Graph Architecture for Temporal Benchmark Generation},
-  journal = {Proceedings of the VLDB Endowment (PVLDB), Demo Track},
-  volume  = {19},
-  year    = {2026}
+  author    = {Jiacheng Ding and Xiaofei Zhang},
+  title     = {{SAGA}: Synthetic Agentic Graph Architecture for Temporal Benchmark Generation},
+  journal   = {Proceedings of the VLDB Endowment},
+  volume    = {19},
+  number    = {12},
+  pages     = {4834--4837},
+  year      = {2026},
+  doi       = {10.14778/3827998.3828134}
 }
 ```
 
