@@ -1,4 +1,5 @@
 [package]
+license-file = "../../LICENSE"
 name = "saga-cli"
 description = "The saga command-line interface"
 version.workspace = true

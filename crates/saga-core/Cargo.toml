@@ -1,4 +1,5 @@
 [package]
+license-file = "../../LICENSE"
 name = "saga-core"
 description = "Discrete-event simulation engine: world state, behavior/adversary/failure processes, intent labeling"
 version.workspace = true

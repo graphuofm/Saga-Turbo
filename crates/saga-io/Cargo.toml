@@ -1,4 +1,5 @@
 [package]
+license-file = "../../LICENSE"
 name = "saga-io"
 description = "Streaming shard writers: Parquet / CSV / GraphML"
 version.workspace = true

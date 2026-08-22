@@ -3,6 +3,7 @@ requires = ["maturin>=1.5"]
 build-backend = "maturin"
 
 [project]
+license = { file = "../../LICENSE" }
 name = "saga"
 description = "SAGA: agent-based-simulation graph benchmark generator (PyO3 bindings)."
 readme = "README.md"

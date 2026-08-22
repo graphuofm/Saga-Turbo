@@ -1,4 +1,5 @@
 [package]
+license-file = "../../LICENSE"
 name = "saga-sample"
 description = "Seeded, splittable RNG and O(1) samplers (alias tables, standard distributions) for bit-reproducible parallel runs"
 version.workspace = true

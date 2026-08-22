@@ -1,4 +1,5 @@
 [package]
+license-file = "../../LICENSE"
 name = "saga-introspect"
 description = "Single-pass streaming statistics, sketches (HLL/CM/KLL/reservoir) and system self-metrics"
 version.workspace = true

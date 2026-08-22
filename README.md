@@ -157,7 +157,7 @@ submission.
 - Jiacheng Ding, University of Memphis, jding2@memphis.edu
 - Xiaofei Zhang, University of Memphis, xiaofei.zhang@memphis.edu
 
-License: to be chosen by the authors.
+License: all rights reserved. No license is granted beyond the rights GitHub requires to host and display this repository; see LICENSE.
 
 ## Acknowledgement
 

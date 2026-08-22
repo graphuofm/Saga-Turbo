@@ -1,4 +1,5 @@
 [package]
+license-file = "../../LICENSE"
 name = "saga-host"
 description = "Host capability auto-probe, adaptive configuration and the dry-run cost model"
 version.workspace = true

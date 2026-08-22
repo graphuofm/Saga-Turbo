@@ -15,7 +15,7 @@ members = [
 [workspace.package]
 version = "0.1.0"
 edition = "2021"
-# license: to be chosen by the authors
+# License: all rights reserved; see LICENSE (workspace crates use license-file)
 repository = "https://github.com/graphuofm/SAGA2.0"
 authors = ["Jiacheng Ding <jding2@memphis.edu>", "Xiaofei Zhang <xiaofei.zhang@memphis.edu>"]
 
