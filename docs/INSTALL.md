@@ -57,7 +57,7 @@ chmod +x saga && ./saga doctor
 ## Option 3 — build from source (Rust)
 
 ```bash
-git clone https://github.com/graphuofm/SAGA2.0 && cd SAGA2.0
+git clone https://github.com/graphuofm/Saga-Turbo && cd Saga-Turbo
 cargo build --release            # binary at target/release/saga
 ./target/release/saga doctor
 # or install onto PATH:

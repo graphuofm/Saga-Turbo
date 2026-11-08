@@ -17,7 +17,7 @@ dynamic = ["version"]
 dependencies = ["numpy>=1.21"]
 
 [project.urls]
-Repository = "https://github.com/graphuofm/SAGA2.0"
+Repository = "https://github.com/graphuofm/Saga-Turbo"
 
 [tool.maturin]
 # The wheel's import name is `saga`, matching the `#[pymodule] fn saga`.

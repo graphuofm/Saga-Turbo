@@ -17,7 +17,7 @@ rule-extraction harness) wraps the same engine.
 Requires stable Rust 1.80+ and, for the Python wheel, Python 3.9+ and maturin.
 
 ```bash
-git clone https://github.com/graphuofm/SAGA2.0 && cd SAGA2.0
+git clone https://github.com/graphuofm/Saga-Turbo && cd Saga-Turbo
 cargo build --release                 # binary at target/release/saga
 
 # optional: Python wheel (import name: saga)
