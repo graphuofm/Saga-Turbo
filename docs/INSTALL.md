@@ -1,6 +1,6 @@
-# Installing SAGA
+# Installing Saga Turbo
 
-SAGA is self-contained: a native Rust core with no runtime services. It runs
+Saga Turbo is self-contained: a native Rust core with no runtime services. It runs
 identically on a 16 GB laptop and an 80 GB H100 node — only the *feasible
 scale* differs, and `saga doctor` tells you what that is (§13).
 
@@ -57,7 +57,7 @@ chmod +x saga && ./saga doctor
 ## Option 3 — build from source (Rust)
 
 ```bash
-git clone https://github.com/graphuofm/SAGA2.0 && cd SAGA
+git clone https://github.com/graphuofm/SAGA2.0 && cd SAGA2.0
 cargo build --release            # binary at target/release/saga
 ./target/release/saga doctor
 # or install onto PATH:
@@ -76,5 +76,5 @@ saga stats out                               # introspection summary
 ```
 
 `saga generate --dry-run` estimates time, RAM and disk *before* running so you
-commit with eyes open; if a request can't fit the host, SAGA refuses with an
+commit with eyes open; if a request can't fit the host, Saga Turbo refuses with an
 actionable message and a suggested feasible scale rather than OOM-ing.

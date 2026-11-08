@@ -104,7 +104,11 @@ fn read_csv(path: &Path, f: &mut dyn FnMut(ReadBatch) -> anyhow::Result<()>) -> 
         "`{}` does not look like a SAGA edges CSV",
         path.display()
     );
-    let attr_cols: Vec<String> = cols[6..].to_vec();
+    let mut attr_cols: Vec<String> = cols[6..].to_vec();
+    // The trailing end-time column is a timestamp, not an attribute.
+    if attr_cols.last().is_some_and(|c| c == "t_end") {
+        attr_cols.pop();
+    }
 
     const BATCH: usize = 65_536;
     let mut batch = new_batch(&attr_cols);

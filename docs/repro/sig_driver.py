@@ -7,7 +7,7 @@ import pyarrow.parquet as pq
 from saga_eval.load import load_saga
 from saga_eval.stats import compute_stats
 
-SP = "./scratch/ds"
+SP = "$WORK/ds"
 DOMAINS = ["finance", "crypto", "cyber", "transport", "ecommerce", "healthcare"]
 BASE_COLS = {"src", "dst", "t", "event_type", "label", "anomaly_id"}
 

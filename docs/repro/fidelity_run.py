@@ -5,7 +5,7 @@ import sys, time, json
 sys.path.insert(0, "./python")
 from saga_eval import load, stats as st, compare as cmp, metrics_advanced as adv
 
-SC = "./scratch"
+SC = "$WORK"
 RD = "./realdata"
 
 JOBS = [

@@ -11,7 +11,7 @@ from saga_eval.tgn_eval import run_tgn
 from saga_eval.downstream_extra import run_edgebank
 from saga_eval.baselines import gen_ba
 
-DS = "./scratch/ds"
+DS = "$WORK/ds"
 DOMAINS = ["finance", "crypto", "cyber", "transport", "ecommerce", "healthcare"]
 K = 200_000  # time-prefix subsample so CPU TGN is tractable
 

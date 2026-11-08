@@ -25,7 +25,7 @@ from saga_eval.deep_gen import fit_generate
 from saga_eval.tabular_gen import ctgan_generate, tvae_generate
 
 HOME = os.path.expanduser("~")
-SP = "./scratch/lrn_after"
+SP = "$WORK/lrn_after"
 BIN = "./target/release/saga"
 NODE_CAP = 2500
 GEN_TIMEOUT = 2400   # per learned generator (TIGGER/CTGAN/TVAE); prev run hung with no cap
@@ -51,10 +51,10 @@ def time_limit(seconds, label):
 
 
 PAIRS = [
-    ("finance",   "email-Eu",    f"./realdata/snap-email-eu/email-Eu-core-temporal.txt", {}),
+    ("finance",   "email-Eu",    f"{HOME}/saga-sigmod/realdata/snap-email-eu/email-Eu-core-temporal.txt", {}),
     ("crypto",    "wiki-talk",   f"{HOME}/.cache/zord/wiki-talk-temporal.txt.gz", {}),
     ("cyber",     "sx-superuser",f"{HOME}/.cache/zord/sx-superuser.txt.gz", {}),
-    ("ecommerce", "tgbl-review", f"./realdata/tgbl-review/tgbl-review_edgelist_v2.csv",
+    ("ecommerce", "tgbl-review", f"{HOME}/saga-sigmod/realdata/tgbl-review/tgbl-review_edgelist_v2.csv",
                     dict(src_col="source", dst_col="target", t_col="ts")),
     ("transport", "sx-askubuntu",f"{HOME}/.cache/zord/sx-askubuntu.txt.gz", {}),
     ("healthcare","sx-mathoverflow",f"{HOME}/.cache/zord/sx-mathoverflow.txt.gz", {}),

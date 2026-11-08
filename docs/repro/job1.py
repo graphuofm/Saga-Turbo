@@ -1,7 +1,7 @@
 import json, os, shutil, subprocess, sys, time
 
 BIN = "./target/release/saga"
-SCR = "./scratch"
+SCR = "$WORK"
 DOMAINS = ["finance", "crypto", "cyber", "transport", "ecommerce", "healthcare"]
 PIS = [0.005, 0.01, 0.02, 0.05, 0.10]
 EDGES = 100_000_000

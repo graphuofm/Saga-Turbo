@@ -145,7 +145,7 @@ add("healthcare","doctor_shopping","prescriber_fanin","provider",0.0174,0.0580,"
 for s in S:
     s["current_k_absurd_flag"] = bool(s["current_k"][1] < 1.0)
 
-json.dump({"stages":S}, open('./scratch/grounded_rates.json','w'), indent=2)
+json.dump({"stages":S}, open('$WORK/grounded_rates.json','w'), indent=2)
 from collections import Counter
 print(len(S), Counter(s['classification'] for s in S))
 print("k<1 everywhere:", sum(1 for s in S if s['current_k_absurd_flag']))

@@ -15,7 +15,7 @@ import time
 import numpy as np
 import pyarrow.parquet as papq
 
-SP = "./scratch"
+SP = "$WORK"
 sys.path.insert(0, os.path.join(SP, "pin"))
 from saga_eval import stats as st  # noqa: E402
 

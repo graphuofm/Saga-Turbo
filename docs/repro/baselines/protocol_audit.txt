@@ -1,0 +1,25 @@
+real edges 59835 saga edges 59014
+
+########## timestamp protocol: uniform ##########
+=== generator comparison vs CollegeMsg (real) ===
+generator            edges  m.deg  clust  recip  burst  alpha motifL1  disc  fidel  T A L
+real (reference)     59835   63.0  0.138  0.636  0.676   4.10   0.000 0.000  1.000  Y Y Y
+SAGA (ours)          59014   62.3  0.086  0.122  0.415   2.54   1.411 0.999  0.795  Y Y Y
+Erdos-Renyi          59835   63.0  0.033  0.015 -0.001  15.83     n/a 1.000  0.558  Y . .
+Barabasi-Albert      59744   62.9  0.084  0.000  0.300   2.92     n/a 0.995  0.642  Y . .
+R-MAT                59835   58.7  0.184  0.101  0.311   2.52     n/a 0.997  0.705  Y . .
+config model         59835   63.0  0.388  0.190 -0.000   4.10   1.416 0.915  0.816  Y . .
+Watts-Strogatz       60768   64.0  0.543  0.000  0.691  25.51     n/a 1.000  0.557  Y . .
+  T=temporal A=attributes L=anomaly-labels;  disc/motifL1/fidel are vs real
+
+########## timestamp protocol: renewal ##########
+=== generator comparison vs CollegeMsg (real) ===
+generator            edges  m.deg  clust  recip  burst  alpha motifL1  disc  fidel  T A L
+real (reference)     59835   63.0  0.138  0.636  0.676   4.10   0.000 0.000  1.000  Y Y Y
+SAGA (ours)          59014   62.3  0.086  0.122  0.415   2.54   1.411 0.999  0.795  Y Y Y
+Erdos-Renyi          59835   63.0  0.033  0.015  0.751  15.83     n/a 1.000  0.578  Y . .
+Barabasi-Albert      59744   62.9  0.084  0.000  0.305   2.92     n/a 0.995  0.643  Y . .
+R-MAT                59835   58.7  0.184  0.101  0.313   2.52     n/a 0.997  0.707  Y . .
+config model         59835   63.0  0.388  0.190  0.750   4.10   1.416 0.928  0.836  Y . .
+Watts-Strogatz       60768   64.0  0.543  0.000  0.692  25.51     n/a 1.000  0.564  Y . .
+  T=temporal A=attributes L=anomaly-labels;  disc/motifL1/fidel are vs real

@@ -1,6 +1,6 @@
 import json, numpy as np
 
-S = "./scratch"
+S = "$WORK"
 raw = json.load(open(f"{S}/gpi_raw.json"))
 DOMAINS = ["finance", "crypto", "cyber", "transport", "ecommerce", "healthcare"]
 PIS = [0.005, 0.01, 0.02, 0.05, 0.10]

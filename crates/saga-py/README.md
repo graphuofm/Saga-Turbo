@@ -1,4 +1,4 @@
-# SAGA (Python bindings)
+# Saga Turbo (Python bindings)
 
 Agent-based-simulation graph benchmark generator. `pip install saga`, then:
 

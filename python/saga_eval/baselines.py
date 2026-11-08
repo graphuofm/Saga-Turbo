@@ -29,8 +29,45 @@ Arrays = Tuple[np.ndarray, np.ndarray, np.ndarray]
 # --------------------------------------------------------------------------- #
 # Classical generators -> (src, dst, t). Timestamps are uniform over the span.
 # --------------------------------------------------------------------------- #
+# Timestamp protocol for the static generators. `uniform` is the naive
+# treatment: draw m timestamps uniformly over the real span, so only one real
+# scalar (the span) is used. `renewal` is the matched-marginal treatment: draw
+# inter-event gaps by bootstrap from the real inter-event distribution, so the
+# baseline is handed the real inter-event marginal outright. The second protocol
+# gives the static baselines strictly more information about the target than
+# SAGA receives, and is reported so that the comparison is not read as an
+# artifact of a weak timestamp assignment.
+_TIME_PROTOCOL = "uniform"
+_REAL_GAPS: np.ndarray | None = None
+
+
+def set_time_protocol(protocol: str, real_t: np.ndarray | None = None) -> None:
+    """Select `uniform` or `renewal`; `renewal` needs the real timestamps."""
+    global _TIME_PROTOCOL, _REAL_GAPS
+    if protocol not in ("uniform", "renewal"):
+        raise ValueError(f"unknown timestamp protocol {protocol!r}")
+    _TIME_PROTOCOL = protocol
+    if protocol == "renewal":
+        if real_t is None or real_t.size < 2:
+            raise ValueError("renewal protocol needs the real timestamps")
+        gaps = np.diff(np.sort(np.asarray(real_t, dtype=float)))
+        _REAL_GAPS = gaps[gaps > 0.0]
+        if _REAL_GAPS.size == 0:
+            raise ValueError("real timestamps have no positive gaps")
+    else:
+        _REAL_GAPS = None
+
+
 def _times(m: int, span: float, seed: int) -> np.ndarray:
-    return np.sort(np.random.default_rng(seed).uniform(0.0, max(span, 1.0), m))
+    rng = np.random.default_rng(seed)
+    if _TIME_PROTOCOL == "renewal" and _REAL_GAPS is not None and m > 0:
+        gaps = rng.choice(_REAL_GAPS, size=m, replace=True)
+        t = np.cumsum(gaps)
+        t -= t[0]
+        if t[-1] > 0.0:
+            t *= max(span, 1.0) / t[-1]
+        return t
+    return np.sort(rng.uniform(0.0, max(span, 1.0), m))
 
 
 def _orient(u: np.ndarray, v: np.ndarray, seed: int) -> Tuple[np.ndarray, np.ndarray]:
@@ -262,8 +299,10 @@ def _row(name: str, arr: Arrays, real_stats, has_sem: bool,
     }
 
 
-def compare_baselines(real: Arrays, saga: Arrays, seed: int = 42) -> List[Dict]:
+def compare_baselines(real: Arrays, saga: Arrays, seed: int = 42,
+                      time_protocol: str = "uniform") -> List[Dict]:
     rs, rd, rt = real
+    set_time_protocol(time_protocol, rt if time_protocol == "renewal" else None)
     n = int(np.unique(np.concatenate([rs, rd])).size)
     m = int(rs.size)
     span = float(rt.max() - rt.min()) if rt.size else 1.0

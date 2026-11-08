@@ -11,7 +11,7 @@ import numpy as np
 sys.path.insert(0, "./python")
 from saga_eval import stats as st
 
-SCRATCH = "./scratch"
+SCRATCH = "$WORK"
 ELL = "./realdata/elliptic-bitcoin"
 
 

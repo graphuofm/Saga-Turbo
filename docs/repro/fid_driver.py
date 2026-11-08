@@ -6,7 +6,7 @@ the tab:fidelity domain mapping. Every AGORA row generated seed 42, deleted afte
 import os, sys, json, shutil, subprocess, tempfile
 import numpy as np
 
-REPO = "./"
+REPO = "."
 sys.path.insert(0, os.path.join(REPO, "python"))
 from saga_eval import load, stats as st, compare as cmp
 
@@ -15,7 +15,7 @@ CAP = 2_500_000
 SEED = 42
 Z = os.path.expanduser("~/.cache/zord")
 RD = os.path.join(REPO, "realdata")
-SCRATCH = "./scratch"
+SCRATCH = "$WORK"
 
 # (row-label, domain, real loader spec)
 # loader spec: ("snap", path) or ("csv", path, src,dst,t)

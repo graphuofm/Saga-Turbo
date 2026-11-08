@@ -34,6 +34,8 @@ entity_types:
   # Externally-owned accounts: user wallets, exchange hot wallets, mixers, scams.
   - name: eoa
     population_weight: 0.86
+    # Node dynamics (--node-dynamics). Provenance: modeled, not sourced.
+    lifecycle: { initial_fraction: 0.4, lifetime_days: !log_normal { mu: 3.0, sigma: 1.5 } }
     attributes:
       - name: label
         kind: !categorical { values: [user, exchange, mixer, scam, mev_bot], weights: [0.88, 0.04, 0.01, 0.02, 0.05] }
@@ -58,6 +60,8 @@ entity_types:
   # Deployed smart contracts: ERC-20/721, DEX pools, lending, Ponzi, proxy.
   - name: contract
     population_weight: 0.09
+    # Node dynamics (--node-dynamics). Provenance: modeled, not sourced.
+    lifecycle: { initial_fraction: 0.6, lifetime_days: !log_normal { mu: 5.0, sigma: 1.5 } }
     attributes:
       - name: ctype
         kind: !categorical { values: [erc20, erc721, dex_pool, lending, ponzi, proxy], weights: [0.40, 0.22, 0.18, 0.08, 0.02, 0.10] }
@@ -72,6 +76,8 @@ entity_types:
   # Fungible/non-fungible token contracts (supply, holders, liquidity proxy).
   - name: token
     population_weight: 0.03
+    # Node dynamics (--node-dynamics). Provenance: modeled, not sourced.
+    lifecycle: { initial_fraction: 0.6, lifetime_days: !log_normal { mu: 5.0, sigma: 1.5 } }
     attributes:
       - name: standard
         kind: !categorical { values: [erc20, erc721, erc1155], weights: [0.70, 0.22, 0.08] }
@@ -86,6 +92,8 @@ entity_types:
   # AMM liquidity pools (reserves, price, LP supply) — the rug-pull surface.
   - name: liquidity_pool
     population_weight: 0.02
+    # Node dynamics (--node-dynamics). Provenance: modeled, not sourced.
+    lifecycle: { initial_fraction: 0.7, lifetime_days: !log_normal { mu: 4.5, sigma: 1.5 } }
     attributes:
       - name: pair_kind
         kind: !categorical { values: [stable_stable, blue_chip, long_tail], weights: [0.18, 0.32, 0.50] }

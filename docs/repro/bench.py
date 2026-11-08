@@ -4,7 +4,7 @@ from saga_eval.compare import compare, format_scorecard
 from saga_eval.tgn_eval import run_tgn
 
 # --- REAL (rescaled to nominal 1-day span for unit-comparability) ---
-z = np.load('./scratch/real-cyber.npz')
+z = np.load('/tmp/claude-real-cyber.npz')
 rs, rd, rt = z['src'].astype(np.int64), z['dst'].astype(np.int64), z['t'].astype(float)
 rt = (rt - rt.min())/(rt.max()-rt.min()) * 86400.0  # monotonic rescale to 1 day
 rt = rt.astype(np.int64)

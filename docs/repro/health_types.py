@@ -4,7 +4,7 @@ sys.path.insert(0, "./python")
 import numpy as np, pyarrow.parquet as papq
 HOME=os.path.expanduser("~")
 BIN="./target/release/saga"
-OUT="./scratch/health_out2"
+OUT="$WORK/health_out2"
 n,m,span=24818,506550,2350.34
 shutil.rmtree(OUT,ignore_errors=True)
 subprocess.run([BIN,"generate","--domain","healthcare","--nodes",str(n),"--edges",str(m),

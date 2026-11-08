@@ -3,7 +3,7 @@ from saga_eval.stats import compute_stats
 from saga_eval.compare import compare
 from saga_eval.tgn_eval import run_tgn
 
-SCRATCH = "./scratch"
+SCRATCH = "$WORK"
 
 # --- REAL ---
 real = np.load(f"{SCRATCH}/real.npy")

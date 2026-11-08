@@ -1,10 +1,10 @@
 import sys, os, time
-SP="./scratch"
+SP="$WORK"
 sys.path.insert(0, os.path.join(SP,"pin"))
 import numpy as np
 from saga_eval.load import load_saga
 from saga_eval.tgn_eval import run_tgn
-s,d,t = load_saga("./scratch/cal_work/crypto")
+s,d,t = load_saga("$WORK/cal_work/crypto")
 # prefix 200k
 K=200000
 order=np.argsort(t,kind="stable")[:K]; order=np.sort(order)

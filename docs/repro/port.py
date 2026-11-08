@@ -1,6 +1,6 @@
 import os
-MAIN="./"
-AGORA="../agora-anon"
+MAIN="."
+AGORA="$ARTIFACT"
 def rename(s): return s.replace("saga","agora").replace("SAGA","AGORA")
 
 files = [

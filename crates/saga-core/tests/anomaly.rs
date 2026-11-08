@@ -53,6 +53,7 @@ fn params(rb: RuleBase, seed: u64, rate: Option<f64>, difficulty: Option<f64>) -
         threads: 8,
         block_len_days: 1.0,
         guards_enabled: false,
+        state_behavior: false,
         anomaly_rate: rate,
         anomaly_difficulty: difficulty,
         anomaly_type_mix: Vec::new(),
@@ -64,6 +65,8 @@ fn params(rb: RuleBase, seed: u64, rate: Option<f64>, difficulty: Option<f64>) -
         exchange_dir: None,
         exchange_timeout_s: 300,
         calibrate_passes: 0,
+        node_dynamics: false,
+        state_trajectory: false,
     }
 }
 

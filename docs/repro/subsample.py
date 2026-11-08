@@ -33,4 +33,4 @@ print("ts_min", int(ts_w.min()), "ts_max", int(ts_w.max()))
 
 out = np.column_stack([src_r, dst_r, ts_w])
 np.save("./../scratch_real.npy", out) if False else None
-np.save("./scratch/real.npy", out)
+np.save("$WORK/real.npy", out)

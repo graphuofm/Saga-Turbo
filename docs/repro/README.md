@@ -3,7 +3,7 @@
 These are the measurement scripts and summary result files that produced the
 numbers in the camera-ready paper (the fixed engine). They are preserved here for
 audit and re-run; the authoritative protocol and before/after numbers live in
-`docs/PAPER_SPEC.md`, `docs/ENGINE_ISSUES.md`, and the `docs/remeasure_*.md`
+`docs/ENGINE_ISSUES.md`, and the `docs/remeasure_*.md`
 files. Multi-megabyte raw JSON dumps from the original session scratchpad were
 not copied; each script regenerates its own outputs from the fixed-engine binary
 (`./target/release/saga`) at seed 42.
@@ -17,7 +17,7 @@ for the side-by-side.
 | script(s) | metric / table | doc |
 |---|---|---|
 | `anom.py` | homophily = (both/out_edges)/(M/N), degree ratio, in/out (the anomaly-realism metric definitions) | remeasure_fidelity.md; ENGINE_ISSUES P1-a |
-| `measure_p1a.py` | P1-a homophily calibration sweep (2.25 -> 12.99 vs Elliptic 13.27) | ENGINE_ISSUES P1-a; PAPER_SPEC F3 |
+| `measure_p1a.py` | P1-a homophily calibration sweep (2.25 -> 12.99 vs Elliptic 13.27) | ENGINE_ISSUES P1-a |
 | `fid_final.py`, `fidelity_driver.py`, `fidelity_after.json` | 7-graph fidelity + B + recurrence | remeasure_fidelity.md, remeasure_tab_fidelity.md; tab:fidelity |
 | `remeasure_agora_row.py`, `job2_matrix_after.py` | fig_matrix AGORA row (final engine) | remeasure_matrix_agora.md; fig_matrix |
 | `diff.sh`, `run_diff.py`, `diff_results.csv` | difficulty AP + AUC sweep (finance; crypto for P2-b) | remeasure_diff_ap.md; tab:diff |

@@ -59,6 +59,12 @@ pub struct ParquetSink {
     /// (the one being filled is extra). Memory stays within that many
     /// encoded groups; the file order never depends on it.
     groups_in_flight: usize,
+    /// Per event type: the duration attribute, if any (see
+    /// `FormatSink::set_event_durations`); resolved to columns with the schema.
+    durations: Vec<Option<(String, f64)>>,
+    dur_cols: Option<Vec<Option<(usize, f64)>>>,
+    /// Open writers of auxiliary tables (`<name>.parquet`), closed in finish.
+    aux: Vec<(String, ArrowWriter<File>)>,
 }
 
 type ChunkResult = (usize, parquet::errors::Result<ArrowColumnChunk>);
@@ -270,6 +276,9 @@ impl ParquetSink {
             shard_idx: 0,
             shards_written: Vec::new(),
             groups_in_flight: 2,
+            aux: Vec::new(),
+            durations: Vec::new(),
+            dur_cols: None,
         })
     }
 
@@ -277,6 +286,11 @@ impl ParquetSink {
         WriterProperties::builder()
             .set_compression(Compression::ZSTD(ZstdLevel::try_new(1).expect("level 1 valid")))
             .build()
+    }
+
+    /// See [`crate::FormatSink::set_event_durations`].
+    pub fn set_event_durations(&mut self, durations: Vec<Option<(String, f64)>>) {
+        self.durations = durations;
     }
 
     fn ensure_schema(&mut self, batch: &EventBatch) {
@@ -305,6 +319,10 @@ impl ParquetSink {
         for (i, name) in batch.attr_names.iter().enumerate() {
             let ty = if col_dicts[i].is_some() { dict_ty.clone() } else { DataType::Float64 };
             fields.push(Field::new(name, ty, true));
+        }
+        if self.durations.iter().any(Option::is_some) {
+            fields.push(Field::new("t_end", DataType::Int64, false));
+            self.dur_cols = Some(crate::resolve_dur_cols(&self.durations, &batch.attr_names));
         }
         self.schema = Some(Arc::new(Schema::new(fields)));
         self.col_dicts = Some(col_dicts);
@@ -364,6 +382,9 @@ impl ParquetSink {
                 }
             }
         }
+        if let Some(dc) = &self.dur_cols {
+            cols.push(Arc::new(Int64Array::from(crate::end_times(b, dc))));
+        }
         Ok(RecordBatch::try_new(self.schema.clone().expect("set"), cols)?)
     }
 }
@@ -420,9 +441,49 @@ impl EventSink for ParquetSink {
         Ok(())
     }
 
+    fn write_table(&mut self, table: &saga_core::AuxTable) -> anyhow::Result<()> {
+        use saga_core::TableColumn;
+        if table.is_empty() {
+            return Ok(());
+        }
+        let dict_ty = DataType::Dictionary(Box::new(DataType::UInt16), Box::new(DataType::Utf8));
+        let mut fields = Vec::new();
+        let mut cols: Vec<ArrayRef> = Vec::new();
+        for (name, col) in &table.columns {
+            let (ty, arr): (DataType, ArrayRef) = match col {
+                TableColumn::U64(v) => (DataType::UInt64, Arc::new(UInt64Array::from(v.clone()))),
+                TableColumn::I64(v) => (DataType::Int64, Arc::new(Int64Array::from(v.clone()))),
+                TableColumn::F64(v) => {
+                    (DataType::Float64, Arc::new(arrow_array::Float64Array::from(v.clone())))
+                }
+                TableColumn::Category { codes, names } => {
+                    (dict_ty.clone(), dict_col(codes, names, codes.len()))
+                }
+            };
+            fields.push(Field::new(name, ty, false));
+            cols.push(arr);
+        }
+        let schema = Arc::new(Schema::new(fields));
+        let rb = RecordBatch::try_new(schema.clone(), cols)?;
+        let pos = match self.aux.iter().position(|(n, _)| n == &table.name) {
+            Some(p) => p,
+            None => {
+                let path = self.dir.join(format!("{}.parquet", table.name));
+                let w = ArrowWriter::try_new(File::create(&path)?, schema, Some(Self::props()))?;
+                self.aux.push((table.name.clone(), w));
+                self.aux.len() - 1
+            }
+        };
+        self.aux[pos].1.write(&rb)?;
+        Ok(())
+    }
+
     fn finish(&mut self) -> anyhow::Result<()> {
         if let Some(w) = self.writer.take() {
             w.close(self.groups_in_flight)?;
+        }
+        for (_, w) in self.aux.drain(..) {
+            w.close()?;
         }
         Ok(())
     }

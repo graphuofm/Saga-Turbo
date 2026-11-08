@@ -8,7 +8,7 @@ import numpy as np
 from saga_eval.load import load_real, load_saga
 from saga_eval import baselines as bl
 
-SP = "./scratch"
+SP = "$WORK"
 BIN = "./target/release/saga"
 REAL = "./realdata/snap-collegemsg/CollegeMsg.txt"
 

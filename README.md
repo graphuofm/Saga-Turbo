@@ -1,6 +1,6 @@
-# SAGA 2.0
+# Saga Turbo
 
-SAGA (Synthetic Agentic Graph Architecture) generates large, attributed,
+Saga Turbo generates large, attributed,
 time-stamped graphs with exact ground-truth anomaly labels by running an
 agent-based simulation whose rules are compiled from domain standards. The
 engine is a Rust workspace that executes the simulation in parallel under a
@@ -42,6 +42,20 @@ Consistency knobs on `saga generate`:
 | `--block-len-days L` | block length in days; state read inside a block is at most `L` days stale |
 | `--guards` | enforce cross-agent invariants (for example no overdraft) at block boundaries |
 | `--calibrate-under-guards` | re-calibrate anomaly rates so the labeled fraction is met with guards on |
+
+Graph-form switches on `saga generate` (all off by default; with them off the
+output is unchanged):
+
+| flag | meaning |
+|---|---|
+| `--node-dynamics` | apply the rulebase's node lifecycles: nodes are born in construction order and may die after a sampled lifetime; no edge touches a node outside its lifetime |
+| `--state-trajectory` | also write the `node_states` table: the initial state, then every state cell a block changed, stamped with the block end |
+| `--state-behavior` | let an agent's own state change its event rate and attribute samplers |
+
+Event types that declare a duration attribute (cyber flows, transport trips,
+healthcare prescriptions) also get a `t_end` column, and `labels_nodes.csv`
+lists every labeled node with its role (operator, member, affected). See
+`docs/OUTPUT.md` for the schemas.
 
 Sharded multi-process generation (N processes, one machine or several sharing
 a directory):
@@ -106,8 +120,7 @@ redistributed (see below).
 
 `docs/` contains the consistency model (`CONSISTENCY_MODEL.md`), the
 verification matrix mapping each claim to a test (`VERIFICATION_MATRIX.md`),
-the engine issue log (`ENGINE_ISSUES.md`), the paper-to-code specification
-(`PAPER_SPEC.md`), one `remeasure_*.md` note per re-measured result, and
+the engine issue log (`ENGINE_ISSUES.md`), one `remeasure_*.md` note per re-measured result, and
 `docs/repro/` with the scripts and raw JSON behind every number. Also in
 `docs/`: `ARCHITECTURE.md`, `INSTALL.md`, `OUTPUT.md`, `EVAL.md`,
 `EXPERIMENTS.md`, `BASELINES.md`, `VALIDATION.md`.
@@ -137,7 +150,7 @@ workspace tests and `scripts/regress.sh` are self-contained.
 
 ## Citation
 
-This repository is SAGA 2.0, the full system. The earlier demonstration (SAGA, VLDB 2026 demo track):
+This repository is Saga Turbo, the full system. The earlier demonstration (SAGA, VLDB 2026 demo track):
 
 ```bibtex
 @article{ding2026saga,

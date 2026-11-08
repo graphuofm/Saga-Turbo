@@ -1,7 +1,7 @@
 import json, os, re, shutil, subprocess, sys, time
 
 SAGA = "./target/release/saga"
-SCRATCH = "./scratch"
+SCRATCH = "$WORK"
 OUT = os.path.join(SCRATCH, "g_run")
 EDGES = 100_000_000
 DOMAINS = ["finance", "crypto", "cyber", "transport", "ecommerce", "healthcare"]

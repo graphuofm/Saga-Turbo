@@ -10,7 +10,7 @@ import subprocess
 import sys
 import time
 
-SP = "./scratch"
+SP = "$WORK"
 sys.path.insert(0, os.path.join(SP, "pin"))
 from saga_eval.detector import detect_auc  # noqa: E402
 

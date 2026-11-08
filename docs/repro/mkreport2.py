@@ -3,7 +3,7 @@
 Every column is read programmatically; nothing is transcribed by hand."""
 import json
 
-S = "./scratch"
+S = "$WORK"
 d = json.load(open(f"{S}/anomaly_validation_after2.json"))
 
 

@@ -90,7 +90,7 @@
  },
  "configs": {
   "A_matched": {
-   "cmd": "./target/release/saga generate --domain crypto --nodes 203769 --edges 234355 --time-span 49 --seed 42 --anomaly-rate 0.0223 --format parquet --out ./scratch/after2_A_matched --quiet",
+   "cmd": "./target/release/saga generate --domain crypto --nodes 203769 --edges 234355 --time-span 49 --seed 42 --anomaly-rate 0.0223 --format parquet --out $WORK/after2_A_matched --quiet",
    "edges_requested": 234355,
    "edges_actual": 230801,
    "anomalous_edges": 107,
@@ -99,7 +99,7 @@
    "status": "OK"
   },
   "B_1e7": {
-   "cmd": "./target/release/saga generate --domain crypto --nodes 203769 --edges 10000000 --time-span 49 --seed 42 --anomaly-rate 0.0223 --format parquet --out ./scratch/after2_B_1e7 --quiet",
+   "cmd": "./target/release/saga generate --domain crypto --nodes 203769 --edges 10000000 --time-span 49 --seed 42 --anomaly-rate 0.0223 --format parquet --out $WORK/after2_B_1e7 --quiet",
    "edges_requested": 10000000,
    "edges_actual": 9820224,
    "anomalous_edges": 4443,
@@ -174,7 +174,7 @@
    "n_anomalous_edges": 107,
    "anomalous_edge_rate": 0.00046360284400847484
   },
-  "cmd": "./target/release/saga generate --domain crypto --nodes 203769 --edges 234355 --time-span 49 --seed 42 --anomaly-rate 0.0223 --format parquet --out ./scratch/after2_A_matched --quiet",
+  "cmd": "./target/release/saga generate --domain crypto --nodes 203769 --edges 234355 --time-span 49 --seed 42 --anomaly-rate 0.0223 --format parquet --out $WORK/after2_A_matched --quiet",
   "wall_s": 4.4
  },
  "after2_cfgB_1e7": {
@@ -243,7 +243,7 @@
    "n_anomalous_edges": 4443,
    "anomalous_edge_rate": 0.00045243367157409036
   },
-  "cmd": "./target/release/saga generate --domain crypto --nodes 203769 --edges 10000000 --time-span 49 --seed 42 --anomaly-rate 0.0223 --format parquet --out ./scratch/after2_B_1e7 --quiet",
+  "cmd": "./target/release/saga generate --domain crypto --nodes 203769 --edges 10000000 --time-span 49 --seed 42 --anomaly-rate 0.0223 --format parquet --out $WORK/after2_B_1e7 --quiet",
   "wall_s": 45.5
  },
  "subgraph_fidelity_after2": {

@@ -5,7 +5,7 @@ BEFORE for downmulti is read programmatically from before_downstream.json
 value AND the pre-fix binary re-measured in this run's own controlled A/B."""
 import json
 
-S = "./scratch"
+S = "$WORK"
 L = []
 
 # ------------------------------------------------------------------ downstream

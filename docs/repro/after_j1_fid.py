@@ -11,7 +11,7 @@ import time
 
 import numpy as np
 
-SP = "./scratch"
+SP = "$WORK"
 sys.path.insert(0, "./python")
 from saga_eval.compare import compare  # noqa: E402
 from saga_eval.load import load_real, load_saga  # noqa: E402
@@ -24,13 +24,13 @@ CAP = 2_500_000
 os.makedirs(WORK, exist_ok=True)
 
 PAIRS = [
-    ("finance", "email-Eu", f"./realdata/snap-email-eu/email-Eu-core-temporal.txt", {}),
-    ("finance", "CollegeMsg", f"./realdata/snap-collegemsg/CollegeMsg.txt", {}),
+    ("finance", "email-Eu", f"{HOME}/saga-sigmod/realdata/snap-email-eu/email-Eu-core-temporal.txt", {}),
+    ("finance", "CollegeMsg", f"{HOME}/saga-sigmod/realdata/snap-collegemsg/CollegeMsg.txt", {}),
     ("crypto", "wiki-talk", f"{HOME}/.cache/zord/wiki-talk-temporal.txt.gz", {}),
     ("crypto", "sx-mathoverflow", f"{HOME}/.cache/zord/sx-mathoverflow.txt.gz", {}),
     ("cyber", "sx-superuser", f"{HOME}/.cache/zord/sx-superuser.txt.gz", {}),
     ("cyber", "sx-askubuntu", f"{HOME}/.cache/zord/sx-askubuntu.txt.gz", {}),
-    ("ecommerce", "tgbl-review", f"./realdata/tgbl-review/tgbl-review_edgelist_v2.csv",
+    ("ecommerce", "tgbl-review", f"{HOME}/saga-sigmod/realdata/tgbl-review/tgbl-review_edgelist_v2.csv",
      dict(src_col="source", dst_col="target", t_col="ts")),
 ]
 

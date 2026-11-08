@@ -15,19 +15,19 @@ from saga_eval.stats import compute_stats
 from saga_eval.compare import compare
 
 HOME = os.path.expanduser("~")
-SP = "./scratch/fidwork"
+SP = "$WORK/fidwork"
 BIN = "./target/release/saga"   # FINAL fixed engine
 CAP = 2_500_000
 os.makedirs(SP, exist_ok=True)
 
 PAIRS = [
-    ("finance",   "email-Eu",        f"./realdata/snap-email-eu/email-Eu-core-temporal.txt", {}),
-    ("finance",   "CollegeMsg",       f"./realdata/snap-collegemsg/CollegeMsg.txt", {}),
+    ("finance",   "email-Eu",        f"{HOME}/saga-sigmod/realdata/snap-email-eu/email-Eu-core-temporal.txt", {}),
+    ("finance",   "CollegeMsg",       f"{HOME}/saga-sigmod/realdata/snap-collegemsg/CollegeMsg.txt", {}),
     ("crypto",    "wiki-talk",        f"{HOME}/.cache/zord/wiki-talk-temporal.txt.gz", {}),
     ("crypto",    "sx-mathoverflow",  f"{HOME}/.cache/zord/sx-mathoverflow.txt.gz", {}),
     ("cyber",     "sx-superuser",     f"{HOME}/.cache/zord/sx-superuser.txt.gz", {}),
     ("cyber",     "sx-askubuntu",     f"{HOME}/.cache/zord/sx-askubuntu.txt.gz", {}),
-    ("ecommerce", "tgbl-review",      f"./realdata/tgbl-review/tgbl-review_edgelist_v2.csv",
+    ("ecommerce", "tgbl-review",      f"{HOME}/saga-sigmod/realdata/tgbl-review/tgbl-review_edgelist_v2.csv",
                     dict(src_col="source", dst_col="target", t_col="ts")),
 ]
 

@@ -1,7 +1,7 @@
 import json, shutil, subprocess, time
 
 BIN = "./target/release/saga"
-SCR = "./scratch"
+SCR = "$WORK"
 
 rows = []
 for dom in ["finance", "cyber"]:

@@ -348,13 +348,20 @@ pub fn plan(params: &GenParams, world: &World) -> anyhow::Result<AnomalyPlan> {
             let entity = actor_start + place_node(&control.placement, n_actors, &mut rng);
             let n_inc = sample_count(&mut rng, incidents_per_entity);
             for _ in 0..n_inc {
-                let (t0, t1) = place_window(
+                let (mut t0, mut t1) = place_window(
                     &control.placement,
                     params.epoch_unix,
                     span_s,
                     (dur_sampler.sample(&mut rng).max(0.01) * 86_400.0) as i64,
                     &mut rng,
                 );
+                // Node dynamics: an incident cannot start before its entity
+                // exists; shift it to the birth (same duration).
+                if !world.birth.is_empty() && t0 < world.birth[entity as usize] {
+                    let d = world.birth[entity as usize] - t0;
+                    t0 += d;
+                    t1 += d;
+                }
                 let id = next_id;
                 next_id += 1;
                 let span = FailureSpan { id, start_s: t0, end_s: t1, intent, mode: mode.clone() };
@@ -479,6 +486,25 @@ fn plan_campaign(
     }
     let (mut cursor, _) =
         place_window(&control.placement, params.epoch_unix, span_s, total_dur_s, rng);
+    // Node dynamics: a campaign can only recruit nodes that exist when it
+    // starts. Re-recruit (same placement, bounded retries) any member not
+    // alive at the start. Without node dynamics every node is alive and no
+    // rng is drawn, so the plan is unchanged.
+    if !world.birth.is_empty() {
+        for m in members.iter_mut() {
+            let mut tries = 0;
+            while !world.alive(*m, cursor) && tries < RECRUIT_RETRIES {
+                let cand = actor_start + place_node(&control.placement, n_actors, rng);
+                if reject.binary_search(&cand).is_err() {
+                    *m = cand;
+                }
+                tries += 1;
+            }
+        }
+        members.sort_unstable();
+        members.dedup();
+        members.retain(|&m| world.alive(m, cursor));
+    }
 
     let mut stages = Vec::with_capacity(proc.stages.len());
     for (si, s) in proc.stages.iter().enumerate() {
@@ -590,7 +616,7 @@ fn plan_campaign(
                     members[0]
                 } else {
                     world.entities.starts[dst_ty]
-                        + place_node(&control.placement, world.entities.counts[dst_ty], rng)
+                        + place_node(&control.placement, world.born_count(dst_ty, cursor).max(1), rng)
                 };
                 PlannedScope::Collector(anchor)
             }
@@ -600,7 +626,7 @@ fn plan_campaign(
                 let n = DistSampler::compile(count)?.sample(rng).round().max(1.0) as usize;
                 let dst_ty = world.events[ev].dst_type;
                 let (vs, vn) =
-                    (world.entities.starts[dst_ty], world.entities.counts[dst_ty]);
+                    (world.entities.starts[dst_ty], world.born_count(dst_ty, cursor).max(1));
                 let pool = (0..n.min(MAX_RING))
                     .map(|_| vs + rng.gen_range(0..vn))
                     .collect();
@@ -613,7 +639,7 @@ fn plan_campaign(
                 let n = DistSampler::compile(count)?.sample(rng).round().max(1.0) as usize;
                 let src_ty = world.events[ev].src_type;
                 let (ps, pn) =
-                    (world.entities.starts[src_ty], world.entities.counts[src_ty]);
+                    (world.entities.starts[src_ty], world.born_count(src_ty, cursor).max(1));
                 let pool = (0..n.min(MAX_RING))
                     .map(|_| ps + rng.gen_range(0..pn))
                     .collect();
@@ -721,24 +747,31 @@ fn community_of(placement: &Placement, n_actors: u64, actor_start: u64, members:
 
 /// Capped sample of member ids (full ground truth is the simulator's; the
 /// JSON record stays bounded for very large rings).
-fn member_sample(members: &[u64], cap: usize) -> Vec<u64> {
-    members.iter().take(cap).copied().collect()
-}
-
 fn campaign_record(c: &Campaign, intent_name: &str) -> AnomalyRecord {
     let start = c.stages.iter().map(|s| s.start_s).min().unwrap_or(0);
     let end = c.stages.iter().map(|s| s.end_s).max().unwrap_or(0);
+    let first = c.members.first().copied();
+    let operator = c
+        .stages
+        .iter()
+        .find_map(|s| match &s.scope {
+            PlannedScope::Hub => first,
+            PlannedScope::Collector(a) if first == Some(*a) => first,
+            _ => None,
+        })
+        .map_or(-1, |m| m as i64);
     AnomalyRecord {
         id: c.id,
         intent: intent_name.to_string(),
         kind: "adversary".into(),
         camouflage: c.camouflage,
-        members: member_sample(&c.members, 256),
+        members: c.members.clone(),
         n_members: c.members.len() as u64,
         community: c.community,
         start_t: start,
         end_t: end,
         cascade: c.cascade,
+        operator,
     }
 }
 
@@ -754,6 +787,7 @@ fn failure_record(s: &FailureSpan, intent_name: &str, entity: u64, cascade: bool
         start_t: s.start_s,
         end_t: s.end_s,
         cascade,
+        operator: -1,
     }
 }
 

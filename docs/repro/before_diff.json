@@ -1,7 +1,7 @@
 [
  {
   "delta": 0.0,
-  "cmd": "/tmp/saga_base/target/release/saga generate --domain finance --edges 200000 --anomaly-rate 0.05 --difficulty 0.0 --seed 11 --format csv --out ./scratch/work_diff/d0.0 --quiet",
+  "cmd": "/tmp/saga_base/target/release/saga generate --domain finance --edges 200000 --anomaly-rate 0.05 --difficulty 0.0 --seed 11 --format csv --out $WORK/work_diff/d0.0 --quiet",
   "auc_all": 0.998,
   "ap_all": 0.9959,
   "n_anom": 60250,
@@ -15,7 +15,7 @@
  },
  {
   "delta": 0.25,
-  "cmd": "/tmp/saga_base/target/release/saga generate --domain finance --edges 200000 --anomaly-rate 0.05 --difficulty 0.25 --seed 11 --format csv --out ./scratch/work_diff/d0.25 --quiet",
+  "cmd": "/tmp/saga_base/target/release/saga generate --domain finance --edges 200000 --anomaly-rate 0.05 --difficulty 0.25 --seed 11 --format csv --out $WORK/work_diff/d0.25 --quiet",
   "auc_all": 0.9946,
   "ap_all": 0.9895,
   "n_anom": 59759,
@@ -29,7 +29,7 @@
  },
  {
   "delta": 0.5,
-  "cmd": "/tmp/saga_base/target/release/saga generate --domain finance --edges 200000 --anomaly-rate 0.05 --difficulty 0.5 --seed 11 --format csv --out ./scratch/work_diff/d0.5 --quiet",
+  "cmd": "/tmp/saga_base/target/release/saga generate --domain finance --edges 200000 --anomaly-rate 0.05 --difficulty 0.5 --seed 11 --format csv --out $WORK/work_diff/d0.5 --quiet",
   "auc_all": 0.993,
   "ap_all": 0.9861,
   "n_anom": 59976,
@@ -43,7 +43,7 @@
  },
  {
   "delta": 0.75,
-  "cmd": "/tmp/saga_base/target/release/saga generate --domain finance --edges 200000 --anomaly-rate 0.05 --difficulty 0.75 --seed 11 --format csv --out ./scratch/work_diff/d0.75 --quiet",
+  "cmd": "/tmp/saga_base/target/release/saga generate --domain finance --edges 200000 --anomaly-rate 0.05 --difficulty 0.75 --seed 11 --format csv --out $WORK/work_diff/d0.75 --quiet",
   "auc_all": 0.9916,
   "ap_all": 0.9828,
   "n_anom": 60155,
@@ -57,7 +57,7 @@
  },
  {
   "delta": 1.0,
-  "cmd": "/tmp/saga_base/target/release/saga generate --domain finance --edges 200000 --anomaly-rate 0.05 --difficulty 1.0 --seed 11 --format csv --out ./scratch/work_diff/d1.0 --quiet",
+  "cmd": "/tmp/saga_base/target/release/saga generate --domain finance --edges 200000 --anomaly-rate 0.05 --difficulty 1.0 --seed 11 --format csv --out $WORK/work_diff/d1.0 --quiet",
   "auc_all": 0.9909,
   "ap_all": 0.9816,
   "n_anom": 60343,

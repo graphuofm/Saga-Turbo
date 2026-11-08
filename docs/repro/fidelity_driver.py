@@ -12,20 +12,20 @@ from saga_eval.compare import compare
 from saga_eval.baselines import compare_baselines
 
 HOME = os.path.expanduser("~")
-SP = "./scratch/fid"
+SP = "$WORK/fid"
 BIN = "./target/release/saga"
 CAP = 2_500_000
 os.makedirs(SP, exist_ok=True)
 
 # (domain, real_name, path, kwargs for load_real, run_baselines?)
 PAIRS = [
-    ("finance",   "email-Eu",       f"./realdata/snap-email-eu/email-Eu-core-temporal.txt", {}, True),
-    ("finance",   "CollegeMsg",      f"./realdata/snap-collegemsg/CollegeMsg.txt", {}, False),
+    ("finance",   "email-Eu",       f"{HOME}/saga-sigmod/realdata/snap-email-eu/email-Eu-core-temporal.txt", {}, True),
+    ("finance",   "CollegeMsg",      f"{HOME}/saga-sigmod/realdata/snap-collegemsg/CollegeMsg.txt", {}, False),
     ("crypto",    "wiki-talk",       f"{HOME}/.cache/zord/wiki-talk-temporal.txt.gz", {}, True),
     ("crypto",    "sx-mathoverflow", f"{HOME}/.cache/zord/sx-mathoverflow.txt.gz", {}, False),
     ("cyber",     "sx-superuser",    f"{HOME}/.cache/zord/sx-superuser.txt.gz", {}, False),
     ("cyber",     "sx-askubuntu",    f"{HOME}/.cache/zord/sx-askubuntu.txt.gz", {}, False),
-    ("ecommerce", "tgbl-review",     f"./realdata/tgbl-review/tgbl-review_edgelist_v2.csv",
+    ("ecommerce", "tgbl-review",     f"{HOME}/saga-sigmod/realdata/tgbl-review/tgbl-review_edgelist_v2.csv",
                     dict(src_col="source", dst_col="target", t_col="ts"), True),
 ]
 

@@ -1,0 +1,35 @@
+Static-generator cost, measured 2026-08-24, same host (Intel i9-13900K).
+Wall time and peak RSS from resource.getrusage in the generating process.
+
+n=1899  m=59835 (CollegeMsg scale)
+  Erdos-Renyi      0.103 s  0.121 GB
+  Barabasi-Albert  0.045 s  0.131 GB
+  R-MAT            0.010 s  0.131 GB
+  Watts-Strogatz   0.036 s  0.139 GB
+  config model     0.175 s  0.138 GB
+  Chung-Lu         0.057 s  0.148 GB
+
+n=100000  m=1000000
+  Erdos-Renyi      1.571 s  0.427 GB
+  Barabasi-Albert  1.509 s  0.427 GB
+  R-MAT            0.248 s  0.427 GB
+  Watts-Strogatz   0.897 s  0.427 GB
+  config model     4.038 s  0.699 GB
+  Chung-Lu         1.439 s  0.867 GB
+
+n=1000000  m=10000000
+  Erdos-Renyi     26.309 s  3.269 GB
+  Barabasi-Albert 22.686 s  3.269 GB
+  R-MAT            3.617 s  3.269 GB
+  Watts-Strogatz  10.756 s  3.269 GB
+  config model    61.992 s  5.857 GB
+  Chung-Lu        25.870 s  7.584 GB
+
+SAGA at the same 10^7 point (tab:scale, guards off, 32-thread host):
+  0.97 s, 211 MiB = 0.211 GB; and 10^9 edges in 89.4 s within 7.62 GiB.
+
+Real-vs-real composite fidelity (the reference band):
+  CollegeMsg     random 50/50 split: 0.992 / 0.978 / 0.981 (seeds 42/7/123)
+                 temporal first vs second half: 0.936
+  High_School11  random 50/50 split: 0.985 / 0.986 / 0.983
+                 temporal first vs second half: 0.958

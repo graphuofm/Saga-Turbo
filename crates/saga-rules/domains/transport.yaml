@@ -32,6 +32,8 @@ entity_types:
   # Loop detectors / fixed sensors on segments — the prime fault locus.
   - name: sensor
     population_weight: 0.18
+    # Node dynamics (--node-dynamics). Provenance: modeled, not sourced.
+    lifecycle: { initial_fraction: 0.95, lifetime_days: !log_normal { mu: 7.0, sigma: 1.0 } }
     attributes:
       - name: kind
         kind: !categorical { values: [loop, radar, camera, gps_probe], weights: [0.55, 0.20, 0.15, 0.10] }
@@ -64,6 +66,8 @@ entity_types:
   # Travelling agents (vehicles) making trips between zones.
   - name: vehicle
     population_weight: 0.50
+    # Node dynamics (--node-dynamics). Provenance: modeled, not sourced.
+    lifecycle: { initial_fraction: 0.8, lifetime_days: !log_normal { mu: 5.5, sigma: 1.0 } }
     attributes:
       - name: vtype
         kind: !categorical { values: [car, taxi, truck, bus], weights: [0.78, 0.10, 0.08, 0.04] }
@@ -128,6 +132,7 @@ relations:
 event_types:
   # A vehicle traversing a segment (the lifeblood "vessel" edge).
   - name: traversal
+    duration_attr: travel_time_s
     src: vehicle
     dst: segment
     attributes:
@@ -155,6 +160,7 @@ event_types:
 
   # A completed trip between zones (taxi/ride demand layer).
   - name: trip
+    duration_attr: duration_s
     src: vehicle
     dst: zone
     # Grounded range guard (consistency model section 13): a trip is suppressed

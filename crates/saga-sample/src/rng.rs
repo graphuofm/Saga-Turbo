@@ -26,6 +26,12 @@ pub enum StreamPurpose {
     ActorStatic = 5,
     /// Failure process draws: (entity_id, process_idx).
     Failure = 6,
+    /// State-conditioned behavior switch: latent draws re-derived in Phase B
+    /// from a candidate's canonical key, so they do not depend on L, on the
+    /// block partition, or on the thread that produced the candidate.
+    Switch = 7,
+    /// Node lifecycle draws (lifetime): (node_id, 0).
+    Lifecycle = 8,
 }
 
 #[inline]

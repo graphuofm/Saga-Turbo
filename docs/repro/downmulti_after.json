@@ -1,7 +1,7 @@
 [
  {
   "domain": "finance",
-  "cmd": "./target/release/saga generate --domain finance --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down_after/finance --quiet",
+  "cmd": "./target/release/saga generate --domain finance --edges 2000000 --no-anomalies --seed 42 --out $WORK/work_down_after/finance --quiet",
   "n_nodes": 63716,
   "n_edges": 200000,
   "tgn_saga": 0.958,

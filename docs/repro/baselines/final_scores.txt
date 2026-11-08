@@ -1,0 +1,35 @@
+High_School11 target; timestamps rescaled linearly to the real span before scoring
+
+generator      edges  nodes distinct t  fidelity
+------------------------------------------------
+real           28560    126       5609         -
+ETN-gen         1713    126        445     0.481
+DYMOND         26163    126         30     0.788
+TagGen         51709    126         12     0.684
+TIGGER          6582    126         14     0.546
+SAGA           31450    126      28982     0.803
+
+per-metric distance to real (lower is closer)
+metric                  ETN-gen   DYMOND   TagGen   TIGGER     SAGA
+KS out_degree             0.698    0.198    0.397    0.484    0.159
+KS in_degree              0.794    0.151    0.365    0.548    0.175
+KS total_degree           0.937    0.183    0.325    0.683    0.143
+KS inter_event_time       0.699    0.774    0.880    0.772    0.558
+powerlaw_alpha            0.230    0.373    0.238    0.332    0.235
+burstiness_b              0.258    0.140    0.014    0.118    0.118
+memory_m                  0.001    0.033    0.017    0.024    0.117
+clustering                0.376    0.268    0.029    0.017    0.194
+reciprocity               0.000    0.000    0.909    1.000    0.418
+repeat_edge_ratio         0.826    0.173    0.015    0.388    0.004
+mean_degree               0.887    0.044    0.288    0.625    0.048
+composite                 0.481    0.788    0.684    0.546    0.803
+
+absolute values (real first)
+metric                     real  ETN-gen   DYMOND   TagGen   TIGGER     SAGA
+powerlaw_alpha            3.762    6.016    8.247    6.112    7.499    2.331
+burstiness_b              0.788    0.273    0.508    0.816    0.552    0.552
+memory_m                  0.056    0.054    0.122    0.021    0.008    0.290
+clustering                0.576    0.200    0.844    0.547    0.559    0.381
+reciprocity               0.000    0.000    0.000    0.909    1.000    0.418
+repeat_edge_ratio         0.940    0.114    0.768    0.925    0.552    0.945
+mean_degree             453.333   27.190  415.286  820.778  104.476  499.206

@@ -8,7 +8,7 @@ import pandas as pd
 from saga_eval.detector import detect_auc
 
 AGORA = "./target/release/saga"
-SCRATCH = "./scratch/sweepdirs"
+SCRATCH = "$WORK/sweepdirs"
 DELTAS = [0.0, 0.25, 0.5, 0.75, 1.0]
 
 def run(domain):

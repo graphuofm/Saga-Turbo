@@ -1,6 +1,6 @@
 import json, os, re, shutil, subprocess, time
 BIN="./target/release/saga"
-S="./scratch"
+S="$WORK"
 OUT=os.path.join(S,"g_after")
 DOMAINS=["finance","crypto","cyber","transport","ecommerce","healthcare"]
 PIS=[0.005,0.01,0.02,0.05,0.10]

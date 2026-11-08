@@ -10,7 +10,7 @@ from saga_eval.compare import compare
 HOME = os.path.expanduser("~")
 BIN = "./target/release/saga"
 CAP = 1_500_000
-SP = "./scratch"
+SP = "$WORK"
 def cap_t(s, d, t, cap=CAP):
     if s.size <= cap: return s, d, t
     order = np.sort(np.argsort(t, kind="stable")[:cap])

@@ -38,6 +38,8 @@ meta:
 entity_types:
   - name: provider
     population_weight: 0.10
+    # Node dynamics (--node-dynamics). Provenance: modeled, not sourced.
+    lifecycle: { initial_fraction: 0.95, lifetime_days: !log_normal { mu: 8.0, sigma: 1.0 } }
     attributes:
       - name: specialty
         kind: !categorical { values: [family_practice, internal_med, cardiology, orthopedics, pain_mgmt, dme_supplier, lab], weights: [0.24, 0.22, 0.10, 0.10, 0.08, 0.13, 0.13] }
@@ -55,6 +57,8 @@ entity_types:
 
   - name: patient
     population_weight: 0.78
+    # Node dynamics (--node-dynamics). Provenance: modeled, not sourced.
+    lifecycle: { initial_fraction: 0.8, lifetime_days: !log_normal { mu: 7.5, sigma: 1.0 } }
     attributes:
       - name: age_band
         kind: !ordinal { tiers: [pediatric, adult, senior], weights: [0.18, 0.52, 0.30] }
@@ -149,6 +153,8 @@ event_types:
       - !add_to_src { var: billing_volume, from_attr: charge }
 
   - name: PRESCRIBED
+    duration_attr: days_supply
+    duration_unit_s: 86400
     src: provider
     dst: patient
     attributes:
@@ -175,6 +181,8 @@ event_types:
       - !increment_dst { var: rx_count }
 
   - name: DISPENSED
+    duration_attr: days_supply
+    duration_unit_s: 86400
     src: pharmacy
     dst: patient
     # Grounded inventory guard (consistency model section 13): a fill is

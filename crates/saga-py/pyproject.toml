@@ -3,11 +3,11 @@ requires = ["maturin>=1.5"]
 build-backend = "maturin"
 
 [project]
-license = { file = "../../LICENSE" }
 name = "saga"
-description = "SAGA: agent-based-simulation graph benchmark generator (PyO3 bindings)."
+description = "Saga Turbo: agent-based-simulation graph benchmark generator (PyO3 bindings)."
 readme = "README.md"
 requires-python = ">=3.9"
+license = { file = "../../LICENSE" }
 authors = [{ name = "Jiacheng Ding", email = "jding2@memphis.edu" }, { name = "Xiaofei Zhang", email = "xiaofei.zhang@memphis.edu" }]
 classifiers = [
     "Programming Language :: Rust",

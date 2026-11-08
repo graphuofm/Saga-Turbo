@@ -10,7 +10,7 @@ HOME = os.path.expanduser("~")
 BIN = "./target/release/saga"
 CAP = 1_500_000
 REF = f"{HOME}/.cache/zord/sx-mathoverflow.txt.gz"
-OUT = "./scratch/health_out"
+OUT = "$WORK/health_out"
 
 def cap_t(s, d, t, cap):
     if s.size <= cap: return s, d, t

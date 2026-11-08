@@ -11,10 +11,10 @@ import subprocess
 import sys
 import time
 
-sys.path.insert(0, "./scratch")
+sys.path.insert(0, "$WORK")
 import anom  # UNMODIFIED  # noqa: E402
 
-S = "./scratch"
+S = "$WORK"
 BIN = "./target/release/saga"
 
 # Elliptic reference, re-derived from scratch (must reproduce the frozen values).

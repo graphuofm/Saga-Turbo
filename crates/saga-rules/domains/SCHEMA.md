@@ -37,7 +37,12 @@ control: ControlParams
   population_weight: 0.9          # share of node budget (normalized across types)
   attributes: [{name, kind: <AttributeKind>}, ...]   # immutable at birth
   state: [{name, init: <Distribution>}, ...]         # mutable sim variables
+  # optional, applied only with --node-dynamics:
+  lifecycle: { initial_fraction: 0.7, lifetime_days: <Distribution> }
 ```
+`initial_fraction` of the type's nodes (the first in construction order) exist
+at t = 0; the rest are born uniformly over the span in id order. Without
+`lifetime_days` nodes never die.
 
 ## RelationRule  (the skeleton: who CAN interact; O(1)/edge models)
 ```yaml
@@ -66,7 +71,11 @@ TopologyModel variants (note constraints):
   dst: account
   attributes: [{name, kind: <AttributeKind>}, ...]
   effects: [<StateEffect>, ...]
+  duration_attr: duration_s   # optional: numeric attr holding the duration
+  duration_unit_s: 1          # optional: seconds per unit (86400 for days)
 ```
+With `duration_attr` the edges carry `t_end = t + duration * duration_unit_s`.
+
 StateEffect variants (var must be a state var on the named endpoint's type;
 from_attr must be one of this event's numeric attributes):
 - `!add_to_dst {var, from_attr}` · `!add_to_src {var, from_attr}`

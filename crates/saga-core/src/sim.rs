@@ -376,6 +376,19 @@ struct BlockSweep {
     exact: Vec<Vec<Vec<f64>>>,
     overdraft_guarded: u64,
     overdraft_violations: u64,
+    /// Master seed, for the Phase-B transducer's latent re-derivation.
+    seed: u64,
+    /// Enable state-conditioned behavior switches.
+    behavior_enabled: bool,
+    /// Switch telemetry: condition held, thinned away, emitted switched.
+    switch_active: u64,
+    switch_thinned: u64,
+    switch_applied: u64,
+    /// Behavior-switch lag: candidates whose switch decision under the stale
+    /// snapshot differs from the decision an event-serial execution would have
+    /// made on the never-stale ledger. This is to the transducer what guard
+    /// leakage is to the guard, and it is bounded by the staleness bound L.
+    switch_misprofiled: u64,
     edges_total: u64,
     edges_per_intent: Vec<u64>,
     /// Section-17 survival tallies, guards-on path only: per event type,
@@ -385,6 +398,130 @@ struct BlockSweep {
     /// Labels `1..=n_adversary` are campaign intents; higher labels are
     /// failure intents (the intent table order).
     n_adversary: u16,
+    /// State-trajectory recorder (`node_states` table); None unless requested.
+    traj: Option<Trajectory>,
+    /// End of the simulated span (unix seconds): the last block's stamp.
+    run_end: i64,
+}
+
+/// Rows buffered before a `node_states` chunk goes to the sink.
+const TRAJ_CHUNK_ROWS: usize = 1 << 17;
+
+/// Node-state trajectory recorder. After each L-block merge it records the
+/// new value of every state cell the block changed, stamped with the block
+/// end, so the rows are cells of the merged snapshots S_b and inherit their
+/// schedule independence (Theorem 1). Rows within a block are in (node, var)
+/// order; blocks are in time order.
+struct Trajectory {
+    /// Per entity type, per state var: code in `names`.
+    var_code: Vec<Vec<u16>>,
+    names: Vec<String>,
+    node: Vec<u64>,
+    t: Vec<i64>,
+    var: Vec<u16>,
+    value: Vec<f64>,
+    /// Scratch: (entity, local index, var) cells touched by the current block.
+    cells: Vec<(usize, usize, usize)>,
+}
+
+impl Trajectory {
+    fn new(world: &World) -> Self {
+        let mut names: Vec<String> = Vec::new();
+        let var_code = world
+            .state_names
+            .iter()
+            .map(|vars| {
+                vars.iter()
+                    .map(|v| match names.iter().position(|n| n == v) {
+                        Some(i) => i as u16,
+                        None => {
+                            names.push(v.clone());
+                            (names.len() - 1) as u16
+                        }
+                    })
+                    .collect()
+            })
+            .collect();
+        Trajectory {
+            var_code,
+            names,
+            node: Vec::new(),
+            t: Vec::new(),
+            var: Vec::new(),
+            value: Vec::new(),
+            cells: Vec::new(),
+        }
+    }
+
+    /// Record every owned cell of `state` at time `t` (the initial snapshot).
+    fn snapshot_all(&mut self, world: &World, state: &[Vec<Vec<f64>>], t: i64, params: &GenParams) {
+        for (ti, vars) in state.iter().enumerate() {
+            let start = world.entities.starts[ti];
+            let n = world.entities.counts[ti] as usize;
+            for local in 0..n {
+                let node = start + local as u64;
+                if !in_shard(node, params) {
+                    continue;
+                }
+                for (vi, col) in vars.iter().enumerate() {
+                    self.push(node, t, self.var_code[ti][vi], col[local]);
+                }
+            }
+        }
+    }
+
+    #[inline]
+    fn push(&mut self, node: u64, t: i64, var: u16, value: f64) {
+        self.node.push(node);
+        self.t.push(t);
+        self.var.push(var);
+        self.value.push(value);
+    }
+
+    /// Note the cell one resolved effect writes.
+    #[inline]
+    fn touch(&mut self, world: &World, eff: &crate::world::CompiledEffect, src: u64, dst: u64) {
+        let node = if eff.on_src { src } else { dst };
+        let local = (node - world.entities.starts[eff.entity]) as usize;
+        self.cells.push((eff.entity, local, eff.var));
+    }
+
+    /// Emit the touched cells' merged values at the block end `t`.
+    fn record_block(&mut self, world: &World, state: &[Vec<Vec<f64>>], t: i64) {
+        let mut cells = std::mem::take(&mut self.cells);
+        cells.sort_unstable();
+        cells.dedup();
+        for &(ti, local, vi) in &cells {
+            let node = world.entities.starts[ti] + local as u64;
+            self.push(node, t, self.var_code[ti][vi], state[ti][vi][local]);
+        }
+        cells.clear();
+        self.cells = cells;
+    }
+
+    /// Hand buffered rows to the sink once there are enough (or `force`).
+    fn flush(&mut self, sink: &mut dyn EventSink, force: bool) -> anyhow::Result<()> {
+        use crate::api::{AuxTable, TableColumn};
+        if self.node.is_empty() || (!force && self.node.len() < TRAJ_CHUNK_ROWS) {
+            return Ok(());
+        }
+        let table = AuxTable {
+            name: "node_states".to_string(),
+            columns: vec![
+                ("node".to_string(), TableColumn::U64(std::mem::take(&mut self.node))),
+                ("t".to_string(), TableColumn::I64(std::mem::take(&mut self.t))),
+                (
+                    "var".to_string(),
+                    TableColumn::Category {
+                        codes: std::mem::take(&mut self.var),
+                        names: self.names.clone(),
+                    },
+                ),
+                ("value".to_string(), TableColumn::F64(std::mem::take(&mut self.value))),
+            ],
+        };
+        sink.write_table(&table)
+    }
 }
 
 const CLASS_NORMAL: usize = 0;
@@ -487,14 +624,33 @@ impl BlockSweep {
             shard_count: params.shard_count.max(1),
             next_block: (((first_t - epoch) as f64) / l_s).floor() as i64,
             state: world.state.clone(),
-            exact: if params.guards_enabled { world.state.clone() } else { Vec::new() },
+            exact: if params.guards_enabled || params.state_behavior {
+                world.state.clone()
+            } else {
+                Vec::new()
+            },
             overdraft_guarded: 0,
             overdraft_violations: 0,
+            seed: params.seed,
+            behavior_enabled: params.state_behavior,
+            switch_active: 0,
+            switch_thinned: 0,
+            switch_applied: 0,
+            switch_misprofiled: 0,
             edges_total: 0,
             edges_per_intent: vec![0u64; n_intents],
             tally: SurvivalTally::new(world.events.len()),
             n_adversary: params.rulebase.adversaries.len() as u16,
+            traj: params.state_trajectory.then(|| Trajectory::new(world)),
+            run_end: epoch + (params.span_days * 86_400.0) as i64,
         }
+    }
+
+    /// The stamp of block `blk`'s merged snapshot: the block end, clipped to
+    /// the end of the span.
+    #[inline]
+    fn block_end(&self, blk: i64) -> i64 {
+        (self.epoch + ((blk + 1) as f64 * self.l_s) as i64).min(self.run_end)
     }
 
     #[inline]
@@ -554,14 +710,70 @@ impl BlockSweep {
             ..Default::default()
         };
         for k in i..j {
-            let ev = &world.events[pending.event_type[k] as usize];
+            let et = pending.event_type[k] as usize;
+            let ev = &world.events[et];
+            let class = if self.guards_enabled {
+                let c = self.class_of(pending.label[k]);
+                self.tally.candidates[et][c] += 1;
+                Some(c)
+            } else {
+                None
+            };
+            // Phase-B transducer: a state-conditioned behavior switch reads the
+            // same block-start snapshot the guard reads, so an agent reacts to
+            // its own evolving state with a lag of at most one block. Unlike the
+            // guard, which only suppresses, the switch also changes what the
+            // event looks like. Its latent draws are re-derived from the
+            // candidate's canonical key, so they depend neither on L, nor on the
+            // block partition, nor on the thread that drew the candidate: the
+            // candidate stream stays L-independent and only its interpretation
+            // is state-conditioned.
+            let mut ovr: Vec<(usize, f64)> = Vec::new();
+            if self.behavior_enabled {
+                if let Some(sw) = &ev.switch {
+                    let start = world.entities.starts[sw.entity];
+                    let idx = (pending.src[k] - start) as usize;
+                    let v = self.state[sw.entity][sw.var][idx];
+                    // The same decision on the never-stale ledger is what an
+                    // event-serial execution would have made; a difference is
+                    // the switch's response lag, bounded by L.
+                    if !self.exact.is_empty()
+                        && (v < sw.below) != (self.exact[sw.entity][sw.var][idx] < sw.below)
+                    {
+                        self.switch_misprofiled += 1;
+                    }
+                    if v < sw.below {
+                        self.switch_active += 1;
+                        let mut rng = stream(
+                            self.seed,
+                            StreamPurpose::Switch,
+                            pending.src[k],
+                            (pending.t[k] as u64)
+                                ^ pending.dst[k].rotate_left(17)
+                                ^ ((et as u64) << 56),
+                        );
+                        if sw.rate_multiplier < 1.0 && rng.gen::<f64>() >= sw.rate_multiplier {
+                            self.switch_thinned += 1;
+                            continue;
+                        }
+                        for (col, dist) in &sw.overrides {
+                            ovr.push((*col, dist.sample(&mut rng)));
+                        }
+                        self.switch_applied += 1;
+                    }
+                }
+            }
             if self.guards_enabled {
-                let class = self.class_of(pending.label[k]);
-                self.tally.candidates[pending.event_type[k] as usize][class] += 1;
                 if let Some(g) = &ev.guard {
                     let start = world.entities.starts[g.entity];
                     let bal = self.state[g.entity][g.var][(pending.src[k] - start) as usize];
-                    let amt = pending.attrs[g.from_col][k];
+                    // The switch runs first, so the guard checks the amount the
+                    // agent actually decided to send.
+                    let amt = ovr
+                        .iter()
+                        .find(|(c, _)| *c == g.from_col)
+                        .map(|(_, v)| *v)
+                        .unwrap_or(pending.attrs[g.from_col][k]);
                     // Suppress an outgoing event the SRC cannot cover on
                     // the (possibly stale) snapshot: it never happens.
                     if amt.is_finite() && bal < amt {
@@ -577,11 +789,23 @@ impl BlockSweep {
                         self.overdraft_violations += 1;
                     }
                 }
-                // Keep the exact ledger current for the next measurement.
-                apply_event(world, &mut self.exact, pending, k);
-                self.tally.kept[pending.event_type[k] as usize][class] += 1;
             }
             append_row(&mut kept, pending, k);
+            if !ovr.is_empty() {
+                let last = kept.len() - 1;
+                for (col, v) in &ovr {
+                    kept.attrs[*col][last] = *v;
+                }
+            }
+            if !self.exact.is_empty() {
+                // Keep the exact ledger current for the next measurement, using
+                // the row as emitted (switched values included).
+                let last = kept.len() - 1;
+                apply_event(world, &mut self.exact, &kept, last);
+            }
+            if let Some(c) = class {
+                self.tally.kept[et][c] += 1;
+            }
         }
         kept
     }
@@ -690,6 +914,15 @@ impl BlockSweep {
                 for d in &merged {
                     apply_wire_delta(world, &mut self.state, d)?;
                 }
+                if let Some(tr) = self.traj.as_mut() {
+                    for d in &merged {
+                        let eff = &world.events[d.event_type as usize].effects[d.effect_index as usize];
+                        tr.touch(world, eff, d.src, d.dst);
+                    }
+                    let t_end = (self.epoch + ((blk + 1) as f64 * self.l_s) as i64).min(self.run_end);
+                    tr.record_block(world, &self.state, t_end);
+                    tr.flush(sink, false)?;
+                }
                 if self.guards_enabled {
                     // Fold the RECEIVED deltas into the exact ledger too (the
                     // local kept events were folded per event in filter_block),
@@ -726,6 +959,20 @@ impl BlockSweep {
             // Merge the block's guarded effects into the running state
             // (canonical fold order over the already-sorted slice).
             fold_canonical(world, &mut self.state, &kept);
+            if self.traj.is_some() {
+                let t_end = self.block_end(blk);
+                let tr = self.traj.as_mut().expect("checked");
+                for r in 0..kept.len() {
+                    let ev = &world.events[kept.event_type[r] as usize];
+                    for eff in &ev.effects {
+                        if !effect_is_noop(eff, effect_amount(eff, &kept, r)) {
+                            tr.touch(world, eff, kept.src[r], kept.dst[r]);
+                        }
+                    }
+                }
+                tr.record_block(world, &self.state, t_end);
+                tr.flush(sink, false)?;
+            }
             self.emit_block(kept, sink)?;
             i = j;
         }
@@ -785,6 +1032,15 @@ pub fn run(
              edges and wrong node state. Alternatively run without --guards for \
              edge-only sharded generation.",
             params.shard_count
+        );
+    }
+    // The state trajectory records merged cells; under sharding a shard's
+    // cells are complete only with the exchange (dst-effects of peers' edges).
+    if params.state_trajectory && params.shard_count > 1 && params.exchange_dir.is_none() {
+        anyhow::bail!(
+            "the state trajectory (--state-trajectory) with --shard-count > 1 requires \
+             the per-block state exchange (--exchange-dir): without it a shard misses \
+             the dst-effects of other shards' edges"
         );
     }
     // Section 17: guard-aware anomaly calibration is a whole-graph, guards-on
@@ -921,8 +1177,18 @@ fn run_pass(
         None => None,
     };
     // The exchange (like guards) needs the L-block sweep over a pending
-    // buffer; plain guards-off runs stream day by day with no buffering.
-    let buffered = params.guards_enabled || exchanger.is_some();
+    // buffer; so does the state-conditioned behavior switch, which reads the
+    // block-start snapshot in the same sweep. Runs with no state-conditioned
+    // mechanism stream day by day with no buffering.
+    let buffered = params.guards_enabled
+        || params.state_behavior
+        || exchanger.is_some()
+        || params.state_trajectory;
+    // State trajectory: the initial snapshot S_0, stamped with the epoch.
+    if let Some(tr) = sweep.traj.as_mut() {
+        tr.snapshot_all(world, &world.state, params.epoch_unix, params);
+        tr.flush(sink, false)?;
+    }
     // Pending buffer: candidates not yet in a completed L-block.
     let mut pending = EventBatch {
         attr_names: world.attr_names.clone(),
@@ -1022,10 +1288,17 @@ fn run_pass(
     if let Some(ex) = &exchanger {
         ex.tidy();
     }
+    if let Some(tr) = sweep.traj.as_mut() {
+        tr.flush(sink, true)?;
+    }
     let BlockSweep {
         state,
         overdraft_guarded,
         overdraft_violations,
+        switch_active,
+        switch_thinned,
+        switch_applied,
+        switch_misprofiled,
         edges_total,
         edges_per_intent,
         tally,
@@ -1054,6 +1327,10 @@ fn run_pass(
         world_mut.attr_dictionaries.clone(), plan.records.clone(), wall,
         overdraft_guarded, overdraft_violations,
     );
+    s.switch_active = switch_active;
+    s.switch_thinned = switch_thinned;
+    s.switch_applied = switch_applied;
+    s.switch_misprofiled = switch_misprofiled;
     if let Some(ex) = &exchanger {
         s.exchange_rounds = ex.rounds;
         s.exchange_deltas_sent = ex.deltas_sent;
@@ -1093,6 +1370,10 @@ fn summary(
         events_per_sec: edges as f64 / wall.max(1e-9),
         overdraft_guarded,
         overdraft_violations,
+        switch_active: 0,
+        switch_thinned: 0,
+        switch_applied: 0,
+        switch_misprofiled: 0,
         exchange_rounds: 0,
         exchange_deltas_sent: 0,
         exchange_bytes_sent: 0,
@@ -1143,6 +1424,11 @@ fn gen_chunk(
         // it owns. Skipping is safe because each actor's stream is independent
         // of every other's — the slices union to the whole-graph output.
         if !in_shard(actor, params) {
+            continue;
+        }
+        // Node dynamics: an actor not alive at any point of this window draws
+        // nothing (its streams are independent of every other actor's).
+        if !world.alive_during(actor, window_start_s, window_end_s) {
             continue;
         }
         let mut rng = stream(
@@ -1470,7 +1756,15 @@ fn gen_campaign_window(
                     && world.entities.counts[cp_ty] > 0
                     && rng.gen::<f64>() < c.camouflage
                 {
-                    world.entities.starts[cp_ty] + rng.gen_range(0..world.entities.counts[cp_ty])
+                    if world.birth.is_empty() {
+                        world.entities.starts[cp_ty] + rng.gen_range(0..world.entities.counts[cp_ty])
+                    } else {
+                        // Node dynamics: reroute to a node that exists now.
+                        match world.pick_alive(cp_ty, t, &mut rng) {
+                            Some(d) => d,
+                            None => continue,
+                        }
+                    }
                 } else {
                     cp
                 };
@@ -1495,6 +1789,12 @@ fn gen_campaign_window(
                     cp
                 };
                 if cp == member {
+                    continue;
+                }
+                // Node dynamics: both endpoints must exist at t. The decision is
+                // a pure function of the shared campaign state, so every shard
+                // skips the same draws and stays in lockstep.
+                if !world.alive(member, t) || !world.alive(cp, t) {
                     continue;
                 }
                 // Place the member on the correct end: fan-in scopes make the
@@ -1579,11 +1879,93 @@ fn emit(
     marked_by_type: &[Vec<u64>],
     marked_set: &HashSet<u64>,
 ) -> Option<usize> {
+    // Node dynamics: an actor outside its lifetime emits nothing. Without
+    // node dynamics `alive` is constant true and no rng is drawn here.
+    if !world.alive(actor, t) {
+        return None;
+    }
     let em_i = b.emission_alias.sample(rng);
     let em = &b.emissions[em_i];
     let ev = &world.events[em.event];
 
-    let dst = match &em.counterparty {
+    let mut dst = pick_counterparty(world, b, em_i, actor, rng, mem, mem_base);
+    // Node dynamics: a counterparty outside its lifetime is re-drawn a bounded
+    // number of times, then replaced by a uniformly chosen live node of the
+    // same type. Pure function of the actor's own stream: deterministic.
+    if !world.birth.is_empty() && dst != u64::MAX && !world.alive(dst, t) {
+        let mut tries = 0;
+        while tries < crate::world::ALIVE_RETRIES && dst != u64::MAX && !world.alive(dst, t) {
+            dst = pick_counterparty(world, b, em_i, actor, rng, mem, mem_base);
+            tries += 1;
+        }
+        if dst == u64::MAX || !world.alive(dst, t) {
+            dst = world.pick_alive(ev.dst_type, t, rng)?;
+        }
+        if dst == actor {
+            return None;
+        }
+    }
+    let mut dst = dst_or_skip(dst)?;
+
+    // Anomaly homophily on the NORMAL path (fidelity axis, extends P1-a): a real
+    // illicit actor's WHOLE edge set skews illicit, not only its campaign edges.
+    // So when the emitting actor is marked, redirect this background edge to a
+    // random marked actor of the chosen dst's entity type with prob `homophily`.
+    // This is the lever the campaign-only redirect lacked: marked actors' normal
+    // traffic otherwise dilutes P(dst marked | src marked) and caps homophily.
+    //
+    // DETERMINISM: the normal path is sharded by the emitting node, and this draw
+    // consumes the actor's OWN normal rng stream, so it is identical regardless of
+    // thread/shard count (an actor is always produced on its owning shard). Guarded
+    // by `homophily > 0.0` and `marked_set.contains(&actor)` so that no rng is
+    // drawn when the control is 0 or the actor is benign — an exact no-op for every
+    // domain that leaves homophily unset, preserving their bit-identical output.
+    if homophily > 0.0 && marked_set.contains(&actor) {
+        let pool = &marked_by_type[world.entities.type_of(dst)];
+        if !pool.is_empty() && !marked_set.contains(&dst) && rng.gen::<f64>() < homophily {
+            let cand = pool[rng.gen_range(0..pool.len())];
+            if cand != actor && world.alive(cand, t) {
+                dst = cand;
+            }
+        }
+    }
+
+    out.src.push(actor);
+    out.dst.push(dst);
+    out.t.push(t);
+    out.event_type.push(em.event as u16);
+    out.label.push(0);
+    out.anomaly_id.push(-1); // normal until a failure span corrupts/labels it
+    // Union columns: NaN by default, overwritten by this event's attrs.
+    for col in out.attrs.iter_mut() {
+        col.push(f64::NAN);
+    }
+    let row = out.src.len() - 1;
+    for ca in &ev.attrs {
+        let v = match &ca.sampler {
+            AttrSampler::Numeric(d) => d.sample(rng),
+            AttrSampler::Category { table, code_map } => code_map[table.sample(rng)] as f64,
+            AttrSampler::Flag(p) => f64::from(rng.gen::<f64>() < *p),
+        };
+        out.attrs[ca.col][row] = v;
+    }
+    Some(row)
+}
+
+/// Draw one counterparty for emission `em_i` of `actor` (the behavior's
+/// counterparty model). Repeat-partner memory is updated in place.
+#[inline]
+fn pick_counterparty(
+    world: &World,
+    b: &CompiledBehavior,
+    em_i: usize,
+    actor: u64,
+    rng: &mut Rng64,
+    mem: &mut [u64],
+    mem_base: usize,
+) -> u64 {
+    match &b.emissions[em_i].counterparty {
+
         CompiledCounterparty::Neighbor { relation } => {
             pick_neighbor(world, *relation, actor, rng)
         }
@@ -1617,52 +1999,7 @@ fn emit(
             }
             d
         }
-    };
-    let mut dst = dst_or_skip(dst)?;
-
-    // Anomaly homophily on the NORMAL path (fidelity axis, extends P1-a): a real
-    // illicit actor's WHOLE edge set skews illicit, not only its campaign edges.
-    // So when the emitting actor is marked, redirect this background edge to a
-    // random marked actor of the chosen dst's entity type with prob `homophily`.
-    // This is the lever the campaign-only redirect lacked: marked actors' normal
-    // traffic otherwise dilutes P(dst marked | src marked) and caps homophily.
-    //
-    // DETERMINISM: the normal path is sharded by the emitting node, and this draw
-    // consumes the actor's OWN normal rng stream, so it is identical regardless of
-    // thread/shard count (an actor is always produced on its owning shard). Guarded
-    // by `homophily > 0.0` and `marked_set.contains(&actor)` so that no rng is
-    // drawn when the control is 0 or the actor is benign — an exact no-op for every
-    // domain that leaves homophily unset, preserving their bit-identical output.
-    if homophily > 0.0 && marked_set.contains(&actor) {
-        let pool = &marked_by_type[world.entities.type_of(dst)];
-        if !pool.is_empty() && !marked_set.contains(&dst) && rng.gen::<f64>() < homophily {
-            let cand = pool[rng.gen_range(0..pool.len())];
-            if cand != actor {
-                dst = cand;
-            }
-        }
     }
-
-    out.src.push(actor);
-    out.dst.push(dst);
-    out.t.push(t);
-    out.event_type.push(em.event as u16);
-    out.label.push(0);
-    out.anomaly_id.push(-1); // normal until a failure span corrupts/labels it
-    // Union columns: NaN by default, overwritten by this event's attrs.
-    for col in out.attrs.iter_mut() {
-        col.push(f64::NAN);
-    }
-    let row = out.src.len() - 1;
-    for ca in &ev.attrs {
-        let v = match &ca.sampler {
-            AttrSampler::Numeric(d) => d.sample(rng),
-            AttrSampler::Category { table, code_map } => code_map[table.sample(rng)] as f64,
-            AttrSampler::Flag(p) => f64::from(rng.gen::<f64>() < *p),
-        };
-        out.attrs[ca.col][row] = v;
-    }
-    Some(row)
 }
 
 #[inline]

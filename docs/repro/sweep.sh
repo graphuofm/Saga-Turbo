@@ -3,10 +3,10 @@
 # Copies finance.yaml, rewrites the `homophily:` control line, generates via an
 # external rule-base path (no rebuild), measures, deletes the graph.
 set -e
-SC=./scratch
+SC=$WORK
 BIN=./target/release/saga
 YAML=./crates/saga-rules/domains/finance.yaml
-cd ./
+cd .
 
 for H in "$@"; do
   TMP=$SC/finance_h.yaml

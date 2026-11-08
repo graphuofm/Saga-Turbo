@@ -30,7 +30,87 @@ pub enum FormatSink {
     Graphml(GraphmlSink),
 }
 
+
+/// Per-row end time: `t + duration` where the row's event type declares a
+/// duration attribute (seconds) holding a finite non-negative value, else `t`.
+pub(crate) fn end_times(b: &saga_core::EventBatch, dur_cols: &[Option<(usize, f64)>]) -> Vec<i64> {
+    (0..b.len())
+        .map(|i| {
+            let t = b.t[i];
+            match dur_cols.get(b.event_type[i] as usize).copied().flatten() {
+                Some((c, unit)) => {
+                    let d = b.attrs[c][i] * unit;
+                    if d.is_finite() && d >= 0.0 { t + d.round() as i64 } else { t }
+                }
+                None => t,
+            }
+        })
+        .collect()
+}
+
+/// Resolve per-event-type duration attribute names to union-column indices.
+pub(crate) fn resolve_dur_cols(
+    durations: &[Option<(String, f64)>],
+    attr_names: &[String],
+) -> Vec<Option<(usize, f64)>> {
+    durations
+        .iter()
+        .map(|d| {
+            d.as_ref()
+                .and_then(|(n, unit)| attr_names.iter().position(|a| a == n).map(|c| (c, *unit)))
+        })
+        .collect()
+}
+
+/// Write `labels_nodes.csv`, the node-level ground truth: one row per
+/// (anomaly actor, instance), complete (no member cap). `role` is `operator`
+/// for the member that runs the scheme (hub centre or fan-in collector),
+/// `affected` for a failure's entity, else `member`.
+pub fn write_labels_nodes(
+    path: &std::path::Path,
+    instances: &[saga_core::AnomalyRecord],
+) -> anyhow::Result<()> {
+    use std::io::Write as _;
+    let mut w = std::io::BufWriter::new(std::fs::File::create(path)?);
+    writeln!(w, "node_id,intent,kind,anomaly_id,camouflage,community,role")?;
+    for inst in instances {
+        let cam = if inst.camouflage.is_nan() {
+            String::new()
+        } else {
+            format!("{:.4}", inst.camouflage)
+        };
+        for &node in &inst.members {
+            let role = if inst.kind == "failure" {
+                "affected"
+            } else if inst.operator == node as i64 {
+                "operator"
+            } else {
+                "member"
+            };
+            writeln!(
+                w,
+                "{node},{},{},{},{cam},{},{role}",
+                inst.intent, inst.kind, inst.id, inst.community
+            )?;
+        }
+    }
+    w.flush()?;
+    Ok(())
+}
+
 impl FormatSink {
+    /// Declare each event type's duration attribute and its unit in seconds
+    /// (by event-type index), so
+    /// the edges carry an end-time column `t_end`. Absent everywhere (the
+    /// default), no `t_end` column is written.
+    pub fn set_event_durations(&mut self, durations: Vec<Option<(String, f64)>>) {
+        match self {
+            FormatSink::Csv(s) => s.set_event_durations(durations),
+            FormatSink::Parquet(s) => s.set_event_durations(durations),
+            FormatSink::Graphml(_) => {}
+        }
+    }
+
     /// `format`: "parquet" | "csv" | "graphml".
     pub fn make(
         format: &str,
@@ -68,6 +148,13 @@ impl EventSink for FormatSink {
             FormatSink::Csv(s) => s.write_nodes(batch),
             FormatSink::Parquet(s) => s.write_nodes(batch),
             FormatSink::Graphml(s) => s.write_nodes(batch),
+        }
+    }
+    fn write_table(&mut self, table: &saga_core::AuxTable) -> anyhow::Result<()> {
+        match self {
+            FormatSink::Csv(s) => s.write_table(table),
+            FormatSink::Parquet(s) => s.write_table(table),
+            FormatSink::Graphml(s) => s.write_table(table),
         }
     }
     fn finish(&mut self) -> anyhow::Result<()> {

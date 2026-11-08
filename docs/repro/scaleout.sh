@@ -1,7 +1,7 @@
 #!/bin/bash
 # Industrial scale-out: 100M edges per domain, measure wall/RSS/throughput, delete after.
-cd ./
-SP=./scratch
+cd .
+SP=$WORK
 BIN=./target/release/saga
 OUT=$SP/scaleout.txt
 : > $OUT

@@ -18,10 +18,10 @@ import numpy as np
 sys.path.insert(0, "./python")
 from saga_eval import load, metrics_advanced as adv, stats as st  # noqa: E402
 
-REPO = "./"
+REPO = "."
 HOME = os.path.expanduser("~")
 SAGA = "./target/release/saga"
-SP = "./scratch"
+SP = "$WORK"
 CAP = 2_500_000
 SEED = 42
 

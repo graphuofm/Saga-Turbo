@@ -4,11 +4,11 @@ rc 1 wall 30.2137
 error: shard 0/2: timed out after 30s waiting for the block-0 delta file `$PROJECT/saga/xrun/timeout16/xchg/r0/b0_from1_to0.bin` from peer shard 1. All 2 shard processes must run concurrently with identical seed/params and the same --exchange-dir; start the missing peer or raise --exchange-timeout-s.
 --- stdout bytes: 0
 --- exchange dir after failure:
-111033936      1 drwxr-xr-x   3 jding2   users           3 Aug 21 07:37 $PROJECT/saga/xrun/timeout16/xchg
-111032700      1 drwxr-xr-x   2 jding2   users           3 Aug 21 07:38 $PROJECT/saga/xrun/timeout16/xchg/r0
-111034020    276 -rw-r--r--   1 jding2   users      142835 Aug 21 07:37 $PROJECT/saga/xrun/timeout16/xchg/r0/b0_from0_to1.bin
+111033936      1 drwxr-xr-x   3 user   users           3 Aug 21 07:37 $PROJECT/saga/xrun/timeout16/xchg
+111032700      1 drwxr-xr-x   2 user   users           3 Aug 21 07:38 $PROJECT/saga/xrun/timeout16/xchg/r0
+111034020    276 -rw-r--r--   1 user   users      142835 Aug 21 07:37 $PROJECT/saga/xrun/timeout16/xchg/r0/b0_from0_to1.bin
 --- out dir after failure:
 total 0
-drwxr-xr-x 3 jding2 users 30 Aug 21 07:37 .
-drwx------ 3 jding2 root  38 Aug 21 07:37 ..
-drwxr-xr-x 2 jding2 users 36 Aug 21 07:37 shard_00
+drwxr-xr-x 3 user users 30 Aug 21 07:37 .
+drwx------ 3 user root  38 Aug 21 07:37 ..
+drwxr-xr-x 2 user users 36 Aug 21 07:37 shard_00

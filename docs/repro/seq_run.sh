@@ -3,8 +3,8 @@
 export OMP_NUM_THREADS=6 MKL_NUM_THREADS=6 OPENBLAS_NUM_THREADS=6 NUMEXPR_NUM_THREADS=6
 export PYTHONPATH=./python
 BIN=./target/release/saga
-SCR=./scratch
-cd ./
+SCR=$WORK
+cd .
 
 # ---- Difficulty sweep ----
 OUT=$SCR/diff_gen

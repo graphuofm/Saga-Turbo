@@ -1,5 +1,5 @@
 import json, sys
-SP = "./scratch"
+SP = "$WORK"
 d = json.load(open(f"{SP}/advanced_axes.json"))
 try:
     fx = json.load(open(f"{SP}/advanced_axes_bipartite_fixed.json"))

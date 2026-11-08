@@ -1200,7 +1200,7 @@ no poke sidecar). Stage the binary and scripts:
 
 ```
 scp target/release/agora docs/repro/exchange_cluster/bin/{x16.slurm,shard16.sh,digest.py} \
-    cluster:$PROJECT/saga/bin/
+    itiger:$PROJECT/saga/bin/
 ```
 
 Reference (one node, one process; gives `$REF` for the digests):
@@ -1449,3 +1449,74 @@ constructor in tests and saga-py sets 0). GenSummary gained
 realized line whenever guards are on and the calibration lines when it ran.
 No frozen artifact (paper/, paper-vldb/, paper.frozen/, agora-anon) was
 touched; nothing was committed.
+
+## 18. State-conditioned behavior: the Phase-B transducer (review Option B)
+
+The advisor review observed that the model in section 1 allows behavior to be a
+general function of the snapshot, while the implementation only admitted or
+suppressed a candidate. This section closes that gap: state now also changes
+what an event looks like and how often an agent acts, without breaking the
+L-independence of the candidate stream.
+
+Mechanism. A rule base may attach a `switch` to an event type:
+
+    switch:
+      src_var: balance          # own state only, like the guard
+      below: 5000.0             # active while the read value is below this
+      rate_multiplier: 0.5      # thinning: the declared rate is the MAXIMUM
+      attr_overrides:           # different samplers while active
+        - attr: amount
+          dist: !log_normal { mu: 4.0, sigma: 0.9 }
+
+Phase B evaluates the switch against the same block-start snapshot the guard
+reads. While it is active the agent (i) emits only `rate_multiplier` of its
+candidate events, so its effective rate is state-dependent even though the
+candidate stream is not, and (ii) draws the listed attributes from different
+samplers. The switch runs before the guard, so the guard checks the amount the
+agent actually decided to send, and the emitted row (not the candidate row) is
+what feeds the effects, the exact ledger and the sink.
+
+Determinism. The switch's latent draws are re-derived in Phase B from the
+candidate's canonical key `(src, dst, t, event_type)` on a dedicated stream
+purpose (`StreamPurpose::Switch = 7`), so they depend neither on L, nor on the
+block partition, nor on the thread that produced the candidate. Theorem 1's
+induction is unchanged: within a block the transducer is a pure function of the
+frozen snapshot and of key-derived randomness, and the boundary merge is still
+the canonical fold. Verified: finance 5e5 edges, seed 42, guards and switch on,
+L = 1 day, threads 1 versus 8 give identical edges, nodes, labels and ground
+truth (`edges_00000.csv` sha256 prefix faaf3151, `nodes.csv` 61d46778).
+
+New metric: behavior-switch lag. For every switch evaluation the engine also
+computes the decision the never-stale ledger would have given, that is the
+decision of an event-serial execution, and counts the disagreements. This is to
+the transducer what guard leakage is to the guard. Measured (finance, 1e6 target
+edges, seed 42, 20k nodes, 30-day span, guards and switch on):
+
+| L (days) | switch decisions | misprofiled | misprofiled % | thinned | switched emitted | edges |
+|---|---:|---:|---:|---:|---:|---:|
+| 1.157407e-05 | 315955 | 15 | 0.005 | 158242 | 157698 | 835993 |
+| 0.001 | 317178 | 1503 | 0.474 | 158131 | 157544 | 836096 |
+| 0.01 | 325148 | 10672 | 3.282 | 157513 | 156963 | 836491 |
+| 0.1 | 338436 | 25723 | 7.601 | 156497 | 156216 | 836599 |
+| 1 | 348323 | 36594 | 10.506 | 155983 | 155746 | 836117 |
+| 7 | 374282 | 65862 | 17.597 | 154174 | 154246 | 832672 |
+| 30 | 423800 | 122736 | 28.961 | 150670 | 150394 | 826223 |
+
+The lag is monotone in L over this sweep and is what a user trades away when
+choosing a larger block: at 86 seconds of staleness fewer than one switch
+decision in 200 differs from the event-serial decision, while at the
+no-feedback endpoint nearly three in ten do.
+
+Interaction with the guard. Adaptive behavior lowers constraint pressure: with
+the switch active, low-balance accounts send smaller amounts, so at L = 1 day
+guard leakage falls from 14.3% (guards only) to 0.55% (guards plus switch) in
+the same configuration. Behavior and admission are therefore not independent
+knobs, and the paper reports them separately.
+
+Scope. Switches read own state only, like guards, so Theorem 2 and the
+per-block exchange are unchanged. `rate_multiplier` can only thin, never
+amplify: a state-dependent rate increase would require drawing candidates at
+the higher rate and thinning the base case, which is a rule-base authoring
+choice rather than an engine change. Off by default (`--state-behavior`); with
+the flag off, output is byte-identical to the recorded digests for all six
+domains.

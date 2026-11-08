@@ -11,9 +11,9 @@ import numpy as np
 sys.path.insert(0, "./python")
 from saga_eval import load, stats as st, metrics_advanced as adv
 
-REPO = "./"
+REPO = "."
 SAGA = f"{REPO}/target/release/saga"
-SP = "./scratch"
+SP = "$WORK"
 CAP = 2_500_000  # docs/EXPERIMENTS.md sec.9 time-prefix cap
 SEED = 42
 

@@ -1,9 +1,9 @@
 [package]
-license-file = "../../LICENSE"
 name = "saga-rules"
 description = "Rule-base schema (the 7 primitives), generation config, presets, validation and run metadata"
 version.workspace = true
 edition.workspace = true
+license-file.workspace = true
 repository.workspace = true
 
 [dependencies]

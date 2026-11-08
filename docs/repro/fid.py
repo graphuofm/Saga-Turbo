@@ -8,7 +8,7 @@ from saga_eval.compare import compare
 HOME=os.path.expanduser("~"); BIN="./target/release/saga"; CAP=1_500_000
 REF=f"{HOME}/.cache/zord/sx-mathoverflow.txt.gz"
 DOM=sys.argv[1] if len(sys.argv)>1 else "healthcare"
-OUT="./scratch/fid_out"
+OUT="$WORK/fid_out"
 def cap_t(s,d,t,cap):
     if s.size<=cap: return s,d,t
     o=np.sort(np.argsort(t,kind="stable")[:cap]); return s[o],d[o],t[o]

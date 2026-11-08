@@ -12,7 +12,7 @@ def cap_t(s,d,t,c):
 rs,rd,rt=cap_t(*load_real(REF),CAP)
 n=int(np.unique(np.concatenate([rs,rd])).size);m=int(rs.size);span=float(rt.max()-rt.min())
 rstat=compute_stats(rs,rd,rt)
-OUT="./scratch/tr_out"
+OUT="$WORK/tr_out"
 shutil.rmtree(OUT,ignore_errors=True)
 subprocess.run([BIN,"generate","--domain","transport","--nodes",str(n),"--edges",str(m),
  "--time-span",str(round(span/86400,2)),"--seed","42","--anomaly-rate","0.02","--out",OUT,"--quiet"],check=True)

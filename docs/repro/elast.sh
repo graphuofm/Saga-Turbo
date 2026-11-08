@@ -2,7 +2,7 @@
 # g(pi) elasticity sweep: 6 domains x 5 pi values, 1M edges, seed 42
 set -e
 BIN=./target/release/saga
-SCR=./scratch
+SCR=$WORK
 OUT=$SCR/elast_gen
 RES=$SCR/elast_results.csv
 echo "domain,pi,edges_written,anomalous_edges,frac" > $RES

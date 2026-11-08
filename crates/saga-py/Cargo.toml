@@ -1,11 +1,11 @@
 [package]
-license-file = "../../LICENSE"
 name = "saga-py"
 version.workspace = true
 edition.workspace = true
+license-file.workspace = true
 repository.workspace = true
 authors.workspace = true
-description = "PyO3 bindings for SAGA: install and run the graph-benchmark generator from Python."
+description = "PyO3 bindings for Saga Turbo: install and run the graph-benchmark generator from Python."
 
 [lib]
 name = "saga_py"

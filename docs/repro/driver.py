@@ -5,7 +5,7 @@ from saga_eval import load
 from saga_eval.stats import compute_stats
 
 BIN = "./target/release/saga"
-SCRATCH = "./scratch"
+SCRATCH = "$WORK"
 STRUCT_COLS = {"src", "dst", "t", "event_type", "label", "anomaly_id"}
 DOMAINS = ["finance", "crypto", "cyber", "transport", "ecommerce", "healthcare"]
 

@@ -28,7 +28,7 @@ exchange dir removed.
   AMD EPYC 7513/9334 32-core, 64 threads, kernel 5.14.0-427.31.1.el9_4,
   Rocky 9.4; `/project` = NFSv4.2 `hard,proto=tcp,rsize=wsize=1 MiB,
   timeo=600,retrans=2,acdirmin=30,acdirmax=60`, server `<nfs-server>`
-  <private-ip>, 200 Gb/s IB). Every task: 8 cpus, `--threads 8`, 4 GB per cpu.
+  <nfs-ip>, 200 Gb/s IB). Every task: 8 cpus, `--threads 8`, 4 GB per cpu.
 - Commands: exactly the section-16 recipe (`bin/x16.slurm` + `bin/shard16.sh`,
   `bin/ref.slurm`, `bin/timeout16.slurm`, `bin/digest.py`, `bin/smoke16.slurm`,
   `bin/nfsprobe.slurm`, all copied to `docs/repro/exchange_cluster_v2/bin/`).

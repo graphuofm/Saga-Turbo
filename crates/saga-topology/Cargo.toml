@@ -1,9 +1,9 @@
 [package]
-license-file = "../../LICENSE"
 name = "saga-topology"
 description = "Pluggable structure/evolution models for the skeleton graph (BA, WS, SBM, R-MAT, forest fire, spatial, affiliation)"
 version.workspace = true
 edition.workspace = true
+license-file.workspace = true
 repository.workspace = true
 
 [dependencies]

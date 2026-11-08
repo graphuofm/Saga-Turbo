@@ -22,6 +22,8 @@ meta:
 entity_types:
   - name: account
     population_weight: 0.90
+    # Node dynamics (--node-dynamics). Provenance: modeled, not sourced.
+    lifecycle: { initial_fraction: 0.7, lifetime_days: !log_normal { mu: 7.3, sigma: 1.0 } }
     attributes:
       - name: type
         kind: !categorical { values: [retail, business, shell], weights: [0.85, 0.13, 0.02] }
@@ -45,6 +47,8 @@ entity_types:
 
   - name: merchant
     population_weight: 0.08
+    # Node dynamics (--node-dynamics). Provenance: modeled, not sourced.
+    lifecycle: { initial_fraction: 0.9, lifetime_days: !log_normal { mu: 7.0, sigma: 1.0 } }
     attributes:
       - name: mcc
         kind: !categorical { values: [grocery, fuel, restaurant, online_retail, travel, gambling, luxury], weights: [0.22, 0.14, 0.20, 0.25, 0.08, 0.04, 0.07] }
@@ -100,6 +104,20 @@ event_types:
     # L -> 0 the read is exact (no overdrafts), and larger L lets more overdrafts
     # slip through on a stale read — the fidelity-vs-L knob's demonstrator.
     guard: { src_var: balance, amount_attr: amount }
+    # State-conditioned behavior switch (consistency model, the Phase-B
+    # transducer): while the payer's balance is low, the account does not
+    # merely get blocked, it BEHAVES differently: it transfers about half as
+    # often and in smaller amounts. Provenance: modeled, not sourced. The read
+    # is against the block-start snapshot, so the reaction lags by at most L,
+    # and the declared rate is therefore the account's maximum rate. Active
+    # only with --state-behavior; the default output is unchanged.
+    switch:
+      src_var: balance
+      below: 5000.0
+      rate_multiplier: 0.5
+      attr_overrides:
+        - attr: amount
+          dist: !log_normal { mu: 4.0, sigma: 0.9 }   # median ~ $55
     attributes:
       - name: amount
         kind: !numeric { dist: !log_normal { mu: 5.2, sigma: 1.4 } }   # median ≈ $180

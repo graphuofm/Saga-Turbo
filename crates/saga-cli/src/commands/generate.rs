@@ -96,6 +96,23 @@ pub struct GenerateArgs {
     /// state only). Default 1 day.
     #[arg(long = "block-len-days", default_value_t = 1.0)]
     pub block_len_days: f64,
+    /// Enable state-conditioned behavior switches: while an agent's own state
+    /// crosses a rule-base threshold it thins its own event stream and draws
+    /// attributes from different samplers (the Phase-B transducer). Off by
+    /// default, so output is unchanged unless requested.
+    #[arg(long, default_value_t = false)]
+    pub state_behavior: bool,
+    /// Node dynamics: apply the rule base's node lifecycles (birth in
+    /// construction order, optional death after a sampled lifetime). Off by
+    /// default: a fixed node population, output unchanged.
+    #[arg(long, default_value_t = false)]
+    pub node_dynamics: bool,
+    /// Write the node-state trajectory (node_states table): the initial
+    /// state, then every state cell an L-block changed, stamped with the block
+    /// end. Off by default.
+    #[arg(long, default_value_t = false)]
+    pub state_trajectory: bool,
+
     /// Enable event state guards (e.g. the finance overdraft guard). Output then
     /// depends on L via the guards; with the flag off, output is independent of
     /// L (the RNG/L decoupling proof).
@@ -255,6 +272,7 @@ pub fn run(ctx: &Ctx, args: GenerateArgs) -> anyhow::Result<()> {
         threads: est.threads,
         block_len_days: args.block_len_days,
         guards_enabled: args.guards,
+        state_behavior: args.state_behavior,
         anomaly_rate: cfg.anomaly.rate,
         anomaly_difficulty: cfg.anomaly.difficulty,
         anomaly_type_mix: parse_type_mix(&args.type_mix)?,
@@ -266,6 +284,8 @@ pub fn run(ctx: &Ctx, args: GenerateArgs) -> anyhow::Result<()> {
         exchange_dir: args.exchange_dir.clone(),
         exchange_timeout_s: args.exchange_timeout_s,
         calibrate_passes,
+        node_dynamics: args.node_dynamics,
+        state_trajectory: args.state_trajectory,
     };
 
     // Categorical event-attr dictionaries (decode codes to strings on write).
@@ -284,7 +304,7 @@ pub fn run(ctx: &Ctx, args: GenerateArgs) -> anyhow::Result<()> {
         OutputFormat::Csv => "csv",
         OutputFormat::Graphml => "graphml",
     };
-    let writer = saga_io::FormatSink::make(
+    let mut writer = saga_io::FormatSink::make(
         format_str,
         cfg.output.path.clone(),
         cfg.output.shard_size_mb,
@@ -292,6 +312,10 @@ pub fn run(ctx: &Ctx, args: GenerateArgs) -> anyhow::Result<()> {
         intent_names.clone(),
         attr_dicts.clone(),
     )?;
+    // Events whose rule declares a duration attribute get an end time t_end.
+    writer.set_event_durations(
+        params.rulebase.event_types.iter().map(|e| e.duration()).collect(),
+    );
     // The guarded L-block sweep delivers one batch per block; a small L means
     // thousands of tiny batches, and Parquet pays a fixed per-encode cost per
     // delivered batch (measured: +23% wall at L = 0.01 vs L = 1 at 1e7
@@ -365,30 +389,11 @@ pub fn run(ctx: &Ctx, args: GenerateArgs) -> anyhow::Result<()> {
         }))?,
     )?;
     // Node-level ground truth: one row per (anomaly actor, instance), so a
-    // detector benchmark has per-NODE labels too (not just per-edge). Rings
-    // are small (≤ the rule base's ring_size), so the per-instance member
-    // list is complete in practice.
-    {
-        use std::io::Write as _;
-        let path = cfg.output.path.join("labels_nodes.csv");
-        let mut w = std::io::BufWriter::new(std::fs::File::create(&path)?);
-        writeln!(w, "node_id,intent,kind,anomaly_id,camouflage,community")?;
-        for inst in &summary.ground_truth {
-            for &node in &inst.members {
-                let cam = if inst.camouflage.is_nan() {
-                    String::new()
-                } else {
-                    format!("{:.4}", inst.camouflage)
-                };
-                writeln!(
-                    w,
-                    "{node},{},{},{},{cam},{}",
-                    inst.intent, inst.kind, inst.id, inst.community
-                )?;
-            }
-        }
-        w.flush()?;
-    }
+    // detector benchmark has per-NODE labels too (not just per-edge). The
+    // member lists are complete (no cap). `role` is `operator` for the member
+    // that runs the scheme (hub centre or fan-in collector), `affected` for a
+    // failure's entity, else `member`.
+    saga_io::write_labels_nodes(&cfg.output.path.join("labels_nodes.csv"), &summary.ground_truth)?;
 
     // Exclude the (potentially large) per-instance records from the summary
     // embedded in meta; they live in ground_truth.json.
@@ -442,6 +447,9 @@ impl saga_core::EventSink for SharedTee {
     fn write_nodes(&mut self, batch: &saga_core::NodeBatch) -> anyhow::Result<()> {
         self.stats.write_nodes(batch)?;
         self.writer.write_nodes(batch)
+    }
+    fn write_table(&mut self, table: &saga_core::AuxTable) -> anyhow::Result<()> {
+        self.writer.write_table(table)
     }
     fn finish(&mut self) -> anyhow::Result<()> {
         self.stats.finish()?;

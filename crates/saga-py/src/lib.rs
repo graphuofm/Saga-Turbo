@@ -153,6 +153,7 @@ fn resolve(
         threads: resolved_threads,
         block_len_days,
         guards_enabled: guards,
+        state_behavior: false,
         anomaly_rate: cfg.anomaly.rate,
         anomaly_difficulty: cfg.anomaly.difficulty,
         anomaly_type_mix: cfg.anomaly.type_mix.clone().unwrap_or_default(),
@@ -166,6 +167,8 @@ fn resolve(
         exchange_dir: None,
         exchange_timeout_s: 300,
         calibrate_passes,
+        node_dynamics: false,
+        state_trajectory: false,
     };
 
     Ok(Resolved {
@@ -398,7 +401,7 @@ fn run_to_files(r: &Resolved, progress: bool) -> anyhow::Result<GenSummary> {
         OutputFormat::Csv => "csv",
         OutputFormat::Graphml => "graphml",
     };
-    let writer = saga_io::FormatSink::make(
+    let mut writer = saga_io::FormatSink::make(
         fmt_str,
         out_dir.clone(),
         r.config.output.shard_size_mb,
@@ -406,6 +409,9 @@ fn run_to_files(r: &Resolved, progress: bool) -> anyhow::Result<GenSummary> {
         r.intent_names.clone(),
         r.attr_dicts.clone(),
     )?;
+    writer.set_event_durations(
+        r.params.rulebase.event_types.iter().map(|e| e.duration()).collect(),
+    );
     let mut sink = saga_io::ThreadedSink::new(writer, 3);
 
     let started = std::time::Instant::now();
@@ -441,27 +447,7 @@ fn run_to_files(r: &Resolved, progress: bool) -> anyhow::Result<GenSummary> {
             "instances": summary.ground_truth,
         }))?,
     )?;
-    {
-        use std::io::Write as _;
-        let path = out_dir.join("labels_nodes.csv");
-        let mut w = std::io::BufWriter::new(std::fs::File::create(&path)?);
-        writeln!(w, "node_id,intent,kind,anomaly_id,camouflage,community")?;
-        for inst in &summary.ground_truth {
-            for &node in &inst.members {
-                let cam = if inst.camouflage.is_nan() {
-                    String::new()
-                } else {
-                    format!("{:.4}", inst.camouflage)
-                };
-                writeln!(
-                    w,
-                    "{node},{},{},{},{cam},{}",
-                    inst.intent, inst.kind, inst.id, inst.community
-                )?;
-            }
-        }
-        w.flush()?;
-    }
+    saga_io::write_labels_nodes(&out_dir.join("labels_nodes.csv"), &summary.ground_truth)?;
 
     // Embed the summary (sans the bulky per-instance records) in meta.
     let mut summary_for_meta = summary.clone();

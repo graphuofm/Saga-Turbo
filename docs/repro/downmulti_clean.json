@@ -1,7 +1,7 @@
 [
  {
   "domain": "finance",
-  "cmd": "./target/release/saga generate --domain finance --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down_after/finance --quiet",
+  "cmd": "./target/release/saga generate --domain finance --edges 2000000 --no-anomalies --seed 42 --out $WORK/work_down_after/finance --quiet",
   "n_nodes": 63716,
   "n_edges": 200000,
   "tgn_saga": 0.959,
@@ -23,7 +23,7 @@
  },
  {
   "domain": "crypto",
-  "cmd": "./target/release/saga generate --domain crypto --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down_after/crypto --quiet",
+  "cmd": "./target/release/saga generate --domain crypto --edges 2000000 --no-anomalies --seed 42 --out $WORK/work_down_after/crypto --quiet",
   "n_nodes": 28889,
   "n_edges": 200000,
   "tgn_saga": 0.984,
@@ -45,7 +45,7 @@
  },
  {
   "domain": "cyber",
-  "cmd": "./target/release/saga generate --domain cyber --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down_after/cyber --quiet",
+  "cmd": "./target/release/saga generate --domain cyber --edges 2000000 --no-anomalies --seed 42 --out $WORK/work_down_after/cyber --quiet",
   "n_nodes": 60627,
   "n_edges": 200000,
   "tgn_saga": 0.944,
@@ -67,7 +67,7 @@
  },
  {
   "domain": "transport",
-  "cmd": "./target/release/saga generate --domain transport --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down_after/transport --quiet",
+  "cmd": "./target/release/saga generate --domain transport --edges 2000000 --no-anomalies --seed 42 --out $WORK/work_down_after/transport --quiet",
   "n_nodes": 48248,
   "n_edges": 200000,
   "tgn_saga": 0.987,
@@ -89,7 +89,7 @@
  },
  {
   "domain": "ecommerce",
-  "cmd": "./target/release/saga generate --domain ecommerce --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down_after/ecommerce --quiet",
+  "cmd": "./target/release/saga generate --domain ecommerce --edges 2000000 --no-anomalies --seed 42 --out $WORK/work_down_after/ecommerce --quiet",
   "n_nodes": 64957,
   "n_edges": 200000,
   "tgn_saga": 0.943,
@@ -111,7 +111,7 @@
  },
  {
   "domain": "healthcare",
-  "cmd": "./target/release/saga generate --domain healthcare --edges 2000000 --no-anomalies --seed 42 --out ./scratch/work_down_after/healthcare --quiet",
+  "cmd": "./target/release/saga generate --domain healthcare --edges 2000000 --no-anomalies --seed 42 --out $WORK/work_down_after/healthcare --quiet",
   "n_nodes": 26162,
   "n_edges": 200000,
   "tgn_saga": 0.972,

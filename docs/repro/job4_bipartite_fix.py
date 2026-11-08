@@ -11,9 +11,9 @@ import numpy as np
 sys.path.insert(0, "./python")
 from saga_eval import load, stats as st, metrics_advanced as adv
 
-REPO = "./"
+REPO = "."
 SAGA = f"{REPO}/target/release/saga"
-SP = "./scratch"
+SP = "$WORK"
 CAP, SEED = 2_500_000, 42
 
 DATASETS = [

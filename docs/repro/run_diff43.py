@@ -4,7 +4,7 @@ sys.path.insert(0, "./python")
 from saga_eval.detector import detect_auc
 
 SAGA = "./target/release/saga"
-SCRATCH = "./scratch"
+SCRATCH = "$WORK"
 OUT = os.path.join(SCRATCH, "d_run")
 EDGES = 10_000_000
 PI = 0.05

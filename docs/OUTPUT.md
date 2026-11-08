@@ -1,4 +1,4 @@
-# SAGA output format & loaders
+# Saga Turbo output format & loaders
 
 Every `saga generate` run writes a self-describing output directory. This page
 documents the layout and gives copy-paste loaders for PyG, DGL, Neo4j, igraph
@@ -11,7 +11,8 @@ out/
   edges_00000.parquet, edges_00001.parquet, …   # the temporal edge stream, sharded
   nodes_<entity_type>.parquet                    # one table per entity type
   ground_truth.json                              # omniscient per-instance anomaly record
-  labels_nodes.csv                               # per-node anomaly labels (actors)
+  labels_nodes.csv                               # per-node anomaly labels (actors, with role)
+  node_states.parquet                            # state trajectory (only with --state-trajectory)
   saga_meta.json                                 # config + seed + version + host probe + result
   saga_stats.json                                # single-pass introspection report
   metrics.prom                                   # Prometheus exposition of run self-metrics
@@ -30,12 +31,13 @@ With `--format csv` the edge shards are `edges_*.csv` and nodes are a single
 | `label` | string (dict) | **ground-truth intent**: `normal` or an anomaly intent |
 | `anomaly_id` | int64 | **ground-truth instance id**: `-1` for normal, else the campaign/incident that caused this edge — joins to `ground_truth.json` |
 | *(domain attrs)* | float64 / string | per-event attributes; **null where not applicable** to that event type |
+| `t_end` | int64 | end time, unix seconds: `t + duration` for event types whose rule declares `duration_attr` (cyber flows, transport traversals and trips, healthcare prescriptions and dispensings), else `t`. Present only when the domain declares a duration. |
 
 Edges are written in non-decreasing `t` order within each shard, and shards are
 ordered by name, so concatenating them in filename order yields a globally
 time-sorted stream.
 
-`label` is the generative cause, not a detector's guess — the central SAGA
+`label` is the generative cause, not a detector's guess — the central Saga Turbo
 property. The exact per-intent counts are in `saga_stats.json`
 (`label_introspection`).
 
@@ -90,15 +92,15 @@ neo4j-admin database import full --nodes=out/nodes.csv --relationships=out/edges
 
 ## Reproducibility
 
-`saga_meta.json` records the seed, full config, SAGA version, git commit and the
+`saga_meta.json` records the seed, full config, Saga Turbo version, git commit and the
 host probe. Re-running with the same seed + config + version reproduces the
 output **bit-for-bit**, independent of thread count (`--threads`).
 
 ## Ground truth (`ground_truth.json` + `labels_nodes.csv`)
 
-Because SAGA *is* the mechanism, the ground truth is the full causal record —
+Because Saga Turbo *is* the mechanism, the ground truth is the full causal record —
 not just a binary label (§3, §11b). This is what a real-data curator can never
-provide and is SAGA's core differentiator.
+provide and is the main difference from topology generators.
 
 `ground_truth.json`:
 ```json
@@ -118,8 +120,32 @@ detector evaluation by **typology** (intent), **difficulty** (camouflage),
 **community** (placement), **time window**, and **cascade** membership — exact
 and free.
 
-`labels_nodes.csv` (`node_id,intent,kind,anomaly_id,camouflage,community`):
+`labels_nodes.csv` (`node_id,intent,kind,anomaly_id,camouflage,community,role`):
 per-NODE labels for the anomaly actors, for node-level detection benchmarks.
+The member lists are complete. `role` is `operator` for the member that runs
+the scheme (the centre of a hub stage or the collector of a fan-in stage),
+`affected` for a failure's entity, else `member`.
+
+## Node dynamics (`--node-dynamics`)
+
+Each entity type may declare a `lifecycle` in its rule base. With the flag,
+node `i` of a type (in id order, which is the topology's construction order)
+exists from t = 0 if `i / n < initial_fraction`, else it is born at the matching
+point of a uniform ramp over the span; it dies `lifetime_days` after birth.
+No edge is emitted outside a node's lifetime, at either end. The node tables
+gain `birth_t` and `death_t` (unix seconds; `death_t` is null for nodes that
+never die). Birth and death are pure functions of the seed and the node id, so
+the output stays identical for any thread count. Without the flag the
+population is fixed and the output is unchanged.
+
+## State trajectory (`--state-trajectory`)
+
+`node_states.parquet` (`node`, `t`, `var`, `value`): the initial value of
+every state cell at the epoch, then, after each L-block merge, the new value
+of every cell the block changed, stamped with the block end. Each row is a
+cell of a merged snapshot, so the table is identical for any thread count.
+The last row of each (node, var) equals the final value in the node table.
+Sharded runs need `--exchange-dir` for this table.
 
 ## Distributed generation (sharding)
 

@@ -1,6 +1,6 @@
 import json, numpy as np
 
-S = "./scratch"
+S = "$WORK"
 r42 = json.load(open(f"{S}/diff_raw.json"))
 r43 = json.load(open(f"{S}/diff_raw_seed43.json"))
 DELTAS = [0.0, 0.25, 0.5, 0.75, 1.0]

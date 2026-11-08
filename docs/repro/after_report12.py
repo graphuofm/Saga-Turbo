@@ -2,7 +2,7 @@
 """Render JOB1/JOB2 after-fix tables + MATCHES/DRIFTED vs the pre-fix baselines."""
 import json
 
-SP = "./scratch"
+SP = "$WORK"
 after = json.load(open(f"{SP}/fidelity_after.json"))
 before = json.load(open(f"{SP}/before_snapshot/before_fidelity.json"))
 bmap = {r["real"]: r for r in before}

@@ -1,7 +1,7 @@
 #!/bin/bash
 # Single-machine scale curve to 1B edges (finance), measure wall/RSS/throughput, delete each.
-cd ./
-SP=./scratch
+cd .
+SP=$WORK
 BIN=./target/release/saga
 OUT=$SP/scalecurve.txt
 : > $OUT

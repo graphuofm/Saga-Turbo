@@ -5,9 +5,9 @@ sys.path.insert(0,"./python")
 import numpy as np
 from saga_eval.stats import compute_stats
 from saga_eval.compare import compare
-sys.path.insert(0,"./scratch")
+sys.path.insert(0,"$WORK")
 from anom import load_elliptic, load_saga
-S="./scratch"
+S="$WORK"
 
 def sub(src,dst,t,lab,mode):
     m=np.isin(src,np.nonzero(lab==1)[0]); m2=np.isin(dst,np.nonzero(lab==1)[0])

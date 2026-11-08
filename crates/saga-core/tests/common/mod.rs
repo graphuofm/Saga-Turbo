@@ -61,6 +61,7 @@ pub fn domain_params(
         threads,
         block_len_days,
         guards_enabled: guards,
+        state_behavior: false,
         anomaly_rate: None,
         anomaly_difficulty: None,
         anomaly_type_mix: Vec::new(),
@@ -72,6 +73,8 @@ pub fn domain_params(
         exchange_dir: None,
         exchange_timeout_s: 300,
         calibrate_passes: 0,
+        node_dynamics: false,
+        state_trajectory: false,
     }
 }
 

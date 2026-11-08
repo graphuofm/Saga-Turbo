@@ -30,7 +30,11 @@
 //!   * exchange_1m_two_processes_equal_single (union == single, 887,156 edges)
 //! Every pinned value below was computed from the binary on 2026-08-21
 //! (i9-13900K, Ubuntu 22.04); see docs/VERIFICATION_MATRIX.md
-//! "Regression suite".
+//! "Regression suite". Re-pinned 2026-11-07 for three writer-only changes,
+//! with every logical digest and edge count unchanged: labels_nodes.csv
+//! gained a `role` column and ground_truth.json an `operator` field (all
+//! domains), and the edges of cyber, healthcare and transport gained the
+//! `t_end` column (their rules declare a duration attribute).
 
 use std::collections::HashMap;
 use std::path::{Path, PathBuf};
@@ -50,48 +54,48 @@ const PIN_1M: [(&str, &str, &str, &str, &str, u64); 6] = [
     (
         "finance",
         "5893b7aac3dfa4e953389ddb8850d55babe8f59c0908c6027af3a0a951fdb657",
-        "334ba9ab03befa008508f054ed11c833de3cbefed53c63440b49f55d245955c9",
-        "a231a0d2148567d020c4dee3f68ee9513d3300dab370d7c20f810dfe46b52206",
+        "d82ee873623d13a70440eafaf6188f408d08788fa59fee351dfa6bf72c92afae",
+        "9b1396638c5f133403c279c3f9479d31303f50938e226600d16da2877ff18e1b",
         "a94e44c674178bbdb5cf383f2081f7aed4bb2f3d562efeb5cbe793605396e925",
         998371,
     ),
     (
         "crypto",
         "9cb42c182962c420f691c256f0703bbd86af9dc2919f369fb8db8abd37a8f42c",
-        "d8104bf5a60a23528f786df9bbc2456b5a2ae2d4d673076ab7102d20a13743ae",
-        "82d361e01c7b9a5c7a5d8028c0ed28043ddff6719f8fe009414a4857ea09dfba",
+        "e68a70f4de5915bed73abbf619af6ab7e6b1a810ecc78362fefa4503b47c26d0",
+        "d8448369d64666abb9664f77e1b5c2303566a0a0327752213662aaa61dbcfd7a",
         "072cbc88938746a37396cbe9fcbf7b04c3833fef8256eb5463d2f7d0dc189409",
         981636,
     ),
     (
         "cyber",
-        "288479830e781b731328786c094eaa5a85ec26d140e73b8a602e2a197305a58f",
-        "3395dcd929d1066c5df627b028accaeaba232e9cf621fab7b68e83b56fac307f",
-        "43399d8a00daaaea449b90d2c92ba47fc6dc03d6de224162531a075448661e19",
+        "dd4cdbaf7fe22a6018137539c6ffa03abe86bc9ed06a4c88cd69f67f7e0586e4",
+        "319472e0bbca451daaed04fab733ab3b560628e004d9df30a0aedaa26eb60570",
+        "851b32840b856c9a99003fd48a7b8484ebeed5e61320df5110333e2af4bfa604",
         "ca00c2e6d93ca3d5c1098f970728e869c2e0384b8011f4199f3ab3ed9a678768",
         993400,
     ),
     (
         "ecommerce",
         "e655061634f06d3a5494f71ae4b6c1956a342d8b2796707c4712e09a028a73e2",
-        "e503581b5d472fb983c5a9edd8811e3c4cc9be79d92ac5cd48d3dfc97f645830",
-        "067476482702b5e345ed12af3d691a54f8a3dc6c8ca13ece18f797f4dcb1a1b7",
+        "a3c0f918a775f66e00fb606205f0193a49ec569177bad5b5f0a6dc41693fc2b1",
+        "0b047d55070a0b5d0f774aad8a3eaf1f2de5d2428cc4e9c804aacad710f51c1e",
         "fe8683737fed13ef5032d8e559cf43d5e17d10217694bf5daafca08a73a4a184",
         997103,
     ),
     (
         "healthcare",
-        "efe4e66cc613c1e4fb136848b3ec5ba983b17efd47d032558897cf8a18685538",
-        "266b05f3e93d764b49882d94bf107f94b317c67c358bdb812fb40681af7d52bf",
-        "9657e70e84f788357480027a746e762aea872904dda3e95f56413879484dc9fe",
+        "30dde6f7d63ea6c35be230fa5b33ec884cc6e300900e8a10247c57e1cce5ffb4",
+        "1b351c944def87c1c16f7dc0eb35a27412eb0116b18d4e435b3175bfd428214e",
+        "7024868b9393e68957c07b64a2d62346538d987466baf86f3fb6b272216f412c",
         "c3c1f93fbc67f141c93801bd7bd7700cdab45aa2628ac3ccb52b5c2c339dd870",
         993791,
     ),
     (
         "transport",
-        "78f81253944b05f42db19ee7d4bd1b962235176a634fb132065f94daf323120d",
-        "99297fe455c034921f302dab4d3d523c61c3f3eeb56cd9335460d1bb99332b53",
-        "5adb949fdd3c4a6a7b4bea8ba4c01d2d2ad9c45663ccdc1174741759881c33b2",
+        "85dc49d0cbcaf2bce650a0b55fe58809f8010af51f712d6b4be5c313f5f504c9",
+        "cd264ffe77784c35b7b58074389dd80f5665490c4f2511eb4c90a402ddd58cae",
+        "81c38fa555c7098e377484e0c800e5508041d0101f61becf271d2203fb032eca",
         "a44e8f6096d700b1656711344ac9186d67154641781290960aa52ee2b161d358",
         998236,
     ),

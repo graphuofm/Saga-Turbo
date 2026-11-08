@@ -88,6 +88,25 @@ pub struct EntityType {
     /// Mutable simulation state variables.
     #[serde(default)]
     pub state: Vec<StateVar>,
+    /// Optional node lifecycle (birth and death). Applied only when the run
+    /// enables node dynamics; absent, every node of this type exists for the
+    /// whole span. Birth follows the topology's construction order (the
+    /// first-built nodes, which preferential attachment makes the hubs, exist
+    /// from t = 0), so it is a pure function of the seed and the node id.
+    #[serde(default)]
+    pub lifecycle: Option<Lifecycle>,
+}
+
+/// Node lifecycle of one entity type (see [`EntityType::lifecycle`]).
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Lifecycle {
+    /// Fraction of the type's nodes that exist at t = 0, in (0, 1]. The rest
+    /// are born in construction order, uniformly over the span.
+    pub initial_fraction: f64,
+    /// Optional lifetime in days from birth; absent means nodes never die.
+    #[serde(default)]
+    pub lifetime_days: Option<Distribution>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -219,9 +238,54 @@ pub struct EventType {
     /// block length L. Only active when the run enables guards.
     #[serde(default)]
     pub guard: Option<EventGuard>,
+    /// Optional state-conditioned behavior switch: while the SRC's own state
+    /// var is below a threshold, the agent thins its own event stream and
+    /// draws attributes from different samplers. Unlike the guard (which only
+    /// suppresses) this changes what the emitted event looks like. Read
+    /// against the block-start snapshot, so it reacts with a lag of at most L.
+    #[serde(default)]
+    pub switch: Option<EventSwitch>,
+    /// Optional name of a numeric attribute of this event that holds its
+    /// duration. The output then carries an end time
+    /// `t_end = t + duration * duration_unit_s`; events without one have
+    /// `t_end = t`.
+    #[serde(default)]
+    pub duration_attr: Option<String>,
+    /// Seconds per unit of `duration_attr` (1 for seconds, 86400 for days).
+    #[serde(default = "one_f64")]
+    pub duration_unit_s: f64,
+}
+
+impl EventType {
+    /// The duration column and its unit in seconds, if declared.
+    pub fn duration(&self) -> Option<(String, f64)> {
+        self.duration_attr.clone().map(|a| (a, self.duration_unit_s))
+    }
 }
 
 /// A grounded own-state guard on an event (see [`EventType::guard`]).
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct EventSwitch {
+    /// SRC state var the switch reads (own state only, like the guard).
+    pub src_var: String,
+    /// The switch is active while `src_state[src_var] < below`.
+    pub below: f64,
+    /// Thinning factor in (0,1]: while the switch is active the agent emits
+    /// only this fraction of its candidate events, so the declared rate is
+    /// the agent's MAXIMUM rate and state lowers it. 1.0 keeps every event.
+    #[serde(default = "one_f64")]
+    pub rate_multiplier: f64,
+    /// Attribute samplers that replace the defaults while the switch is
+    /// active (for example smaller transfer amounts near a zero balance).
+    #[serde(default)]
+    pub attr_overrides: Vec<AttrOverride>,
+}
+
+fn one_f64() -> f64 {
+    1.0
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct EventGuard {
@@ -906,10 +970,40 @@ impl RuleBase {
                 check_dist(&sv.init, &format!("entity `{}` state `{}`", et.name, sv.name))
                     .map_err(|m| RuleBaseError::Invalid(self.meta.id.clone(), m))?;
             }
+            if let Some(lc) = &et.lifecycle {
+                if !(lc.initial_fraction.is_finite()
+                    && lc.initial_fraction > 0.0
+                    && lc.initial_fraction <= 1.0)
+                {
+                    return err(format!(
+                        "entity `{}`: lifecycle initial_fraction must be in (0, 1]",
+                        et.name
+                    ));
+                }
+                if let Some(d) = &lc.lifetime_days {
+                    check_dist(d, &format!("entity `{}` lifecycle lifetime_days", et.name))
+                        .map_err(|m| RuleBaseError::Invalid(self.meta.id.clone(), m))?;
+                }
+            }
         }
         for ev in &self.event_types {
             for a in &ev.attributes {
                 self.check_attr_kind(&a.kind, &format!("event `{}` attr `{}`", ev.name, a.name))?;
+            }
+            if !(ev.duration_unit_s.is_finite() && ev.duration_unit_s > 0.0) {
+                return err(format!("event `{}`: duration_unit_s must be finite > 0", ev.name));
+            }
+            if let Some(da) = &ev.duration_attr {
+                let numeric = ev
+                    .attributes
+                    .iter()
+                    .any(|a| &a.name == da && matches!(a.kind, AttributeKind::Numeric { .. }));
+                if !numeric {
+                    return err(format!(
+                        "event `{}`: duration_attr `{da}` must name a numeric attribute of the event",
+                        ev.name
+                    ));
+                }
             }
         }
         for b in &self.behaviors {

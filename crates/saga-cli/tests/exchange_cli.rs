@@ -34,6 +34,7 @@ fn core_params(guards: bool) -> saga_core::GenParams {
         threads: 2,
         block_len_days: 1.0,
         guards_enabled: guards,
+        state_behavior: false,
         anomaly_rate: None,
         anomaly_difficulty: None,
         anomaly_type_mix: Vec::new(),
@@ -45,6 +46,8 @@ fn core_params(guards: bool) -> saga_core::GenParams {
         exchange_dir: None,
         exchange_timeout_s: 300,
         calibrate_passes: 0,
+        node_dynamics: false,
+        state_trajectory: false,
     }
 }
 

@@ -3,7 +3,7 @@
 Re-measurement of `paper/main.tex` Table `tab:multidomain` (the per-domain NORMAL
 graph structural stats) on the FINAL fixed engine, so the whole table sits on one
 consistent engine for AGORA's camera-ready. Measurement log only: it does NOT touch
-`paper/main.tex`, `paper.frozen/`, `../agora-anon`, or `docs/PAPER_SPEC.md`,
+`paper/main.tex`, `paper.frozen/`, `$ARTIFACT`, or `docs/PAPER_SPEC.md`,
 and nothing is committed. Every value is from a real seed-42, anomalies-off run.
 
 Engine build: `target/release/agora` (the pre-built final engine, built 01:06; NOT

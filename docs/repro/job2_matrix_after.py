@@ -11,16 +11,16 @@ from saga_eval.compare import compare
 from saga_eval import baselines as bl
 
 HOME = os.path.expanduser("~")
-SP = "./scratch/mat_after"
+SP = "$WORK/mat_after"
 BIN = "./target/release/saga"
 CAP = 1_500_000
 os.makedirs(SP, exist_ok=True)
 
 PAIRS = [
-    ("finance",   "email-Eu",    f"./realdata/snap-email-eu/email-Eu-core-temporal.txt", {}, False),
+    ("finance",   "email-Eu",    f"{HOME}/saga-sigmod/realdata/snap-email-eu/email-Eu-core-temporal.txt", {}, False),
     ("crypto",    "wiki-talk",   f"{HOME}/.cache/zord/wiki-talk-temporal.txt.gz", {}, False),
     ("cyber",     "sx-superuser",f"{HOME}/.cache/zord/sx-superuser.txt.gz", {}, False),
-    ("ecommerce", "tgbl-review", f"./realdata/tgbl-review/tgbl-review_edgelist_v2.csv",
+    ("ecommerce", "tgbl-review", f"{HOME}/saga-sigmod/realdata/tgbl-review/tgbl-review_edgelist_v2.csv",
                     dict(src_col="source", dst_col="target", t_col="ts"), False),
     ("transport", "sx-askubuntu",f"{HOME}/.cache/zord/sx-askubuntu.txt.gz", {}, True),
     ("healthcare","sx-mathoverflow",f"{HOME}/.cache/zord/sx-mathoverflow.txt.gz", {}, True),

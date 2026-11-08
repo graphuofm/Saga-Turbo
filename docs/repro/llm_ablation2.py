@@ -17,8 +17,8 @@ from saga_eval.load import load_real, load_saga
 from saga_eval.stats import compute_stats
 from saga_eval.compare import compare
 
-ROOT = Path("./")
-SP = Path("./scratch")
+ROOT = Path(".")
+SP = Path("$WORK")
 BIN = str(ROOT / "target/release/saga")
 CORPUS = ROOT / "corpus"
 DESC = ("US retail banking payment network with anti-money-laundering monitoring: "

@@ -5,7 +5,7 @@ Re-measurement of the 7-row fidelity-vs-real table (`paper/main.tex`
 (`target/release/agora`, the pre-built binary; NOT rebuilt this session). Every
 number below is from a real seed-42 run. All generated graphs were deleted
 immediately after scoring. This is a measurement log only: it does NOT touch
-`paper/main.tex`, `paper.frozen/`, `../agora-anon`, or
+`paper/main.tex`, `paper.frozen/`, `$ARTIFACT`, or
 `docs/PAPER_SPEC.md`, and nothing is committed.
 
 ## 1. Protocol (reproduced exactly from the submission driver)

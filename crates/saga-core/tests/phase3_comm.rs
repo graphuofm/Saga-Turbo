@@ -21,6 +21,7 @@ fn params(block_len_days: f64) -> GenParams {
         threads: 8,
         block_len_days,
         guards_enabled: true,
+        state_behavior: false,
         anomaly_rate: None,
         anomaly_difficulty: None,
         anomaly_type_mix: Vec::new(),
@@ -32,6 +33,8 @@ fn params(block_len_days: f64) -> GenParams {
         exchange_dir: None,
         exchange_timeout_s: 300,
         calibrate_passes: 0,
+        node_dynamics: false,
+        state_trajectory: false,
     }
 }
 

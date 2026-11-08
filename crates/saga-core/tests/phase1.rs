@@ -70,6 +70,7 @@ fn params(threads: usize, block_len_days: f64, guards: bool) -> GenParams {
         threads,
         block_len_days,
         guards_enabled: guards,
+        state_behavior: false,
         anomaly_rate: None,
         anomaly_difficulty: None,
         anomaly_type_mix: Vec::new(),
@@ -81,6 +82,8 @@ fn params(threads: usize, block_len_days: f64, guards: bool) -> GenParams {
         exchange_dir: None,
         exchange_timeout_s: 300,
         calibrate_passes: 0,
+        node_dynamics: false,
+        state_trajectory: false,
     }
 }
 

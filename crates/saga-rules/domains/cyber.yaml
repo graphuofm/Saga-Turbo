@@ -37,6 +37,8 @@ entity_types:
   # Hosts: workstations, servers, domain controllers — power-law flow degree.
   - name: host
     population_weight: 0.55
+    # Node dynamics (--node-dynamics). Provenance: modeled, not sourced.
+    lifecycle: { initial_fraction: 0.9, lifetime_days: !log_normal { mu: 6.0, sigma: 1.0 } }
     attributes:
       - name: os
         kind: !categorical { values: [windows, linux, macos], weights: [0.70, 0.22, 0.08] }
@@ -65,6 +67,8 @@ entity_types:
   # Users/accounts: role, privilege, host affinity.
   - name: user
     population_weight: 0.28
+    # Node dynamics (--node-dynamics). Provenance: modeled, not sourced.
+    lifecycle: { initial_fraction: 0.9, lifetime_days: !log_normal { mu: 6.5, sigma: 1.0 } }
     attributes:
       - name: role
         kind: !categorical { values: [employee, admin, service_account, contractor], weights: [0.74, 0.06, 0.14, 0.06] }
@@ -81,6 +85,8 @@ entity_types:
   # Processes: parent/child exec tree, integrity level.
   - name: process
     population_weight: 0.14
+    # Node dynamics (--node-dynamics). Provenance: modeled, not sourced.
+    lifecycle: { initial_fraction: 0.3, lifetime_days: !log_normal { mu: 0.0, sigma: 1.5 } }
     attributes:
       - name: integrity
         kind: !ordinal { tiers: [low, medium, high, system], weights: [0.20, 0.58, 0.18, 0.04] }
@@ -139,6 +145,7 @@ relations:
 event_types:
   # Network flow host->host (CICFlowMeter-style; bimodal packet sizes).
   - name: flow
+    duration_attr: duration_s
     src: host
     dst: host
     # Grounded egress guard (consistency model section 13): a flow is

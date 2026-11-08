@@ -441,3 +441,176 @@ The guards-on run's 817 final-state violations are the 130 staleness leaks
 plus unguarded subtracting events (purchases and withdrawals). These are the
 numbers quoted in paper-vldb/main.tex (sec:impl, guards paragraph).
 
+
+---
+
+## External generator baselines (2026-08-24)
+
+Five generators run end to end on one target, `High_School11` (126 nodes,
+28,560 records, 5,609 distinct timestamps). Provenance and every upstream
+source repair: `docs/baseline_survey.md`. Measured numbers, caveats, and the
+Task A / Task B split: `docs/baseline_results.md`. Raw drivers, generated edge
+lists, and score dumps: `docs/repro/baselines/`.
+
+| generator | task | ran | total wall | peak RSS | composite fidelity |
+|---|---|---|---:|---:|---:|
+| SAGA | A (prior-driven) | yes | 0.04 s | 0.016 GB | 0.803 |
+| DYMOND | B (fitted) | yes, 2 patches | 182 s | 0.30 GB | 0.788 |
+| TagGen | B (fitted) | yes, 5 patches | 576 s | 1.40 GB | 0.684 |
+| TIGGER | B (fitted) | yes, 2 patches | 1400 s | 3.74 GB | 0.546 |
+| ETN-gen | B (fitted) | yes, unpatched | 7.6 s | 0.18 GB | 0.481 |
+| STM | - | no public implementation located | - | - | - |
+
+The composite is not a clean ranking of the methods: three of the four fitted
+generators are discrete-snapshot models emitting 12 to 30 distinct timestamps,
+so the inter-event term penalizes their model class, and ETN-gen at its
+documented parameter emitted 1,713 edges against the target's 28,560. Both are
+stated in `docs/baseline_results.md` §3 and in the paper.
+
+### Timestamp-protocol audit (review §9.1)
+
+Static generators carry no time, so the assignment protocol is now an explicit
+parameter rather than an unstated default
+(`python/saga_eval/baselines.py::set_time_protocol`). On CollegeMsg, composite
+fidelity under `uniform` versus `renewal` (inter-event gaps bootstrapped from
+the real gap distribution): configuration model 0.816 -> 0.836, Erdos-Renyi
+0.558 -> 0.578, Watts-Strogatz 0.557 -> 0.564, R-MAT 0.705 -> 0.707,
+Barabasi-Albert 0.642 -> 0.643, SAGA 0.795 unchanged.
+
+Under the fairer protocol the configuration model scores above SAGA. That is
+reported in the paper rather than suppressed. Full numbers:
+`docs/repro/baselines/protocol_audit.txt`.
+
+### C2ST calibration (2026-08-24)
+
+The classifier two-sample test in `python/saga_eval/metrics_advanced.py` was
+checked against its own null before the AUC is quoted as a limitation.
+
+- **Null.** Computing the edge features once on the whole real CollegeMsg graph
+  and splitting the feature rows at random gives AUC 0.506 / 0.502 / 0.500
+  (seeds 0/1/2). The test is calibrated; there is no leak.
+- **Split artifact, do not use.** Splitting the real *edge list* in half and
+  computing features on each half separately gives AUC 0.992 to 0.998. This is
+  an artifact: degrees, inter-event gaps, and repeat rates are computed per
+  passed edge set, so halving the data changes their scale. It is not evidence
+  that the C2ST saturates, and must not be reported as a real-vs-real ceiling.
+- **Measured gap.** Saga vs real CollegeMsg: AUC 0.999. Ablation: no single
+  feature accounts for it (removing any one leaves 0.996 to 0.999); degrees and
+  the log inter-event gap each reach 0.867 to 0.871 alone; `repeat` alone is
+  0.502, that is, repeat structure matches. The separation is a distributional
+  shape gap spread over degree and timing, not one broken component.
+- **Field context.** No generator measured closes it: configuration model 0.915
+  (handed the target's degree sequence), Barabasi-Albert 0.995, R-MAT 0.997,
+  Erdos-Renyi 1.000, Watts-Strogatz 1.000.
+
+Unlike the composite-fidelity band (which does have a valid real-vs-real
+reference, since both sides are scored the same way), the C2ST has no such
+ceiling argument available. The paper states the gap as real.
+
+### State-conditioned channel ablation + build-config determinism (2026-08-24)
+
+Prompted by the second review's §3.1, we ran the guard-only / switch-only /
+both decomposition. It found a real gating bug: `sim.rs` computed
+`buffered = guards_enabled || exchanger.is_some()`, but the behavior switch
+lives in the L-block sweep that only runs when `buffered` is true, so
+`--state-behavior` alone was a silent no-op. Fixed by including
+`params.state_behavior` in that condition. 111 tests and `scripts/regress.sh`
+still pass; guards-on and guards-off byte digests are unchanged, so no
+previously reported number moves.
+
+Ablation after the fix (finance, 20k nodes, 2e5 edges, 30 d, seed 42):
+
+| mechanisms on | L=0.5 | L=2 | L=span | edges identical across L? |
+|---|---:|---:|---:|---|
+| none | 202,821 | 202,821 | 202,821 | yes, one digest |
+| guard only | 179,907 | 178,417 | 193,127 | no |
+| switch only | 170,385 | 171,002 | 168,533 | no |
+| guard + switch | 169,771 | 169,336 | 167,783 | no |
+
+Each mechanism is independently L-sensitive; with none enabled the output is
+bit-identical across L, which is the RNG/L decoupling claim.
+
+Build-configuration determinism (same host, guarded 2e5-edge finance run):
+default release, `-C opt-level=2`, `-C target-cpu=native` (FMA/AVX-512), and
+`-C lto=off -C codegen-units=16` all give edge digest `52ff130c747e564a` and
+node-state digest `864821743e3c92fe`. Node state is the floating-point
+artifact, so this exercises the contraction/reassociation freedom
+Assumption 1 excludes. Only one rustc toolchain (1.95.0) was available, so the
+paper says "build configurations", not "compilers".
+
+## Saga demonstration rerun on the same host (2026-08-28)
+
+Source: github.com/graphuofm/SAGA (the PVLDB 2026 demo), cloned to
+/tmp/baselines/SAGA-demo, run with `saga_cli.py --domain finance --seed 42`.
+Its pipeline is four phases: (1) static Barabasi-Albert skeleton (igraph);
+(2) slice skeleton edges into macro blocks and pack tasks, one task per edge
+(`任务调度完成: 5000 个任务` for 5,000 edges); (3) semantic injection: rules +
+LLM give each edge attributes, intent, and a clock time inside its block,
+seeing only initial balances; (4) global sort by clock time and serial
+replay; on insufficient balance the amount is rewritten to 50-80% of the
+available balance (`state_machine.py:164`), never deleted. The run is seeded
+and reproducible.
+
+### Mock backend (model call stubbed out; measures Phases 1, 2, 4)
+
+| nodes | days | edges | wall | peak RSS | amounts rewritten in Phase 4 | labeled anomalous |
+|---:|---:|---:|---:|---:|---:|---:|
+| 1,000 | 30 | 5,000 | 0.74 s | 0.14 GB | 4,662 (93.2%) | 500 (10.0%) |
+| 10,000 | 60 | 50,000 | 2.14 s | 0.32 GB | 47,657 (95.3%) | 5,000 (10.0%) |
+| 100,000 | 90 | 500,000 | 20.05 s | 2.32 GB | 479,253 (95.9%) | 50,000 (10.0%) |
+
+The anomaly count is exactly the configured `--anomaly-rate 0.1` quota at
+every size; the rewritten-amount fraction is what "state reconciled after
+the fact" costs. These two numbers are quoted in the paper (Sec. 2).
+
+### Saga Turbo at the demo's largest size, same host
+
+`saga generate --domain finance --nodes 100000 --edges 500000 --time-span 90
+--seed 42 --format csv`: 498,651 edges in 0.35 s, 55 MB peak RSS (guards
+off); 450,512 edges in 0.32 s, 59 MB with `--guards --block-len-days 1`.
+Versus the demo's mock pipeline: 57x wall, 42x memory. Quoted in Sec. 7.1.
+
+### Real model backend (Ollama, qwen2.5:3b, the model the demo's own SLURM
+script uses; RTX A5000 24 GB; `SAGA_LLM_BACKEND=ollama`, concurrency 8)
+
+Note: `--mode ollama` on the CLI does not switch the backend; the env var
+`SAGA_LLM_BACKEND` does (config.py:80). The first attempt with the flag alone
+ran mock (log: `LLMCaller 初始化: backend=mock`) and was discarded.
+
+1,000 nodes / 5,000 edges: one model call per edge, GPU at 93-94%
+utilization; wall time 1,709.91 s (28.5 min), RSS 156 MB, concurrency 8; Phase 4 rewrote 3,255 of 5,000 amounts (65.1%), anomalies 500 (10.0%, the requested quota). Per edge: 0.34 s. Same size with the model stubbed out: 0.74 s, so the model is roughly 2,300x the rest of the pipeline on this host. Log: llm_1k_real.log (deleted with the outputs after recording).
+
+## LLM-size ablation of the RAG compiler (2026-07-18, docs/repro/llm_ablation*.{py,json})
+
+Full pipeline with only the drafter+extractor model swapped (corpus, retrieval,
+seed, size fixed; ground truth 31 CFR 1010.311 / FinCEN):
+
+| model | valid | ctr_threshold | sar_threshold | structuring_upper | fidelity vs email-Eu-core |
+|---|---|---|---|---|---|
+| qwen2.5:0.5b | yes | 10,000 | 5,000 | 10,000 | 0.802 |
+| qwen2.5:1.5b | yes | 10,000 | 5,000 | 10,000 | 0.802 |
+| qwen2.5:3b | yes | 10,000 | 5,000 | 10,000 | 0.802 |
+| qwen2.5:7b | yes | 10,000 | 5,000 | 10,000 | 0.802 |
+| qwen2.5:14b | yes | 10,000 | 5,000 | 10,000 | 0.802 |
+
+v2 (raw LLM draft only, no grounding/template): json_ok fails at 0.5b; lint and
+Rust validation fail at every size 0.5b-14b, fidelity N/A. Conclusion stated in
+the paper (S4.2): grounding plus the schema validator, not model size, carry the
+result. Paper sentence added 2026-08-30; 0.802 appears only there.
+
+## Claim-to-evidence backup for the strong statements kept after the 2026-08-30 editorial review
+
+Review (saga_turbo_review.pdf, 95 annotations, all style-level, zero technical
+objections): 34 wording fixes applied, 61 claim-weakening suggestions rejected.
+Backing for each contested claim, for rebuttal use:
+
+| paper claim | evidence |
+|---|---|
+| the LLM appears only in offline rule compilation | no llm/ollama/openai/http match anywhere in crates/*/src; model lives in python/saga_rag, runs once offline |
+| new domain is zero-code (swap the RAG corpus) | no domain name appears in saga-core/saga-sample/saga-host sources; six domains are YAML in crates/saga-rules/domains/ only |
+| reads are defined, not a race | sim.rs frozen block-start snapshot, own-cell reads; merged at boundaries in canonical order |
+| randomness keyed by identity, never schedule | rng.rs stream(master_seed, purpose, agent, day); tests streams_are_deterministic, streams_differ_across_ids_and_purposes |
+| distribution changes nothing but wall time | 12/12 sharded matrix runs byte-identical to single-machine; iTiger cluster runs hash-identical (CONSISTENCY_MODEL.md) |
+| every property is a measurement | 62 saga-core tests + scripts/regress.sh pinned gate; each paper claim has a row in this file |
+| model-size insensitivity of the compiler | LLM-size ablation section above (0.5B-14B, params and fidelity identical) |
+| timing not cherry-picked | protocol: run twice, keep faster, worst rep spread ~3%, counts identical (Track 2 method) |

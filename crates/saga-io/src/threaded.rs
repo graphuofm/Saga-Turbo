@@ -39,6 +39,7 @@ use saga_core::{EventBatch, EventSink, NodeBatch};
 enum Msg {
     Batch(Arc<EventBatch>),
     Nodes(NodeBatch),
+    Table(saga_core::AuxTable),
 }
 
 pub struct ThreadedSink {
@@ -84,6 +85,7 @@ impl ThreadedSink {
                     match msg {
                         Msg::Batch(b) => inner.write_batch(&b)?,
                         Msg::Nodes(n) => inner.write_nodes(&n)?,
+                        Msg::Table(t) => inner.write_table(&t)?,
                     }
                 }
                 inner.finish()
@@ -202,6 +204,16 @@ impl EventSink for ThreadedSink {
         self.flush_pending()?;
         if let Some(tx) = &self.tx {
             tx.send(Msg::Nodes(batch.clone()))
+                .map_err(|_| anyhow::anyhow!("writer thread stopped early"))?;
+        }
+        Ok(())
+    }
+
+    fn write_table(&mut self, table: &saga_core::AuxTable) -> anyhow::Result<()> {
+        // Keep channel messages in delivery order: edges before this chunk.
+        self.flush_pending()?;
+        if let Some(tx) = &self.tx {
+            tx.send(Msg::Table(table.clone()))
                 .map_err(|_| anyhow::anyhow!("writer thread stopped early"))?;
         }
         Ok(())

@@ -29,6 +29,10 @@ pub struct GenParams {
     /// false, guards are bypassed so the output is independent of L (the RNG/L
     /// decoupling proof). Default off preserves the pre-Phase-1 output.
     pub guards_enabled: bool,
+    /// Enable state-conditioned behavior switches (the Phase-B transducer:
+    /// thinning and attribute overrides driven by the block-start snapshot).
+    /// Off by default, so output is unchanged unless it is requested.
+    pub state_behavior: bool,
     /// Anomaly-axis overrides; `None` fields fall back to rule-base control.
     /// Axis 1 (prevalence) and axis 2 (difficulty):
     pub anomaly_rate: Option<f64>,
@@ -79,6 +83,17 @@ pub struct GenParams {
     /// guards-on outputs are byte-identical to the pre-section-17 engine.
     /// Requires `guards_enabled` and a whole-graph run (`shard_count == 1`).
     pub calibrate_passes: u32,
+    /// Node dynamics: apply each entity type's declared lifecycle (birth and
+    /// death). A node emits no event and is never chosen as a counterparty
+    /// outside its lifetime. Birth and death are pure functions of the seed and
+    /// the node id, so both theorems hold unchanged. Off by default: a fixed
+    /// population, byte-identical to the engine without lifecycles.
+    pub node_dynamics: bool,
+    /// Emit the node-state trajectory: the initial state, then after every
+    /// L-block merge the new value of every state cell the block changed,
+    /// stamped with the block end. Each row is a cell of a merged snapshot
+    /// S_b, so the table is schedule-independent by Theorem 1. Off by default.
+    pub state_trajectory: bool,
 }
 
 /// One columnar batch of generated temporal edges.
@@ -134,6 +149,10 @@ pub trait EventSink: Send {
     fn write_nodes(&mut self, _batch: &NodeBatch) -> anyhow::Result<()> {
         Ok(())
     }
+    /// A chunk of an auxiliary table (default: ignored).
+    fn write_table(&mut self, _table: &AuxTable) -> anyhow::Result<()> {
+        Ok(())
+    }
     /// Called once after the last event batch.
     fn finish(&mut self) -> anyhow::Result<()> {
         Ok(())
@@ -159,6 +178,10 @@ impl<A: EventSink, B: EventSink> EventSink for TeeSink<A, B> {
     fn write_nodes(&mut self, batch: &NodeBatch) -> anyhow::Result<()> {
         self.a.write_nodes(batch)?;
         self.b.write_nodes(batch)
+    }
+    fn write_table(&mut self, table: &AuxTable) -> anyhow::Result<()> {
+        self.a.write_table(table)?;
+        self.b.write_table(table)
     }
     fn finish(&mut self) -> anyhow::Result<()> {
         self.a.finish()?;
@@ -199,6 +222,49 @@ pub enum NodeColumn {
     Category { codes: Vec<u16>, names: Vec<String> },
 }
 
+/// One column of an auxiliary output table.
+#[derive(Debug, Clone)]
+pub enum TableColumn {
+    U64(Vec<u64>),
+    I64(Vec<i64>),
+    F64(Vec<f64>),
+    /// Dictionary-encoded strings.
+    Category { codes: Vec<u16>, names: Vec<String> },
+}
+
+impl TableColumn {
+    pub fn len(&self) -> usize {
+        match self {
+            TableColumn::U64(v) => v.len(),
+            TableColumn::I64(v) => v.len(),
+            TableColumn::F64(v) => v.len(),
+            TableColumn::Category { codes, .. } => codes.len(),
+        }
+    }
+    pub fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
+}
+
+/// A chunk of an auxiliary output table beside the edges and node tables:
+/// `node_labels` (node-level ground truth) and `node_states` (the state
+/// trajectory). A sink may receive several chunks of one table, always with
+/// the same schema, and appends them in order.
+#[derive(Debug, Clone)]
+pub struct AuxTable {
+    pub name: String,
+    pub columns: Vec<(String, TableColumn)>,
+}
+
+impl AuxTable {
+    pub fn len(&self) -> usize {
+        self.columns.first().map_or(0, |(_, c)| c.len())
+    }
+    pub fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
+}
+
 /// Periodic progress callback: (edges_so_far, fraction_complete).
 pub type ProgressFn<'a> = &'a mut dyn FnMut(u64, f64);
 
@@ -218,8 +284,8 @@ pub struct AnomalyRecord {
     /// Effective camouflage/difficulty in [0,1] that shaped this instance
     /// (the difficulty axis applied to the process). NaN if not applicable.
     pub camouflage: f64,
-    /// Node ids participating (ring members / affected entity). Capped sample
-    /// for very large instances; `n_members` is the true count.
+    /// Node ids participating (ring members / affected entity), complete.
+    /// The node_labels table carries the same membership with roles.
     pub members: Vec<u64>,
     pub n_members: u64,
     /// Placement community block index, if clustered (else -1).
@@ -229,6 +295,11 @@ pub struct AnomalyRecord {
     pub end_t: i64,
     /// True if spawned by a cascade from another instance.
     pub cascade: bool,
+    /// The member that runs the scheme, or -1: the centre of a hub (star
+    /// fan-out) stage, or the member a fan-in stage collects to. Gives the
+    /// `role` column of labels_nodes.csv (operator vs member).
+    #[serde(default = "minus_one")]
+    pub operator: i64,
 }
 
 /// What actually happened, for `saga_meta.json` and the end-of-run summary.
@@ -257,6 +328,20 @@ pub struct GenSummary {
     /// L -> 0. Both 0 when guards are disabled.
     #[serde(default)]
     pub overdraft_guarded: u64,
+    /// Behavior-switch telemetry: candidates whose switch condition held,
+    /// how many were thinned away by it, and how many were emitted with
+    /// switched attributes.
+    #[serde(default)]
+    pub switch_active: u64,
+    #[serde(default)]
+    pub switch_thinned: u64,
+    #[serde(default)]
+    pub switch_applied: u64,
+    /// Candidates whose switch decision differed from the event-serial
+    /// decision because the snapshot was stale (the transducer's analogue of
+    /// guard leakage; bounded by L).
+    #[serde(default)]
+    pub switch_misprofiled: u64,
     #[serde(default)]
     pub overdraft_violations: u64,
     /// Multi-process exchange telemetry (Phase 4); all 0 when no exchange ran.
@@ -308,6 +393,10 @@ pub struct GenSummary {
     pub calibration_uncorrected_fraction: f64,
     #[serde(default)]
     pub calibration_multipliers: Vec<(String, f64)>,
+}
+
+fn minus_one() -> i64 {
+    -1
 }
 
 fn f64_nan() -> f64 {

@@ -33,6 +33,8 @@ meta:
 entity_types:
   - name: user
     population_weight: 0.74
+    # Node dynamics (--node-dynamics). Provenance: modeled, not sourced.
+    lifecycle: { initial_fraction: 0.6, lifetime_days: !log_normal { mu: 5.0, sigma: 1.2 } }
     attributes:
       - name: kind
         kind: !categorical { values: [organic, paid, bot], weights: [0.93, 0.05, 0.02] }
@@ -59,6 +61,8 @@ entity_types:
 
   - name: product
     population_weight: 0.18
+    # Node dynamics (--node-dynamics). Provenance: modeled, not sourced.
+    lifecycle: { initial_fraction: 0.7, lifetime_days: !log_normal { mu: 5.0, sigma: 1.0 } }
     attributes:
       - name: category
         kind: !categorical { values: [electronics, home, beauty, books, apparel, supplements, toys], weights: [0.20, 0.18, 0.14, 0.12, 0.20, 0.08, 0.08] }
@@ -76,6 +80,8 @@ entity_types:
 
   - name: seller
     population_weight: 0.05
+    # Node dynamics (--node-dynamics). Provenance: modeled, not sourced.
+    lifecycle: { initial_fraction: 0.8, lifetime_days: !log_normal { mu: 6.0, sigma: 1.0 } }
     attributes:
       - name: tenure
         kind: !ordinal { tiers: [new, established, top_rated], weights: [0.30, 0.55, 0.15] }
@@ -90,6 +96,8 @@ entity_types:
   # Shared-fingerprint node for sockpuppet linkage (YelpChi R-U-R / device relation).
   - name: device
     population_weight: 0.03
+    # Node dynamics (--node-dynamics). Provenance: modeled, not sourced.
+    lifecycle: { initial_fraction: 0.6, lifetime_days: !log_normal { mu: 5.0, sigma: 1.2 } }
     attributes:
       - name: fp_type
         kind: !categorical { values: [residential_ip, mobile, datacenter_proxy, emulator], weights: [0.55, 0.32, 0.08, 0.05] }

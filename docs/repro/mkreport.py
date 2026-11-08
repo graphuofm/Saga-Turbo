@@ -1,5 +1,5 @@
 import json, os
-S="./scratch"
+S="$WORK"
 ell=json.load(open(f"{S}/elliptic_anom.json"))
 A=json.load(open(f"{S}/saga_anom_A.json"))
 B=json.load(open(f"{S}/saga_anom_B.json"))

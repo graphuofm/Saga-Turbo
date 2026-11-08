@@ -2,7 +2,7 @@
 # Throughput / scaling: finance, seed 42, sizes 1M 10M 100M. Wall + peak RAM + M/s.
 # Uses /usr/bin/time -v for wall clock and max RSS. Deletes each graph immediately.
 BIN=./target/release/saga
-SCR=./scratch
+SCR=$WORK
 OUT=$SCR/thrpt_gen
 RES=$SCR/thrpt_results.csv
 echo "edges,wall_s,maxrss_gb,engine_eps,engine_edges,loadavg1" > $RES

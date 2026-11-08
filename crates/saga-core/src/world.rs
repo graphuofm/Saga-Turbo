@@ -127,6 +127,19 @@ pub struct CompiledGuard {
 }
 
 /// Compiled event type: union-attr samplers + effects + optional guard.
+pub struct CompiledSwitch {
+    /// Entity type of the SRC (own-state read only).
+    pub entity: usize,
+    /// State var index the switch reads.
+    pub var: usize,
+    /// Active while the read value is below this.
+    pub below: f64,
+    /// Thinning factor in (0,1].
+    pub rate_multiplier: f64,
+    /// (union attr column, replacement sampler) applied while active.
+    pub overrides: Vec<(usize, DistSampler)>,
+}
+
 pub struct CompiledEvent {
     pub name: String,
     pub src_type: usize,
@@ -134,6 +147,7 @@ pub struct CompiledEvent {
     pub attrs: Vec<CompiledAttr>,
     pub effects: Vec<CompiledEffect>,
     pub guard: Option<CompiledGuard>,
+    pub switch: Option<CompiledSwitch>,
 }
 
 pub enum CompiledCounterparty {
@@ -208,7 +222,15 @@ pub struct World {
     pub popularity: Vec<(usize, AliasTable)>,
     /// Events/day rate multiplier that calibrates expected totals to target.
     pub rate_scale: f64,
+    /// Node lifetimes `[birth, death)` in unix seconds, indexed by global node
+    /// id. EMPTY unless the run enables node dynamics, in which case every
+    /// node is alive for the whole span and no lifecycle check runs.
+    pub birth: Vec<i64>,
+    pub death: Vec<i64>,
 }
+
+/// Bounded retries when a sampled counterparty is not alive.
+pub const ALIVE_RETRIES: u32 = 8;
 
 impl World {
     pub fn build(params: &GenParams) -> anyhow::Result<World> {
@@ -225,6 +247,33 @@ impl World {
         let behaviors = compile_behaviors(
             rb, &entities, &node_attrs, &skeletons, &events, &pop_index, params.seed,
         )?;
+
+        // Node dynamics: per-node lifetimes, then the effective activity of
+        // each behavior is its actors' activity weighted by the fraction of
+        // the span they are alive, so the calibration below still hits the
+        // edge budget with a growing (or shrinking) population.
+        let (birth, death) = if params.node_dynamics {
+            build_lifecycles(rb, &entities, params)?
+        } else {
+            (Vec::new(), Vec::new())
+        };
+        let mut behaviors = behaviors;
+        if !birth.is_empty() {
+            let lo = params.epoch_unix;
+            let hi = lo + (params.span_days * 86_400.0) as i64;
+            let span_s = (hi - lo).max(1) as f64;
+            for b in behaviors.iter_mut() {
+                b.activity_sum = b
+                    .actors
+                    .iter()
+                    .zip(&b.activity)
+                    .map(|(&a, &v)| {
+                        let alive = (death[a as usize].min(hi) - birth[a as usize].max(lo)).max(0);
+                        v as f64 * alive as f64 / span_s
+                    })
+                    .sum();
+            }
+        }
 
         // Closed-form calibration (§3): expected events at scale 1.0, then
         // scale so the expectation hits the target edge budget.
@@ -268,7 +317,50 @@ impl World {
             attr_dictionaries,
             popularity,
             rate_scale,
+            birth,
+            death,
         })
+    }
+
+    /// Whether node `id` exists at time `t` (always, without node dynamics).
+    #[inline]
+    pub fn alive(&self, id: u64, t: i64) -> bool {
+        self.birth.is_empty() || (t >= self.birth[id as usize] && t < self.death[id as usize])
+    }
+
+    /// Whether node `id` is alive at any time in `[lo, hi)`.
+    #[inline]
+    pub fn alive_during(&self, id: u64, lo: i64, hi: i64) -> bool {
+        self.birth.is_empty() || (self.birth[id as usize] < hi && self.death[id as usize] > lo)
+    }
+
+    /// Number of nodes of type `ty` born by time `t`. Births follow the id
+    /// order within a type, so the born nodes are the prefix
+    /// `starts[ty] .. starts[ty] + born_count(ty, t)`.
+    pub fn born_count(&self, ty: usize, t: i64) -> u64 {
+        let n = self.entities.counts[ty];
+        if self.birth.is_empty() {
+            return n;
+        }
+        let s = self.entities.starts[ty] as usize;
+        self.birth[s..s + n as usize].partition_point(|&b| b <= t) as u64
+    }
+
+    /// A uniformly chosen node of type `ty` alive at `t`: uniform over the
+    /// born prefix, retried a bounded number of times past dead nodes.
+    pub fn pick_alive(&self, ty: usize, t: i64, rng: &mut saga_sample::Rng64) -> Option<u64> {
+        let n = self.born_count(ty, t);
+        if n == 0 {
+            return None;
+        }
+        let s = self.entities.starts[ty];
+        for _ in 0..ALIVE_RETRIES {
+            let d = s + rng.gen_range(0..n);
+            if self.alive(d, t) {
+                return Some(d);
+            }
+        }
+        None
     }
 
     /// Mean events/day a NORMAL actor of entity type `ti` emits, at the
@@ -410,6 +502,15 @@ impl World {
                 attr_names.push(self.state_names[ti][si].clone());
                 attrs.push(NodeColumn::Numeric(sv.clone()));
             }
+            if !self.birth.is_empty() {
+                let r = start as usize..start as usize + n;
+                attr_names.push("birth_t".to_string());
+                attrs.push(NodeColumn::Numeric(self.birth[r.clone()].iter().map(|&b| b as f64).collect()));
+                attr_names.push("death_t".to_string());
+                attrs.push(NodeColumn::Numeric(
+                    self.death[r].iter().map(|&d| if d == i64::MAX { f64::NAN } else { d as f64 }).collect(),
+                ));
+            }
             out.push(NodeBatch {
                 entity_type: self.entities.names[ti].clone(),
                 ids: (start..start + n as u64).collect(),
@@ -426,6 +527,54 @@ fn attr_name_of(w: &World, ti: usize, ai: usize) -> String {
 }
 
 // --- construction helpers ---------------------------------------------------
+
+/// Per-node lifetimes for node dynamics. Within an entity type, node `i` (in
+/// id order, which is the topology's construction order) is born at t = 0 if
+/// `i / n < initial_fraction`, else at the matching point of a uniform ramp
+/// over the span; it dies `lifetime_days` after birth (a per-node draw from
+/// its own stream) or never. Types without a lifecycle live the whole span.
+/// Pure function of (rule base, scale, seed): identical on every thread and
+/// shard.
+fn build_lifecycles(
+    rb: &RuleBase,
+    entities: &EntityIndex,
+    params: &GenParams,
+) -> anyhow::Result<(Vec<i64>, Vec<i64>)> {
+    let total: u64 = entities.counts.iter().sum();
+    let epoch = params.epoch_unix;
+    let span_s = params.span_days * 86_400.0;
+    let mut birth = vec![epoch; total as usize];
+    let mut death = vec![i64::MAX; total as usize];
+    for (ti, et) in rb.entity_types.iter().enumerate() {
+        let Some(lc) = &et.lifecycle else { continue };
+        let start = entities.starts[ti];
+        let n = entities.counts[ti];
+        let f0 = lc.initial_fraction;
+        let life = match &lc.lifetime_days {
+            Some(d) => Some(
+                DistSampler::compile(d)
+                    .with_context(|| format!("entity `{}` lifecycle lifetime_days", et.name))?,
+            ),
+            None => None,
+        };
+        for i in 0..n {
+            let id = start + i;
+            let u = i as f64 / n as f64;
+            let b = if u < f0 || f0 >= 1.0 {
+                epoch
+            } else {
+                epoch + ((u - f0) / (1.0 - f0) * span_s) as i64
+            };
+            birth[id as usize] = b;
+            if let Some(ls) = &life {
+                let mut rng = stream(params.seed, StreamPurpose::Lifecycle, id, 0);
+                let days = ls.sample(&mut rng).max(0.0);
+                death[id as usize] = b.saturating_add((days * 86_400.0) as i64).max(b + 1);
+            }
+        }
+    }
+    Ok((birth, death))
+}
 
 fn layout_entities(rb: &RuleBase, total_nodes: u64) -> EntityIndex {
     let weight_sum: f64 = rb.entity_types.iter().map(|e| e.population_weight).sum();
@@ -666,6 +815,7 @@ fn compile_events(
             attrs,
             effects: Vec::new(),
             guard: None,
+            switch: None,
         });
     }
     let _ = col_of; // release the borrow of attr_names before pass 2
@@ -673,6 +823,7 @@ fn compile_events(
     for (ei, et) in rb.event_types.iter().enumerate() {
         events[ei].effects = compile_effects(rb, et, entities, &attr_names)?;
         events[ei].guard = compile_guard(rb, et, entities, &attr_names)?;
+        events[ei].switch = compile_switch(rb, et, entities, &attr_names)?;
     }
     Ok((events, attr_names, dictionaries))
 }
@@ -780,6 +931,47 @@ fn compile_effects(
 /// Resolve an event's optional own-state guard to hot-path indices. Validated
 /// at rule-base load, so the lookups cannot fail; still returned as a Result to
 /// surface any drift as an actionable error rather than a panic.
+fn compile_switch(
+    rb: &RuleBase,
+    et: &EventType,
+    entities: &EntityIndex,
+    attr_names: &[String],
+) -> anyhow::Result<Option<CompiledSwitch>> {
+    let Some(sw) = &et.switch else { return Ok(None) };
+    if !sw.below.is_finite() {
+        anyhow::bail!("event `{}`: switch `below` must be finite", et.name);
+    }
+    if !(sw.rate_multiplier > 0.0 && sw.rate_multiplier <= 1.0) {
+        anyhow::bail!(
+            "event `{}`: switch `rate_multiplier` must be in (0,1], got {}",
+            et.name,
+            sw.rate_multiplier
+        );
+    }
+    let src_type = entities.index_of(&et.src);
+    let var = rb.entity_types[src_type]
+        .state
+        .iter()
+        .position(|s| s.name == sw.src_var)
+        .ok_or_else(|| {
+            anyhow::anyhow!("event `{}`: switch state var `{}` not found", et.name, sw.src_var)
+        })?;
+    let mut overrides = Vec::new();
+    for ov in &sw.attr_overrides {
+        let col = attr_names.iter().position(|a| a == &ov.attr).ok_or_else(|| {
+            anyhow::anyhow!("event `{}`: switch override attr `{}` not found", et.name, ov.attr)
+        })?;
+        overrides.push((col, DistSampler::compile(&ov.dist)?));
+    }
+    Ok(Some(CompiledSwitch {
+        entity: src_type,
+        var,
+        below: sw.below,
+        rate_multiplier: sw.rate_multiplier,
+        overrides,
+    }))
+}
+
 fn compile_guard(
     rb: &RuleBase,
     et: &EventType,

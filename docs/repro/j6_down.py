@@ -13,7 +13,7 @@ import time
 
 import numpy as np
 
-SP = "./scratch"
+SP = "$WORK"
 sys.path.insert(0, os.path.join(SP, "pin"))
 from saga_eval.baselines import gen_ba  # noqa: E402
 from saga_eval.downstream_extra import run_edgebank  # noqa: E402

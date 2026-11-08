@@ -26,6 +26,9 @@ pub struct CsvSink {
     writer: Option<BufWriter<File>>,
     header: Option<String>,
     pub shards_written: Vec<PathBuf>,
+    /// Per event type: the duration attribute, if any; resolved with the header.
+    durations: Vec<Option<(String, f64)>>,
+    dur_cols: Option<Vec<Option<(usize, f64)>>>,
 }
 
 impl CsvSink {
@@ -49,7 +52,14 @@ impl CsvSink {
             writer: None,
             header: None,
             shards_written: Vec::new(),
+            durations: Vec::new(),
+            dur_cols: None,
         })
+    }
+
+    /// See [`crate::FormatSink::set_event_durations`].
+    pub fn set_event_durations(&mut self, durations: Vec<Option<(String, f64)>>) {
+        self.durations = durations;
     }
 
     fn roll_shard(&mut self) -> anyhow::Result<&mut BufWriter<File>> {
@@ -82,6 +92,10 @@ impl EventSink for CsvSink {
                 h.push(',');
                 h.push_str(a);
             }
+            if self.durations.iter().any(Option::is_some) {
+                h.push_str(",t_end");
+                self.dur_cols = Some(crate::resolve_dur_cols(&self.durations, &batch.attr_names));
+            }
             h.push('\n');
             self.header = Some(h);
         }
@@ -101,6 +115,7 @@ impl EventSink for CsvSink {
             );
         }
         let col_dicts = self.col_dicts.clone().expect("just set");
+        let t_end = self.dur_cols.as_ref().map(|dc| crate::end_times(batch, dc));
         // Render rows into a reusable buffer, then write once.
         let mut buf = String::with_capacity(batch.len() * 48);
         for i in 0..batch.len() {
@@ -125,6 +140,9 @@ impl EventSink for CsvSink {
                 } else {
                     write!(buf, ",{v:.4}").unwrap();
                 }
+            }
+            if let Some(te) = &t_end {
+                write!(buf, ",{}", te[i]).unwrap();
             }
             buf.push('\n');
         }
@@ -173,6 +191,47 @@ impl EventSink for CsvSink {
                     }
                     saga_core::NodeColumn::Category { codes, names } => {
                         write!(buf, ",{}", names[codes[i] as usize]).unwrap();
+                    }
+                }
+            }
+            buf.push('\n');
+        }
+        w.write_all(buf.as_bytes())?;
+        w.flush()?;
+        Ok(())
+    }
+
+    fn write_table(&mut self, table: &saga_core::AuxTable) -> anyhow::Result<()> {
+        use saga_core::TableColumn;
+        use std::fmt::Write as _;
+        if table.is_empty() {
+            return Ok(());
+        }
+        let path = self.dir.join(format!("{}.csv", table.name));
+        let exists = path.exists();
+        let file = std::fs::OpenOptions::new().create(true).append(true).open(&path)?;
+        let mut w = BufWriter::with_capacity(1 << 20, file);
+        if !exists {
+            let h: Vec<&str> = table.columns.iter().map(|(n, _)| n.as_str()).collect();
+            w.write_all(h.join(",").as_bytes())?;
+            w.write_all(b"\n")?;
+        }
+        let mut buf = String::with_capacity(table.len() * 32);
+        for i in 0..table.len() {
+            for (ci, (_, col)) in table.columns.iter().enumerate() {
+                if ci > 0 {
+                    buf.push(',');
+                }
+                match col {
+                    TableColumn::U64(v) => write!(buf, "{}", v[i]).unwrap(),
+                    TableColumn::I64(v) => write!(buf, "{}", v[i]).unwrap(),
+                    TableColumn::F64(v) => {
+                        if !v[i].is_nan() {
+                            write!(buf, "{}", v[i]).unwrap()
+                        }
+                    }
+                    TableColumn::Category { codes, names } => {
+                        buf.push_str(&names[codes[i] as usize])
                     }
                 }
             }

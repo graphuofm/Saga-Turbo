@@ -5,11 +5,11 @@ error: shard 0/2: timed out after 30s waiting for the block-0 delta file `$PROJE
 --- stdout bytes: 0
 --- exchange dir after failure:
 total 277
-drwxr-xr-x 2 jding2 users      3 Aug 21 06:26 .
-drwxr-xr-x 3 jding2 users      5 Aug 21 06:26 ..
--rw-r--r-- 1 jding2 users 142835 Aug 21 06:26 b0_from0_to1.bin
+drwxr-xr-x 2 user users      3 Aug 21 06:26 .
+drwxr-xr-x 3 user users      5 Aug 21 06:26 ..
+-rw-r--r-- 1 user users 142835 Aug 21 06:26 b0_from0_to1.bin
 --- out dir after failure:
 total 0
-drwxr-xr-x 3 jding2 users 30 Aug 21 06:26 .
-drwx------ 3 jding2 root  38 Aug 21 06:26 ..
-drwxr-xr-x 2 jding2 users 36 Aug 21 06:26 shard_00
+drwxr-xr-x 3 user users 30 Aug 21 06:26 .
+drwx------ 3 user root  38 Aug 21 06:26 ..
+drwxr-xr-x 2 user users 36 Aug 21 06:26 shard_00

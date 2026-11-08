@@ -3,7 +3,7 @@ sys.path.insert(0, "./python")
 from saga_eval.detector import detect_auc
 
 BIN = "./target/release/saga"
-SCR = "./scratch"
+SCR = "$WORK"
 
 # Sizing rationale: JOB1 gives finance frac ~= 0.081*pi. At pi=0.10 -> ~0.008.
 # 5M edges -> ~41k positives at delta=0, leaving >=20k even if delta=1 halves it.

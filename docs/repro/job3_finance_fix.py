@@ -27,7 +27,7 @@ from saga_eval.deep_gen import fit_generate
 from saga_eval.tabular_gen import ctgan_generate, tvae_generate
 
 HOME = os.path.expanduser("~")
-SP = "./scratch/fin_fix"
+SP = "$WORK/fin_fix"
 BIN = "./target/release/saga"
 NODE_CAP = 2500
 EDGE_CAP = 50000     # NEW: no-op for the five sparse refs (<=49200); binds only for dense finance
@@ -84,7 +84,7 @@ def fscore(rstat, arr, label):
 
 
 domain, rname, path, kw = ("finance", "email-Eu",
-    f"./realdata/snap-email-eu/email-Eu-core-temporal.txt", {})
+    f"{HOME}/saga-sigmod/realdata/snap-email-eu/email-Eu-core-temporal.txt", {})
 
 t0 = time.time()
 rs, rd, rt = cap_by_nodes(*load_real(path, **kw), NODE_CAP, EDGE_CAP)

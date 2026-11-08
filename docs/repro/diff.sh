@@ -3,7 +3,7 @@
 # Detector: GBM (detect_auc), 3 views: all / attr / struct. Report ROC-AUC + AP.
 set -e
 BIN=./target/release/saga
-SCR=./scratch
+SCR=$WORK
 OUT=$SCR/diff_gen
 RES=$SCR/diff_results.csv
 export PYTHONPATH=./python
